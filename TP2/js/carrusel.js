@@ -8,7 +8,7 @@ class CarouselCard extends HTMLElement {
   }
 
   connectedCallback() {
-    this.appendChild(this.template.content.cloneNode(true));
+    this.innerHTML = this.template.innerHTML;
     this.querySelector("img").src = this.getAttribute("img") || "";
     this.querySelector("img").alt = this.getAttribute("title") || "";
     this.querySelector("h3").textContent = this.getAttribute("title") || "";
