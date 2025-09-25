@@ -21,13 +21,14 @@ class ImageCarousel extends HTMLElement {
   template;
   slides;
   track;
-  step;
+  _step;
+  visibleCount;
 
   constructor() {
     super();
     this.currentIndex = 0;
     this.template = document.getElementById("carousel-template");
-    this.step = parseInt(this.getAttribute("step")) || 1;
+    this._step = parseInt(this.getAttribute("step")) || null;
   }
 
   connectedCallback() {
@@ -56,14 +57,17 @@ class ImageCarousel extends HTMLElement {
     this.update();
   }
 
-  get visibleCount() {
-    if (!this.slides.length) return 1;
-    const slideWidth = this.slides[0].offsetWidth;
-    const trackWidth = this.querySelector(".carousel").offsetWidth;
-    return Math.max(1, Math.floor(trackWidth / slideWidth));
+  get step() {
+    return this._step || this.visibleCount;
   }
 
   update() {
+    if (!this.slides.length) return;
+
+    const slideWidth = this.slides[0].offsetWidth;
+    const trackWidth = this.querySelector(".carousel").offsetWidth;
+    this.visibleCount = Math.max(1, Math.floor(trackWidth / slideWidth));
+
     const offset = this.currentIndex * (100 / this.visibleCount);
     this.track.style.transform = `translateX(-${offset}%)`;
   }
