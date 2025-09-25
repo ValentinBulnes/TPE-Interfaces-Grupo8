@@ -13,15 +13,23 @@ h1 {
 image-carousel {
   display: block;
   position: relative;
-  width: 1220px;
+  width: 420px;
   margin: 0 auto;
+}
+
+image-carousel.triple {
+  width: 1220px;
 }
 
 .carousel {
   position: relative;
   overflow: hidden;
-  width: 1200px;
+  width: 400px;
   height: 320px;
+}
+
+image-carousel.triple .carousel {
+  width: 1200px;
 }
 
 .track {
