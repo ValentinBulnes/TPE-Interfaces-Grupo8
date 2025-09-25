@@ -54,7 +54,16 @@ class ImageCarousel extends HTMLElement {
       this.navigate(1)
     );
 
+    // Observe dynamic changes
+    this.observer = new MutationObserver(() => this.refresh());
+    this.observer.observe(this, { childList: true });
+
     this.update();
+  }
+
+  disconnectedCallback() {
+    // Clean up observer if component is removed
+    if (this.observer) this.observer.disconnect();
   }
 
   get step() {
@@ -81,6 +90,16 @@ class ImageCarousel extends HTMLElement {
       maxIndex
     );
 
+    this.update();
+  }
+
+  refresh() {
+    // moves any direct child <carousel-card> into track
+    // Gets called twice per insert: first for the insert, and a second time due to card relocation
+    const cards = Array.from(this.querySelectorAll(":scope > carousel-card"));
+    cards.forEach((card) => this.track.appendChild(card));
+
+    this.slides = this.track.querySelectorAll("carousel-card");
     this.update();
   }
 }
