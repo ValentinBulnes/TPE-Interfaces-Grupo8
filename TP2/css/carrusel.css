@@ -13,14 +13,14 @@ h1 {
 image-carousel {
   display: block;
   position: relative;
-  width: 420px;
+  width: 1220px;
   margin: 0 auto;
 }
 
 .carousel {
   position: relative;
   overflow: hidden;
-  width: 400px;
+  width: 1200px;
   height: 320px;
 }
 
