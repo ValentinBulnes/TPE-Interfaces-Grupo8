@@ -21,11 +21,13 @@ class ImageCarousel extends HTMLElement {
   template;
   slides;
   track;
+  step;
 
   constructor() {
     super();
     this.currentIndex = 0;
     this.template = document.getElementById("carousel-template");
+    this.step = parseInt(this.getAttribute("step")) || 1;
   }
 
   connectedCallback() {
@@ -71,7 +73,7 @@ class ImageCarousel extends HTMLElement {
     const maxIndex = totalSlides - this.visibleCount;
 
     this.currentIndex = Math.min(
-      Math.max(this.currentIndex + direction, 0),
+      Math.max(this.currentIndex + direction * this.step, 0),
       maxIndex
     );
 
