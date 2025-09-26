@@ -93,6 +93,8 @@ class ImageCarousel extends HTMLElement {
     const offset = this.currentIndex * slotSize;
 
     this.track.style.transform = `translateX(-${offset}px)`;
+
+    this.updateScrollPill();
   }
 
   navigate(direction) {
@@ -115,6 +117,35 @@ class ImageCarousel extends HTMLElement {
 
     this.slides = this.track.querySelectorAll("carousel-card");
     this.update();
+  }
+
+  updateScrollPill() {
+    const pill = this.querySelector(".scroll-pill > div");
+    const container = this.querySelector(".scroll-pill");
+    if (!pill || !container) return;
+
+    const total = this.slides.length;
+    if (!total) return;
+
+    // fraction of visible slides
+    const fractionVisible = this.visibleCount / total;
+    pill.style.width = `${fractionVisible * 100}%`;
+
+    const maxIndex = total - this.visibleCount;
+    if (maxIndex <= 0) {
+      pill.style.transform = "translateX(0px)";
+      return;
+    }
+
+    // available travel distance in pixels
+    const containerWidth = container.offsetWidth;
+    const pillWidth = pill.offsetWidth;
+    const travel = containerWidth - pillWidth;
+
+    // pixel offset proportional to currentIndex
+    const offset = (this.currentIndex / maxIndex) * travel;
+
+    pill.style.transform = `translateX(${offset}px)`;
   }
 }
 
