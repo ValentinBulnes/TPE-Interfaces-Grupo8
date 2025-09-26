@@ -13,7 +13,31 @@ body {
     font-size: 15px;
     color: #EDEDED;
     background-color: #121212;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
+
+h1 {
+    font-size: 45px;
+    font-weight: 700;
+    color: #EDEDED;
+    margin: 0;
+}
+
+h2 {
+    font-size: 28px;
+    font-weight: 600;
+    color: #EDEDED;
+    margin: 0;
+}
+
+h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #EDEDED;
+    margin: 0;
+}           
 
 .header {
     background-color: #2E2E2E;
@@ -158,59 +182,63 @@ iconify-icon {
 /* Fat footer -------------------------------------------------------- */
 
 #fat-footer {
-    background: #262626;
-    margin-top: 85px;
+    background: #2E2E2E;
+    margin-top: auto;
+
 }
 
 #footer-content {
     max-width: 1350px;
     margin: 0 auto;
+    padding-top: 40px;
+    padding-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+    height: 434px;
 }
 
 #footer-top {
     display: flex;
     justify-content: space-between;
-    padding-top: 33px;
-    padding-bottom: 27px;
-}
-
-#footer-logo img {
-    height: 40px;
+    height: 54px;
+    padding-left: 9px;
+    padding-right: 9px;
 }
 
 #footer-social {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     gap: 20px;
 }
 
-#footer-social a img {
-    width: 24px;
-    height: 24px;
-    transition: filter 0.2s;
-}
 
-#footer-social a:hover img {
-    filter: brightness(2) drop-shadow(0 0 6px #2ecc71);
+#footer-social a:hover iconify-icon {
+    color: #33EB8A;
 }
 
 .footer-separator {
-    border-bottom: 2px solid #2ecc71;
+    height: 1px;
+    background-color: #33EB8A;
 }
 
 #footer-links {
     display: flex;
     justify-content: space-between;
-    padding: 33px 9px 33px 9px;
+    padding-left: 9px;
+    padding-right: 9px;
 }
 
-.footer-link-category h3 {
-    font-weight: bold;
-    margin-bottom: 15px;
+.footer-link-category {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
 }
 
-.footer-link-list li {
-    margin-bottom: 10px;
+.footer-link-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
 }
 
 .footer-link-list li a {
@@ -219,13 +247,18 @@ iconify-icon {
 }
 
 .footer-link-list li a:hover {
-    color: #2ecc71;
+    color: #33EB8A;
 }
 
 #copyright {
-    font-size: 0.85em;
-    color: #808080;
+    color: #7A7A7A;
     text-align: center;
-    padding-top: 9px;
-    padding-bottom: 33px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+#copyright iconify-icon {
+    color: #7A7A7A;
 }
