@@ -12,7 +12,7 @@ class CarouselCard extends HTMLElement {
     this.querySelector("img").src = this.getAttribute("img") || "";
     this.querySelector("img").alt = this.getAttribute("title") || "";
     this.querySelector("h3").textContent = this.getAttribute("title") || "";
-    this.querySelector("p").textContent = this.getAttribute("text") || "";
+    this.querySelector("p").textContent = this.getAttribute("price") || "";
   }
 }
 customElements.define("carousel-card", CarouselCard);
