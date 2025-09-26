@@ -73,12 +73,26 @@ class ImageCarousel extends HTMLElement {
   update() {
     if (!this.slides.length) return;
 
-    const slideWidth = this.slides[0].offsetWidth;
-    const trackWidth = this.querySelector(".carousel").offsetWidth;
-    this.visibleCount = Math.max(1, Math.floor(trackWidth / slideWidth));
+    const carousel = this.querySelector(".carousel");
+    const slide = this.slides[0];
 
-    const offset = this.currentIndex * (100 / this.visibleCount);
-    this.track.style.transform = `translateX(-${offset}%)`;
+    const slideWidth = slide.offsetWidth;
+    const style = getComputedStyle(this.track);
+    const gap = parseFloat(style.columnGap || style.gap || 0);
+
+    // total width one "slot" takes (slide + gap)
+    const slotSize = slideWidth + gap;
+
+    // how many slides fit in the visible viewport
+    this.visibleCount = Math.max(
+      1,
+      Math.floor(carousel.offsetWidth / slotSize)
+    );
+
+    // compute the offset in px
+    const offset = this.currentIndex * slotSize;
+
+    this.track.style.transform = `translateX(-${offset}px)`;
   }
 
   navigate(direction) {
