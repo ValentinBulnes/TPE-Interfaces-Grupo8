@@ -1,10 +1,13 @@
 :root {
+  --color-primary: #3d5afe;
   --color-text: #ededed;
+  --gray-dark1: #989898;
   /* Background colors */
   --background-dark-1: #121212;
   --background-dark-2: #2e2e2e;
   /* Border Radius */
   --border-rad-s: 10px;
+  --border-rad-m: 20px;
   /* Padding */
   --padding-xxs: 6px;
   --padding-xs: 9px;
@@ -45,20 +48,12 @@ h3 {
   justify-self: center;
   color: var(--color-text);
 }
+h3 {
+  font-size: 20px;
+}
 .bold {
   font-weight: bold;
 }
-
-image-carousel {
-  display: block;
-  position: relative;
-  width: fit-content;
-  margin: 0 auto;
-}
-
-/* image-carousel.triple {
-  width: 1220px;
-} */
 
 .flex-row {
   display: flex;
@@ -69,6 +64,21 @@ image-carousel {
 .flex-col {
   display: flex;
   flex-direction: column;
+}
+
+.gap-xxs {
+  gap: var(--gap-xxs);
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+image-carousel {
+  display: block;
+  position: relative;
+  width: fit-content;
+  margin: 0 auto;
 }
 
 .carousel {
@@ -87,13 +97,16 @@ image-carousel.triple .carousel {
   transition: transform 0.4s ease-in-out;
   height: 100%;
   gap: var(--gap-l);
-  padding-bottom: var(--padding-xs);
+  padding-bottom: var(--padding-xxs);
+}
+
+image-carousel .topic {
+  width: 100%;
+  padding: 0 var(--padding-m);
 }
 
 /* Navigation buttons */
 .nav {
-  position: absolute;
-  top: 50%;
   transform: translateY(-50%);
   border: none;
   background: rgba(0, 0, 0, 0.4);
@@ -103,12 +116,6 @@ image-carousel.triple .carousel {
   height: 40px;
   border-radius: 50%;
   cursor: pointer;
-}
-.prev {
-  left: 0;
-}
-.next {
-  right: 0;
 }
 
 /* Card styles (global) */
