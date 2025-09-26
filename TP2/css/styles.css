@@ -10,7 +10,7 @@
 
 body {
     font-family: 'Inter', sans-serif;
-    font-size: 15px;
+    font-size: 16px;
     color: #EDEDED;
     background-color: #121212;
     display: flex;
@@ -20,7 +20,7 @@ body {
 
 h1 {
     font-size: 45px;
-    font-weight: 700;
+    font-weight: 400;
     color: #EDEDED;
     margin: 0;
 }
@@ -261,4 +261,182 @@ iconify-icon {
 
 #copyright iconify-icon {
     color: #7A7A7A;
+}
+
+/* Login Page Styles -------------------------------------------------------- */
+
+.logo-section {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100px;
+    padding: 30px 0px 0px 30px;
+}
+
+.login-logo {
+    width: 375px;
+    height: 70px;
+}
+
+.login-form-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 106px 36px 106px;
+    margin-top: -310px;
+}
+
+.login-frame {
+    width: 520px;
+    height: 531px;
+    background-color: #2E2E2E;
+    border-radius: 20px;
+    padding: 30px 30px 30px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 36px;
+}
+
+.login-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 0;
+    width: 520px;
+    height: 70px;
+}
+
+.login-form {
+    width: 400px;
+    height: 531px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+
+.input-group input {
+    width: 364px;
+    height: 45px;
+    border: 2px solid #EDEDED;
+    border-radius: 20px;
+    background-color: transparent;
+    padding: 0 16px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.input-group input::placeholder {
+    color: #7A7A7A;
+}
+
+.password-input-container {
+    position: relative;
+    width: 364px;
+}
+
+.password-input-container input {
+    width: 100%;
+    padding-right: 50px;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-btn {
+    width: 364px;
+    height: 50px;
+    background-color: #3D5AFE;
+    color: #EDEDED;
+    border: none;
+    border-radius: 20px;
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.register-link {
+    text-align: center;
+}
+
+.register-link p {
+    color: #EDEDED;
+    margin: 0;
+}
+
+.register-text {
+    color: #FF4081;
+}
+
+
+.separator {
+    height: 2px;
+    min-height: 2px;
+    background-color: #EDEDED;
+    display: block;
+    width: 460px;
+}
+
+.social-login {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.social-btn {
+    width: 364px;
+    height: 45px;
+    border: 2px solid #EDEDED;
+    border-radius: 20px;
+    background-color: transparent;
+    color: #EDEDED;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    padding: 10px 35px 10px 35px;
+    position: relative;
+}
+
+.social-btn iconify-icon {
+    position: absolute;
+    left: 37px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.facebook-btn {
+    background-color: #4267B2;
+    border-color: #4267B2;
+}
+
+.google-btn {
+    background-color: #EDEDED;
+    color: #000000;
+    border-color: #EDEDED;
 }
