@@ -77,8 +77,8 @@ h3 {
   align-items: center;
 }
 
-.material-symbols-outlined{
-  color: var(--color-text)
+.material-symbols-rounded {
+  color: var(--color-text);
 }
 
 /* Carousel styles */
@@ -152,12 +152,32 @@ carousel-card > div {
   text-align: start;
   gap: var(--gap-xxs);
   padding-bottom: var(--padding-xxs);
+  position: relative;
 }
 
+carousel-card > div > .material-symbols-rounded {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 71px;
+  height: 71px;
+  aspect-ratio: 1/1;
+  display: none;
+  background-color: var(--color-primary);
+  border-radius: 100%;
+}
+carousel-card:hover > div > .material-symbols-rounded {
+  display: inline-block;
+}
 carousel-card img {
   width: 100%;
   aspect-ratio: 221/294;
   display: block;
+}
+
+carousel-card:hover img {
+  filter: blur(1px);
 }
 
 .card-info {
