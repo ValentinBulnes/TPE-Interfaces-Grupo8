@@ -37,7 +37,7 @@ class ImageCarousel extends HTMLElement {
     );
 
     this.innerHTML = this.template.innerHTML;
-    const track = this.querySelector(".track");
+    const track = this.querySelector(".carousel > div");
 
     slides.forEach((slide) => track.appendChild(slide));
 

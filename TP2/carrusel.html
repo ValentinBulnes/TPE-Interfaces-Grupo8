@@ -49,9 +49,12 @@
             <carousel-card
                 img="https://cdn1.epicgames.com/offer/16ed9f15b1b449ccb59cb610b13df5b8/SMITE2-PortraitImagev2-F2P-1200x1600_1200x1600-ffcfc13b70a51bb7299ab1db021a2960?resize=1&w=360&h=480&quality=medium"
                 title="Mountains" price="$99.99"></carousel-card>
+            <carousel-card
+                img="https://cdn1.epicgames.com/spt-assets/ea0a24395cd641d7bbde3e5d78ad462c/hades-ii-1rb3z.png?resize=1&w=360&h=480&quality=medium"
+                title="Ocean" price="$22.22"></carousel-card>
         </image-carousel>
 
-        <image-carousel>
+        <image-carousel class="single">
             <carousel-card
                 img="https://cdn1.epicgames.com/offer/16ed9f15b1b449ccb59cb610b13df5b8/SMITE2-PortraitImagev2-F2P-1200x1600_1200x1600-ffcfc13b70a51bb7299ab1db021a2960?resize=1&w=360&h=480&quality=medium"
                 title="Mountains" price="$99.99"></carousel-card>
@@ -86,7 +89,7 @@
     </main>
     <footer></footer>
     <template id="card-template">
-        <div class="card">
+        <div>
             <img>
             <div class="card-info flex-col">
                 <h3 class="bold">El Juego 2077: Retorno del Rey</h3>
@@ -94,6 +97,7 @@
                     <h3>$99.99</h3>
                     <span class="material-symbols-outlined">
                         favorite
+                        <!-- TODO: cambiarle el color -->
                     </span>
                 </div>
             </div>
@@ -102,14 +106,14 @@
 
     <template id="carousel-template">
         <div class="flex-col gap-xxs align-items-center">
-            <h3 class="topic">Section title</h3>
-            <div class="flex-row">
-                <button class="nav prev">‹</button>
+            <h3>Section title</h3>
+            <nav class="flex-row">
+                <button class="prev">‹</button>
                 <div class="carousel">
-                    <div class="track"></div>
+                    <div></div>
                 </div>
-                <button class="nav next">›</button>
-            </div>
+                <button class="next">›</button>
+            </nav>
             <div class="scroll-pill">
                 <div></div>
             </div>

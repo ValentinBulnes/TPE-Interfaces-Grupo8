@@ -29,6 +29,9 @@ html {
   box-sizing: inherit;
   margin: 0;
   padding: 0;
+  text-decoration: none;
+  border: none;
+  outline: none;
 }
 
 main {
@@ -74,22 +77,24 @@ h3 {
   align-items: center;
 }
 
+/* Carousel styles */
 image-carousel {
   display: block;
-  position: relative;
   width: fit-content;
   margin: 0 auto;
 }
 
 .carousel {
   position: relative;
-  width: 400px;
+  /* TODO: width */
+  width: 1184px;
   overflow: hidden;
   height: fit-content;
 }
 
-image-carousel.triple .carousel {
-  width: 1184px;
+image-carousel.single .carousel {
+  /* TODO: width */
+  width: 400px;
 }
 
 .scroll-pill {
@@ -100,14 +105,13 @@ image-carousel.triple .carousel {
 }
 
 .scroll-pill > div {
-  width: 25%;
   height: 100%;
   background-color: var(--color-primary);
   border-radius: var(--border-rad-m);
   transition: transform 0.3s ease;
 }
 
-.track {
+.carousel > div {
   display: flex;
   transition: transform 0.4s ease-in-out;
   height: 100%;
@@ -115,14 +119,12 @@ image-carousel.triple .carousel {
   padding-bottom: var(--padding-xxs);
 }
 
-image-carousel .topic {
+image-carousel > div > h3 {
   width: 100%;
   padding: 0 var(--padding-m);
 }
 
-/* Navigation buttons */
-.nav {
-  transform: translateY(-50%);
+nav > button {
   border: none;
   background: rgba(0, 0, 0, 0.4);
   color: white;
@@ -131,10 +133,12 @@ image-carousel .topic {
   height: 40px;
   border-radius: 50%;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
 }
 
-/* Card styles (global) */
-.card {
+/* Carousel card styles */
+carousel-card > div {
   width: 221px;
   height: fit-content;
   overflow: hidden;
@@ -146,7 +150,7 @@ image-carousel .topic {
   padding-bottom: var(--padding-xxs);
 }
 
-.card img {
+carousel-card img {
   width: 100%;
   aspect-ratio: 221/294;
   display: block;
