@@ -77,6 +77,10 @@ h3 {
   align-items: center;
 }
 
+.material-symbols-outlined{
+  color: var(--color-text)
+}
+
 /* Carousel styles */
 image-carousel {
   display: block;
