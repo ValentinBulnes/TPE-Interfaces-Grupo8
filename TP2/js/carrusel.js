@@ -100,11 +100,23 @@ class ImageCarousel extends HTMLElement {
   navigate(direction) {
     const totalSlides = this.slides.length;
     const maxIndex = totalSlides - this.visibleCount;
+    const lastIndex = this.currentIndex;
 
     this.currentIndex = Math.min(
       Math.max(this.currentIndex + direction * this.step, 0),
       maxIndex
     );
+
+    if (this.currentIndex == maxIndex) {
+      this.querySelector(".next").disabled = true;
+    } else if (lastIndex == maxIndex) {
+      this.querySelector(".next").disabled = false;
+    }
+    if (this.currentIndex == 0) {
+      this.querySelector(".prev").disabled = true;
+    } else if (lastIndex == 0) {
+      this.querySelector(".prev").disabled = false;
+    }
 
     this.update();
   }

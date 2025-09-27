@@ -140,6 +140,9 @@ nav > button {
   display: flex;
   justify-content: center;
 }
+nav > button:disabled {
+  opacity: 50%;
+}
 
 /* Carousel card styles */
 carousel-card > div {
