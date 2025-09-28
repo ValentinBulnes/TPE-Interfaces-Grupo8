@@ -124,7 +124,8 @@ image-carousel.single .carousel {
   transition: transform 0.4s ease-in-out;
   height: 100%;
   gap: var(--gap-l);
-  padding-bottom: var(--padding-xxs);
+  padding: var(--padding-xxs);
+  padding-top: 0;
 }
 
 image-carousel > div > h3 {
