@@ -23,13 +23,13 @@
                 title="Mountains" price="$99.99"></carousel-card>
             <carousel-card
                 img="https://cdn1.epicgames.com/offer/879b0d8776ab46a59a129983ba78f0ce/genshintall_1200x1600-4a5697be3925e8cb1f59725a9830cafc?resize=1&w=360&h=480&quality=medium"
-                title="Forest" price="$66.66"></carousel-card>
+                title="Forest" price="$66.66" cart></carousel-card>
             <carousel-card
                 img="https://cdn1.epicgames.com/spt-assets/ea0a24395cd641d7bbde3e5d78ad462c/hades-ii-1rb3z.png?resize=1&w=360&h=480&quality=medium"
-                title="Ocean" price="$22.22"></carousel-card>
+                title="Ocean" price="$22.22" free></carousel-card>
             <carousel-card
                 img="https://cdn1.epicgames.com/offer/16ed9f15b1b449ccb59cb610b13df5b8/SMITE2-PortraitImagev2-F2P-1200x1600_1200x1600-ffcfc13b70a51bb7299ab1db021a2960?resize=1&w=360&h=480&quality=medium"
-                title="Mountains" price="$99.99"></carousel-card>
+                title="Mountains" price="$99.99" cart free></carousel-card>
             <carousel-card
                 img="https://cdn1.epicgames.com/offer/879b0d8776ab46a59a129983ba78f0ce/genshintall_1200x1600-4a5697be3925e8cb1f59725a9830cafc?resize=1&w=360&h=480&quality=medium"
                 title="Forest" price="$66.66"></carousel-card>
@@ -110,11 +110,19 @@
         <div class="flex-col gap-xxs align-items-center">
             <h3>Section title</h3>
             <nav class="flex-row">
-                <button class="prev" disabled>‹</button>
+                <button class="prev" disabled>
+                    <span class="material-symbols-rounded">
+                        chevron_left
+                    </span>
+                </button>
                 <div class="carousel">
                     <div></div>
                 </div>
-                <button class="next">›</button>
+                <button class="next">
+                    <span class="material-symbols-rounded">
+                        chevron_right
+                    </span>
+                </button>
             </nav>
             <div class="scroll-pill">
                 <div></div>

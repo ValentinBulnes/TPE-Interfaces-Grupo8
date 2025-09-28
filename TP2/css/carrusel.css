@@ -134,18 +134,19 @@ image-carousel > div > h3 {
 
 nav > button {
   border: none;
-  background: rgba(0, 0, 0, 0.4);
-  color: white;
-  font-size: 2rem;
-  width: 40px;
-  height: 40px;
+  background: var(--color-primary);
+  color: var(--color-text);
   border-radius: 50%;
   cursor: pointer;
   display: flex;
-  justify-content: center;
 }
+
 nav > button:disabled {
   opacity: 50%;
+}
+
+nav > button > .material-symbols-rounded {
+  font-size: 55px;
 }
 
 /* Carousel card styles */
