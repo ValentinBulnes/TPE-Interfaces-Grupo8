@@ -58,7 +58,9 @@ class ImageCarousel extends HTMLElement {
 
   connectedCallback() {
     const slides = Array.from(this.children).filter(
-      (el) => el.tagName.toLowerCase() === "carousel-card"
+      (el) =>
+        el.tagName.toLowerCase() === "carousel-card" ||
+        el.tagName.toLowerCase() === "premium-card"
     );
 
     this.innerHTML = this.template.innerHTML;
@@ -66,11 +68,8 @@ class ImageCarousel extends HTMLElement {
 
     slides.forEach((slide) => track.appendChild(slide));
 
-    this.slides = track.querySelectorAll("carousel-card");
+    this.slides = track.querySelectorAll("carousel-card,premium-card");
     this.track = track;
-
-    // listen for resize to recalc visible count
-    window.addEventListener("resize", () => this.update());
 
     this.querySelector(".prev").addEventListener("click", () =>
       this.navigate(-1)
@@ -79,11 +78,17 @@ class ImageCarousel extends HTMLElement {
       this.navigate(1)
     );
 
-    // Observe dynamic changes
+    // Observe dynamic changes in children
     this.observer = new MutationObserver(() => this.refresh());
     this.observer.observe(this, { childList: true });
 
-    this.update();
+    // Use ResizeObserver instead of window resize
+    this.resizeObserver = new ResizeObserver(() => this.update());
+    const carousel = this.querySelector(".carousel");
+    if (carousel) this.resizeObserver.observe(carousel);
+
+    // Initial update after layout has settled
+    requestAnimationFrame(() => this.update());
   }
 
   disconnectedCallback() {
@@ -102,6 +107,7 @@ class ImageCarousel extends HTMLElement {
     const slide = this.slides[0];
 
     const slideWidth = slide.offsetWidth;
+    console.log(slide, slideWidth);
     const style = getComputedStyle(this.track);
     const gap = parseFloat(style.columnGap || style.gap || 0);
 
@@ -109,6 +115,7 @@ class ImageCarousel extends HTMLElement {
     const slotSize = slideWidth + gap;
 
     // how many slides fit in the visible viewport
+    console.log(carousel.offsetWidth, slotSize);
     this.visibleCount = Math.max(
       1,
       Math.floor(carousel.offsetWidth / slotSize)
@@ -149,10 +156,12 @@ class ImageCarousel extends HTMLElement {
   refresh() {
     // moves any direct child <carousel-card> into track
     // Gets called twice per insert: first for the insert, and a second time due to card relocation
-    const cards = Array.from(this.querySelectorAll(":scope > carousel-card"));
+    const cards = Array.from(
+      this.querySelectorAll(":scope > carousel-card, :scope > premium-card")
+    );
     cards.forEach((card) => this.track.appendChild(card));
 
-    this.slides = this.track.querySelectorAll("carousel-card");
+    this.slides = this.track.querySelectorAll("carousel-card,premium-card");
     this.update();
   }
 
@@ -167,6 +176,7 @@ class ImageCarousel extends HTMLElement {
     // fraction of visible slides
     const fractionVisible = this.visibleCount / total;
     pill.style.width = `${fractionVisible * 100}%`;
+    console.log(this.visibleCount, total, pill.style.width);
 
     const maxIndex = total - this.visibleCount;
     if (maxIndex <= 0) {
@@ -187,3 +197,28 @@ class ImageCarousel extends HTMLElement {
 }
 
 customElements.define("image-carousel", ImageCarousel);
+
+class PremiumCard extends HTMLElement {
+  template;
+
+  constructor() {
+    super();
+    this.template = document.getElementById("premium-card-template");
+  }
+
+  connectedCallback() {
+    this.innerHTML = this.template.innerHTML;
+    this.isCart = this.hasAttribute("cart");
+    this.isFree = this.hasAttribute("free");
+
+    this.querySelector("img").src = this.getAttribute("img") || "E404";
+    this.querySelector("img").alt = this.getAttribute("title") || "E404";
+    this.querySelector("section h1").textContent =
+      this.getAttribute("title") || "E404";
+
+    this.querySelector("section h2").textContent =
+      this.getAttribute("price") || "E404";
+  }
+}
+
+customElements.define("premium-card", PremiumCard);

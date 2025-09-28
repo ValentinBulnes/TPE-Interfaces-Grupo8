@@ -1,5 +1,6 @@
 :root {
   --color-primary: #3d5afe;
+  --color-primary-dark2: #1e287a;
   --color-secondary: #00e676;
   --color-text: #ededed;
   --gray-dark1: #989898;
@@ -12,6 +13,7 @@
   /* Padding */
   --padding-xxs: 6px;
   --padding-xs: 9px;
+  --padding-s: 18px;
   --padding-m: 36px;
   --padding-l: 72px;
   /* Gap */
@@ -48,9 +50,16 @@ main {
 h1,
 h2,
 h3 {
+  font-family: "Inter", sans-serif;
   font-weight: normal;
   justify-self: center;
   color: var(--color-text);
+}
+h1 {
+  font-size: 45px;
+}
+h2 {
+  font-size: 28px;
 }
 h3 {
   font-size: 20px;
@@ -102,7 +111,7 @@ image-carousel {
 
 image-carousel.single .carousel {
   /* TODO: width */
-  width: 400px;
+  width: 1179px;
 }
 
 .scroll-pill {
@@ -217,4 +226,55 @@ section > div {
 
 carousel-card[free] section div h3 {
   color: var(--color-secondary);
+}
+
+/* Premium card styles */
+premium-card {
+  display: inline-block;
+  width: fit-content;
+  height: fit-content;
+  position: relative;
+}
+
+premium-card img {
+  height: 500px;
+  /* aspect-ratio: 16/9; */
+  width: 1179px;
+  object-fit: cover;
+}
+
+premium-card section {
+  position: absolute;
+  bottom: 0;
+  padding: 60px;
+  gap: var(--gap-xs);
+  justify-content: space-between;
+}
+
+premium-card section div {
+  width: 75%;
+}
+
+premium-card h1 {
+  -webkit-text-stroke: 2px var(--color-primary-dark2);
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* text-shadow: -2px -2px 0 var(--color-primary-dark2),
+  2px -2px 0 var(--color-primary-dark2), -2px 2px 0 var(--color-primary-dark2),
+  2px 2px 0 var(--color-primary-dark2); */
+}
+
+premium-card div > h2 {
+  -webkit-text-stroke: 1px var(--color-primary-dark2);
+  font-weight: bold;
+}
+
+premium-card button {
+  padding: var(--padding-s) var(--padding-xs);
+  border-radius: 30px;
+  background-color: var(--color-primary);
+  width: 180px;
+  cursor: pointer;
 }
