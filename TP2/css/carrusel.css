@@ -109,11 +109,6 @@ image-carousel {
   height: fit-content;
 }
 
-image-carousel.single .carousel {
-  /* TODO: width */
-  width: 1179px;
-}
-
 .scroll-pill {
   width: 25%;
   height: 20px;
@@ -236,11 +231,22 @@ premium-card {
   position: relative;
 }
 
+image-carousel.single .carousel {
+  /* TODO: width */
+  width: 1189px;
+}
+
 premium-card img {
   height: 500px;
   /* aspect-ratio: 16/9; */
   width: 1179px;
   object-fit: cover;
+  border-radius: var(--border-rad-s);
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 1);
+}
+
+premium-card:hover img {
+  filter: blur(1px);
 }
 
 premium-card section {
@@ -261,14 +267,16 @@ premium-card h1 {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  /* text-shadow: -2px -2px 0 var(--color-primary-dark2),
-  2px -2px 0 var(--color-primary-dark2), -2px 2px 0 var(--color-primary-dark2),
-  2px 2px 0 var(--color-primary-dark2); */
 }
 
 premium-card div > h2 {
   -webkit-text-stroke: 1px var(--color-primary-dark2);
   font-weight: bold;
+  opacity: 0;
+}
+
+premium-card:hover div > h2 {
+  opacity: 100%;
 }
 
 premium-card button {
@@ -277,4 +285,9 @@ premium-card button {
   background-color: var(--color-primary);
   width: 180px;
   cursor: pointer;
+  display: none;
+}
+
+premium-card:hover button {
+  display: inline-block;
 }
