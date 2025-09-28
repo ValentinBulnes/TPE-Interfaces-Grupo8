@@ -1,18 +1,43 @@
 // carousel.js
 class CarouselCard extends HTMLElement {
   template;
+  isCart;
+  isFree;
 
   constructor() {
     super();
     this.template = document.getElementById("card-template");
+    this.isCart = false;
+    this.isFree = false;
   }
 
   connectedCallback() {
     this.innerHTML = this.template.innerHTML;
-    this.querySelector("img").src = this.getAttribute("img") || "";
-    this.querySelector("img").alt = this.getAttribute("title") || "";
-    this.querySelector("h3").textContent = this.getAttribute("title") || "";
-    this.querySelector("p").textContent = this.getAttribute("price") || "";
+    this.isCart = this.hasAttribute("cart");
+    this.isFree = this.hasAttribute("free");
+
+    this.querySelector("img").src = this.getAttribute("img") || "E404";
+    this.querySelector("img").alt = this.getAttribute("title") || "E404";
+    this.querySelector("section > h3.bold").textContent =
+      this.getAttribute("title") || "E404";
+
+    const priceElem = this.querySelector("section div h3");
+    if (this.isFree) {
+      priceElem.textContent = "Sin costo";
+    } else {
+      priceElem.textContent = this.getAttribute("price") || "E404";
+    }
+
+    if (this.isCart) {
+      this.querySelector("div > span").textContent = "shopping_cart";
+    }
+
+    const favoriteIcon = this.querySelector(
+      ".flex-row > .material-symbols-rounded"
+    );
+    favoriteIcon.addEventListener("click", () => {
+      favoriteIcon.classList.toggle("filled");
+    });
   }
 }
 customElements.define("carousel-card", CarouselCard);

@@ -1,5 +1,6 @@
 :root {
   --color-primary: #3d5afe;
+  --color-secondary: #00e676;
   --color-text: #ededed;
   --gray-dark1: #989898;
   /* Background colors */
@@ -80,6 +81,9 @@ h3 {
 .material-symbols-rounded {
   color: var(--color-text);
 }
+.material-symbols-rounded.filled {
+  font-variation-settings: "FILL" 1;
+}
 
 /* Carousel styles */
 image-carousel {
@@ -158,21 +162,36 @@ carousel-card > div {
   position: relative;
 }
 
+carousel-card .material-symbols-rounded {
+  cursor: pointer;
+}
+
 carousel-card > div > .material-symbols-rounded {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 71px;
+
+  font-size: 55px;
   height: 71px;
   aspect-ratio: 1/1;
-  display: none;
   background-color: var(--color-primary);
   border-radius: 100%;
+
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  display: none;
 }
+
 carousel-card:hover > div > .material-symbols-rounded {
-  display: inline-block;
+  display: flex;
 }
+
+carousel-card section span.filled {
+  color: var(--color-secondary);
+}
+
 carousel-card img {
   width: 100%;
   aspect-ratio: 221/294;
@@ -183,13 +202,17 @@ carousel-card:hover img {
   filter: blur(1px);
 }
 
-.card-info {
+section {
   width: 100%;
   padding: 0 var(--padding-xxs);
   gap: var(--gap-xs);
 }
 
-.card-info > div {
+section > div {
   justify-content: space-between;
   height: fit-content;
+}
+
+carousel-card[free] section div h3 {
+  color: var(--color-secondary);
 }
