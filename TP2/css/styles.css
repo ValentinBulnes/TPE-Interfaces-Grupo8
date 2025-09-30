@@ -1,4 +1,4 @@
-*{
+* {
     margin: 0;
     padding: 0;
     list-style: none;
@@ -6,4 +6,582 @@
     border: none;
     outline: none;
     box-sizing: border-box;
+}
+
+.hidden {
+    display: none;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    color: #EDEDED;
+    background-color: #121212;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+h1 {
+    font-size: 45px;
+    font-weight: 400;
+    color: #EDEDED;
+    margin: 0;
+}
+
+h2 {
+    font-size: 28px;
+    font-weight: 600;
+    color: #EDEDED;
+    margin: 0;
+}
+
+h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #EDEDED;
+    margin: 0;
+}           
+
+.header {
+    background-color: #2E2E2E;
+    width: 100%;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+    padding: 0 9px;
+    position: relative;
+    max-width: 1350px;
+    margin: 0 auto;
+}
+
+/* Contenedor izquierdo del header */
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    position: relative;
+}
+
+/* Logo con imagen */
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo-img {
+    height: 40px;
+    width: auto;
+}
+
+/* Barra de búsqueda */
+.search-container {
+    position: absolute;
+    left: 475px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 400px;
+    height: 38px;
+}
+
+.search-input {
+    width: 100%;
+    height: 100%;
+    padding: 0 16px 0 16px;
+    border: 2px solid #EDEDED;
+    border-radius: 20px;
+    background-color: transparent;
+    color: #EDEDED;
+    font-size: 15px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.search-btn {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-container .search-btn iconify-icon {
+    width: 24px;
+    height: 24px;
+    font-size: 24px;
+}
+
+/* Contenedor derecho del header */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 23px;
+    position: relative;
+}
+
+/* Botones de íconos */
+.icon-btn {
+    background: none;
+    cursor: pointer;
+    position: relative;
+}
+
+
+.header iconify-icon {
+    width: 34px;
+    height: 34px;
+    font-size: 34px;
+}
+
+/* Avatar de usuario */
+.user-avatar {
+    position: relative;
+    cursor: pointer;
+}
+
+.avatar-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.status-indicator {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 10px;
+    height: 10px;
+    background-color: #34A853;
+    border-radius: 50%;
+}
+
+/* Tamaño íconos generales */
+iconify-icon {
+    color: #EDEDED;
+    font-size: 24px;
+    vertical-align: middle;
+}
+
+/* Fat footer -------------------------------------------------------- */
+
+#fat-footer {
+    background: #2E2E2E;
+    margin-top: auto;
+
+}
+
+#footer-content {
+    max-width: 1350px;
+    margin: 0 auto;
+    padding-top: 40px;
+    padding-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+    height: 434px;
+}
+
+#footer-top {
+    display: flex;
+    justify-content: space-between;
+    height: 54px;
+    padding-left: 9px;
+    padding-right: 9px;
+}
+
+#footer-social {
+    display: flex;
+    align-items: flex-end;
+    gap: 20px;
+}
+
+
+#footer-social a:hover iconify-icon {
+    color: #33EB8A;
+}
+
+.footer-separator {
+    height: 1px;
+    background-color: #33EB8A;
+}
+
+#footer-links {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 9px;
+    padding-right: 9px;
+}
+
+.footer-link-category {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.footer-link-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.footer-link-list li a {
+    color: #ccc;
+    transition: color 0.2s;
+}
+
+.footer-link-list li a:hover {
+    color: #33EB8A;
+}
+
+#copyright {
+    color: #7A7A7A;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+#copyright iconify-icon {
+    color: #7A7A7A;
+}
+
+/* Login Page Styles -------------------------------------------------------- */
+
+.logo-section {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100px;
+    padding: 30px 0px 0px 30px;
+}
+
+.login-logo {
+    width: 375px;
+    height: 70px;
+}
+
+.login-form-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0px 106px 0px 106px;
+    height: auto;
+}
+
+.login-form-section#register-container {
+    justify-content: flex-start;
+    height: auto;
+    min-height: 100vh;
+}
+
+.login-form-section.hidden {
+    display: none;
+}
+
+.login-frame {
+    width: 520px;
+    height: 531px;
+    background-color: #2E2E2E;
+    border-radius: 20px;
+    padding: 30px 30px 30px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 36px;
+}
+
+.login-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 0;
+    width: 520px;
+    height: 70px;
+}
+
+.login-form {
+    width: 400px;
+    height: 531px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+
+.input-group input {
+    width: 364px;
+    height: 45px;
+    border: 2px solid #EDEDED;
+    border-radius: 20px;
+    background-color: transparent;
+    padding: 0 16px;
+    outline: none;
+    box-sizing: border-box;
+    color: #EDEDED;
+}
+
+.input-group input::placeholder {
+    color: #7A7A7A;
+}
+
+/* Shared Button Styles */
+.btn-primary {
+    width: 364px;
+    height: 50px;
+    background-color: #3D5AFE;
+    color: #EDEDED;
+    border: none;
+    border-radius: 20px;
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.login-btn {
+    width: 364px;
+    height: 50px;
+    background-color: #3D5AFE;
+    color: #EDEDED;
+    border: none;
+    border-radius: 20px;
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.register-link {
+    text-align: center;
+}
+
+.register-link p {
+    color: #EDEDED;
+    margin: 0;
+}
+
+.register-text {
+    color: #FF4081;
+}
+
+
+.separator {
+    height: 2px;
+    min-height: 2px;
+    background-color: #EDEDED;
+    display: block;
+    width: 460px;
+}
+
+.social-login {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.social-btn {
+    width: 364px;
+    height: 45px;
+    border: 2px solid #EDEDED;
+    border-radius: 20px;
+    background-color: transparent;
+    color: #EDEDED;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    padding: 10px 35px 10px 35px;
+    position: relative;
+}
+
+.social-btn iconify-icon {
+    position: absolute;
+    left: 37px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.facebook-btn {
+    background-color: #4267B2;
+    border-color: #4267B2;
+}
+
+.google-btn {
+    background-color: #EDEDED;
+    color: #000000;
+    border-color: #EDEDED;
+}
+
+/* Shared Form Styles -------------------------------------------------------- */
+
+/* Input containers with icons (password, date) */
+.input-container-with-icon {
+    position: relative;
+    width: 364px;
+}
+
+.input-container-with-icon input {
+    width: 100%;
+    padding-right: 50px;
+}
+
+.input-icon-btn {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Registration Form Specific Styles */
+.password-input-container {
+    position: relative;
+    width: 364px;
+}
+
+.password-input-container input {
+    width: 100%;
+    padding-right: 50px;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.date-input-container {
+    position: relative;
+    width: 364px;
+}
+
+.date-input-container input {
+    width: 100%;
+    padding-right: 50px;
+}
+
+.date-picker-btn {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.captcha-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 15px 0;
+}
+
+.captcha-image {
+    height: 67px;
+    width: 237px;
+}
+
+.legal-text {
+    text-align: center;
+    margin-top: 80px;
+    margin-bottom: 20px;
+    width: 100%;
+    padding: 0 20px;
+}
+
+.legal-text p {
+    color: #7A7A7A;
+    font-size: 12px;
+    line-height: 1.4;
+    margin: 5px 0;
+}
+
+.legal-link {
+    color: #3D5AFE;
+    text-decoration: underline;
+}
+
+.legal-link:hover {
+    color: #33EB8A;
+}
+
+/* Shared Form Layout Styles */
+.form-extended {
+    height: auto;
+    min-height: 700px;
+    padding-bottom: 40px;
+}
+
+.form-extended .form-content {
+    height: auto;
+    gap: 20px;
+    justify-content: flex-start;
+}
+
+.form-extended .input-group {
+    margin-bottom: 10px;
+}
+
+.form-extended .btn-primary {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* Registration specific overrides */
+.login-frame.registration-frame {
+    width: 520px;
+    height: 854px;
+}
+
+.registration-form {
+    width: 400px;
+    height: 794px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
 }
