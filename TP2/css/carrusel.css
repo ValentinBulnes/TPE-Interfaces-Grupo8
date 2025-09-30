@@ -235,16 +235,21 @@ carousel-card[free] section div h3 {
 }
 
 /* Premium card styles */
+image-carousel.single .carousel {
+  /* TODO: width */
+  width: 1189px;
+}
+
+image-carousel.single h3,
+image-carousel.single .scroll-pill {
+  display: none;
+}
+
 premium-card {
   display: inline-block;
   width: fit-content;
   height: fit-content;
   position: relative;
-}
-
-image-carousel.single .carousel {
-  /* TODO: width */
-  width: 1189px;
 }
 
 premium-card img {
