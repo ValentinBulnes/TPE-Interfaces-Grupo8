@@ -107,7 +107,6 @@ class ImageCarousel extends HTMLElement {
     const slide = this.slides[0];
 
     const slideWidth = slide.offsetWidth;
-    console.log(slide, slideWidth);
     const style = getComputedStyle(this.track);
     const gap = parseFloat(style.columnGap || style.gap || 0);
 
@@ -115,7 +114,6 @@ class ImageCarousel extends HTMLElement {
     const slotSize = slideWidth + gap;
 
     // how many slides fit in the visible viewport
-    console.log(carousel.offsetWidth, slotSize);
     this.visibleCount = Math.max(
       1,
       Math.floor(carousel.offsetWidth / slotSize)
@@ -176,7 +174,6 @@ class ImageCarousel extends HTMLElement {
     // fraction of visible slides
     const fractionVisible = this.visibleCount / total;
     pill.style.width = `${fractionVisible * 100}%`;
-    console.log(this.visibleCount, total, pill.style.width);
 
     const maxIndex = total - this.visibleCount;
     if (maxIndex <= 0) {
