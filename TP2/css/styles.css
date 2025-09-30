@@ -258,6 +258,9 @@ iconify-icon {
 }
 
 /* Login Page Styles -------------------------------------------------------- */
+body.login-page {
+    background: linear-gradient(to bottom, #2E2E2E, #121212);
+}
 
 .logo-section {
     display: flex;
