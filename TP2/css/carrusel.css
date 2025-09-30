@@ -101,7 +101,7 @@ image-carousel {
   margin: 0 auto;
 }
 
-.carousel {
+image-carousel .carousel {
   position: relative;
   /* TODO: width */
   width: 1184px;
@@ -109,21 +109,21 @@ image-carousel {
   height: fit-content;
 }
 
-.scroll-pill {
+image-carousel .scroll-pill {
   width: 25%;
   height: 20px;
   background-color: var(--gray-dark1);
   border-radius: var(--border-rad-m);
 }
 
-.scroll-pill > div {
+image-carousel .scroll-pill > div {
   height: 100%;
   background-color: var(--color-primary);
   border-radius: var(--border-rad-m);
   transition: transform 0.3s ease;
 }
 
-.carousel > div {
+image-carousel .carousel > div {
   display: flex;
   transition: transform 0.4s ease-in-out;
   height: 100%;
@@ -137,7 +137,7 @@ image-carousel > div > h3 {
   padding: 0 var(--padding-m);
 }
 
-nav > button {
+image-carousel nav > button {
   border: none;
   background: var(--color-primary);
   color: var(--color-text);
@@ -146,11 +146,11 @@ nav > button {
   display: flex;
 }
 
-nav > button:disabled {
+image-carousel nav > button:disabled {
   opacity: 50%;
 }
 
-nav > button > .material-symbols-rounded {
+image-carousel nav > button > .material-symbols-rounded {
   font-size: 55px;
 }
 
@@ -208,13 +208,13 @@ carousel-card:hover img {
   filter: blur(1px);
 }
 
-section {
+carousel-card section {
   width: 100%;
   padding: 0 var(--padding-xxs);
   gap: var(--gap-xs);
 }
 
-section > div {
+carousel-card section > div {
   justify-content: space-between;
   height: fit-content;
 }
@@ -266,6 +266,7 @@ premium-card:hover img {
 }
 
 premium-card section {
+  width: 100%;
   position: absolute;
   bottom: 0;
   padding: 60px;
