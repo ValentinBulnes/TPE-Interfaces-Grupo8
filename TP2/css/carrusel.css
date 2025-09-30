@@ -219,6 +219,17 @@ section > div {
   height: fit-content;
 }
 
+carousel-card section > h3 {
+  line-height: 1.2em;
+  min-height: 2.4em;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+}
+
 carousel-card[free] section div h3 {
   color: var(--color-secondary);
 }
