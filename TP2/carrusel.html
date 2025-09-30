@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Global Styles Carousel</title>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <link rel="stylesheet" href="./css/carrusel.css">
+</head>
+<body>
+    <header></header>
+    <main>
+
+        <h1>Global Styles Carousel Demo</h1>
+        <carousel-card
+            img="https://cdn1.epicgames.com/offer/16ed9f15b1b449ccb59cb610b13df5b8/SMITE2-PortraitImagev2-F2P-1200x1600_1200x1600-ffcfc13b70a51bb7299ab1db021a2960?resize=1&w=360&h=480&quality=medium"
+            title="Mountains" price="$99.99" class="premium" cart free></carousel-card>
+
+        <image-carousel class="triple" step="2">
+            <carousel-card
+                img="https://cdn1.epicgames.com/offer/16ed9f15b1b449ccb59cb610b13df5b8/SMITE2-PortraitImagev2-F2P-1200x1600_1200x1600-ffcfc13b70a51bb7299ab1db021a2960?resize=1&w=360&h=480&quality=medium"
+                title="Mountains es un nombre demasiado corto para probar el truncate" price="$99.99"></carousel-card>
+            <carousel-card
+                img="https://cdn1.epicgames.com/offer/879b0d8776ab46a59a129983ba78f0ce/genshintall_1200x1600-4a5697be3925e8cb1f59725a9830cafc?resize=1&w=360&h=480&quality=medium"
+                title="Forest" price="$66.66" cart></carousel-card>
+            <carousel-card
+                img="https://cdn1.epicgames.com/spt-assets/ea0a24395cd641d7bbde3e5d78ad462c/hades-ii-1rb3z.png?resize=1&w=360&h=480&quality=medium"
+                title="Ocean" price="$22.22" free></carousel-card>
+            <carousel-card
+                img="https://cdn1.epicgames.com/offer/16ed9f15b1b449ccb59cb610b13df5b8/SMITE2-PortraitImagev2-F2P-1200x1600_1200x1600-ffcfc13b70a51bb7299ab1db021a2960?resize=1&w=360&h=480&quality=medium"
+                title="Mountains" price="$99.99" cart free></carousel-card>
+            <carousel-card
+                img="https://cdn1.epicgames.com/offer/879b0d8776ab46a59a129983ba78f0ce/genshintall_1200x1600-4a5697be3925e8cb1f59725a9830cafc?resize=1&w=360&h=480&quality=medium"
+                title="Forest" price="$66.66"></carousel-card>
+            <carousel-card
+                img="https://cdn1.epicgames.com/spt-assets/ea0a24395cd641d7bbde3e5d78ad462c/hades-ii-1rb3z.png?resize=1&w=360&h=480&quality=medium"
+                title="Ocean" price="$22.22"></carousel-card>
+            <carousel-card
+                img="https://cdn1.epicgames.com/offer/16ed9f15b1b449ccb59cb610b13df5b8/SMITE2-PortraitImagev2-F2P-1200x1600_1200x1600-ffcfc13b70a51bb7299ab1db021a2960?resize=1&w=360&h=480&quality=medium"
+                title="Mountains" price="$99.99"></carousel-card>
+            <carousel-card
+                img="https://cdn1.epicgames.com/offer/879b0d8776ab46a59a129983ba78f0ce/genshintall_1200x1600-4a5697be3925e8cb1f59725a9830cafc?resize=1&w=360&h=480&quality=medium"
+                title="Forest" price="$66.66"></carousel-card>
+            <carousel-card
+                img="https://cdn1.epicgames.com/spt-assets/ea0a24395cd641d7bbde3e5d78ad462c/hades-ii-1rb3z.png?resize=1&w=360&h=480&quality=medium"
+                title="Ocean" price="$22.22"></carousel-card>
+            <carousel-card
+                img="https://cdn1.epicgames.com/offer/16ed9f15b1b449ccb59cb610b13df5b8/SMITE2-PortraitImagev2-F2P-1200x1600_1200x1600-ffcfc13b70a51bb7299ab1db021a2960?resize=1&w=360&h=480&quality=medium"
+                title="Mountains" price="$99.99"></carousel-card>
+            <carousel-card
+                img="https://cdn1.epicgames.com/spt-assets/ea0a24395cd641d7bbde3e5d78ad462c/hades-ii-1rb3z.png?resize=1&w=360&h=480&quality=medium"
+                title="Ocean" price="$22.22"></carousel-card>
+        </image-carousel>
+
+        <premium-card
+            img="https://cdn2.unrealengine.com/egs-hades-ii-carousel-desktop-1920x1080-cd5e48bed01e.jpeg?resize=1&w=1280&h=720&quality=medium"
+            title="Mountains" price="$11.11"></premium-card>
+
+        <image-carousel class="single">
+            <premium-card
+                img="https://cdn2.unrealengine.com/egs-hades-ii-carousel-desktop-1920x1080-cd5e48bed01e.jpeg?resize=1&w=1280&h=720&quality=medium"
+                title="Mountains es un nombre demasiado corto para probar el truncate" price="$22.22"></premium-card>
+            <premium-card
+                img="https://cdn2.unrealengine.com/egs-cyberpunk-2077-phantom-liberty-anniversary-breaker-1920x1080-966616fdd009.jpg?resize=1&w=1280&h=720&quality=medium"
+                title="Forest" price="$66.66"></premium-card>
+            <premium-card
+                img="https://cdn2.unrealengine.com/en-honkai-star-rail-update-3-6-breaker-1920x1080-176fc19500ad.jpg?resize=1&w=1280&h=720&quality=medium"
+                title="Ocean" price="$33.33"></premium-card>
+        </image-carousel>
+
+    </main>
+    <footer></footer>
+    <template id="card-template">
+        <div>
+            <img>
+            <span class="material-symbols-rounded">
+                play_arrow
+            </span>
+            <section class="flex-col">
+                <h3 class="bold">El Juego 2077: Retorno del Rey</h3>
+                <div class="flex-row">
+                    <h3>$99.99</h3>
+                    <span class="material-symbols-rounded">
+                        favorite
+                    </span>
+                </div>
+            </section>
+        </div>
+    </template>
+
+    <template id="premium-card-template">
+        <img>
+        <section class="flex-row">
+            <div class="flex-col">
+                <h1>El Juego 2077: Retorno del Rey</h1>
+                <h2>$99.99</h2>
+            </div>
+            <button>
+                <h2>Comprar</h2>
+            </button>
+        </section>
+    </template>
+
+    <template id="carousel-template">
+        <div class="flex-col gap-xxs align-items-center">
+            <h3>Section title</h3>
+            <nav class="flex-row">
+                <button class="prev" disabled>
+                    <span class="material-symbols-rounded">
+                        chevron_left
+                    </span>
+                </button>
+                <div class="carousel">
+                    <div></div>
+                </div>
+                <button class="next">
+                    <span class="material-symbols-rounded">
+                        chevron_right
+                    </span>
+                </button>
+            </nav>
+            <div class="scroll-pill">
+                <div></div>
+            </div>
+        </div>
+    </template>
+
+    <script src="./js/carrusel.js" type="module"></script>
+</body>
+</html>
