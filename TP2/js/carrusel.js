@@ -66,6 +66,8 @@ class ImageCarousel extends HTMLElement {
     this.innerHTML = this.template.innerHTML;
     const track = this.querySelector(".carousel > div");
 
+    this.querySelector("h3").textContent =
+      this.getAttribute("title") || "E404";
     slides.forEach((slide) => track.appendChild(slide));
 
     this.slides = track.querySelectorAll("carousel-card,premium-card");
