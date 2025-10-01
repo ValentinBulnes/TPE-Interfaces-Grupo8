@@ -332,6 +332,10 @@ body.login-page {
     gap: 8px;
 }
 
+.required {
+    color: #FF4081;
+}
+
 
 .input-group input {
     width: 364px;
