@@ -27,7 +27,25 @@ document.addEventListener('DOMContentLoaded', function () {
     if (showLogin) {
         showLogin.addEventListener('click', mostrarLogin);
     }
-});
 
+    // Menu desplegable del header
+    const menuToggle = document.querySelector('.menu-toggle');
+    const dropdownMenu = document.querySelector('.dropdown-menu');
+    const menuIcon = menuToggle.querySelector('iconify-icon');
+
+    if (menuToggle && dropdownMenu) {
+        menuToggle.addEventListener('click', function() {
+            // Toggle del menú
+            dropdownMenu.classList.toggle('show');
+            
+            // Cambiar el ícono
+            if (dropdownMenu.classList.contains('show')) {
+                menuIcon.setAttribute('icon', 'lucide:x');
+            } else {
+                menuIcon.setAttribute('icon', 'lucide:menu');
+            }
+        });
+    }
+});
 
   
