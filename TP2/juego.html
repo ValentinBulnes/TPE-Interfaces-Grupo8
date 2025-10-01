@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>
 </head>
+
 <body>
     <header class="header">
         <div class="header-content">
@@ -43,8 +45,96 @@
             </div>
         </div>
     </header>
-    <main>
-        
+    <main id="game-page-main">
+        <div class="game-page-section" id="breadcrumb">
+            <nav>
+                <ol>
+                    <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
+                    <li class="breadcrumb-separator">›</li>
+                    <li class="breadcrumb-item"><a href="#">Juegos</a></li>
+                    <li class="breadcrumb-separator">›</li>
+                    <li class="breadcrumb-item"><a href="#">Puzzles</a></li>
+                    <li class="breadcrumb-separator">›</li>
+                    <li class="breadcrumb-item active"><a href="juego.html">Batman Peg Solitaire: Gotham Edition</a>
+                    </li>
+                </ol>
+            </nav>
+        </div>
+        <div class="game-page-section" id="game-execution">
+            <img src="img/juego_1.png" alt="Pantalla de ejecución del juego">
+            <button class="play-btn">
+                <!-- Icono de play -->
+            </button>
+        </div>
+
+        <div class="game-page-section" id="game-title">
+            <h1>Batman Peg Solitaire: Gotham Edition</h1>
+            <div id="game-title-actions">
+                <button class="icon-btn">
+                    <iconify-icon icon="lucide:heart"></iconify-icon>
+                </button>
+                <button class="icon-btn">
+                    <iconify-icon icon="lucide:thumbs-up"></iconify-icon>
+                </button>
+                <button class="icon-btn">
+                    <iconify-icon icon="lucide:thumbs-down"></iconify-icon>
+                </button>
+                <button class="icon-btn" id="share-button">
+                    <iconify-icon icon="lucide:share-2"></iconify-icon>
+                    <label>Compartir</label>
+                </button>
+            </div>
+        </div>
+
+        <section class="game-page-section" id="about-game">
+            <article id="how-to-play">
+                <h3>Cómo jugar</h3>
+                <ul>
+                    <li>El tablero representa la ciudad de Gotham. Cada ficha es un villano que amenaza el orden.
+                    </li>
+                    <li>Controlás a Batman, que se mueve saltando sobre los enemigos adyacentes (horizontal o
+                        verticalmente).</li>
+                    <li>Al saltar sobre un villano, este es capturado y retirado del tablero.</li>
+                    <li>Solo puedes saltar si hay un espacio vacío justo después del villano que vas a atrapar.</li>
+                    <li>El objetivo es que quede un único Batman en pie, símbolo de que el Caballero Oscuro ha
+                        triunfado sobre el crimen en Gotham.</li>
+                </ul>
+            </article>
+
+            <article id="gallery">
+                <img src="img/captura_1.png" alt="Captura del juego 1">
+                <img src="img/captura_2.png" alt="Captura del juego 2">
+                <img src="img/captura_3.png" alt="Captura del juego 3">
+                <img src="img/captura_4.png" alt="Captura del juego 4">
+            </article>
+
+            <div class="flex-row">
+                <article id="description">
+                    <h3>Descripción</h3>
+                    <p>Gotham está sumida en el caos. Los criminales acechan en cada rincón y la ciudad depende de un
+                        solo héroe para traer justicia. En Batman Peg Solitaire, cada movimiento representa una lucha en
+                        la oscuridad, un enfrentamiento entre el Murciélago y las fuerzas del crimen. Cada salto es un
+                        villano capturado, cada ficha retirada es un pedazo de Gotham que vuelve a estar a salvo. Solo
+                        quedando un Batman en el tablero, la ciudad podrá respirar en paz.</p>
+                    <p>Más información en la <a href="https://www.dc.com/">página de DC Comics.</a></p>
+                </article>
+
+                <aside class="about-game-article" id="game-details">
+                    <h3>Detalles del juego</h3>
+                    <div class="separator"></div>
+                    <ul>
+                        <li>Categoría: <strong>Puzzles</strong></li>
+                        <li>Desarrollador: <strong>Grupo 8 Studios</strong></li>
+                        <li>Modo: <strong>1 jugador</strong></li>
+                        <li>Dificultad: <strong>Media-alta</strong></li>
+                        <li>Duración aproximada: <strong>5-10 min</strong></li>
+                        <li>Fecha de lanzamiento: <strong>Septiembre 2025</strong></li>
+                        <li>Valoración de usuarios: <strong>85%</strong></li>
+                        <li>En favoritos: <strong>1.250 jugadores</strong></li>
+                    </ul>
+                </aside>
+            </div>
+        </section>
     </main>
     <footer id="fat-footer">
         <div id="footer-content">
@@ -58,7 +148,7 @@
                     <a href="#"><iconify-icon icon="lucide:facebook"></iconify-icon></a>
                 </div>
             </div>
-            <div class="footer-separator"></div>
+            <div class="separator"></div>
             <div id="footer-links">
                 <div class="footer-link-category">
                     <h3 class="footer-link-category">Navegación</h3>
@@ -120,4 +210,5 @@
     </footer>
     <script src="js/main.js"></script>
 </body>
+
 </html>

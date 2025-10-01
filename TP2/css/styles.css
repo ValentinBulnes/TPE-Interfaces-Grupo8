@@ -211,11 +211,6 @@ iconify-icon {
     color: #33EB8A;
 }
 
-.footer-separator {
-    height: 1px;
-    background-color: #33EB8A;
-}
-
 #footer-links {
     display: flex;
     justify-content: space-between;
@@ -443,6 +438,171 @@ body.login-page {
     border-color: #EDEDED;
 }
 
+/* Game Page Styles -------------------------------------------------------- */
+
+/* Flujo y posicionamiento de la página */
+#game-page-main {
+    max-width: 1350px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    padding: 0 9px;
+}
+
+/* Breadcrumb */
+#breadcrumb {
+    height: 24px;
+    margin-top: 29px;
+    align-content: center;
+    font-size: 13px; /*Label bold*/
+    font-weight: bold;
+}
+
+#breadcrumb ol {
+    display: flex;
+    gap: 8px;
+}
+
+.breadcrumb-item a {
+    color: #33EB8A;
+    transition: color 0.2s;
+}
+
+.breadcrumb-item a:hover {
+    color: #3D5AFE;
+}
+
+.breadcrumb-separator {
+    color: #A0A0A0;
+    user-select: none;
+}
+
+/* Game execution */
+
+#game-execution {
+    margin-top: 28px;
+    width: 1320px;
+    height: 610px;
+}
+
+/* Game title */
+
+#game-title {
+    margin-top: 29px;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    align-items: center;
+}
+
+#game-title h1, #game-title-actions {
+    width: max-content;
+    font-weight: bold;
+}
+
+#game-title-actions {
+    display: flex;
+    align-content: center;
+    gap: 17px;
+}
+
+.icon-btn {
+    background: none;
+    cursor: pointer;
+    color: #EDEDED;
+}
+
+#share-button {
+    background: #3D5AFE;
+    color: #fff;
+    width: auto;
+    height: 42px;
+    padding: 9px 18px;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    font-weight: bold;
+    font-size: 20px;
+    border: none;
+    border-radius: 20px;
+}
+
+#game-title-actions button:last-child iconify-icon {
+  color: #fff;
+  font-size: 22px;
+}
+
+/* About Game */
+
+#how-to-play {
+    padding: 11px 18px;
+}
+
+#how-to-play ul { /* Lo pisa el global */
+    margin-top: 15px;
+    list-style-type: disc;
+    padding-left: 24px;
+}
+
+#how-to-play ul li {
+    margin-top: 5px;
+}
+
+/* Gallery */
+
+#gallery {
+    margin-top: 15px;
+    padding: 15px 18px;
+}
+
+#gallery img {
+    margin: 0 7px;
+    border-radius: 10px;
+}
+
+/* Description and Game Details */
+
+#description {
+    margin-top: 15px;
+    padding: 0 18px;
+    width: 820px;
+}
+
+#description p {
+    margin-top: 15px;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 200px;
+}
+
+#game-details {
+    width: 300px;
+    margin-top: 15px;
+    padding: 0 18px;
+}
+
+#game-details ul {
+    margin-top: 15px;
+    padding-left: 23px;
+    list-style-type: disc;
+}
+
+#game-details ul li {
+    margin-top: 10px;
+}
+
+/* Otros ------------------------------------------------------------------ */
+
+.separator {
+    height: 1px;
+    background-color: #33EB8A;
+    width: 100%;
+    margin-top: 15px;
+}
 /* Shared Form Styles -------------------------------------------------------- */
 
 /* Input containers with icons (password, date) */
