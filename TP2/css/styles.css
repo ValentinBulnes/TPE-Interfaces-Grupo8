@@ -752,3 +752,150 @@ body.login-page {
     align-items: center;
     justify-content: space-between;
 }
+
+/* Seccion Comunidad */
+
+.comunidad-container {
+    min-height: 710px;
+    width: 820px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+.comentar-container {
+    width: 820px;
+    height: 99px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.avatar-comunidad-img {
+    width: 60px;
+    height: 60px; 
+}
+
+.comentar-container input {
+    flex: 1;
+    height: 45px;
+    border: 2px solid #EDEDED;
+    border-radius: 20px;
+    background-color: transparent;
+    outline: none;
+    box-sizing: border-box;
+    color: #EDEDED;
+    padding: 0 10px;
+}
+
+.comentar-container input::placeholder {
+    color: #6A6A6A;
+}
+
+.comentar-btn {
+    width: 135px;
+    height: 45px;
+    background-color: #3D5AFE;
+    border: none;
+    border-radius: 20px;
+    color: #EDEDED;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Estilos para comentarios existentes */
+.comentario-container {
+    width: 820px;
+    min-height: 130px;
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    padding: 13px 0;
+}
+
+.comentario-avatar {
+    display: flex;
+    align-items: flex-start;
+}
+
+.comentario-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    flex: 1;
+}
+
+.comentario-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+}
+
+.comentario-nombre {
+    font-size: 20px;
+    font-weight: 700;
+    color: #EDEDED;
+    margin: 0;
+}
+
+.comentario-tiempo {
+    font-size: 13px;
+    color: #6A6A6A;
+    margin: 0;
+}
+
+.comentario-texto {
+    font-size: 16px;
+    color: #EDEDED;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.comentario-likes {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 7px 0;
+}
+
+.like-group {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.dislike-group {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.comentario-likes p {
+    font-size: 13px;
+    color: #6A6A6A;
+    margin: 0;
+}
+
+.comentario-ver-mas {
+    font-size: 13px;
+    color: #FF4081;
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    transition: color 0.2s;
+    font-family: inherit;
+    align-self: flex-start;
+}
+
+.comentario-ver-mas:hover {
+    color: #C60055;
+    text-decoration: underline;
+}
