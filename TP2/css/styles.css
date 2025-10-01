@@ -8,6 +8,10 @@
     box-sizing: border-box;
 }
 
+.hidden {
+    display: none;
+}
+
 body {
     font-family: 'Inter', sans-serif;
     font-size: 16px;
@@ -69,12 +73,6 @@ h3 {
     align-items: center;
 }
 
-.logo a {
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-}
-
 .logo-img {
     height: 40px;
     width: auto;
@@ -101,10 +99,6 @@ h3 {
     font-size: 15px;
     outline: none;
     box-sizing: border-box;
-}
-
-.search-input::placeholder {
-    color: #7A7A7A
 }
 
 .search-btn {
@@ -259,6 +253,9 @@ iconify-icon {
 }
 
 /* Login Page Styles -------------------------------------------------------- */
+body.login-page {
+    background: linear-gradient(to bottom, #2E2E2E, #121212);
+}
 
 .logo-section {
     display: flex;
@@ -277,10 +274,20 @@ iconify-icon {
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    padding: 0px 106px 36px 106px;
-    margin-top: -310px;
+    padding: 0px 106px 0px 106px;
+    height: auto;
+}
+
+.login-form-section#register-container {
+    justify-content: flex-start;
+    height: auto;
+    min-height: 100vh;
+}
+
+.login-form-section.hidden {
+    display: none;
 }
 
 .login-frame {
@@ -320,6 +327,10 @@ iconify-icon {
     gap: 8px;
 }
 
+.required {
+    color: #FF4081;
+}
+
 
 .input-group input {
     width: 364px;
@@ -330,34 +341,25 @@ iconify-icon {
     padding: 0 16px;
     outline: none;
     box-sizing: border-box;
+    color: #EDEDED;
 }
 
 .input-group input::placeholder {
     color: #7A7A7A;
 }
 
-.password-input-container {
-    position: relative;
+/* Shared Button Styles */
+.btn-primary {
     width: 364px;
-}
-
-.password-input-container input {
-    width: 100%;
-    padding-right: 50px;
-}
-
-.password-toggle {
-    position: absolute;
-    right: 16px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
+    height: 50px;
+    background-color: #3D5AFE;
+    color: #EDEDED;
     border: none;
+    border-radius: 20px;
+    font-size: 20px;
+    font-weight: 700;
     cursor: pointer;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    transition: background-color 0.2s;
 }
 
 .login-btn {
@@ -600,4 +602,153 @@ iconify-icon {
     background-color: #33EB8A;
     width: 100%;
     margin-top: 15px;
+}
+/* Shared Form Styles -------------------------------------------------------- */
+
+/* Input containers with icons (password, date) */
+.input-container-with-icon {
+    position: relative;
+    width: 364px;
+}
+
+.input-container-with-icon input {
+    width: 100%;
+    padding-right: 50px;
+}
+
+.input-icon-btn {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Registration Form Specific Styles */
+.password-input-container {
+    position: relative;
+    width: 364px;
+}
+
+.password-input-container input {
+    width: 100%;
+    padding-right: 50px;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.date-input-container {
+    position: relative;
+    width: 364px;
+}
+
+.date-input-container input {
+    width: 100%;
+    padding-right: 50px;
+}
+
+.date-picker-btn {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.captcha-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 15px 0;
+}
+
+.captcha-image {
+    height: 67px;
+    width: 237px;
+}
+
+.legal-text {
+    text-align: center;
+    margin-top: 80px;
+    margin-bottom: 20px;
+    width: 100%;
+    padding: 0 20px;
+}
+
+.legal-text p {
+    color: #7A7A7A;
+    font-size: 12px;
+    line-height: 1.4;
+    margin: 5px 0;
+}
+
+.legal-link {
+    color: #3D5AFE;
+    text-decoration: underline;
+}
+
+.legal-link:hover {
+    color: #33EB8A;
+}
+
+/* Shared Form Layout Styles */
+.form-extended {
+    height: auto;
+    min-height: 700px;
+    padding-bottom: 40px;
+}
+
+.form-extended .form-content {
+    height: auto;
+    gap: 20px;
+    justify-content: flex-start;
+}
+
+.form-extended .input-group {
+    margin-bottom: 10px;
+}
+
+.form-extended .btn-primary {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* Registration specific overrides */
+.login-frame.registration-frame {
+    width: 520px;
+    height: 854px;
+}
+
+.registration-form {
+    width: 400px;
+    height: 794px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
 }

@@ -10,52 +10,120 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>
 </head>
-<body>
-        <div class="logo-section">
-            <img src="img/Logo_big.svg" alt="GameCenter" class="login-logo">
-        </div>
-
-        <div class="login-form-section">
-                <h1 class="login-title">Inicia sesión</h1>
-            <div class="login-frame">
-                <form class="login-form">
-                    <div class="input-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" placeholder="Email" required>
-                    </div>
-                    
-                    <div class="input-group">
-                        <label for="password">Contraseña</label>
-                        <div class="password-input-container">
-                            <input type="password" id="password" placeholder="Contraseña" required>
-                            <button type="button" class="password-toggle" aria-label="Mostrar contraseña">
-                                <iconify-icon icon="lucide:eye"></iconify-icon>
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <button type="submit" class="login-btn">Iniciar sesión</button>
-                </form>
-                
-                <div class="register-link">
-                    <p>¿No tienes una cuenta? <a href="#" class="register-text">Regístrate acá</a></p>
+<body class="login-page">
+    <div class="logo-section">
+        <img src="img/Logo_big.svg" alt="GameCenter" class="login-logo">
+    </div>
+    
+    <!-- login -->
+    <div class="login-form-section" id="login-container">
+            <h1 class="login-title" id="form-title">Inicia sesión</h1>
+        <div class="login-frame" id="form-container">
+            <form class="login-form" action="index.html" method="get">
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="Email" required>
                 </div>
                 
-                <div class="separator"></div>
-                
-                <div class="social-login">
-                    <button class="social-btn facebook-btn">
-                        <iconify-icon icon="ri:facebook-fill"></iconify-icon>
-                        Iniciar sesión con Facebook
-                    </button>
-                    
-                    <button class="social-btn google-btn">
-                        <iconify-icon icon="material-icon-theme:google"></iconify-icon>
-                        Iniciar sesión con Google
-                    </button>
+                <div class="input-group">
+                    <label for="password">Contraseña</label>
+                    <div class="password-input-container">
+                        <input type="password" id="password" placeholder="Contraseña" required>
+                        <button type="button" class="password-toggle" aria-label="Mostrar contraseña">
+                            <iconify-icon icon="lucide:eye"></iconify-icon>
+                        </button>
+                    </div>
                 </div>
+                
+                <button type="submit" class="login-btn">Iniciar sesión</button>
+            </form>
+            
+            <div class="register-link">
+                <p>¿No tienes una cuenta? <a href="#" class="register-text" id="show-register">Regístrate acá</a></p>
+            </div>
+            
+            <div class="separator"></div>
+            
+            <div class="social-login">
+                <button class="social-btn facebook-btn">
+                    <iconify-icon icon="ri:facebook-fill"></iconify-icon>
+                    Iniciar sesión con Facebook
+                </button>
+                
+                <button class="social-btn google-btn">
+                    <iconify-icon icon="material-icon-theme:google"></iconify-icon>
+                    Iniciar sesión con Google
+                </button>
             </div>
         </div>
+    </div>
+
+    <!-- registro -->
+    <div class="login-form-section hidden" id="register-container">
+        <h1 class="login-title">Crea tu cuenta</h1>
+        <div class="login-frame registration-frame">
+            <form class="registration-form" action="index.html" method="get">
+                <div class="input-group">
+                    <label for="reg-email">Email<span class="required">*</span></label>
+                    <input type="email" id="reg-email" placeholder="Email" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="reg-password">Contraseña<span class="required">*</span></label>
+                    <div class="password-input-container">
+                        <input type="password" id="reg-password" placeholder="Contraseña" required>
+                        <button type="button" class="password-toggle" aria-label="Mostrar contraseña">
+                            <iconify-icon icon="lucide:eye"></iconify-icon>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="confirm-password">Confirmar contraseña<span class="required">*</span></label>
+                    <div class="password-input-container">
+                        <input type="password" id="confirm-password" placeholder="Contraseña" required>
+                        <button type="button" class="password-toggle" aria-label="Mostrar contraseña">
+                            <iconify-icon icon="lucide:eye"></iconify-icon>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="full-name">Nombre y Apellido<span class="required">*</span></label>
+                    <input type="text" id="full-name" placeholder="Nombre y Apellido" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="nickname">Nickname</label>
+                    <input type="text" id="nickname" placeholder="Nickname">
+                </div>
+
+                <div class="input-group">
+                    <label for="birth-date">Fecha de nacimiento<span class="required">*</span></label>
+                    <div class="date-input-container">
+                        <input type="text" id="birth-date" placeholder="DD/MM/YYYY" required>
+                        <button type="button" class="date-picker-btn" aria-label="Seleccionar fecha">
+                            <iconify-icon icon="material-symbols:calendar-month-outline"></iconify-icon>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="captcha-section">
+                        <img src="img/captcha.png" alt="reCAPTCHA" class="captcha-image">
+                </div>
+                
+                <button type="submit" class="login-btn">Registrarse</button>
+            </form>
+            
+            <div class="register-link">
+                <p>¿Ya tienes una cuenta? <a href="#" id="show-login" class="register-text">Inicia sesión acá</a></p>
+            </div>
+        </div>
+        <div class="legal-text">
+            <p>Al registrarte aceptas nuestros <a href="#" class="legal-link">Términos y Condiciones</a> y <a href="#" class="legal-link">Política de Privacidad</a>.</p>
+            <p>Este sitio está protegido por reCAPTCHA y se aplican la <a href="#" class="legal-link">Política de Privacidad</a> y los <a href="#" class="legal-link">Términos de Servicio</a> de Google.</p>
+        </div>
+    </div>
     <script src="js/main.js"></script>
 </body>
 </html>
