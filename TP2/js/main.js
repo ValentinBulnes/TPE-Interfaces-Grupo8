@@ -96,3 +96,25 @@ if (userAvatarBtn && userDropdownMenu) {
         }
     });
 }
+
+// Footer accordion functionality
+const footerCategoryHeaders = document.querySelectorAll('.footer-category-header');
+
+footerCategoryHeaders.forEach(header => {
+    header.addEventListener('click', function() {
+        const list = this.nextElementSibling;
+        const isActive = this.classList.contains('active');
+        
+        // Cerrar todas las categorías
+        footerCategoryHeaders.forEach(h => {
+            h.classList.remove('active');
+            h.nextElementSibling.classList.remove('show');
+        });
+        
+        // Si no estaba activa, abrirla
+        if (!isActive) {
+            this.classList.add('active');
+            list.classList.add('show');
+        }
+    });
+});

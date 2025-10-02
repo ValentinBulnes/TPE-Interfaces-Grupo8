@@ -383,11 +383,126 @@ iconify-icon {
 #fat-footer {
     background: #2E2E2E;
     margin-top: auto;
+    padding: 24px 16px;
 }
 
-/* Ocultar footer completo en mobile por ahora */
 #footer-content {
-    display: none;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Footer top - logo y redes sociales */
+#footer-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+#footer-logo img {
+    height: 40px;
+    width: auto;
+}
+
+#footer-social {
+    display: flex;
+    gap: 20px;
+}
+
+#footer-social a iconify-icon {
+    font-size: 28px;
+    transition: color 0.2s;
+}
+
+#footer-social a:hover iconify-icon {
+    color: #33EB8A;
+}
+
+.separator {
+    height: 1px;
+    background-color: #EDEDED;
+    width: 100%;
+}
+
+/* Footer Links - Acordeón Mobile */
+#footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.footer-link-category {
+    border-bottom: 1px solid #555555;
+}
+
+.footer-category-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+    cursor: pointer;
+    user-select: none;
+}
+
+.footer-category-header h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #EDEDED;
+    margin: 0;
+}
+
+.footer-category-icon {
+    font-size: 24px;
+    color: #EDEDED;
+    transition: transform ease;
+}
+
+.footer-category-header.active .footer-category-icon {
+    transform: rotate(180deg);
+}
+
+.footer-link-list {
+    max-height: 0;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-link-list.show {
+    max-height: 300px;
+    padding-bottom: 16px;
+}
+
+.footer-link-list li {
+    margin-top: 12px;
+}
+
+.footer-link-list li a {
+    color: #ccc;
+    font-size: 16px;
+    transition: color 0.2s;
+}
+
+.footer-link-list li a:hover {
+    color: #33EB8A;
+}
+
+/* Copyright */
+#copyright {
+    color: #7A7A7A;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 14px;
+    margin-top: 8px;
+}
+
+#copyright iconify-icon {
+    color: #7A7A7A;
+    font-size: 14px;
 }
 
 /* ============================================
@@ -516,78 +631,83 @@ iconify-icon {
 
     /* Footer Styles -------------------------------- */
     #fat-footer {
-        background: #2E2E2E;
-        margin-top: auto;
+        padding: 0;
     }
 
     #footer-content {
-        display: flex;
         max-width: 1350px;
         margin: 0 auto;
         padding-top: 40px;
         padding-bottom: 0;
-        flex-direction: column;
         gap: 36px;
         height: 434px;
     }
 
     #footer-top {
-        display: flex;
+        flex-direction: row;
         justify-content: space-between;
+        align-items: center;
         height: 54px;
         padding-left: 9px;
         padding-right: 9px;
     }
 
-    #footer-social {
-        display: flex;
-        align-items: flex-end;
-        gap: 20px;
+    #footer-logo img {
+        height: 54px;
     }
 
-    #footer-social a:hover iconify-icon {
-        color: #33EB8A;
+    #footer-social {
+        align-items: flex-end;
+    }
+
+    #footer-social a iconify-icon {
+        font-size: 24px;
     }
 
     #footer-links {
-        display: flex;
+        flex-direction: row;
         justify-content: space-between;
         padding-left: 9px;
         padding-right: 9px;
+        gap: 20px;
     }
 
     .footer-link-category {
         display: flex;
         flex-direction: column;
         gap: 18px;
+        border-bottom: none;
+    }
+
+    .footer-category-header {
+        padding: 0;
+        cursor: default;
+        pointer-events: none;
+    }
+
+    .footer-category-header h3 {
+        font-size: 20px;
+    }
+
+    .footer-category-icon {
+        display: none;
     }
 
     .footer-link-list {
         display: flex;
         flex-direction: column;
         gap: 18px;
+        max-height: none;
+        overflow: visible;
+        padding: 0;
     }
 
-    .footer-link-list li a {
-        color: #ccc;
-        transition: color 0.2s;
-    }
-
-    .footer-link-list li a:hover {
-        color: #33EB8A;
+    .footer-link-list li {
+        margin-top: 0;
     }
 
     #copyright {
-        color: #7A7A7A;
-        text-align: center;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 6px;
-    }
-
-    #copyright iconify-icon {
-        color: #7A7A7A;
+        margin-top: 0;
     }
 }
 
