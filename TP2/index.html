@@ -38,14 +38,17 @@
                 <button class="icon-btn cart-btn" aria-label="Carrito">
                     <iconify-icon icon="lucide:shopping-cart"></iconify-icon>
                 </button>
-                <div class="user-avatar">
-                    <img src="img/avatars/avatar_1.png" alt="Avatar de usuario" class="avatar-img">
-                    <div class="status-indicator"></div>
-                </div>
+                <button class="user-avatar-btn" aria-label="Menú de usuario">
+                    <div class="user-avatar">
+                        <img src="img/avatars/avatar_1.png" alt="Avatar de usuario" class="avatar-img">
+                        <div class="status-indicator"></div>
+                    </div>
+                    <iconify-icon icon="lucide:x" class="close-icon hidden"></iconify-icon>
+                </button>
             </div>
         </div>
 
-        <!-- Menú desplegable -->
+        <!-- Menú desplegable de navegación -->
         <nav class="dropdown-menu">
             <ul class="menu-list">
                 <li class="menu-item menu-main">
@@ -107,6 +110,38 @@
                     <a href="#" class="menu-link">
                         <iconify-icon icon="fluent-emoji-flat:crystal-ball"></iconify-icon>
                         <span>Rol</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Menú desplegable de usuario -->
+        <nav class="user-dropdown-menu">
+            <div class="user-menu-header">
+                <img src="img/avatars/avatar_1.png" alt="Avatar de usuario" class="user-menu-avatar">
+                <h3 class="user-menu-name">PlayerOne</h3>
+            </div>
+            <div class="user-menu-separator"></div>
+            <ul class="user-menu-list">
+                <li class="user-menu-item">
+                    <a href="#" class="user-menu-link">Perfil</a>
+                </li>
+                <li class="user-menu-item">
+                    <a href="#" class="user-menu-link">Amigos</a>
+                </li>
+                <li class="user-menu-item">
+                    <a href="#" class="user-menu-link">Favoritos</a>
+                </li>
+                <li class="user-menu-item">
+                    <a href="#" class="user-menu-link">Biblioteca</a>
+                </li>
+                <li class="user-menu-item">
+                    <a href="#" class="user-menu-link">Configuracion</a>
+                </li>
+                <li class="user-menu-item logout">
+                    <a href="login.html" class="user-menu-link">
+                        <span>Cerrar sesion</span>
+                        <iconify-icon icon="lucide:log-out"></iconify-icon>
                     </a>
                 </li>
             </ul>

@@ -101,6 +101,10 @@ h3 {
     box-sizing: border-box;
 }
 
+.search-input:hover {
+    border-color: #00E676;
+}
+
 .search-btn {
     position: absolute;
     right: 16px;
@@ -136,6 +140,13 @@ h3 {
     position: relative;
 }
 
+.icon-btn:hover iconify-icon {
+    color: #00E676;
+}
+
+.menu-toggle:hover iconify-icon {
+    color: #00E676;
+}
 
 .header iconify-icon {
     width: 34px;
@@ -144,9 +155,45 @@ h3 {
 }
 
 /* Avatar de usuario */
+.user-avatar-btn {
+    background: none;
+    cursor: pointer;
+    position: relative;
+    border: none;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .user-avatar {
     position: relative;
     cursor: pointer;
+}
+
+.user-avatar-btn .close-icon {
+    width: 34px;
+    height: 34px;
+    font-size: 34px;
+    display: none;
+}
+
+.user-avatar-btn .close-icon:not(.hidden) {
+    display: block;
+}
+
+.user-avatar-btn .user-avatar.hidden {
+    display: none;
+}
+
+.user-avatar-btn:hover .avatar-img {
+    box-shadow: 0 0 0 2px #00E676;
+}
+
+.user-avatar-btn:hover .close-icon {
+    color: #00E676;
 }
 
 .avatar-img {
@@ -177,7 +224,7 @@ iconify-icon {
 .dropdown-menu {
     position: absolute;
     top: 70px;
-    left: 0;
+    left: 271px;
     width: 300px;
     background-color: #555555;
     max-height: 0;
@@ -251,6 +298,101 @@ iconify-icon {
     width: 263px;
     height: 1px;
     background-color: #33EB8A;
+}
+
+/* Menú desplegable de usuario -------------------------------------------- */
+.user-dropdown-menu {
+    position: absolute;
+    top: 70px;
+    right: 210px;
+    width: 191px;
+    background-color: #555555;
+    max-height: 0;
+    overflow: hidden;
+    z-index: 1000;
+    padding: 0;
+}
+
+.user-dropdown-menu.show {
+    max-height: 316px;
+    padding: 20px;
+}
+
+.user-menu-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    margin-bottom: 10px;
+}
+
+.user-menu-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user-menu-name {
+    font-size: 20px;
+    font-weight: 700;
+    color: #EDEDED;
+    margin: 0;
+}
+
+.user-menu-separator {
+    width: 100%;
+    height: 1px;
+    background-color: #33EB8A;
+    margin-bottom: 10px;
+}
+
+.user-menu-list {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.user-menu-item {
+    position: relative;
+}
+
+.user-menu-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0;
+    color: #EDEDED;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.user-menu-link:hover {
+    color: #637BFF;
+}
+
+.user-menu-item.logout .user-menu-link {
+    color: #EDEDED;
+    font-weight: 400;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+}
+
+.user-menu-item.logout .user-menu-link:hover {
+    color: #637BFF;
+}
+
+.user-menu-item.logout .user-menu-link iconify-icon {
+    color: #637BFF;
+    width: 24px;
+    height: 24px;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
 }
 
 /* Fat footer -------------------------------------------------------- */
