@@ -46,6 +46,29 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
+
+    // Menú desplegable del usuario
+    const userAvatarBtn = document.querySelector('.user-avatar-btn');
+    const userDropdownMenu = document.querySelector('.user-dropdown-menu');
+
+    if (userAvatarBtn && userDropdownMenu) {
+        const userAvatar = userAvatarBtn.querySelector('.user-avatar');
+        const closeIcon = userAvatarBtn.querySelector('.close-icon');
+
+        userAvatarBtn.addEventListener('click', function() {
+            // Toggle del menú
+            userDropdownMenu.classList.toggle('show');
+            
+            // Cambiar entre avatar y X
+            if (userDropdownMenu.classList.contains('show')) {
+                userAvatar.classList.add('hidden');
+                closeIcon.classList.remove('hidden');
+            } else {
+                userAvatar.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+            }
+        });
+    }
 });
 
   
