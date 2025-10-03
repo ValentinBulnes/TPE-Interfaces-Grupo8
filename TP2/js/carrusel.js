@@ -66,8 +66,7 @@ class ImageCarousel extends HTMLElement {
     this.innerHTML = this.template.innerHTML;
     const track = this.querySelector(".carousel > div");
 
-    this.querySelector("h3").textContent =
-      this.getAttribute("title") || "E404";
+    this.querySelector("h3").textContent = this.getAttribute("title") || "E404";
     slides.forEach((slide) => track.appendChild(slide));
 
     this.slides = track.querySelectorAll("carousel-card,premium-card");
@@ -133,6 +132,14 @@ class ImageCarousel extends HTMLElement {
     const totalSlides = this.slides.length;
     const maxIndex = totalSlides - this.visibleCount;
     const lastIndex = this.currentIndex;
+
+    this.slides.forEach((slide, i) => {
+      slide.style.animation = "none"; // reset in case animation is mid-flight
+      slide.offsetHeight; // force reflow so animation restarts
+      slide.style.animation = `${
+        direction > 0 ? "flip-left" : "flip-right"
+      } 1s ease`;
+    });
 
     this.currentIndex = Math.min(
       Math.max(this.currentIndex + direction * this.step, 0),

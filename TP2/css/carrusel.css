@@ -101,13 +101,16 @@ image-carousel .scroll-pill > div {
 
 image-carousel .carousel > div {
   display: flex;
-  transition: transform 0.4s ease-in-out;
+  transition: transform .8s ease-in-out;
   height: 100%;
   gap: var(--gap-l);
   padding: var(--padding-xxs);
   padding-top: 0;
 }
-
+image-carousel.single .carousel > div {
+  transition-duration: .6s;
+  transition-timing-function: linear;
+}
 image-carousel > div > h3 {
   width: 100%;
   padding: 0 var(--padding-m);
@@ -128,6 +131,42 @@ image-carousel nav > button:disabled {
 
 image-carousel nav > button > .material-symbols-rounded {
   font-size: 55px;
+}
+
+@keyframes flip-left {
+  0% {
+    transform: rotateY(0deg);
+  }
+  50% {
+    transform: rotateY(-85deg) skew(10deg, 10deg);
+  }
+  51% {
+    transform: rotateY(-85deg) skew(10deg, -10deg);
+  }
+  100% {
+    transform: rotateY(0deg);
+  }
+}
+
+@keyframes flip-right {
+  0% {
+    transform: rotateY(0deg);
+  }
+  50% {
+    transform: rotateY(85deg) skew(-10deg, -10deg);
+  }
+  51% {
+    transform: rotateY(85deg) skew(-10deg, 10deg);
+  }
+  100% {
+    transform: rotateY(0deg);
+  }
+}
+
+carousel-card,
+premium-card {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
 }
 
 /* Carousel card styles */
