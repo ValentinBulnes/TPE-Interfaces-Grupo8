@@ -1,4 +1,4 @@
-body:has(#loader) {
+body:has(#loader:not(.hidden)) {
   overflow: hidden;
 }
 
