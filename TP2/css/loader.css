@@ -9,7 +9,7 @@ body:has(#loader:not(.hidden)) {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: #111;
+  background: var(--background-dark-1);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -28,8 +28,8 @@ body:has(#loader:not(.hidden)) {
 .spinner {
   width: 60px;
   height: 60px;
-  border: 6px solid rgba(255, 255, 255, 0.2);
-  border-top-color: #00ffcc;
+  border: 6px solid var(--background-dark-3);
+  border-top-color: var(--color-primary);
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
@@ -45,7 +45,7 @@ body:has(#loader:not(.hidden)) {
   width: 70%;
   max-width: 400px;
   height: 10px;
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--background-dark-3);
   border-radius: 5px;
   overflow: hidden;
 }
@@ -59,7 +59,7 @@ body:has(#loader:not(.hidden)) {
 .progress-bar > div {
   width: 0%;
   height: 100%;
-  background: #00ffcc;
+  background: var(--color-primary);
   transition: width 0.1s ease;
   animation: progress-bar 5s linear;
 }
