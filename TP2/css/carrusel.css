@@ -1,27 +1,3 @@
-:root {
-  --color-primary: #3d5afe;
-  --color-primary-dark2: #1e287a;
-  --color-secondary: #00e676;
-  --color-text: #ededed;
-  --gray-dark1: #989898;
-  /* Background colors */
-  --background-dark-1: #121212;
-  --background-dark-2: #2e2e2e;
-  /* Border Radius */
-  --border-rad-s: 10px;
-  --border-rad-m: 20px;
-  /* Padding */
-  --padding-xxs: 6px;
-  --padding-xs: 9px;
-  --padding-s: 18px;
-  --padding-m: 36px;
-  --padding-l: 72px;
-  /* Gap */
-  --gap-xxs: 6px;
-  --gap-xs: 9px;
-  --gap-l: 36px;
-}
-
 html {
   box-sizing: border-box;
 }
