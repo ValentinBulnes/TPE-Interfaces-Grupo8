@@ -711,7 +711,22 @@ body.login-page {
     font-size: 20px;
     font-weight: 700;
     cursor: pointer;
-    transition: background-color 0.2s;
+    letter-spacing: 0px;
+    /* Transición */
+    transition: all 0.5s ease;
+}
+
+/* Efecto de hover */
+.login-btn:hover {
+    background-color: #637BFF;
+    transform: translateY(-5px);
+    letter-spacing: 3px;
+}
+
+/* Efecto de click */
+.login-btn:active {
+    transform: translateY(0);
+    background-color: #3D5AFE;
 }
 
 .register-link {
