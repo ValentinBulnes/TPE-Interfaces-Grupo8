@@ -73,13 +73,8 @@ if (userAvatarBtn && userDropdownMenu) {
         userDropdownMenu.classList.toggle('show');
         
         // Cambiar entre avatar y X
-        if (userDropdownMenu.classList.contains('show')) {
-            userAvatar.classList.add('hidden');
-            closeIcon.classList.remove('hidden');
-        } else {
-            userAvatar.classList.remove('hidden');
-            closeIcon.classList.add('hidden');
-        }
+        userAvatar.classList.toggle('hidden');
+        closeIcon.classList.toggle('hidden');
     });
 }
 
