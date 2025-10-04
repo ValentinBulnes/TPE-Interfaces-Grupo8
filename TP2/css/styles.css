@@ -1135,8 +1135,15 @@ body.login-page {
 }
 
 .date-input-container input {
-    width: 100%;
-    padding-right: 50px;
+    width: fit-content;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.9)
+}
+
+input[type=date]:invalid::-webkit-datetime-edit {
+    color: var(--color-input-placeholder);
 }
 
 .date-picker-btn {
