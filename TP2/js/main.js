@@ -118,3 +118,20 @@ footerCategoryHeaders.forEach(header => {
         }
     });
 });
+
+// Menu de compartir
+const shareButton = document.getElementById('share-button');
+const shareMenu = document.getElementById('share-menu');
+
+if (shareButton && shareMenu) {
+    shareButton.addEventListener('click', function() {
+        shareMenu.classList.toggle('hidden');
+    });
+    
+    // Cerrar al hacer click fuera
+    document.addEventListener('click', function(event) {
+        if (!shareButton.contains(event.target) && !shareMenu.contains(event.target)) {
+            shareMenu.classList.add('hidden');
+        }
+    });
+}
