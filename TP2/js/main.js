@@ -3,28 +3,14 @@ var register = document.getElementById('register-container');
 var showRegister = document.getElementById('show-register');
 var showLogin = document.getElementById('show-login');
 
-function mostrarLogin() {
-    login.classList.remove('hidden');
-    register.classList.add('hidden');
+function rotarLoginRegistro() {
+    login.classList.toggle('hidden');
+    register.classList.toggle('hidden');
 }
 
-function mostrarRegistro() {
-    login.classList.add('hidden');
-    register.classList.remove('hidden');
-}
-
-// Estado inicial, login visible
 if (login && register) {
-    mostrarLogin();
-}
-
-// Eventos
-if (showRegister) {
-    showRegister.addEventListener('click', mostrarRegistro);
-}
-
-if (showLogin) {
-    showLogin.addEventListener('click', mostrarLogin);
+    showRegister.addEventListener('click', rotarLoginRegistro);
+    showLogin.addEventListener('click', rotarLoginRegistro);
 }
 
 // Menu desplegable del header
