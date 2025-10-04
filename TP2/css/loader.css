@@ -52,7 +52,7 @@ body:has(#loader:not(.hidden)) {
 
 @keyframes progress-bar {
   to {
-    width: 100%;
+    width: 104%;
   }
 }
 
@@ -61,5 +61,5 @@ body:has(#loader:not(.hidden)) {
   height: 100%;
   background: var(--color-primary);
   transition: width 0.1s ease;
-  animation: progress-bar 5s linear;
+  animation: progress-bar 5.3s linear;
 }
