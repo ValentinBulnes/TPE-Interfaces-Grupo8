@@ -1,0 +1,331 @@
+[
+  {
+    "title": "BATMAN Peg Solitaire: Gotham Edition",
+    "image": "./img/juego/jugar.png",
+    "alt": "",
+    "price": "$99.99",
+    "tags": ["premium"]
+  },
+  {
+    "title": "Hollow Knight",
+    "image": "img/cards-big/hollow-knight.jpg",
+    "alt": "",
+    "price": "$99.99",
+    "tags": ["premium"]
+  },
+  {
+    "title": "PEAK",
+    "image": "img/cards-big/peak.jpg",
+    "alt": "",
+    "price": "$99.99",
+    "tags": ["premium"]
+  },
+  {
+    "title": "Honkai Star Rail",
+    "image": "https://cdn2.unrealengine.com/en-honkai-star-rail-update-3-6-breaker-1920x1080-176fc19500ad.jpg?resize=1&w=1280&h=720&quality=medium",
+    "alt": "",
+    "price": "$99.99",
+    "tags": ["premium"]
+  },
+  {
+    "title": "Cyberpunk 2077: Phantom Liberty",
+    "image": "https://cdn2.unrealengine.com/egs-cyberpunk-2077-phantom-liberty-anniversary-breaker-1920x1080-966616fdd009.jpg?resize=1&w=1280&h=720&quality=medium",
+    "alt": "",
+    "price": "$99.99",
+    "tags": ["premium"]
+  },
+  {
+    "title": "Hades II",
+    "image": "https://cdn2.unrealengine.com/egs-hades-ii-carousel-desktop-1920x1080-cd5e48bed01e.jpeg?resize=1&w=1280&h=720&quality=medium",
+    "alt": "",
+    "price": "$99.99",
+    "tags": ["premium"]
+  },
+  {
+    "title": "Naruto Shippuden: Ultimate Ninja Storm 4",
+    "image": "img/cards-big/naruto.png",
+    "alt": "",
+    "price": "$99.99",
+    "tags": ["premium"]
+  },
+  {
+    "title": "The Elder Scrolls V: Skyrim",
+    "image": "img/cards-big/skyrim.png",
+    "alt": "",
+    "price": "$99.99",
+    "tags": ["premium"]
+  },
+  {
+    "title": "Borderlands 4",
+    "image": "img/cards-big/borderlands.png",
+    "alt": "",
+    "price": "$99.99",
+    "tags": ["premium"]
+  },
+  {
+    "title": "Cyberpunk 2077",
+    "image": "img/cards-big/cyberpunk.jpeg",
+    "alt": "Cyberpunk 2077",
+    "price": "$99.99",
+    "tags": ["premium"]
+  },
+  {
+    "title": "Grand Theft Auto V",
+    "image": "img/cards-big/gta.png",
+    "alt": "Grand Theft Auto V",
+    "price": "$89.99",
+    "tags": ["premium"]
+  },
+  {
+    "title": "Cyberpunk 2077",
+    "image": "img/cards-small/cyberpunk.jpg",
+    "alt": "Cyberpunk 2077 Game",
+    "price": "$99.99",
+    "tags": ["favorito", "recomendado"]
+  },
+  {
+    "title": "Grand Theft Auto V",
+    "image": "img/cards-small/gta.jpg",
+    "alt": "Grand Theft Auto V Game",
+    "price": "$89.99",
+    "tags": ["novedad"]
+  },
+  {
+    "title": "Marvel's Spider-Man 2",
+    "image": "img/cards-small/spiderman.png",
+    "alt": "Marvel's Spider-Man 2 Game",
+    "price": "$54.99",
+    "tags": ["novedad", "favorito"]
+  },
+  {
+    "title": "Batman Peg Solitaire: Gotham Edition",
+    "image": "img/cards-small/batman.png",
+    "alt": "Batman Peg Solitaire: Gotham Edition Game",
+    "price": "Sin costo",
+    "tags": ["novedad", "favorito"]
+  },
+  {
+    "title": "Riders Republic",
+    "image": "img/cards-small/riders.jpg",
+    "alt": "Riders Republic Game",
+    "price": "$19.49",
+    "tags": ["novedad"]
+  },
+  {
+    "title": "Blue Protocol: Star Resonance",
+    "image": "img/cards-small/star.jpg",
+    "alt": "Blue Protocol: Star Resonance Game",
+    "price": "Sin costo",
+    "tags": ["novedad"]
+  },
+  {
+    "title": "Raven2",
+    "image": "img/cards-small/raven.jpg",
+    "alt": "Sons of the Forest Game",
+    "price": "$79.99",
+    "tags": ["promo"]
+  },
+  {
+    "title": "Truck Sim 2025",
+    "image": "img/cards-small/truck.jpg",
+    "alt": "Truck Sim 2025 Game",
+    "price": "$39.99",
+    "tags": ["novedad"]
+  },
+  {
+    "title": "Enjoy the Diner",
+    "image": "img/cards-small/enjoy.png",
+    "alt": "Enjoy the Diner Game",
+    "price": "$9.99",
+    "tags": ["favorito"]
+  },
+  {
+    "title": "The Witcher 3: Wild Hunt",
+    "image": "img/cards-small/witcher.png",
+    "alt": "The Witcher 3: Wild Hunt Game",
+    "price": "$59.99",
+    "tags": ["favorito", "recomendado"]
+  },
+  {
+    "title": "Dota 2",
+    "image": "img/cards-small/dota.jpg",
+    "alt": "Dota 2 Game",
+    "price": "Sin costo",
+    "tags": ["favorito", "promo"]
+  },
+  {
+    "title": "The Elder Scrolls V: Skyrim",
+    "image": "img/cards-small/skyrim.jpg",
+    "alt": "The Elder Scrolls V: Skyrim Game",
+    "price": "$34.49",
+    "tags": ["recomendado"]
+  },
+  {
+    "title": "Naruto Shippuden: Ultimate Ninja Storm 4",
+    "image": "img/cards-small/naruto.jpg",
+    "alt": "Naruto Shippuden: Ultimate Ninja Storm 4 Game",
+    "price": "$29.99",
+    "tags": ["favorito"]
+  },
+  {
+    "title": "Fortnite",
+    "image": "img/cards-small/fortnite.jpg",
+    "alt": "Fortnite Game",
+    "price": "Sin costo",
+    "tags": ["favorito", "promo"]
+  },
+  {
+    "title": "EA Sports FC 25",
+    "image": "img/cards-small/fc25.jpg",
+    "alt": "EA Sports FC 25 Game",
+    "price": "$123.00",
+    "tags": ["promo"]
+  },
+  {
+    "title": "Hell Is Us",
+    "image": "img/cards-small/hell.jpg",
+    "alt": "Hell Is Us Game",
+    "price": "Adquirido",
+    "tags": ["recomendado"]
+  },
+  {
+    "title": "Borderlands 4",
+    "image": "img/cards-small/borderlands.jpeg",
+    "alt": "Borderlands 4 Game",
+    "price": "$99.49",
+    "tags": ["favorito"]
+  },
+  {
+    "title": "PUBG: BATTLEGROUNDS",
+    "image": "img/cards-small/pubg.jpg",
+    "alt": "PUBG: BATTLEGROUNDS Game",
+    "price": "Sin costo",
+    "tags": ["favorito", "promo"]
+  },
+  {
+    "title": "Kingdom Come: Deliverance II",
+    "image": "img/cards-small/kingdom.jpg",
+    "alt": "Kingdom Come: Deliverance II Game",
+    "price": "$44.99",
+    "tags": ["promo"]
+  },
+  {
+    "title": "Helldivers 2",
+    "image": "img/cards-small/helldivers.png",
+    "alt": "Helldivers 2 Game",
+    "price": "$39.99",
+    "tags": ["recomendado"]
+  },
+  {
+    "title": "Super Mario Galaxy 2",
+    "image": "img/cards-small/mario.jpg",
+    "alt": "Super Mario Galaxy 2 Game",
+    "price": "69.99",
+    "tags": ["favorito"]
+  },
+  {
+    "title": "Warframe",
+    "image": "img/cards-small/warframe.jpg",
+    "alt": "Warframe Game",
+    "price": "Sin costo",
+    "tags": ["novedad"]
+  },
+  {
+    "title": "Delta Force",
+    "image": "img/cards-small/delta.png",
+    "alt": "Delta Force Game",
+    "price": "$65.99",
+    "tags": ["promo"]
+  },
+  {
+    "title": "Digimon Story: Time Stranger",
+    "image": "img/cards-small/digimon.png",
+    "alt": "Digimon Story: Time Stranger Game",
+    "price": "$75.49",
+    "tags": ["recomendado"]
+  },
+  {
+    "title": "Marvel Rivals",
+    "image": "img/cards-small/marvel.png",
+    "alt": "Marvel Rivals Game",
+    "price": "Sin costo",
+    "tags": ["novedad", "favorito"]
+  },
+  {
+    "title": "Battlefield 6",
+    "image": "img/cards-small/battlefield.jpg",
+    "alt": "Battlefield 6 Game",
+    "price": "$69.99",
+    "tags": ["promo"]
+  },
+  {
+    "title": "Path of Exile",
+    "image": "img/cards-small/path.png",
+    "alt": "Path of Exile Game",
+    "price": "$49.49",
+    "tags": ["promo"]
+  },
+  {
+    "title": "Call of Duty: Warzone",
+    "image": "img/cards-small/warzone.png",
+    "alt": "Call of Duty: Warzone Game",
+    "price": "Sin costo",
+    "tags": ["favorito", "promo"]
+  },
+  {
+    "title": "Dying Light",
+    "image": "img/cards-small/dying.jpg",
+    "alt": "Dying Light Game",
+    "price": "$99.99",
+    "tags": ["recomendado"]
+  },
+  {
+    "title": "Hollow Knight: Silksong",
+    "image": "img/cards-small/hollow.png",
+    "alt": "Hollow Knight: Silksong Game",
+    "price": "$6.99",
+    "tags": ["novedad"]
+  },
+  {
+    "title": "Baldur's Gate 3",
+    "image": "img/cards-small/baldurs.jpg",
+    "alt": "Baldur's Gate 3 Game",
+    "price": "$49.99",
+    "tags": ["favorito", "recomendado"]
+  },
+  {
+    "title": "Counter-Strike 2",
+    "image": "img/cards-small/cs.jpg",
+    "alt": "Counter-Strike 2 Game",
+    "price": "Sin costo",
+    "tags": ["recomendado"]
+  },
+  {
+    "title": "Hogwarts Legacy",
+    "image": "img/cards-small/hogwarts.jpg",
+    "alt": "Hogwarts Legacy Game",
+    "price": "$29.99",
+    "tags": ["favorito", "recomendado"]
+  },
+  {
+    "title": "The Last of Us",
+    "image": "img/cards-small/lastofus.jpg",
+    "alt": "The Last of Us Game",
+    "price": "$79.99",
+    "tags": ["favorito", "recomendado"]
+  },
+  {
+    "title": "Red Dead Redemption 2",
+    "image": "img/cards-small/reddead.jpg",
+    "alt": "Red Dead Redemption 2 Game",
+    "price": "$99.99",
+    "tags": ["favorito", "recomendado"]
+  },
+  {
+    "title": "Rust",
+    "image": "img/cards-small/rust.jpg",
+    "alt": "Rust Game",
+    "price": "$9.49",
+    "tags": ["recomendado"]
+  }
+]

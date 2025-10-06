@@ -48,6 +48,8 @@ class ImageCarousel extends HTMLElement {
   track;
   _step;
   visibleCount;
+  jsonPath = "./js/games.json";
+  filter;
 
   constructor() {
     super();
@@ -57,20 +59,15 @@ class ImageCarousel extends HTMLElement {
   }
 
   connectedCallback() {
-    const slides = Array.from(this.children).filter(
-      (el) =>
-        el.tagName.toLowerCase() === "carousel-card" ||
-        el.tagName.toLowerCase() === "premium-card"
-    );
-
     this.innerHTML = this.template.innerHTML;
-    const track = this.querySelector(".carousel > div");
+    this.track = this.querySelector(".carousel > div");
+    this.filter = this.getAttribute("filter") || "default?";
 
     this.querySelector("h3").textContent = this.getAttribute("title") || "E404";
-    slides.forEach((slide) => track.appendChild(slide));
 
-    this.slides = track.querySelectorAll("carousel-card,premium-card");
-    this.track = track;
+    fetch(this.jsonPath)
+      .then((res) => res.json())
+      .then((data) => this.loadFromJSON(data));
 
     this.querySelector(".prev").addEventListener("click", () =>
       this.navigate(-1)
@@ -90,6 +87,38 @@ class ImageCarousel extends HTMLElement {
 
     // Initial update after layout has settled
     requestAnimationFrame(() => this.update());
+  }
+
+  loadFromJSON(jsonData) {
+    if (!this.track) {
+      console.warn(
+        "Carousel track not initialized yet. Run after connectedCallback."
+      );
+      return [];
+    }
+
+    // Create and append slides
+    const slides = jsonData
+      .filter(
+        (item) => Array.isArray(item.tags) && item.tags.includes(this.filter)
+      )
+      .map((item) => {
+        var card;
+        if (this.filter == "premium")
+          card = document.createElement("premium-card");
+        else card = document.createElement("carousel-card");
+
+        card.setAttribute("img", item.image);
+        card.setAttribute("title", item.title);
+        card.setAttribute("price", item.price);
+        this.track.appendChild(card);
+        return card;
+      });
+
+    // Update internal reference
+    this.slides = this.track.querySelectorAll("carousel-card,premium-card");
+
+    return slides;
   }
 
   disconnectedCallback() {
