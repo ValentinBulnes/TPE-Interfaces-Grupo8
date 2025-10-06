@@ -116,3 +116,38 @@ if (shareButton && shareMenu) {
         }
     });
 }
+
+// Success Animation
+function showSuccessAnimation() {
+    const overlay = document.getElementById('success-overlay');
+    
+    if (overlay) {
+        // Mostrar animación con un pequeño delay para asegurar que se vea
+        setTimeout(() => {
+            overlay.classList.add('show');
+        }, 50);
+        
+        // Redirigir después de 2.5 segundos para dar tiempo a ver la animación completa
+        setTimeout(() => {
+            window.location.href = 'index.html';
+        }, 2500);
+    }
+}
+
+// Interceptar envío de formularios de login y registro
+const loginForm = document.querySelector('.login-form');
+const registerForm = document.querySelector('.registration-form');
+
+if (loginForm) {
+    loginForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        showSuccessAnimation();
+    });
+}
+
+if (registerForm) {
+    registerForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        showSuccessAnimation();
+    });
+}
