@@ -40,13 +40,26 @@ body:has(#loader:not(.hidden)) {
   }
 }
 
-/* Percentage counter */
-.percentage {
-  color: var(--color-primary);
-  font-size: 18px;
-  font-weight: 600;
-  font-family: var(--font-family);
-  text-align: center;
-  margin-top: 10px;
+/* Progress bar */
+.progress-bar {
+  width: 70%;
+  max-width: 400px;
+  height: 10px;
+  background: var(--background-dark-3);
+  border-radius: 5px;
+  overflow: hidden;
 }
 
+@keyframes progress-bar {
+  to {
+    width: 104%;
+  }
+}
+
+.progress-bar > div {
+  width: 0%;
+  height: 100%;
+  background: var(--color-primary);
+  transition: width 0.1s ease;
+  animation: progress-bar 5.3s linear;
+}
