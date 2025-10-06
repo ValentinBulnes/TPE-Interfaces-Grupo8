@@ -85,6 +85,8 @@ class ImageCarousel extends HTMLElement {
     const carousel = this.querySelector(".carousel");
     if (carousel) this.resizeObserver.observe(carousel);
 
+    this.initSwipe(carousel);
+
     // Initial update after layout has settled
     requestAnimationFrame(() => this.update());
   }
@@ -187,6 +189,31 @@ class ImageCarousel extends HTMLElement {
     }
 
     this.update();
+  }
+
+  initSwipe(element) {
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    element.addEventListener("touchstart", (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+
+    element.addEventListener("touchend", (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      this.handleSwipe(touchStartX, touchEndX);
+    });
+  }
+
+  handleSwipe(startX, endX) {
+    const swipeThreshold = 50;
+    if (endX < startX - swipeThreshold) {
+      // Swipe left → next
+      this.navigate(1);
+    } else if (endX > startX + swipeThreshold) {
+      // Swipe right → previous
+      this.navigate(-1);
+    }
   }
 
   refresh() {
