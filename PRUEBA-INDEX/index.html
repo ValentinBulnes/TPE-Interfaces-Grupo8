@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio - GameCenter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="header-left">
+                <button class="icon-btn menu-toggle" aria-label="Abrir menú">
+                    <iconify-icon icon="lucide:menu"></iconify-icon>
+                </button>
+
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="img/logo.svg" alt="GameCenter" class="logo-img">
+                    </a>
+                </div>
+            </div>
+
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="¿Qué querés jugar hoy?">
+                <button class="search-btn" aria-label="Buscar">
+                    <iconify-icon icon="lucide:search"></iconify-icon>
+                </button>
+            </div>
+
+            <div class="header-right">
+                <button class="icon-btn cart-btn" aria-label="Carrito">
+                    <iconify-icon icon="lucide:shopping-cart"></iconify-icon>
+                </button>
+                <button class="user-avatar-btn" aria-label="Menú de usuario">
+                    <div class="user-avatar">
+                        <img src="img/avatars/avatar_1.png" alt="Avatar de usuario" class="avatar-img">
+                        <div class="status-indicator"></div>
+                    </div>
+                    <iconify-icon icon="lucide:x" class="close-icon hidden"></iconify-icon>
+                </button>
+            </div>
+        </div>
+
+        <!-- Menú desplegable de navegación -->
+        <nav class="dropdown-menu">
+            <ul class="menu-list">
+                <li class="menu-item menu-main menu-search-mobile">
+                    <a href="#" class="menu-link">
+                        <iconify-icon icon="lucide:search"></iconify-icon>
+                        <span>Búsqueda</span>
+                    </a>
+                </li>
+                <li class="menu-item menu-main">
+                    <a href="index.html" class="menu-link">
+                        <iconify-icon icon="lucide:home"></iconify-icon>
+                        <span>Inicio</span>
+                    </a>
+                </li>
+                <li class="menu-item menu-main">
+                    <a href="#" class="menu-link">
+                        <iconify-icon icon="lucide:flame"></iconify-icon>
+                        <span>De moda</span>
+                    </a>
+                </li>
+                <li class="menu-item menu-main">
+                    <a href="#" class="menu-link">
+                        <iconify-icon icon="lucide:rocket"></iconify-icon>
+                        <span>Novedades</span>
+                    </a>
+                </li>
+                <li class="menu-item menu-main active">
+                    <a href="#" class="menu-link">
+                        <iconify-icon icon="lucide:layout-grid"></iconify-icon>
+                        <span>Todas las categorías</span>
+                    </a>
+                </li>
+                <div class="menu-separator"></div>
+                <li class="menu-item menu-category">
+                    <a href="#" class="menu-link">
+                        <iconify-icon icon="fluent-emoji-flat:crossed-swords"></iconify-icon>
+                        <span>Acción</span>
+                    </a>
+                </li>
+                <li class="menu-item menu-category">
+                    <a href="#" class="menu-link">
+                        <iconify-icon icon="fluent-emoji-flat:world-map"></iconify-icon>
+                        <span>Aventura</span>
+                    </a>
+                </li>
+                <li class="menu-item menu-category">
+                    <a href="#" class="menu-link">
+                        <iconify-icon icon="fluent-emoji-flat:puzzle-piece"></iconify-icon>
+                        <span>Puzzles</span>
+                    </a>
+                </li>
+                <li class="menu-item menu-category">
+                    <a href="#" class="menu-link">
+                        <iconify-icon icon="fluent-emoji-flat:soccer-ball"></iconify-icon>
+                        <span>Deportes</span>
+                    </a>
+                </li>
+                <li class="menu-item menu-category">
+                    <a href="#" class="menu-link">
+                        <iconify-icon icon="fluent-emoji-flat:chess-pawn"></iconify-icon>
+                        <span>Estrategia</span>
+                    </a>
+                </li>
+                <li class="menu-item menu-category">
+                    <a href="#" class="menu-link">
+                        <iconify-icon icon="fluent-emoji-flat:crystal-ball"></iconify-icon>
+                        <span>Rol</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Menú desplegable de usuario -->
+        <nav class="user-dropdown-menu">
+            <div class="user-menu-header">
+                <img src="img/avatars/avatar_1.png" alt="Avatar de usuario" class="user-menu-avatar">
+                <h3 class="user-menu-name">PlayerOne</h3>
+            </div>
+            <div class="user-menu-separator"></div>
+            <ul class="user-menu-list">
+                <li class="user-menu-item user-cart-mobile">
+                    <a href="#" class="user-menu-link">Carrito de compras</a>
+                </li>
+                <li class="user-menu-item">
+                    <a href="#" class="user-menu-link">Perfil</a>   
+                </li>
+                <li class="user-menu-item">
+                    <a href="#" class="user-menu-link">Amigos</a>
+                </li>
+                <li class="user-menu-item">
+                    <a href="#" class="user-menu-link">Favoritos</a>
+                </li>
+                <li class="user-menu-item">
+                    <a href="#" class="user-menu-link">Biblioteca</a>
+                </li>
+                <li class="user-menu-item">
+                    <a href="#" class="user-menu-link">Configuracion</a>
+                </li>
+                <li class="user-menu-item logout">
+                    <a href="login.html" class="user-menu-link">
+                        <span>Cerrar sesion</span>
+                        <iconify-icon icon="lucide:log-out"></iconify-icon>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Galería de imágenes -->
+    <section class="gallery-section">
+        <button class="carousel-btn gallery-btn-prev" aria-label="Anterior">
+            <iconify-icon icon="lucide:chevron-left"></iconify-icon>
+        </button>
+        <div class="gallery-wrapper" id="gallery">
+            <img src="img/cards-big/cyberpunk.jpeg" alt="Cyberpunk 2077">
+            <img src="img/cards-big/borderlands.png" alt="Borderlands 4">
+            <img src="img/cards-big/gta.png" alt="Grand Theft Auto V">
+            <img src="img/cards-big/naruto.png" alt="Naruto Shippuden: Ultimate Ninja Storm 4">
+            <img src="img/cards-big/skyrim.png" alt="The Elder Scrolls V: Skyrim">
+            <h2 class="gallery-title" id="gallery-title">Cyberpunk 2077</h2>
+            <p class="gallery-price" id="gallery-price">$59.99</p>
+            <button class="gallery-buy-btn" id="gallery-buy-btn">Comprar</button>
+        </div>
+        <!-- Indicador de imágenes de la galería -->
+        <div class="gallery-indicator" id="gallery-indicator">
+            <span class="gallery-indicator-text" id="gallery-indicator-text">1 / 5</span>
+        </div>
+        <button class="carousel-btn gallery-btn-next" aria-label="Siguiente">
+            <iconify-icon icon="lucide:chevron-right"></iconify-icon>
+        </button>
+    </section>
+    
+        <!-- Carrusel de juegos -->
+        <section class="carousel-section">
+            <h2 class="carousel-title">Recomendados para vos</h2>
+            <div class="carousel-container">
+                <button class="carousel-btn carousel-btn-prev" aria-label="Anterior">
+                    <iconify-icon icon="lucide:chevron-left"></iconify-icon>
+                </button>
+                <div class="carousel-wrapper">
+                    <div class="carousel-track" id="carousel-track">
+                        <!-- Las cards del carrusel se generarán aquí -->
+                    </div>
+                </div>
+                <button class="carousel-btn carousel-btn-next" aria-label="Siguiente">
+                    <iconify-icon icon="lucide:chevron-right"></iconify-icon>
+                </button>
+            </div>
+            <!-- Indicador de posición -->
+            <div class="carousel-indicator">
+                <div class="carousel-indicator-bar" id="carousel-indicator-1"></div>
+            </div>
+        </section>
+
+        <!-- Segundo Carrusel de juegos -->
+        <section class="carousel-section">
+            <h2 class="carousel-title">Tus favoritos</h2>
+            <div class="carousel-container">
+                <button class="carousel-btn carousel-btn-prev-2" aria-label="Anterior">
+                    <iconify-icon icon="lucide:chevron-left"></iconify-icon>
+                </button>
+                <div class="carousel-wrapper carousel-wrapper-2">
+                    <div class="carousel-track" id="carousel-track-2">
+                        <!-- Las cards del segundo carrusel se generarán aquí -->
+                    </div>
+                </div>
+                <button class="carousel-btn carousel-btn-next-2" aria-label="Siguiente">
+                    <iconify-icon icon="lucide:chevron-right"></iconify-icon>
+                </button>
+            </div>
+            <!-- Indicador de posición -->
+            <div class="carousel-indicator">
+                <div class="carousel-indicator-bar" id="carousel-indicator-2"></div>
+            </div>
+        </section>
+
+        <!-- Tercer Carrusel de juegos -->
+        <section class="carousel-section">
+            <h2 class="carousel-title">Novedades</h2>
+            <div class="carousel-container">
+                <button class="carousel-btn carousel-btn-prev-3" aria-label="Anterior">
+                    <iconify-icon icon="lucide:chevron-left"></iconify-icon>
+                </button>
+                <div class="carousel-wrapper carousel-wrapper-3">
+                    <div class="carousel-track" id="carousel-track-3">
+                        <!-- Las cards del tercer carrusel se generarán aquí -->
+                    </div>
+                </div>
+                <button class="carousel-btn carousel-btn-next-3" aria-label="Siguiente">
+                    <iconify-icon icon="lucide:chevron-right"></iconify-icon>
+                </button>
+            </div>
+            <!-- Indicador de posición -->
+            <div class="carousel-indicator">
+                <div class="carousel-indicator-bar" id="carousel-indicator-3"></div>
+            </div>
+        </section>
+
+        <!-- Template de la card -->
+        <template id="game-card-template">
+            <div class="game-card">
+                <div class="game-card-image-container">
+                    <img src="" alt="" class="game-card-image">
+                    <a href="juego.html" class="game-card-play-btn">
+                        <iconify-icon icon="lucide:play" class="play-icon"></iconify-icon>
+                        <iconify-icon icon="lucide:shopping-cart" class="cart-icon hidden"></iconify-icon>
+                    </a>
+                </div>
+                <div class="game-card-content">
+                    <h3 class="game-card-title"></h3>
+                    <div class="game-card-footer">
+                        <p class="game-card-price"></p>
+                        <button class="game-card-favorite" aria-label="Agregar a favoritos">
+                            <iconify-icon icon="lucide:heart"></iconify-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </main>
+    <footer id="fat-footer">
+        <div id="footer-content">
+            <div id="footer-top">
+                <div id="footer-logo">
+                    <img src="img/Logo_big.svg" alt="GameCenter Logo">
+                </div>
+                <div id="footer-social">
+                    <a href="#"><iconify-icon icon="pajamas:twitter"></iconify-icon></a>
+                    <a href="#"><iconify-icon icon="lucide:instagram"></iconify-icon></a>
+                    <a href="#"><iconify-icon icon="lucide:facebook"></iconify-icon></a>
+                </div>
+            </div>
+            <div class="separator"></div>
+            <div id="footer-links">
+                <div class="footer-link-category">
+                    <div class="footer-category-header">
+                        <h3>Navegación</h3>
+                        <iconify-icon icon="lucide:chevron-down" class="footer-category-icon"></iconify-icon>
+                    </div>
+                    <ul class="footer-link-list">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#">Categorías</a></li>
+                        <li><a href="#">Perfil</a></li>
+                        <li><a href="#">Carrito</a></li>
+                    </ul>
+                </div>
+                <div class="footer-link-category">
+                    <div class="footer-category-header">
+                        <h3>Cuenta</h3>
+                        <iconify-icon icon="lucide:chevron-down" class="footer-category-icon"></iconify-icon>
+                    </div>
+                    <ul class="footer-link-list">
+                        <li><a href="login.html">Iniciar sesión</a></li>
+                        <li><a href="signup.html">Registrarse</a></li>
+                        <li><a href="#">Privacidad</a></li>
+                        <li><a href="#">Términos y condiciones</a></li>
+                    </ul>
+                </div>
+                <div class="footer-link-category">
+                    <div class="footer-category-header">
+                        <h3>Juegos</h3>
+                        <iconify-icon icon="lucide:chevron-down" class="footer-category-icon"></iconify-icon>
+                    </div>
+                    <ul class="footer-link-list">
+                        <li><a href="#">Nuevos lanzamientos</a></li>
+                        <li><a href="#">Más jugados</a></li>
+                        <li><a href="#">Gratis</a></li>
+                        <li><a href="#">Multijugador</a></li>
+                    </ul>
+                </div>
+                <div class="footer-link-category">
+                    <div class="footer-category-header">
+                        <h3>Sobre nosotros</h3>
+                        <iconify-icon icon="lucide:chevron-down" class="footer-category-icon"></iconify-icon>
+                    </div>
+                    <ul class="footer-link-list">
+                        <li><a href="#">Quíenes somos</a></li>
+                        <li><a href="#">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-link-category">
+                    <div class="footer-category-header">
+                        <h3>Ayuda</h3>
+                        <iconify-icon icon="lucide:chevron-down" class="footer-category-icon"></iconify-icon>
+                    </div>
+                    <ul class="footer-link-list">
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Cómo comprar</a></li>
+                        <li><a href="#">Soporte</a></li>
+                    </ul>
+                </div>
+                <div class="footer-link-category">
+                    <div class="footer-category-header">
+                        <h3>Comunidad</h3>
+                        <iconify-icon icon="lucide:chevron-down" class="footer-category-icon"></iconify-icon>
+                    </div>
+                    <ul class="footer-link-list">
+                        <li><a href="#">Foro</a></li>
+                        <li><a href="#">Rankings</a></li>
+                        <li><a href="#">Discord oficial</a></li>
+                        <li><a href="#">Reseñas de juegos</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="copyright">
+                <iconify-icon icon="lucide:copyright"></iconify-icon>
+                2025 GameCenter. Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <script src="./js/main.js"></script>
+
+</body>
+</html>
