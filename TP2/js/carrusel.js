@@ -84,7 +84,10 @@ class ImageCarousel extends HTMLElement {
     this.observer.observe(this, { childList: true });
 
     // Use ResizeObserver instead of window resize
-    this.resizeObserver = new ResizeObserver(() => this.update());
+    this.resizeObserver = new ResizeObserver(() => {
+      this.update();
+      this.updateScrollPill(true);
+    });
     this.resizeObserver.observe(this.carousel);
     this.carousel.addEventListener("scroll", () => this.updateScrollPill(true));
 
@@ -237,27 +240,39 @@ class ImageCarousel extends HTMLElement {
     const carousel = this.querySelector(".carousel");
     if (!pill || !container || !carousel || !this.slides.length) return;
 
-    // --- Width is always based on visible fraction ---
+    // --- 1️⃣ Compute pill width ---
     const total = this.slides.length;
     const fractionVisible = this.visibleCount / total;
     pill.style.width = `${fractionVisible * 100}%`;
 
-    // --- Horizontal position depends on source ---
-    const maxScroll = carousel.scrollWidth - carousel.clientWidth;
-    const maxIndex = total - this.visibleCount;
-    const travel = container.offsetWidth - pill.offsetWidth;
+    // --- 2️⃣ Compute travel distance ---
+    const containerTravel = container.offsetWidth - pill.offsetWidth;
 
+    // --- 3️⃣ Compute progress depending on source ---
     let progress = 0;
+    const slide = this.slides[0];
+    const slideWidth = slide.offsetWidth;
+    const style = getComputedStyle(this.track);
+    const gap = parseFloat(style.columnGap || style.gap || 0);
+    const slotSize = slideWidth + gap;
 
-    if (is_scroll && maxScroll > 0) {
-      // Direct scroll syncing (for touch and native scrolling)
-      progress = carousel.scrollLeft / maxScroll;
+    // max index that can start a new page
+    const maxIndex = total - this.visibleCount;
+    const lastStartOffset = Math.max(0, maxIndex * slotSize);
+    const realMaxScroll = Math.min(
+      carousel.scrollWidth - carousel.clientWidth,
+      lastStartOffset
+    );
+
+    if (is_scroll && realMaxScroll > 0) {
+      // Actual scroll-based movement
+      progress = Math.min(carousel.scrollLeft / realMaxScroll, 1);
     } else if (maxIndex > 0) {
-      // Programmatic navigation (buttons, swipe)
+      // Button or swipe navigation
       progress = this.currentIndex / maxIndex;
     }
 
-    pill.style.transform = `translateX(${progress * travel}px)`;
+    pill.style.transform = `translateX(${progress * containerTravel}px)`;
   }
 }
 
