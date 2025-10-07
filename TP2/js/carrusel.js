@@ -51,6 +51,8 @@ class ImageCarousel extends HTMLElement {
   jsonPath = "./js/games.json";
   filter;
   carousel;
+  apiUrl = "https://vj.interfaces.jima.com.ar/api/v2";
+  isApi;
 
   constructor() {
     super();
@@ -58,17 +60,20 @@ class ImageCarousel extends HTMLElement {
     this.template = document.getElementById("carousel-template");
     this._step = parseInt(this.getAttribute("step")) || null;
     this.slides = [];
+    this.isApi = false;
   }
 
   connectedCallback() {
     this.innerHTML = this.template.innerHTML;
+    this.isApi = this.hasAttribute("is-api");
     this.track = this.querySelector(".carousel > div");
     this.filter = this.getAttribute("filter") || "default?";
     this.carousel = this.querySelector(".carousel");
 
     this.querySelector("h3").textContent = this.getAttribute("title") || "E404";
 
-    fetch(this.jsonPath)
+    const dataUrl = this.isApi ? this.apiUrl : this.jsonPath;
+    fetch(dataUrl)
       .then((res) => res.json())
       .then((data) => this.loadFromJSON(data));
 
@@ -106,27 +111,58 @@ class ImageCarousel extends HTMLElement {
     }
 
     // Create and append slides
-    const slides = jsonData
-      .filter(
-        (item) => Array.isArray(item.tags) && item.tags.includes(this.filter)
-      )
-      .map((item) => {
-        var card;
-        if (this.filter == "premium")
-          card = document.createElement("premium-card");
-        else card = document.createElement("carousel-card");
-
-        card.setAttribute("img", item.image);
-        card.setAttribute("title", item.title);
-        card.setAttribute("price", item.price);
-        this.track.appendChild(card);
-        return card;
-      });
+    const slides = this.isApi
+      ? this.parseApi(jsonData)
+      : this.parseLocal(jsonData);
 
     // Update internal reference
     this.slides = this.track.querySelectorAll("carousel-card,premium-card");
 
     return slides;
+  }
+
+  createCard({ isPremium, img, title, price }) {
+    const tagName = isPremium ? "premium-card" : "carousel-card";
+    const card = document.createElement(tagName);
+
+    card.setAttribute("img", img);
+    card.setAttribute("title", title);
+    card.setAttribute("price", price);
+
+    this.track.appendChild(card);
+    return card;
+  }
+
+  parseLocal(jsonData) {
+    return jsonData
+      .filter(
+        (item) => Array.isArray(item.tags) && item.tags.includes(this.filter)
+      )
+      .map((item) =>
+        this.createCard({
+          isPremium: this.filter === "premium",
+          img: item.image,
+          title: item.title,
+          price: item.price,
+        })
+      );
+  }
+
+  parseApi(jsonData) {
+    return jsonData
+      .filter((item) =>
+        item.genres?.some(
+          (genre) => genre.name.toLowerCase() === this.filter.toLowerCase()
+        )
+      )
+      .map((item) =>
+        this.createCard({
+          isPremium: this.filter === "premium",
+          img: item.background_image_low_res,
+          title: item.name,
+          price: `$${(parseFloat(item.rating) * 10).toFixed(2)}`,
+        })
+      );
   }
 
   disconnectedCallback() {
@@ -233,6 +269,7 @@ class ImageCarousel extends HTMLElement {
     this.slides = this.track.querySelectorAll("carousel-card,premium-card");
     this.update();
   }
+
   updateScrollPill(isScroll = false) {
     const container = this.querySelector(".scroll-pill");
     const pill = container?.querySelector("div");
@@ -252,7 +289,7 @@ class ImageCarousel extends HTMLElement {
     const slotSize = slideWidth + gap;
 
     // max index for the pill to reach the end
-    const maxIndex = total - this.visibleCount//1; // match module behavior
+    const maxIndex = total - this.visibleCount;
     const lastOffset = Math.max(0, maxIndex * slotSize);
     const realMaxScroll = Math.min(
       carousel.scrollWidth - carousel.clientWidth,
