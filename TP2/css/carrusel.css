@@ -31,37 +31,26 @@ h3 {
   justify-self: center;
   color: var(--color-text);
 }
-h1 {
-  font-size: 45px;
-}
-h2 {
+
+image-carousel h1 {
   font-size: 28px;
 }
-h3 {
-  font-size: 20px;
-}
-.bold {
-  font-weight: bold;
+
+image-carousel h2 {
+  font-size: 18px;
 }
 
-.flex-row {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: unset;
+image-carousel h3 {
+  font-size: 15px;
+}
+
+.bold {
+  font-weight: bold;
 }
 
 .flex-col {
   display: flex;
   flex-direction: column;
-}
-
-.gap-xxs {
-  gap: var(--gap-xxs);
-}
-
-.align-items-center {
-  align-items: center;
 }
 
 .material-symbols-rounded {
@@ -319,13 +308,16 @@ premium-card section {
   width: 100%;
   position: absolute;
   bottom: 0;
-  padding: 60px;
+  padding: var(--padding-xs);
   gap: var(--gap-xs);
   justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 premium-card section div {
-  width: 75%;
+  width: 100%;
 }
 
 premium-card h1 {
@@ -359,12 +351,26 @@ premium-card button {
   display: none;
 }
 
-premium-card:hover button {
-  display: inline-block;
-}
-
 /* Desktop styles para carrusel */
 @media (min-width: 768px) {
+  image-carousel h1 {
+    font-size: 45px;
+  }
+  image-carousel h2 {
+    font-size: 28px;
+  }
+  image-carousel h3 {
+    font-size: 20px;
+  }
+  premium-card section {
+    padding: 60px;
+  }
+  premium-card section div {
+    width: 75%;
+  }
+  premium-card:hover button {
+    display: inline-block;
+  }
   image-carousel {
     width: fit-content;
     max-width: 1350px;
@@ -376,6 +382,8 @@ premium-card:hover button {
   image-carousel:has(premium-card) .carousel {
     /* TODO: width */
     width: 1189px;
+    overflow-x: hidden; /* because you'll likely use arrows */
+    justify-content: flex-start;
   }
   image-carousel nav > button {
     display: flex;
@@ -389,23 +397,5 @@ premium-card:hover button {
   premium-card img {
     height: 500px;
     width: 1179px;
-  }
-}
-
-/* MOBILE-FIRST FIXES */
-
-/* DESKTOP OVERRIDES */
-@media (min-width: 768px) {
-  carousel-card > div {
-    width: 221px; /* restore original card size */
-  }
-
-  image-carousel .carousel {
-    overflow-x: hidden; /* because you'll likely use arrows */
-    justify-content: flex-start;
-  }
-
-  image-carousel nav > button {
-    display: flex;
   }
 }
