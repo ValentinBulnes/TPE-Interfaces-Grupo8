@@ -78,7 +78,8 @@ class ImageCarousel extends HTMLElement {
     const dataUrl = this.isApi ? this.apiUrl : this.jsonPath;
     fetch(dataUrl)
       .then((res) => res.json())
-      .then((data) => this.loadFromJSON(data));
+      .then((data) => this.loadFromJSON(data))
+      .then(() => this.batmanNavigation());
 
     this.querySelector(".prev").addEventListener("click", () =>
       this.navigate(-1)
@@ -103,6 +104,14 @@ class ImageCarousel extends HTMLElement {
 
     // Initial update after layout has settled
     requestAnimationFrame(() => this.update());
+  }
+
+  batmanNavigation() {
+    const batman = this.querySelector('premium-card[title^="BATMAN" i]');
+    if (!batman) return;
+    batman.addEventListener("click", () => {
+      window.location.href = "./juego.html";
+    });
   }
 
   loadFromJSON(jsonData) {
