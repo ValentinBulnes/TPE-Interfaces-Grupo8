@@ -53,6 +53,7 @@ class ImageCarousel extends HTMLElement {
   carousel;
   apiUrl = "https://vj.interfaces.jima.com.ar/api/v2";
   isApi;
+  isPremium;
 
   constructor() {
     super();
@@ -61,11 +62,13 @@ class ImageCarousel extends HTMLElement {
     this._step = parseInt(this.getAttribute("step")) || null;
     this.slides = [];
     this.isApi = false;
+    this.isPremium = false;
   }
 
   connectedCallback() {
     this.innerHTML = this.template.innerHTML;
-    this.isApi = this.hasAttribute("is-api");
+    this.isApi = this.hasAttribute("api");
+    this.isPremium = this.hasAttribute("premium");
     this.track = this.querySelector(".carousel > div");
     this.filter = this.getAttribute("filter") || "default?";
     this.carousel = this.querySelector(".carousel");
@@ -121,8 +124,8 @@ class ImageCarousel extends HTMLElement {
     return slides;
   }
 
-  createCard({ isPremium, img, title, price }) {
-    const tagName = isPremium ? "premium-card" : "carousel-card";
+  createCard({ img, title, price }) {
+    const tagName = this.isPremium ? "premium-card" : "carousel-card";
     const card = document.createElement(tagName);
 
     card.setAttribute("img", img);
@@ -140,7 +143,6 @@ class ImageCarousel extends HTMLElement {
       )
       .map((item) =>
         this.createCard({
-          isPremium: this.filter === "premium",
           img: item.image,
           title: item.title,
           price: item.price,
@@ -157,7 +159,6 @@ class ImageCarousel extends HTMLElement {
       )
       .map((item) =>
         this.createCard({
-          isPremium: this.filter === "premium",
           img: item.background_image_low_res,
           title: item.name,
           price: `$${(parseFloat(item.rating) * 10).toFixed(2)}`,
