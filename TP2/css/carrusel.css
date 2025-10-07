@@ -96,7 +96,6 @@ image-carousel .carousel {
   overflow-y: hidden;
 }
 
-
 image-carousel .carousel::-webkit-scrollbar {
   display: none;
 }
@@ -255,6 +254,9 @@ carousel-card section {
 carousel-card section > div {
   justify-content: space-between;
   height: fit-content;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
 }
 
 carousel-card section > h3 {

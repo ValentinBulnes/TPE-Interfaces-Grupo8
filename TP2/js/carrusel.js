@@ -33,7 +33,7 @@ class CarouselCard extends HTMLElement {
     }
 
     const favoriteIcon = this.querySelector(
-      ".flex-row > .material-symbols-rounded"
+      "section .material-symbols-rounded"
     );
     favoriteIcon.addEventListener("click", () => {
       favoriteIcon.classList.toggle("filled");
