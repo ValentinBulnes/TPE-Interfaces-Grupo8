@@ -154,7 +154,7 @@ class ImageCarousel extends HTMLElement {
     // how many slides fit in the visible viewport
     this.visibleCount = Math.max(
       1,
-      Math.floor(carousel.offsetWidth / slotSize)
+      Math.floor((carousel.offsetWidth + gap) / slotSize)
     );
 
     // compute the offset in px
@@ -233,42 +233,36 @@ class ImageCarousel extends HTMLElement {
     this.slides = this.track.querySelectorAll("carousel-card,premium-card");
     this.update();
   }
-
-  updateScrollPill(is_scroll = false) {
+  updateScrollPill(isScroll = false) {
     const container = this.querySelector(".scroll-pill");
     const pill = container?.querySelector("div");
-    const carousel = this.querySelector(".carousel");
+    const carousel = this.carousel;
     if (!pill || !container || !carousel || !this.slides.length) return;
 
-    // --- 1️⃣ Compute pill width ---
+    // --- Width proportional to visible slides ---
     const total = this.slides.length;
     const fractionVisible = this.visibleCount / total;
     pill.style.width = `${fractionVisible * 100}%`;
 
-    // --- 2️⃣ Compute travel distance ---
     const containerTravel = container.offsetWidth - pill.offsetWidth;
-
-    // --- 3️⃣ Compute progress depending on source ---
-    let progress = 0;
     const slide = this.slides[0];
     const slideWidth = slide.offsetWidth;
     const style = getComputedStyle(this.track);
     const gap = parseFloat(style.columnGap || style.gap || 0);
     const slotSize = slideWidth + gap;
 
-    // max index that can start a new page
-    const maxIndex = total - this.visibleCount;
-    const lastStartOffset = Math.max(0, maxIndex * slotSize);
+    // max index for the pill to reach the end
+    const maxIndex = total - this.visibleCount//1; // match module behavior
+    const lastOffset = Math.max(0, maxIndex * slotSize);
     const realMaxScroll = Math.min(
       carousel.scrollWidth - carousel.clientWidth,
-      lastStartOffset
+      lastOffset
     );
 
-    if (is_scroll && realMaxScroll > 0) {
-      // Actual scroll-based movement
+    let progress = 0;
+    if (isScroll && realMaxScroll > 0) {
       progress = Math.min(carousel.scrollLeft / realMaxScroll, 1);
     } else if (maxIndex > 0) {
-      // Button or swipe navigation
       progress = this.currentIndex / maxIndex;
     }
 

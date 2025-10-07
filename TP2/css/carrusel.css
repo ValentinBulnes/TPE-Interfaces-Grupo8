@@ -94,9 +94,11 @@ image-carousel .carousel {
   align-items: center;
   overflow-x: auto;
   overflow-y: hidden;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
+}
+
+
+image-carousel .carousel::-webkit-scrollbar {
+  display: none;
 }
 
 image-carousel .scroll-pill {
@@ -104,6 +106,7 @@ image-carousel .scroll-pill {
   height: 20px;
   background-color: var(--gray-dark1);
   border-radius: var(--border-rad-m);
+  overflow: hidden;
 }
 
 image-carousel .scroll-pill > div {
@@ -121,11 +124,7 @@ image-carousel .carousel > div {
   padding: var(--padding-xxs);
   padding-top: 0;
   flex-wrap: nowrap;
-  width: max-content;
-  /* scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none; */
+  width: 110%;
 }
 image-carousel.single .carousel > div {
   transition-duration: 0.6s;
@@ -203,7 +202,7 @@ carousel-card > div {
   position: relative;
   /* important: prevents shrinking and forces proper snap behavior */
   flex: 0 0 auto;
-  scroll-snap-align: start;
+  /* scroll-snap-align: start; */
 }
 
 carousel-card .material-symbols-rounded {
@@ -275,8 +274,10 @@ carousel-card[free] section div h3 {
 
 /* Premium card styles */
 image-carousel:has(premium-card) .carousel {
-  /* TODO: width */
   max-width: 100%;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
 }
 
 image-carousel:has(premium-card) h3 {
