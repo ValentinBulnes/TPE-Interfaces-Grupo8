@@ -56,6 +56,7 @@ class ImageCarousel extends HTMLElement {
     this.currentIndex = 0;
     this.template = document.getElementById("carousel-template");
     this._step = parseInt(this.getAttribute("step")) || null;
+    this.slides = [];
   }
 
   connectedCallback() {

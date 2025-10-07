@@ -5,7 +5,7 @@ html {
 *,
 *::before,
 *::after {
-  box-sizing: inherit;
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
   text-decoration: none;
@@ -74,16 +74,40 @@ h3 {
 /* Carousel styles */
 image-carousel {
   display: block;
-  width: fit-content;
+  width: 100%;
+  padding: var(--padding-s);
+  max-width: 100%;
   margin: 0 auto;
+  overflow: hidden;
+}
+
+image-carousel > div {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-xxs);
+  align-items: center;
+}
+
+image-carousel nav {
+  justify-content: center;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 image-carousel .carousel {
   position: relative;
-  /* TODO: width */
-  width: 1184px;
-  overflow: hidden;
+  width: 100%;
   height: fit-content;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
 }
 
 image-carousel .scroll-pill {
@@ -107,6 +131,12 @@ image-carousel .carousel > div {
   gap: var(--gap-l);
   padding: var(--padding-xxs);
   padding-top: 0;
+  flex-wrap: nowrap;
+  width: max-content;
+  /* scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; */
 }
 image-carousel.single .carousel > div {
   transition-duration: 0.6s;
@@ -123,7 +153,7 @@ image-carousel nav > button {
   color: var(--color-text);
   border-radius: 50%;
   cursor: pointer;
-  display: flex;
+  display: none;
 }
 
 image-carousel nav > button:disabled {
@@ -168,11 +198,12 @@ carousel-card,
 premium-card {
   transform-style: preserve-3d;
   backface-visibility: hidden;
+  flex-shrink: 0;
 }
 
 /* Carousel card styles */
 carousel-card > div {
-  width: 221px;
+  width: 180px;
   height: fit-content;
   overflow: hidden;
   background: var(--background-dark-2);
@@ -182,6 +213,9 @@ carousel-card > div {
   gap: var(--gap-xxs);
   padding-bottom: var(--padding-xxs);
   position: relative;
+  /* important: prevents shrinking and forces proper snap behavior */
+  flex: 0 0 auto; 
+  scroll-snap-align: start;
 }
 
 carousel-card .material-symbols-rounded {
@@ -218,6 +252,7 @@ carousel-card img {
   width: 100%;
   aspect-ratio: 221/294;
   display: block;
+  object-fit: cover;
 }
 
 carousel-card:hover img {
@@ -251,13 +286,12 @@ carousel-card[free] section div h3 {
 }
 
 /* Premium card styles */
-image-carousel.single .carousel {
+image-carousel:has(premium-card) .carousel {
   /* TODO: width */
-  width: 1189px;
+  max-width: 100%;
 }
 
-image-carousel.single h3,
-image-carousel.single .scroll-pill {
+image-carousel:has(premium-card) h3 {
   display: none;
 }
 
@@ -327,4 +361,47 @@ premium-card button {
 
 premium-card:hover button {
   display: inline-block;
+}
+
+/* Desktop styles para carrusel */
+@media (min-width: 768px) {
+  image-carousel {
+    width: fit-content;
+    max-width: 1350px;
+  }
+  image-carousel .carousel {
+    /* TODO: width */
+    width: 1184px;
+  }
+  image-carousel:has(premium-card) .carousel {
+    /* TODO: width */
+    width: 1189px;
+  }
+  image-carousel nav > button {
+    display: flex;
+  }
+  image-carousel:has(premium-card) .scroll-pill {
+    display: none;
+  }
+  carousel-card > div {
+    width: 221px;
+  }
+}
+
+/* MOBILE-FIRST FIXES */
+
+/* DESKTOP OVERRIDES */
+@media (min-width: 768px) {
+  carousel-card > div {
+    width: 221px; /* restore original card size */
+  }
+
+  image-carousel .carousel {
+    overflow-x: hidden; /* because you'll likely use arrows */
+    justify-content: flex-start;
+  }
+
+  image-carousel nav > button {
+    display: flex;
+  }
 }
