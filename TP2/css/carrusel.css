@@ -210,11 +210,10 @@ carousel-card > div {
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 1);
   border-radius: var(--border-rad-s);
   text-align: start;
-  gap: var(--gap-xxs);
   padding-bottom: var(--padding-xxs);
   position: relative;
   /* important: prevents shrinking and forces proper snap behavior */
-  flex: 0 0 auto; 
+  flex: 0 0 auto;
   scroll-snap-align: start;
 }
 
@@ -300,12 +299,13 @@ premium-card {
   width: fit-content;
   height: fit-content;
   position: relative;
+  flex: 0 0 auto;
+  scroll-snap-align: center;
 }
 
 premium-card img {
-  height: 500px;
-  /* aspect-ratio: 16/9; */
-  width: 1179px;
+  aspect-ratio: 16/9;
+  width: 100%;
   object-fit: cover;
   border-radius: var(--border-rad-s);
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 1);
@@ -385,6 +385,10 @@ premium-card:hover button {
   }
   carousel-card > div {
     width: 221px;
+  }
+  premium-card img {
+    height: 500px;
+    width: 1179px;
   }
 }
 
