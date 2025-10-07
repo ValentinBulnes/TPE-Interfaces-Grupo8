@@ -48,7 +48,7 @@ class ImageCarousel extends HTMLElement {
   track;
   _step;
   visibleCount;
-  jsonPath = "./js/games.json";
+  jsonPath = "./js/games.JSON";
   filter;
   carousel;
   apiUrl = "https://vj.interfaces.jima.com.ar/api/v2";
