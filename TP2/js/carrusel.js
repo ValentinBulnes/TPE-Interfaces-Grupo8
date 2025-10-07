@@ -86,7 +86,7 @@ class ImageCarousel extends HTMLElement {
     // Use ResizeObserver instead of window resize
     this.resizeObserver = new ResizeObserver(() => this.update());
     this.resizeObserver.observe(this.carousel);
-    this.carousel.addEventListener("scroll", () => this.handleScroll());
+    this.carousel.addEventListener("scroll", () => this.updateScrollPill(true));
 
     this.initSwipe(this.carousel);
 
@@ -231,48 +231,33 @@ class ImageCarousel extends HTMLElement {
     this.update();
   }
 
-  handleScroll() {
-    const carousel = this.querySelector(".carousel");
+  updateScrollPill(is_scroll = false) {
     const container = this.querySelector(".scroll-pill");
     const pill = container?.querySelector("div");
-    if (!carousel || !pill || !this.slides.length) return;
+    const carousel = this.querySelector(".carousel");
+    if (!pill || !container || !carousel || !this.slides.length) return;
 
-    const maxScroll = carousel.scrollWidth - carousel.clientWidth;
-    if (maxScroll <= 0) return;
-
-    const progress = carousel.scrollLeft / maxScroll; // 0 → 1
-    const travel = container.offsetWidth - pill.offsetWidth;
-
-    pill.style.transform = `translateX(${progress * travel}px)`;
-  }
-
-  updateScrollPill() {
-    const pill = this.querySelector(".scroll-pill > div");
-    const container = this.querySelector(".scroll-pill");
-    if (!pill || !container) return;
-
+    // --- Width is always based on visible fraction ---
     const total = this.slides.length;
-    if (!total) return;
-
-    // fraction of visible slides
     const fractionVisible = this.visibleCount / total;
     pill.style.width = `${fractionVisible * 100}%`;
 
+    // --- Horizontal position depends on source ---
+    const maxScroll = carousel.scrollWidth - carousel.clientWidth;
     const maxIndex = total - this.visibleCount;
-    if (maxIndex <= 0) {
-      pill.style.transform = "translateX(0px)";
-      return;
+    const travel = container.offsetWidth - pill.offsetWidth;
+
+    let progress = 0;
+
+    if (is_scroll && maxScroll > 0) {
+      // Direct scroll syncing (for touch and native scrolling)
+      progress = carousel.scrollLeft / maxScroll;
+    } else if (maxIndex > 0) {
+      // Programmatic navigation (buttons, swipe)
+      progress = this.currentIndex / maxIndex;
     }
 
-    // available travel distance in pixels
-    const containerWidth = container.offsetWidth;
-    const pillWidth = pill.offsetWidth;
-    const travel = containerWidth - pillWidth;
-
-    // pixel offset proportional to currentIndex
-    const offset = (this.currentIndex / maxIndex) * travel;
-
-    pill.style.transform = `translateX(${offset}px)`;
+    pill.style.transform = `translateX(${progress * travel}px)`;
   }
 }
 
