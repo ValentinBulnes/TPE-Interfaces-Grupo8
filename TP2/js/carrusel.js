@@ -50,6 +50,7 @@ class ImageCarousel extends HTMLElement {
   visibleCount;
   jsonPath = "./js/games.json";
   filter;
+  carousel;
 
   constructor() {
     super();
@@ -63,6 +64,7 @@ class ImageCarousel extends HTMLElement {
     this.innerHTML = this.template.innerHTML;
     this.track = this.querySelector(".carousel > div");
     this.filter = this.getAttribute("filter") || "default?";
+    this.carousel = this.querySelector(".carousel");
 
     this.querySelector("h3").textContent = this.getAttribute("title") || "E404";
 
@@ -83,10 +85,10 @@ class ImageCarousel extends HTMLElement {
 
     // Use ResizeObserver instead of window resize
     this.resizeObserver = new ResizeObserver(() => this.update());
-    const carousel = this.querySelector(".carousel");
-    if (carousel) this.resizeObserver.observe(carousel);
+    this.resizeObserver.observe(this.carousel);
+    this.carousel.addEventListener("scroll", () => this.handleScroll());
 
-    this.initSwipe(carousel);
+    this.initSwipe(this.carousel);
 
     // Initial update after layout has settled
     requestAnimationFrame(() => this.update());
@@ -227,6 +229,21 @@ class ImageCarousel extends HTMLElement {
 
     this.slides = this.track.querySelectorAll("carousel-card,premium-card");
     this.update();
+  }
+
+  handleScroll() {
+    const carousel = this.querySelector(".carousel");
+    const container = this.querySelector(".scroll-pill");
+    const pill = container?.querySelector("div");
+    if (!carousel || !pill || !this.slides.length) return;
+
+    const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+    if (maxScroll <= 0) return;
+
+    const progress = carousel.scrollLeft / maxScroll; // 0 → 1
+    const travel = container.offsetWidth - pill.offsetWidth;
+
+    pill.style.transform = `translateX(${progress * travel}px)`;
   }
 
   updateScrollPill() {
