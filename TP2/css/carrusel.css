@@ -5,7 +5,7 @@ html {
 *,
 *::before,
 *::after {
-  box-sizing: inherit;
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
   text-decoration: none;
@@ -31,36 +31,26 @@ h3 {
   justify-self: center;
   color: var(--color-text);
 }
-h1 {
-  font-size: 45px;
-}
-h2 {
+
+image-carousel h1 {
   font-size: 28px;
 }
-h3 {
-  font-size: 20px;
-}
-.bold {
-  font-weight: bold;
+
+image-carousel h2 {
+  font-size: 18px;
 }
 
-.flex-row {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+image-carousel h3 {
+  font-size: 15px;
+}
+
+.bold {
+  font-weight: bold;
 }
 
 .flex-col {
   display: flex;
   flex-direction: column;
-}
-
-.gap-xxs {
-  gap: var(--gap-xxs);
-}
-
-.align-items-center {
-  align-items: center;
 }
 
 .material-symbols-rounded {
@@ -73,16 +63,41 @@ h3 {
 /* Carousel styles */
 image-carousel {
   display: block;
-  width: fit-content;
+  width: 100%;
+  padding: var(--padding-s);
+  max-width: 100%;
   margin: 0 auto;
+  overflow: hidden;
+}
+
+image-carousel > div {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-xxs);
+  align-items: center;
+}
+
+image-carousel nav {
+  justify-content: center;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 image-carousel .carousel {
   position: relative;
-  /* TODO: width */
-  width: 1184px;
-  overflow: hidden;
+  width: 100%;
   height: fit-content;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+image-carousel .carousel::-webkit-scrollbar {
+  display: none;
 }
 
 image-carousel .scroll-pill {
@@ -90,6 +105,7 @@ image-carousel .scroll-pill {
   height: 20px;
   background-color: var(--gray-dark1);
   border-radius: var(--border-rad-m);
+  overflow: hidden;
 }
 
 image-carousel .scroll-pill > div {
@@ -101,14 +117,16 @@ image-carousel .scroll-pill > div {
 
 image-carousel .carousel > div {
   display: flex;
-  transition: transform .8s ease-in-out;
+  transition: transform 0.8s ease-in-out;
   height: 100%;
   gap: var(--gap-l);
   padding: var(--padding-xxs);
   padding-top: 0;
+  flex-wrap: nowrap;
+  width: 110%;
 }
 image-carousel.single .carousel > div {
-  transition-duration: .6s;
+  transition-duration: 0.6s;
   transition-timing-function: linear;
 }
 image-carousel > div > h3 {
@@ -122,7 +140,7 @@ image-carousel nav > button {
   color: var(--color-text);
   border-radius: 50%;
   cursor: pointer;
-  display: flex;
+  display: none;
 }
 
 image-carousel nav > button:disabled {
@@ -167,20 +185,23 @@ carousel-card,
 premium-card {
   transform-style: preserve-3d;
   backface-visibility: hidden;
+  flex-shrink: 0;
 }
 
 /* Carousel card styles */
 carousel-card > div {
-  width: 221px;
+  width: 180px;
   height: fit-content;
   overflow: hidden;
   background: var(--background-dark-2);
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 1);
   border-radius: var(--border-rad-s);
   text-align: start;
-  gap: var(--gap-xxs);
   padding-bottom: var(--padding-xxs);
   position: relative;
+  /* important: prevents shrinking and forces proper snap behavior */
+  flex: 0 0 auto;
+  /* scroll-snap-align: start; */
 }
 
 carousel-card .material-symbols-rounded {
@@ -217,6 +238,7 @@ carousel-card img {
   width: 100%;
   aspect-ratio: 221/294;
   display: block;
+  object-fit: cover;
 }
 
 carousel-card:hover img {
@@ -232,6 +254,9 @@ carousel-card section {
 carousel-card section > div {
   justify-content: space-between;
   height: fit-content;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
 }
 
 carousel-card section > h3 {
@@ -250,13 +275,14 @@ carousel-card[free] section div h3 {
 }
 
 /* Premium card styles */
-image-carousel.single .carousel {
-  /* TODO: width */
-  width: 1189px;
+image-carousel:has(premium-card) .carousel {
+  max-width: 100%;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
 }
 
-image-carousel.single h3,
-image-carousel.single .scroll-pill {
+image-carousel:has(premium-card) h3 {
   display: none;
 }
 
@@ -265,12 +291,13 @@ premium-card {
   width: fit-content;
   height: fit-content;
   position: relative;
+  flex: 0 0 auto;
+  scroll-snap-align: center;
 }
 
 premium-card img {
-  height: 500px;
-  /* aspect-ratio: 16/9; */
-  width: 1179px;
+  aspect-ratio: 16/9;
+  width: 100%;
   object-fit: cover;
   border-radius: var(--border-rad-s);
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 1);
@@ -284,17 +311,22 @@ premium-card section {
   width: 100%;
   position: absolute;
   bottom: 0;
-  padding: 60px;
+  padding: var(--padding-xs);
   gap: var(--gap-xs);
   justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 premium-card section div {
-  width: 75%;
+  width: 100%;
 }
 
 premium-card h1 {
-  -webkit-text-stroke: 2px var(--color-primary-dark2);
+  text-shadow: -2px -2px 0 var(--color-primary-dark2),
+    2px -2px 0 var(--color-primary-dark2), -2px 2px 0 var(--color-primary-dark2),
+    2px 2px 0 var(--color-primary-dark2), 0 0 4px var(--color-primary-dark2);
   font-weight: bold;
   white-space: nowrap;
   overflow: hidden;
@@ -302,7 +334,9 @@ premium-card h1 {
 }
 
 premium-card div > h2 {
-  -webkit-text-stroke: 1px var(--color-primary-dark2);
+  text-shadow: -2px -2px 0 var(--color-primary-dark2),
+    2px -2px 0 var(--color-primary-dark2), -2px 2px 0 var(--color-primary-dark2),
+    2px 2px 0 var(--color-primary-dark2), 0 0 4px var(--color-primary-dark2);
   font-weight: bold;
   opacity: 0;
 }
@@ -320,6 +354,51 @@ premium-card button {
   display: none;
 }
 
-premium-card:hover button {
-  display: inline-block;
+/* Desktop styles para carrusel */
+@media (min-width: 768px) {
+  image-carousel h1 {
+    font-size: 45px;
+  }
+  image-carousel h2 {
+    font-size: 28px;
+  }
+  image-carousel h3 {
+    font-size: 20px;
+  }
+  premium-card section {
+    padding: 60px;
+  }
+  premium-card section div {
+    width: 75%;
+  }
+  premium-card:hover button {
+    display: inline-block;
+  }
+  image-carousel {
+    width: fit-content;
+    max-width: 1350px;
+  }
+  image-carousel .carousel {
+    /* TODO: width */
+    width: 1184px;
+  }
+  image-carousel:has(premium-card) .carousel {
+    /* TODO: width */
+    width: 1189px;
+    overflow-x: hidden; /* because you'll likely use arrows */
+    justify-content: flex-start;
+  }
+  image-carousel nav > button {
+    display: flex;
+  }
+  image-carousel:has(premium-card) .scroll-pill {
+    display: none;
+  }
+  carousel-card > div {
+    width: 221px;
+  }
+  premium-card img {
+    height: 500px;
+    width: 1179px;
+  }
 }
