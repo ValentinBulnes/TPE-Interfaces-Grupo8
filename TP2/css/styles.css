@@ -1466,7 +1466,15 @@ input[type=date]:invalid::-webkit-datetime-edit {
     font-size: 18px;
     font-weight: 700;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: 0.4s ease-in-out;
+}
+
+.comentar-btn:hover {
+    background-color: #33EB8A;
+}
+
+.comentar-btn:active {
+    transform: scale(0.95);
 }
 
 /* Estilos para comentarios existentes */
