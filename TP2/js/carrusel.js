@@ -109,7 +109,13 @@ class ImageCarousel extends HTMLElement {
   batmanNavigation() {
     const batman = this.querySelector('premium-card[title^="BATMAN" i]');
     if (!batman) return;
-    batman.addEventListener("click", () => {
+
+    const button = batman.querySelector("button");
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+
+    const target = isMobile || !button ? batman : button;
+
+    target.addEventListener("click", () => {
       window.location.href = "./juego.html";
     });
   }
