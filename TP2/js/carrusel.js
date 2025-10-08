@@ -79,7 +79,10 @@ class ImageCarousel extends HTMLElement {
     fetch(dataUrl)
       .then((res) => res.json())
       .then((data) => this.loadFromJSON(data))
-      .then(() => this.batmanNavigation());
+      .then(() => {
+        this.batmanNavigation();
+        this.batmanNavigationCarouselCard();
+      });
 
     this.querySelector(".prev").addEventListener("click", () =>
       this.navigate(-1)
@@ -114,6 +117,22 @@ class ImageCarousel extends HTMLElement {
     const isMobile = window.matchMedia("(max-width: 768px)").matches;
 
     const target = isMobile || !button ? batman : button;
+
+    target.addEventListener("click", () => {
+      window.location.href = "./juego.html";
+    });
+  }
+
+  batmanNavigationCarouselCard() {
+    const batmanCard = this.querySelector('carousel-card[title*="Batman" i]');
+    if (!batmanCard) return;
+
+    const playButton = batmanCard.querySelector("div > .material-symbols-rounded");
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+
+    // En mobile, hacer clickeable toda la card; en desktop, solo el botón de play
+    const target = isMobile ? batmanCard : playButton;
+    if (!target) return;
 
     target.addEventListener("click", () => {
       window.location.href = "./juego.html";
