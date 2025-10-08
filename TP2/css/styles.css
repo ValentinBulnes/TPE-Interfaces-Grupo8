@@ -1422,6 +1422,7 @@ input[type=date]:invalid::-webkit-datetime-edit {
     flex-direction: column;
     gap: 10px;
     padding: 18px;
+    margin-top: -120px;
     margin-bottom: 30px;
 }
 
