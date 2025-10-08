@@ -1,11 +1,14 @@
 * {
     margin: 0;
     padding: 0;
-    list-style: none;
     text-decoration: none;
     border: none;
     outline: none;
     box-sizing: border-box;
+}
+
+ul, ol {
+    list-style: none;
 }
 
 .hidden {
@@ -998,6 +1001,10 @@ body.login-page {
     color: #EDEDED;
 }
 
+#game-title-actions .icon-btn:nth-child(-n+3):hover iconify-icon {
+    color: #00E676;
+}
+
 /* Tamaño de iconos en game-title-actions */
 #game-title-actions .icon-btn iconify-icon {
     width: 24px;
@@ -1153,7 +1160,7 @@ body.login-page {
 }
 
 #game-details ul li {
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 /* Botones de play */
@@ -1414,8 +1421,8 @@ input[type=date]:invalid::-webkit-datetime-edit {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    padding: 18px;
 }
-
 
 .comentar-container {
     width: 820px;
@@ -1425,7 +1432,6 @@ input[type=date]:invalid::-webkit-datetime-edit {
     align-items: center;
     gap: 10px;
 }
-
 
 .avatar-comunidad-img {
     width: 60px;
@@ -1552,7 +1558,7 @@ input[type=date]:invalid::-webkit-datetime-edit {
     color: #C60055;
     text-decoration: underline;
 }
-}
+
 
 /* Animacion login y registro exitoso */
 .success-overlay {
