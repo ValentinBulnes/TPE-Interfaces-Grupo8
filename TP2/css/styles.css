@@ -1140,6 +1140,18 @@ body.login-page {
     margin-top: 15px;
 }
 
+#description a {
+    color: #FF4081;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+#description a:hover {
+    color: #C60055;
+    text-decoration: underline;
+}
+
 .flex-row {
     display: flex;
     flex-direction: row;
