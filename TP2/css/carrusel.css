@@ -223,11 +223,17 @@ carousel-card > div > .material-symbols-rounded {
   align-items: center;
   justify-content: center;
   line-height: 1;
-  display: none;
+  display: flex;
+  opacity: 0;
+  transition: opacity 0.3s ease, background-color 0.3s ease;
+}
+
+carousel-card > div > .material-symbols-rounded:hover {
+  background-color: var(--color-secondary);
 }
 
 carousel-card:hover > div > .material-symbols-rounded {
-  display: flex;
+  opacity: 1;
 }
 
 carousel-card section span.filled {
@@ -239,10 +245,11 @@ carousel-card img {
   aspect-ratio: 221/294;
   display: block;
   object-fit: cover;
+  transition: filter 0.3s ease;
 }
 
 carousel-card:hover img {
-  filter: blur(1px);
+  filter: blur(3px);
 }
 
 carousel-card section {
@@ -301,10 +308,12 @@ premium-card img {
   object-fit: cover;
   border-radius: var(--border-rad-s);
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 1);
+  opacity: 0.7;
+  transition: filter 0.3s ease, opacity 0.3s ease;
 }
 
 premium-card:hover img {
-  filter: blur(1px);
+  filter: blur(3px);
 }
 
 premium-card section {
@@ -339,6 +348,7 @@ premium-card div > h2 {
     2px 2px 0 var(--color-primary-dark2), 0 0 4px var(--color-primary-dark2);
   font-weight: bold;
   opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 premium-card:hover div > h2 {
@@ -351,7 +361,12 @@ premium-card button {
   background-color: var(--color-primary);
   width: 180px;
   cursor: pointer;
-  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease, background-color 0.3s ease;
+}
+
+premium-card button:hover {
+  background-color: var(--color-secondary);
 }
 
 /* Desktop styles para carrusel */
@@ -371,8 +386,11 @@ premium-card button {
   premium-card section div {
     width: 75%;
   }
-  premium-card:hover button {
+  premium-card button {
     display: inline-block;
+  }
+  premium-card:hover button {
+    opacity: 1;
   }
   image-carousel {
     width: fit-content;
