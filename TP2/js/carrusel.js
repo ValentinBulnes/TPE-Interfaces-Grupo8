@@ -79,10 +79,7 @@ class ImageCarousel extends HTMLElement {
     fetch(dataUrl)
       .then((res) => res.json())
       .then((data) => this.loadFromJSON(data))
-      .then(() => {
-        this.batmanNavigation();
-        this.batmanNavigationCarouselCard();
-      });
+      .then(() => this.batmanNavigation());
 
     this.querySelector(".prev").addEventListener("click", () =>
       this.navigate(-1)
@@ -110,28 +107,21 @@ class ImageCarousel extends HTMLElement {
   }
 
   batmanNavigation() {
-    const batman = this.querySelector('premium-card[title^="BATMAN" i]');
-    if (!batman) return;
-
-    const button = batman.querySelector("button");
-    const isMobile = window.matchMedia("(max-width: 768px)").matches;
-
-    const target = isMobile || !button ? batman : button;
-
-    target.addEventListener("click", () => {
-      window.location.href = "./juego.html";
-    });
-  }
-
-  batmanNavigationCarouselCard() {
-    const batmanCard = this.querySelector('carousel-card[title*="Batman" i]');
+    // Look for Batman cards in both premium and carousel variants
+    const batmanCard =
+      this.querySelector('premium-card[title^="BATMAN" i]') ||
+      this.querySelector('carousel-card[title^="Batman" i]');
     if (!batmanCard) return;
 
-    const playButton = batmanCard.querySelector("div > .material-symbols-rounded");
+    // Select the appropriate button depending on the card type
+    const button = batmanCard.matches("premium-card")
+      ? batmanCard.querySelector("button")
+      : batmanCard.querySelector("div > .material-symbols-rounded");
+
     const isMobile = window.matchMedia("(max-width: 768px)").matches;
 
-    // En mobile, hacer clickeable toda la card; en desktop, solo el botón de play
-    const target = isMobile ? batmanCard : playButton;
+    // On mobile: make entire card clickable; on desktop: use button (if present)
+    const target = isMobile || !button ? batmanCard : button;
     if (!target) return;
 
     target.addEventListener("click", () => {
