@@ -352,8 +352,14 @@ class PremiumCard extends HTMLElement {
     this.querySelector("section h1").textContent =
       this.getAttribute("title") || "E404";
 
-    this.querySelector("section h2").textContent =
-      this.getAttribute("price") || "E404";
+    const price = this.getAttribute("price") || "E404";
+    this.querySelector("section h2").textContent = price;
+
+    // Cambiar texto del botón si el juego es gratis
+    const button = this.querySelector("button h2");
+    if (button && (this.isFree || price === "Sin costo")) {
+      button.textContent = "Jugar";
+    }
   }
 }
 
