@@ -811,20 +811,6 @@ body.login-page {
     color: #7A7A7A;
 }
 
-/* Shared Button Styles */
-.btn-primary {
-    width: 364px;
-    height: 50px;
-    background-color: #3D5AFE;
-    color: #EDEDED;
-    border: none;
-    border-radius: 20px;
-    font-size: 20px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
 .login-btn {
     width: 364px;
     height: 50px;
@@ -893,7 +879,6 @@ body.login-page {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.2s;
     padding: 10px 35px 10px 35px;
     position: relative;
 }
@@ -901,8 +886,6 @@ body.login-page {
 .social-btn iconify-icon {
     position: absolute;
     left: 37px;
-    top: 50%;
-    transform: translateY(-50%);
 }
 
 .facebook-btn {
@@ -1584,9 +1567,15 @@ input[type=date]:invalid::-webkit-datetime-edit {
 
 /* Animacion login y registro exitoso */
 .success-overlay {
-    position: fixed; inset: 0; background: rgba(0,0,0,0.8);
-    display: flex; align-items: center; justify-content: center;
-    z-index: 10000; opacity: 0; visibility: hidden;
+    position: fixed; 
+    inset: 0; 
+    background: rgba(0,0,0,0.8);
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    z-index: 10000; 
+    opacity: 0; 
+    visibility: hidden;
     transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
 }
 
@@ -1596,20 +1585,30 @@ input[type=date]:invalid::-webkit-datetime-edit {
 }
 
 .success-animation {
-    background: #2E2E2E; border-radius: 20px; padding: 40px;
-    text-align: center; transform: scale(0.8); opacity: 0;
+    background: #2E2E2E; 
+    border-radius: 20px; 
+    padding: 40px;
+    text-align: center; 
+    transform: scale(0.8); 
+    opacity: 0;
     transition: transform 0.3s ease-out, opacity 0.3s ease-out;
 }
 
 .success-overlay.show .success-animation { 
-    transform: scale(1); opacity: 1; 
+    transform: scale(1); 
+    opacity: 1; 
 }
 
 .success-icon {
-    width: 80px; height: 80px; margin: 0 auto 20px;
-    background: #00E676; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    transform: scale(0); opacity: 0;
+    width: 80px; height: 80px; 
+    margin: 0 auto 20px;
+    background: #00E676; 
+    border-radius: 50%;
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    transform: scale(0); 
+    opacity: 0;
     transition: transform 0.4s ease-out, opacity 0.4s ease-out;
 }
 
@@ -1624,7 +1623,8 @@ input[type=date]:invalid::-webkit-datetime-edit {
 }
 
 .success-message {
-    opacity: 0; transform: translateY(20px);
+    opacity: 0; 
+    transform: translateY(20px);
     transition: opacity 0.3s ease-out, transform 0.3s ease-out;
 }
 

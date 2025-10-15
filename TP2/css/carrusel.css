@@ -363,10 +363,33 @@ premium-card button {
   cursor: pointer;
   opacity: 0;
   transition: opacity 0.3s ease, background-color 0.3s ease;
-}
+  position:relative;
+  overflow: hidden;
 
+}
+  premium-card button::before {
+    content: '';
+    position: absolute;
+    top: var(--y, -50%);
+    left: var(--x, -50%);
+    transform: translate(-50%, -50%);
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center,var(--color-primary), var(--color-secondary), transparent 70% );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 1;
+  }
+  premium-card button:hover::before {
+    opacity: 1;
+  }
 premium-card button:hover {
   background-color: var(--color-secondary);
+}
+premium-card button > h2 {
+  position: relative;
+  z-index: 10;
 }
 
 /* Desktop styles para carrusel */
@@ -397,13 +420,11 @@ premium-card button:hover {
     max-width: 1350px;
   }
   image-carousel .carousel {
-    /* TODO: width */
     width: 1184px;
   }
   image-carousel:has(premium-card) .carousel {
-    /* TODO: width */
     width: 1189px;
-    overflow-x: hidden; /* because you'll likely use arrows */
+    overflow-x: hidden;
     justify-content: flex-start;
   }
   image-carousel nav > button {

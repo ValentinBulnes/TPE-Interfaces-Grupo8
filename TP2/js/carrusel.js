@@ -18,8 +18,7 @@ class CarouselCard extends HTMLElement {
 
     this.querySelector("img").src = this.getAttribute("img") || "E404";
     this.querySelector("img").alt = this.getAttribute("title") || "E404";
-    this.querySelector("section > h3.bold").textContent =
-      this.getAttribute("title") || "E404";
+    this.querySelector("section > h3.bold").textContent = this.getAttribute("title") || "E404";
 
     const priceElem = this.querySelector("section div h3");
     if (this.isFree) {
@@ -40,6 +39,7 @@ class CarouselCard extends HTMLElement {
     });
   }
 }
+
 customElements.define("carousel-card", CarouselCard);
 
 class ImageCarousel extends HTMLElement {
@@ -69,8 +69,9 @@ class ImageCarousel extends HTMLElement {
     this.innerHTML = this.template.innerHTML;
     this.isApi = this.hasAttribute("api");
     this.isPremium = this.hasAttribute("premium");
-    this.track = this.querySelector(".carousel > div");
     this.filter = this.getAttribute("filter") || "default?";
+
+    this.track = this.querySelector(".carousel > div");
     this.carousel = this.querySelector(".carousel");
 
     this.querySelector("h3").textContent = this.getAttribute("title") || "E404";
@@ -336,6 +337,8 @@ customElements.define("image-carousel", ImageCarousel);
 
 class PremiumCard extends HTMLElement {
   template;
+  isCart;
+  isFree;
 
   constructor() {
     super();
@@ -360,6 +363,19 @@ class PremiumCard extends HTMLElement {
     if (button && (this.isFree || price === "Sin costo")) {
       button.textContent = "Jugar";
     }
+    this.gradienteLoco()
+  }
+
+  gradienteLoco(){
+    const button = this.querySelector("button");
+    button.addEventListener("mousemove", (e) => {
+      const rect = button.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      button.style.setProperty('--x', `${x}px`);
+      button.style.setProperty('--y', `${y}px`);
+      // button.style.background = `radial-gradient(circle at ${x}px ${y}px, var(--color-secondary), var(--color-primary))`;
+    })
   }
 }
 

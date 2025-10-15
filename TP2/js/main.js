@@ -140,8 +140,8 @@ const registerForm = document.querySelector('.registration-form');
 
 if (loginForm) {
     loginForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        showSuccessAnimation();
+        e.preventDefault();  //al precionar submit no recarga la pagina
+        showSuccessAnimation(); // mostrar animación de éxito
     });
 }
 
