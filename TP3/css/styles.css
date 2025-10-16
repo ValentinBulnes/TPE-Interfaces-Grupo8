@@ -945,15 +945,27 @@ body.login-page {
     width: 1320px;
     height: 610px;
 
-    display: grid;
-    place-items: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     overflow: hidden;
 }
 
 #game-execution img {
     /* Para posicionar el botón de play */
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    grid-area: 1 / 1; 
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.5;
+}
+
+#game-execution .play-btn {
+    grid-area: auto;
+    position: relative;
 }
 
 /* Game title */
@@ -1104,11 +1116,15 @@ body.login-page {
 
     display: flex;
     flex-direction: row;
+    gap: 14px;
 }
 
 #gallery img {
-    margin: 0 7px;
+    width: 305px;
+    height: 255px;
+    object-fit: cover;
     border-radius: 10px;
+    opacity: 0.5;
 }
 
 /* Description and Game Details */
@@ -1163,8 +1179,6 @@ body.login-page {
 .play-btn {
     grid-area: 1 / 1;
     z-index: 1;
-   
-    position: relative;
     
     border-radius: 50%;
     background: #3D5AFE;
@@ -1186,6 +1200,7 @@ body.login-page {
 .game-btn {
     width: 135px;
     height: 135px;
+    position: relative;
 }
 
 .game-btn:hover {
@@ -1226,10 +1241,13 @@ body.login-page {
 .video-thumb {
     display: grid;
     place-items: center;
-    width: fit-content;
+    width: 305px;
+    height: 255px;
 }
 
 .video-thumb img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     grid-area: 1 / 1;
 }
