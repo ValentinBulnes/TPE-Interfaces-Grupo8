@@ -1,5 +1,12 @@
 [
   {
+    "title": "BLOCKA Mario Bros.",
+    "image": "./img/cards-big/BLOCKAmario.png",
+    "alt": "",
+    "price": "Sin costo",
+    "tags": ["premium"]
+  },
+  {
     "title": "BATMAN Peg Solitaire: Gotham Edition",
     "image": "./img/juego/jugar.png",
     "alt": "",
@@ -77,11 +84,18 @@
     "tags": ["premium"]
   },
   {
+    "title": "BLOCKA Mario Bros.",
+    "image": "img/cards-small/BLOCKAmario.png",
+    "alt": "",
+    "price": "Sin costo",
+    "tags": ["recomendado"]
+  },
+  {
     "title": "Cyberpunk 2077",
     "image": "img/cards-small/cyberpunk.jpg",
     "alt": "Cyberpunk 2077 Game",
     "price": "$99.99",
-    "tags": ["favorito", "recomendado"]
+    "tags": ["favorito"]
   },
   {
     "title": "Grand Theft Auto V",
