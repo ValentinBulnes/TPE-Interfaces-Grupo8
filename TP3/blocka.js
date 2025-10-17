@@ -114,15 +114,15 @@ function filtroEscalaDeGrises(imageData) {
     return imageData;
 }
 
-function filtroBrillo(imageData) {
+function filtroBrillo(imageData, brillo = 1.3) {
     for (var x = 0; x < imageData.width; x++) {
         for (var y = 0; y < imageData.height; y++) {
             var pixel = getPixel(imageData, x, y);
             
             // Aumentar cada canal RGB por el factor
-            var nuevoR = Math.min(255, pixel.r * 1.3);
-            var nuevoG = Math.min(255, pixel.g * 1.3);
-            var nuevoB = Math.min(255, pixel.b * 1.3);
+            var nuevoR = Math.min(255, pixel.r * brillo);
+            var nuevoG = Math.min(255, pixel.g * brillo);
+            var nuevoB = Math.min(255, pixel.b * brillo);
             
             setPixel(imageData, x, y, nuevoR, nuevoG, nuevoB, pixel.a);
         }
@@ -220,6 +220,7 @@ function verificarJuegoCompleto() {
 
 // Función para mostrar mensaje de victoria
 function mostrarVictoria() {
+    juegoIniciado = false
     detenerTemporizador();
     
     var segundosTotales = obtenerSegundos(tiempoTranscurrido);
@@ -232,9 +233,8 @@ function mostrarVictoria() {
 
 // Función para detectar en qué cuadrante se hizo click
 function obtenerCuadrante(event) {
-    var rect = canvas.getBoundingClientRect();
-    var x = event.clientX - rect.left;
-    var y = event.clientY - rect.top;
+    var x = event.offsetX
+    var y = event.offsetY
     
     var ladoCuadrante = imageWidth / 2;
     
@@ -244,35 +244,25 @@ function obtenerCuadrante(event) {
     return { x: cuadranteX, y: cuadranteY };
 }
 
-// Event listener para click izquierdo (rotar cuadrante a la izquierda)
-canvas.addEventListener("click", function(e) {
+function clickCuadrante(e, direccion){
+    e.preventDefault();
     if (!juegoIniciado) return; // Solo permitir clicks si el juego inició
     
     var cuadrante = obtenerCuadrante(e);
-    rotarCuadrante(cuadrante.x, cuadrante.y, -1); // -1 = izquierda
+    rotarCuadrante(cuadrante.x, cuadrante.y, direccion); // -1 = izquierda
     
     // Verificar si se completó el juego
     if (verificarJuegoCompleto()) {
         mostrarVictoria();
     }
-});
+
+}
+
+// Event listener para click izquierdo (rotar cuadrante a la izquierda)
+canvas.addEventListener("click", (e) => clickCuadrante(e, -1))
 
 // Event listener para click derecho (rotar cuadrante a la derecha)
-canvas.addEventListener("contextmenu", function(e) {
-    e.preventDefault(); // Prevenir el menú contextual del navegador
-    
-    if (!juegoIniciado) return false; // Solo permitir clicks si el juego inició
-    
-    var cuadrante = obtenerCuadrante(e);
-    rotarCuadrante(cuadrante.x, cuadrante.y, 1); // 1 = derecha
-    
-    // Verificar si se completó el juego
-    if (verificarJuegoCompleto()) {
-        mostrarVictoria();
-    }
-    
-    return false;
-});
+canvas.addEventListener("contextmenu", (e) => clickCuadrante(e, 1))
 
 
 // Funciones del temporizador
