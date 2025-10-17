@@ -64,8 +64,7 @@ function cargarImagenEnCanvas(imagen) {
     
     imageData = ctx.getImageData(0, 0, imageWidth, imageHeight);
     
-    // Aplicar filtro negativo
-    filtroEscalaDeGrises(imageData);
+    aplicarFiltroRandom(imageData);
     ctx.putImageData(imageData, 0, 0);
     
     // Dibujar bordes en cada cuadrante
@@ -82,6 +81,12 @@ function cargarImagenEnCanvas(imagen) {
     }
     rotarCuadrantesAleatorio();
     juegoIniciado = true;
+}
+
+function aplicarFiltroRandom(imageData){
+    const filtros = [filtroBrillo, filtroEscalaDeGrises, filtroNegativo]
+    const random = Math.floor(Math.random() * filtros.length)
+    filtros[random](imageData)
 }
 
 function setPixel(imageData,x,y,r,g,b,a){
