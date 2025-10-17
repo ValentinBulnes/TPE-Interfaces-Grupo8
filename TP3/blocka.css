@@ -1,0 +1,40 @@
+body {
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #1a1a1a;
+}
+
+.contenedor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    color: #EDEDED;
+}
+
+/* Pantalla de inicio */
+#pantalla-inicio {
+    text-align: center;
+}
+
+/* Juego */
+#juego {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Clase para ocultar elementos */
+.oculto {
+    display: none !important;
+}
+
+/* Mensaje de victoria */
+#mensaje-victoria {
+    text-align: center;
+}

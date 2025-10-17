@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba Blocka</title>
+    <link rel="stylesheet" href="blocka.css">
+</head>
+<body>
+    <div class="contenedor">
+        <div id="pantalla-inicio">
+            <h1>Rompecabezas Blocka</h1>
+            <p>Rota los cuadrantes para completar la imagen</p>
+            <button id="btn-comenzar">COMENZAR</button>
+        </div>
+        <div id="juego" class="oculto">
+            <div id="temporizador">0 segundos</div>
+            <canvas id="canvas" width="900" height="600"></canvas>
+            <div id="mensaje-victoria" class="oculto">
+                <h1>GANASTE</h1>
+                <p>Completaste el rompecabezas en <span id="tiempo-final"></span></p>
+                <button onclick="location.reload()">Jugar de nuevo</button>
+            </div>
+        </div>
+    </div>
+    <script src="blocka.js"></script>
+</body>
+</html>
