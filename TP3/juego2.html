@@ -165,10 +165,20 @@
             </nav>
         </div>
         <div class="game-page-section" id="game-execution">
-            <img src="img/cards-big/BLOCKAmario.png" alt="Pantalla de ejecución del juego">
-            <button class="play-btn game-btn">
+            <img src="img/cards-big/BLOCKAmario.png" alt="Pantalla de ejecución del juego" id="game-preview">
+            <button class="play-btn game-btn" id="btn-comenzar-blocka">
                 <iconify-icon icon="lucide-play"></iconify-icon>
             </button>
+            <!-- Contenedor del juego Blocka -->
+            <div id="juego-blocka" class="oculto">
+                <div id="temporizador">0 segundos</div>
+                <canvas id="canvas" width="900" height="600"></canvas>
+                <div id="mensaje-victoria" class="oculto">
+                    <h1>GANASTE</h1>
+                    <p>Completaste el rompecabezas en <span id="tiempo-final"></span></p>
+                    <button id="btn-jugar-nuevo">Jugar de nuevo</button>
+                </div>
+            </div>
         </div>
         <div class="game-page-section" id="game-title">
             <h1>BLOCKA Mario Bros.</h1>

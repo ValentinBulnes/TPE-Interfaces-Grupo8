@@ -1,40 +1,79 @@
-body {
-    margin: 0;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #1a1a1a;
-}
-
-.contenedor {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    color: #EDEDED;
-}
-
-/* Pantalla de inicio */
-#pantalla-inicio {
-    text-align: center;
-}
-
-/* Juego */
-#juego {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-}
-
 /* Clase para ocultar elementos */
 .oculto {
     display: none !important;
 }
 
+/* Contenedor del juego Blocka */
+#juego-blocka {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    height: 610px;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #555555;
+}
+
+#game-execution {
+    position: relative;
+}
+
+#game-execution.juego-activo #game-preview,
+#game-execution.juego-activo .play-btn {
+    display: none;
+}
+
+/* Temporizador */
+#temporizador {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #EDEDED;
+    padding: 10px 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+}
+
+
 /* Mensaje de victoria */
 #mensaje-victoria {
     text-align: center;
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 30px;
+    border-radius: 15px;
+    color: #EDEDED;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    min-width: 300px;
+}
+
+#mensaje-victoria h1 {
+    font-size: 3rem;
+    margin: 0 0 20px 0;
+    color: #4CAF50;
+}
+
+#mensaje-victoria p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+#mensaje-victoria button {
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#mensaje-victoria button:hover {
+    background-color: #45a049;
 }
