@@ -5,10 +5,9 @@ var imageWidth  = 0;
 var imageData;
 
 // Array para guardar la rotación de cada cuadrante (0, 1, 2, 3 = 0°, 90°, 180°, 270°)
-var rotacionCuadrantes = [
-    [0, 0],  // Fila 0: [cuadrante 0,0] [cuadrante 1,0]
-    [0, 0]   // Fila 1: [cuadrante 0,1] [cuadrante 1,1]
-];
+var filas = 2
+const columnas = 2
+var rotacionCuadrantes = Array(filas).fill(Array(columnas).fill(0))
 
 // Array con las rutas de las imágenes disponibles
 var imagenes = [
@@ -68,15 +67,16 @@ function cargarImagenEnCanvas(imagen) {
     ctx.putImageData(imageData, 0, 0);
     
     // Dibujar bordes en cada cuadrante
-    var ladoCuadrante = imageWidth / 2;
+    const anchoCuadrante = imageWidth / columnas;
+    const altoCuadrante = imageHeight / filas;
     ctx.strokeStyle = "red";
     ctx.lineWidth = 2;
     
     for (var x = 0; x < 2; x++) {
-        for (var y = 0; y < 2; y++) {
-            var posX = x * ladoCuadrante;
-            var posY = y * ladoCuadrante;
-            ctx.strokeRect(posX, posY, ladoCuadrante, ladoCuadrante);
+        for (var y = 0; y < filas; y++) {
+            var posX = x * anchoCuadrante;
+            var posY = y * altoCuadrante;
+            ctx.strokeRect(posX, posY, anchoCuadrante, altoCuadrante);
         }
     }
     rotarCuadrantesAleatorio();
@@ -154,7 +154,7 @@ function filtroNegativo(imageData) {
 function rotarCuadrantesAleatorio() {
     // Rotar cada uno de los 4 cuadrantes
     for (var x = 0; x < 2; x++) {
-        for (var y = 0; y < 2; y++) {
+        for (var y = 0; y < filas; y++) {
             // Generar número aleatorio de rotaciones (1, 2, o 3 veces 90°, nunca 0)
             var numRotaciones = Math.floor(Math.random() * 3) + 1;
             
@@ -169,37 +169,38 @@ function rotarCuadrantesAleatorio() {
 // Función para rotar un cuadrante específico
 function rotarCuadrante(cuadranteX, cuadranteY, direccion) {
 
-    var ladoCuadrante = imageWidth / 2;  //calcular tamaño de cada cuadrante. imagen cuadrada, width = height
+    const anchoCuadrante = imageWidth / columnas;
+    const altoCuadrante = imageHeight / filas;
     
     //Calcular la posición inicial del cuadrante en el canvas
-    var posX = cuadranteX * ladoCuadrante;
-    var posY = cuadranteY * ladoCuadrante;
+    var posX = cuadranteX * anchoCuadrante;
+    var posY = cuadranteY * altoCuadrante;
     
-    var dataCuadrante = ctx.getImageData(posX, posY, ladoCuadrante, ladoCuadrante);
+    var dataCuadrante = ctx.getImageData(posX, posY, anchoCuadrante, altoCuadrante);
     
     //Crear un canvas temporal para dibujar el cuadrante rotado
     var canvasTemp = document.createElement('canvas');
-    canvasTemp.width = ladoCuadrante;
-    canvasTemp.height = ladoCuadrante;
+    canvasTemp.width = anchoCuadrante;
+    canvasTemp.height = altoCuadrante;
     var ctxTemp = canvasTemp.getContext('2d');
     
     // Dibujar los píxeles extraídos en el canvas temporal
     ctxTemp.putImageData(dataCuadrante, 0, 0);
     
     //Limpiar el área del cuadrante original en el canvas principal
-    ctx.clearRect(posX, posY, ladoCuadrante, ladoCuadrante);
+    ctx.clearRect(posX, posY, anchoCuadrante, altoCuadrante);
     
     ctx.save(); //Guardar el estado del contexto
     
     //Mover el punto de origen al centro del cuadrante
-    ctx.translate(posX + ladoCuadrante / 2, posY + ladoCuadrante / 2);
+    ctx.translate(posX + anchoCuadrante / 2, posY + altoCuadrante / 2);
     
     //Rotar el contexto (direccion: 1 = derecha, -1 = izquierda)
     var angulo = direccion * 90 * Math.PI / 180;
     ctx.rotate(angulo);
     
     //Dibujar el canvas temporal rotado (centrado en el origen)
-    ctx.drawImage(canvasTemp, -ladoCuadrante / 2, -ladoCuadrante / 2);
+    ctx.drawImage(canvasTemp, -anchoCuadrante / 2, -altoCuadrante / 2);
     
     //Restaurar el estado del contexto
     ctx.restore();
@@ -212,7 +213,7 @@ function rotarCuadrante(cuadranteX, cuadranteY, direccion) {
 
 // Función para verificar si todos los cuadrantes están correctos
 function verificarJuegoCompleto() {
-    for (var y = 0; y < 2; y++) {
+    for (var y = 0; y < filas; y++) {
         for (var x = 0; x < 2; x++) {
             // Si algún cuadrante no está en rotación 0 (0°), no está completo
             if (rotacionCuadrantes[y][x] !== 0) {
@@ -241,12 +242,21 @@ function obtenerCuadrante(event) {
     var x = event.offsetX
     var y = event.offsetY
     
-    var ladoCuadrante = imageWidth / 2;
+    const anchoCuadrante = imageWidth / columnas;
+    const altoCuadrante = imageHeight / filas;
     
-    var cuadranteX = x < ladoCuadrante ? 0 : 1;
-    var cuadranteY = y < ladoCuadrante ? 0 : 1;
+    var cuadranteX = calcularCuadrante(x, anchoCuadrante);
+    var cuadranteY = calcularCuadrante(y, altoCuadrante);
     
     return { x: cuadranteX, y: cuadranteY };
+}
+
+function calcularCuadrante(pos, lado){
+    var cuadrante = 1
+    while (pos > lado * cuadrante){
+        cuadrante += 1
+    }
+    return cuadrante -1 // 0 index
 }
 
 function clickCuadrante(e, direccion){
