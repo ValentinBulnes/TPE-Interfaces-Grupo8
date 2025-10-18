@@ -27,12 +27,23 @@ var juegoIniciado = false;
 
 // Función para iniciar el juego
 function iniciarJuego() {
-    var pantallaInicio = document.getElementById("pantalla-inicio");
-    var juego = document.getElementById("juego");
+    var juegoBlocka = document.getElementById("juego-blocka");
+    var gamePreview = document.getElementById("game-preview");
+    var btnComenzarBlocka = document.getElementById("btn-comenzar-blocka");
     
-    // Ocultar pantalla de inicio y mostrar juego
-    pantallaInicio.classList.add("oculto");
-    juego.classList.remove("oculto");
+    // Ocultar preview y botón, mostrar juego
+    if (juegoBlocka && gamePreview && btnComenzarBlocka) {
+        gamePreview.classList.add("oculto");
+        btnComenzarBlocka.classList.add("oculto");
+        juegoBlocka.classList.remove("oculto");
+    }
+    
+    // Resetear el array de rotaciones
+    rotacionCuadrantes = Array(filas).fill(null).map(() => Array(columnas).fill(0));
+    
+    // Resetear variables del juego
+    tiempoTranscurrido = 0;
+    juegoIniciado = false;
     
     // Seleccionar una imagen aleatoria
     var indiceAleatorio = Math.floor(Math.random() * imagenes.length);
@@ -47,8 +58,49 @@ function iniciarJuego() {
     };
 }
 
-// Event listener para el botón de comenzar
-document.getElementById("btn-comenzar").addEventListener("click", iniciarJuego);
+// Función para reiniciar el juego (comenzar uno nuevo)
+function reiniciarJuego() {
+    var mensajeVictoria = document.getElementById("mensaje-victoria");
+    
+    // Detener el temporizador si está corriendo
+    detenerTemporizador();
+    
+    // Ocultar mensaje de victoria
+    if (mensajeVictoria) {
+        mensajeVictoria.classList.add("oculto");
+    }
+    
+    // Resetear el array de rotaciones
+    rotacionCuadrantes = Array(filas).fill(null).map(() => Array(columnas).fill(0));
+    
+    // Resetear variables del juego
+    tiempoTranscurrido = 0;
+    juegoIniciado = false;
+    
+    // Seleccionar una imagen aleatoria
+    var indiceAleatorio = Math.floor(Math.random() * imagenes.length);
+    var imagenSeleccionada = imagenes[indiceAleatorio];
+    
+    // Cargar la imagen y iniciar el temporizador
+    var Imagen = new Image();
+    Imagen.src = imagenSeleccionada;
+    Imagen.onload = function() {
+        cargarImagenEnCanvas(this);
+        iniciarTemporizador();
+    };
+}
+
+// Event listener para el botón de play
+var btnComenzarBlocka = document.getElementById("btn-comenzar-blocka");
+if (btnComenzarBlocka) {
+    btnComenzarBlocka.addEventListener("click", iniciarJuego);
+}
+
+// Event listener para el botón "Jugar de nuevo"
+var btnJugarNuevo = document.getElementById("btn-jugar-nuevo");
+if (btnJugarNuevo) {
+    btnJugarNuevo.addEventListener("click", reiniciarJuego);
+}
 
 // Función para cargar imagen en el canvas
 function cargarImagenEnCanvas(imagen) {
