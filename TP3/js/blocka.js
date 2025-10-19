@@ -23,6 +23,7 @@ var imagenes = [
 // Variables del temporizador
 var tiempoInicio;
 var tiempoTranscurrido = 0;
+var tiempoTranscurridoTotal = 0;
 var intervaloTemporizador;
 var juegoIniciado = false;
 
@@ -500,10 +501,18 @@ function iniciarTemporizador() {
 
 function actualizarTemporizador() {
     tiempoTranscurrido = Date.now() - tiempoInicio;
-    var segundos = Math.floor(tiempoTranscurrido / 1000);
+    var segundos = obtenerSegundos(tiempoTranscurrido);
     var temporizador = document.getElementById("temporizador");
     
-    temporizador.textContent = segundos + " segundos";
+    temporizador.textContent = `Tiempo: ${segundos}s`;
+    actualizarTiempoTotal()
+}
+
+function actualizarTiempoTotal(){
+    const tiempoTranscurridoTotal = tiempoTotalAcumulado + tiempoTranscurrido
+    var segundos = obtenerSegundos(tiempoTranscurridoTotal);
+    const tiempoTotalElem = document.querySelector("#game-info >h3")
+    tiempoTotalElem.textContent = `Tiempo total: ${segundos}s`
 }
 
 function detenerTemporizador() {

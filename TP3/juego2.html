@@ -179,16 +179,19 @@
             
             <!-- Contenedor del juego Blocka -->
             <div id="juego-blocka" class="oculto">
-                <div id="game-info">
-                    <div id="nivel-indicador">Nivel 1</div>
-                    <div id="temporizador">0 segundos</div>
+                <div class="left-bar">
+                    <button id="btn-menu-principal">Menú Principal</button>
                 </div>
                 <canvas id="canvas" width="900" height="600"></canvas>
+                <div id="game-info">
+                    <h3>Tiempo total: 0s</h3>
+                    <h2 id="nivel-indicador">Nivel 1</h2>
+                    <h3 id="temporizador">Tiempo: 0s</h3>
+                </div>
                 <div id="mensaje-victoria" class="oculto">
                     <h1>¡NIVEL COMPLETADO!</h1>
                     <p id="mensaje-tiempo"></p>
                     <div id="botones-victoria">
-                        <button id="btn-menu-principal">Menú Principal</button>
                         <button id="btn-siguiente-nivel">Siguiente Nivel</button>
                     </div>
                 </div>
