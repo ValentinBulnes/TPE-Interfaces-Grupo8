@@ -3,77 +3,42 @@
     display: none !important;
 }
 
-/* Contenedor del juego Blocka */
-#juego-blocka {
+/* Estilos compartidos entre juego y menú principal */
+#juego-blocka,
+#menu-principal-blocka {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15px;
     width: 100%;
-    height: 610px;
-    padding: 20px;
+    height: 800px;
     box-sizing: border-box;
     background-color: #555555;
 }
 
-#game-execution {
+/* Estilos específicos del contenedor del juego */
+#juego-blocka {
+    justify-content: flex-start;
+    padding: 0;
     position: relative;
+    overflow: hidden;
 }
 
-#game-execution.juego-activo #game-preview,
-#game-execution.juego-activo .play-btn {
-    display: none;
+/* Estilos específicos del menú principal */
+#menu-principal-blocka {
+    justify-content: center;
+    padding: 40px;
 }
 
-/* Temporizador */
-#temporizador {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #EDEDED;
-    padding: 10px 20px;
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 10px;
+/* Cuando el juego o el menú están activos, ajustar el contenedor */
+#game-execution:has(#juego-blocka:not(.oculto)),
+#game-execution:has(#menu-principal-blocka:not(.oculto)) {
+    height: auto !important;
 }
 
+#canvas {
+    margin-top: 80px;
+}
 
-/* Mensaje de victoria */
 #mensaje-victoria {
     text-align: center;
-    background-color: rgba(0, 0, 0, 0.9);
-    padding: 30px;
-    border-radius: 15px;
-    color: #EDEDED;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1000;
-    min-width: 300px;
-}
-
-#mensaje-victoria h1 {
-    font-size: 3rem;
-    margin: 0 0 20px 0;
-    color: #4CAF50;
-}
-
-#mensaje-victoria p {
-    font-size: 1.2rem;
-    margin-bottom: 20px;
-}
-
-#mensaje-victoria button {
-    padding: 12px 24px;
-    font-size: 1rem;
-    font-weight: bold;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-#mensaje-victoria button:hover {
-    background-color: #45a049;
 }

@@ -3,6 +3,7 @@ var ctx = canvas.getContext("2d");
 var imageHeight = 0;
 var imageWidth  = 0;
 var imageData;
+var imageDataOriginal; // Guardar la imagen original sin filtros
 
 // Array para guardar la rotación de cada cuadrante (0, 1, 2, 3 = 0°, 90°, 180°, 270°)
 var filas = 2
@@ -25,17 +26,51 @@ var tiempoTranscurrido = 0;
 var intervaloTemporizador;
 var juegoIniciado = false;
 
-// Función para iniciar el juego
-function iniciarJuego() {
-    var juegoBlocka = document.getElementById("juego-blocka");
+// Variables de niveles
+var nivelActual = 1;
+var maxNiveles = 5;
+
+// Variable para tiempo total acumulado
+var tiempoTotalAcumulado = 0;
+
+// Función para mostrar el menú principal
+function mostrarMenuPrincipal() {
+    var menuPrincipal = document.getElementById("menu-principal-blocka");
     var gamePreview = document.getElementById("game-preview");
     var btnComenzarBlocka = document.getElementById("btn-comenzar-blocka");
     
-    // Ocultar preview y botón, mostrar juego
-    if (juegoBlocka && gamePreview && btnComenzarBlocka) {
+    // Ocultar preview y botón, mostrar menú
+    if (menuPrincipal && gamePreview && btnComenzarBlocka) {
         gamePreview.classList.add("oculto");
         btnComenzarBlocka.classList.add("oculto");
+        menuPrincipal.classList.remove("oculto");
+    }
+}
+
+// Función para iniciar el juego desde el menú
+function iniciarJuego() {
+    var juegoBlocka = document.getElementById("juego-blocka");
+    var menuPrincipal = document.getElementById("menu-principal-blocka");
+    
+    // Ocultar menú, mostrar juego
+    if (juegoBlocka && menuPrincipal) {
+        menuPrincipal.classList.add("oculto");
         juegoBlocka.classList.remove("oculto");
+    }
+    
+    // Resetear nivel y tiempo total al iniciar
+    nivelActual = 1;
+    tiempoTotalAcumulado = 0;
+    cargarNivel(nivelActual);
+}
+
+
+// Función para cargar un nivel específico
+function cargarNivel(nivel) {
+    // Actualizar indicador de nivel
+    var nivelIndicador = document.getElementById("nivel-indicador");
+    if (nivelIndicador) {
+        nivelIndicador.textContent = "Nivel " + nivel;
     }
     
     // Resetear el array de rotaciones
@@ -53,13 +88,31 @@ function iniciarJuego() {
     var Imagen = new Image();
     Imagen.src = imagenSeleccionada;
     Imagen.onload = function() {
-        cargarImagenEnCanvas(this);
+        cargarImagenEnCanvas(this, nivel);
         iniciarTemporizador();
     };
 }
 
-// Función para reiniciar el juego (comenzar uno nuevo)
-function reiniciarJuego() {
+// Función para ir al siguiente nivel
+function siguienteNivel() {
+    var mensajeVictoria = document.getElementById("mensaje-victoria");
+    
+    // Ocultar mensaje de victoria
+    if (mensajeVictoria) {
+        mensajeVictoria.classList.add("oculto");
+    }
+    
+    // Incrementar nivel
+    nivelActual++;
+    
+    // Cargar el siguiente nivel
+    cargarNivel(nivelActual);
+}
+
+// Función para volver al menú principal desde el juego
+function volverAlMenu() {
+    var juegoBlocka = document.getElementById("juego-blocka");
+    var menuPrincipal = document.getElementById("menu-principal-blocka");
     var mensajeVictoria = document.getElementById("mensaje-victoria");
     
     // Detener el temporizador si está corriendo
@@ -70,40 +123,50 @@ function reiniciarJuego() {
         mensajeVictoria.classList.add("oculto");
     }
     
-    // Resetear el array de rotaciones
-    rotacionCuadrantes = Array(filas).fill(null).map(() => Array(columnas).fill(0));
+    // Ocultar juego y mostrar menú principal
+    if (juegoBlocka && menuPrincipal) {
+        juegoBlocka.classList.add("oculto");
+        menuPrincipal.classList.remove("oculto");
+    }
     
-    // Resetear variables del juego
-    tiempoTranscurrido = 0;
+    // Limpiar el canvas
+    if (canvas && ctx) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+    
+    // Resetear variables
     juegoIniciado = false;
-    
-    // Seleccionar una imagen aleatoria
-    var indiceAleatorio = Math.floor(Math.random() * imagenes.length);
-    var imagenSeleccionada = imagenes[indiceAleatorio];
-    
-    // Cargar la imagen y iniciar el temporizador
-    var Imagen = new Image();
-    Imagen.src = imagenSeleccionada;
-    Imagen.onload = function() {
-        cargarImagenEnCanvas(this);
-        iniciarTemporizador();
-    };
+    tiempoTranscurrido = 0;
+    nivelActual = 1;
+    tiempoTotalAcumulado = 0;
 }
 
-// Event listener para el botón de play
+// Event listener para el botón de play (muestra menú principal)
 var btnComenzarBlocka = document.getElementById("btn-comenzar-blocka");
 if (btnComenzarBlocka) {
-    btnComenzarBlocka.addEventListener("click", iniciarJuego);
+    btnComenzarBlocka.addEventListener("click", mostrarMenuPrincipal);
 }
 
-// Event listener para el botón "Jugar de nuevo"
-var btnJugarNuevo = document.getElementById("btn-jugar-nuevo");
-if (btnJugarNuevo) {
-    btnJugarNuevo.addEventListener("click", reiniciarJuego);
+// Event listener para el botón "JUGAR" del menú principal
+var btnIniciarJuego = document.getElementById("btn-iniciar-juego");
+if (btnIniciarJuego) {
+    btnIniciarJuego.addEventListener("click", iniciarJuego);
+}
+
+// Event listener para el botón "Siguiente Nivel"
+var btnSiguienteNivel = document.getElementById("btn-siguiente-nivel");
+if (btnSiguienteNivel) {
+    btnSiguienteNivel.addEventListener("click", siguienteNivel);
+}
+
+// Event listener para el botón "Menú Principal"
+var btnMenuPrincipal = document.getElementById("btn-menu-principal");
+if (btnMenuPrincipal) {
+    btnMenuPrincipal.addEventListener("click", volverAlMenu);
 }
 
 // Función para cargar imagen en el canvas
-function cargarImagenEnCanvas(imagen) {
+function cargarImagenEnCanvas(imagen, nivel) {
     imageWidth  = imagen.width;
     imageHeight = imagen.height;
     
@@ -113,9 +176,14 @@ function cargarImagenEnCanvas(imagen) {
     
     ctx.drawImage(imagen, 0, 0);
     
+    // Guardar la imagen original sin filtros
+    imageDataOriginal = ctx.getImageData(0, 0, imageWidth, imageHeight);
+    
+    // Crear una copia para aplicar el filtro
     imageData = ctx.getImageData(0, 0, imageWidth, imageHeight);
     
-    aplicarFiltroRandom(imageData);
+    // Aplicar filtro según el nivel
+    aplicarFiltroPorNivel(imageData, nivel);
     ctx.putImageData(imageData, 0, 0);
     
     // Dibujar bordes en cada cuadrante
@@ -135,10 +203,78 @@ function cargarImagenEnCanvas(imagen) {
     juegoIniciado = true;
 }
 
-function aplicarFiltroRandom(imageData){
-    const filtros = [filtroBrillo, filtroEscalaDeGrises, filtroNegativo]
-    const random = Math.floor(Math.random() * filtros.length)
-    filtros[random](imageData)
+// Función para aplicar filtro según el nivel
+function aplicarFiltroPorNivel(imageData, nivel) {
+    switch(nivel) {
+        case 1:
+            // Nivel 1: Sin filtro
+            break;
+        case 2:
+            // Nivel 2: Filtro de brillo
+            filtroBrillo(imageData);
+            break;
+        case 3:
+            // Nivel 3: Escala de grises
+            filtroEscalaDeGrises(imageData);
+            break;
+        case 4:
+            // Nivel 4: Filtro negativo
+            filtroNegativo(imageData);
+            break;
+        case 5:
+            // Nivel 5: Filtros mixtos por cuadrante
+            aplicarFiltrosPorCuadrante(imageData);
+            break;
+        default:
+            // Por defecto sin filtro
+            break;
+    }
+}
+
+// Función para aplicar diferentes filtros a cada cuadrante
+function aplicarFiltrosPorCuadrante(imageData) {
+    const anchoCuadrante = imageWidth / columnas;
+    const altoCuadrante = imageHeight / filas;
+    
+    // Cuadrante superior izquierdo (0,0): Sin filtro
+    // No se aplica nada
+    
+    // Cuadrante superior derecho (1,0): Filtro de brillo
+    aplicarFiltroCuadrante(imageData, 1, 0, anchoCuadrante, altoCuadrante, filtroBrillo);
+    
+    // Cuadrante inferior izquierdo (0,1): Escala de grises
+    aplicarFiltroCuadrante(imageData, 0, 1, anchoCuadrante, altoCuadrante, filtroEscalaDeGrises);
+    
+    // Cuadrante inferior derecho (1,1): Filtro negativo
+    aplicarFiltroCuadrante(imageData, 1, 1, anchoCuadrante, altoCuadrante, filtroNegativo);
+}
+
+// Función auxiliar para aplicar filtro a un cuadrante específico
+function aplicarFiltroCuadrante(imageData, cuadranteX, cuadranteY, anchoCuadrante, altoCuadrante, filtroFn) {
+    const startX = cuadranteX * anchoCuadrante;
+    const startY = cuadranteY * altoCuadrante;
+    const endX = startX + anchoCuadrante;
+    const endY = startY + altoCuadrante;
+    
+    // Crear un imageData temporal solo para este cuadrante
+    const tempCanvas = document.createElement('canvas');
+    tempCanvas.width = anchoCuadrante;
+    tempCanvas.height = altoCuadrante;
+    const tempCtx = tempCanvas.getContext('2d');
+    
+    // Extraer el cuadrante
+    const cuadranteData = ctx.getImageData(startX, startY, anchoCuadrante, altoCuadrante);
+    
+    // Aplicar el filtro al cuadrante
+    filtroFn(cuadranteData);
+    
+    // Colocar el cuadrante filtrado de vuelta en la imagen completa
+    for (var y = 0; y < altoCuadrante; y++) {
+        for (var x = 0; x < anchoCuadrante; x++) {
+            const pixel = getPixel(cuadranteData, x, y);
+            setPixel(imageData, startX + x, startY + y, pixel.r, pixel.g, pixel.b, pixel.a);
+        }
+    }
 }
 
 function setPixel(imageData,x,y,r,g,b,a){
@@ -281,11 +417,39 @@ function mostrarVictoria() {
     juegoIniciado = false
     detenerTemporizador();
     
-    var segundosTotales = obtenerSegundos(tiempoTranscurrido);
-    var tiempoFinal = document.getElementById("tiempo-final");
-    var mensajeVictoria = document.getElementById("mensaje-victoria");
+    // Mostrar la imagen original en RGB (sin filtros)
+    ctx.putImageData(imageDataOriginal, 0, 0);
     
-    tiempoFinal.textContent = segundosTotales + " segundos";
+    var segundosTotales = obtenerSegundos(tiempoTranscurrido);
+    
+    // Acumular el tiempo del nivel actual
+    tiempoTotalAcumulado += tiempoTranscurrido;
+    
+    var mensajeTiempo = document.getElementById("mensaje-tiempo");
+    var mensajeVictoria = document.getElementById("mensaje-victoria");
+    var tituloVictoria = mensajeVictoria.querySelector("h1");
+    var btnSiguienteNivel = document.getElementById("btn-siguiente-nivel");
+    
+    // Verificar si es el último nivel
+    if (nivelActual >= maxNiveles) {
+        // Mostrar tiempo total acumulado en el último nivel
+        var segundosTotalesAcumulados = obtenerSegundos(tiempoTotalAcumulado);
+        tituloVictoria.textContent = "¡JUEGO COMPLETADO!";
+        mensajeTiempo.textContent = "Completaste el juego en un tiempo total de " + segundosTotalesAcumulados + " segundos";
+        // Ocultar botón de siguiente nivel
+        if (btnSiguienteNivel) {
+            btnSiguienteNivel.style.display = "none";
+        }
+    } else {
+        // Mostrar tiempo del nivel actual
+        tituloVictoria.textContent = "¡NIVEL COMPLETADO!";
+        mensajeTiempo.textContent = "Completaste el nivel en " + segundosTotales + " segundos";
+        // Mostrar botón de siguiente nivel
+        if (btnSiguienteNivel) {
+            btnSiguienteNivel.style.display = "inline-block";
+        }
+    }
+    
     mensajeVictoria.classList.remove("oculto");
 }
 

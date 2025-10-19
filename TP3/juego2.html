@@ -169,14 +169,28 @@
             <button class="play-btn game-btn" id="btn-comenzar-blocka">
                 <iconify-icon icon="lucide-play"></iconify-icon>
             </button>
+            <!-- Menú Principal del Juego -->
+            <div id="menu-principal-blocka" class="oculto">
+                <h1>BLOCKA</h1>
+                <h1>Mario Bros.</h1>
+                <h2>Rota los cuadrantes para completar la imagen</h2>
+                <button id="btn-iniciar-juego" class="btn-menu-jugar">Comenzar</button>
+            </div>
+            
             <!-- Contenedor del juego Blocka -->
             <div id="juego-blocka" class="oculto">
-                <div id="temporizador">0 segundos</div>
+                <div id="game-info">
+                    <div id="nivel-indicador">Nivel 1</div>
+                    <div id="temporizador">0 segundos</div>
+                </div>
                 <canvas id="canvas" width="900" height="600"></canvas>
                 <div id="mensaje-victoria" class="oculto">
-                    <h1>GANASTE</h1>
-                    <p>Completaste el rompecabezas en <span id="tiempo-final"></span></p>
-                    <button id="btn-jugar-nuevo">Jugar de nuevo</button>
+                    <h1>¡NIVEL COMPLETADO!</h1>
+                    <p id="mensaje-tiempo"></p>
+                    <div id="botones-victoria">
+                        <button id="btn-menu-principal">Menú Principal</button>
+                        <button id="btn-siguiente-nivel">Siguiente Nivel</button>
+                    </div>
                 </div>
             </div>
         </div>
