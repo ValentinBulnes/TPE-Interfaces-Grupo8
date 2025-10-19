@@ -36,15 +36,11 @@ var tiempoTotalAcumulado = 0;
 // Función para mostrar el menú principal
 function mostrarMenuPrincipal() {
     var menuPrincipal = document.getElementById("menu-principal-blocka");
-    var gamePreview = document.getElementById("game-preview");
     var btnComenzarBlocka = document.getElementById("btn-comenzar-blocka");
     
     // Ocultar preview y botón, mostrar menú
-    if (menuPrincipal && gamePreview && btnComenzarBlocka) {
-        gamePreview.classList.add("oculto");
-        btnComenzarBlocka.classList.add("oculto");
-        menuPrincipal.classList.remove("oculto");
-    }
+    btnComenzarBlocka?.classList.add("oculto");
+    menuPrincipal?.classList.remove("oculto");
 }
 
 // Función para iniciar el juego desde el menú
