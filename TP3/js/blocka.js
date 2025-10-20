@@ -98,6 +98,7 @@ function siguienteNivel() {
     // Ocultar mensaje de victoria
     if (mensajeVictoria) {
         mensajeVictoria.classList.add("oculto");
+        mensajeVictoria.classList.remove("aparecer");
     }
 
     // Incrementar nivel
@@ -119,6 +120,7 @@ function volverAlMenu() {
     // Ocultar mensaje de victoria
     if (mensajeVictoria) {
         mensajeVictoria.classList.add("oculto");
+        mensajeVictoria.classList.remove("aparecer");
     }
 
     // Ocultar juego y mostrar menú principal
@@ -490,7 +492,14 @@ function mostrarVictoria() {
         }
     }
 
-    mensajeVictoria.classList.remove("oculto");
+    // Mostrar el mensaje de victoria después de 1 segundo
+    setTimeout(() => {
+        mensajeVictoria.classList.remove("oculto");
+        // Pequeño delay para que la transición se active correctamente
+        setTimeout(() => {
+            mensajeVictoria.classList.add("aparecer");
+        }, 10);
+    }, 1000);
 }
 
 // Función para detectar en qué cuadrante se hizo click
