@@ -3,48 +3,42 @@
     display: none !important;
 }
 
-/* Estilos compartidos entre juego y menú principal */
-#juego-blocka,
-#menu-principal-blocka {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    box-sizing: border-box;
-}
-
 /* Estilos específicos del contenedor del juego */
 #juego-blocka {
+    width: 100%;
+    height: 100%;
     display: grid;
     grid-template-columns: 0.25fr 0.5fr 0.25fr;
     justify-items: center;
     padding: 0;
     position: relative;
     overflow: hidden;
+    align-items: center;
 }
 
 /* Estilos específicos del menú principal */
 #menu-principal-blocka {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    padding: 40px;
-}
-
-#mensaje-victoria {
-    text-align: center;
+    gap: var(--gap-m);
+    padding: var(--padding-s);
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: var(--border-rad-s);
 }
 
 #game-info {
     font-size: 1.5rem;
     font-weight: bold;
-    color: #EDEDED;
+    color: var(--color-text);
     padding: 10px 20px;
     background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 10px;
+    border-radius: var(--border-rad-s);
 }
 
-#game-info h2{
-    margin-top:var(--padding-s) ;
+#game-info h2 {
+    margin-top: var(--padding-s);
 }
 
 #mensaje-victoria {
@@ -52,7 +46,7 @@
     background-color: rgba(0, 0, 0, 0.9);
     padding: 30px;
     border-radius: 15px;
-    color: #EDEDED;
+    color: var(--color-text);
     position: absolute;
     top: 80%;
     left: 50%;
@@ -64,7 +58,7 @@
 #mensaje-victoria h1 {
     font-size: 3rem;
     margin: 0 0 20px 0;
-    color: #4CAF50;
+    color: #4caf50;
 }
 
 #mensaje-victoria p {
@@ -72,11 +66,12 @@
     margin-bottom: 20px;
 }
 
-#juego-blocka button, .btn-menu-jugar {
+#juego-blocka button,
+.btn-menu-jugar {
     padding: 12px 24px;
     font-size: 1rem;
     font-weight: bold;
-    background-color: #4CAF50;
+    background-color: #4caf50;
     color: white;
     border: none;
     border-radius: 8px;
@@ -84,6 +79,7 @@
     transition: background-color 0.3s ease;
 }
 
-#juego-blocka button:hover, .btn-menu-jugar:hover {
+#juego-blocka button:hover,
+.btn-menu-jugar:hover {
     background-color: #45a049;
 }
