@@ -1,28 +1,28 @@
 :root {
-  --color-primary: #3d5afe;
-  --color-primary-dark2: #1e287a;
-  --color-secondary: #00e676;
-  --color-text: #ededed;
-  --gray-dark1: #989898;
-  --color-input-placeholder: #7a7a7a;
-  /* Background colors */
-  --background-dark-1: #121212;
-  --background-dark-2: #2e2e2e;
-  --background-dark-3: #555555;
-  --background-dark-4: #7F7F7F;
-  --background-dark-5: #B0B0B0;
-  /* Border Radius */
-  --border-rad-s: 10px;
-  --border-rad-m: 20px;
-  /* Padding */
-  --padding-xxs: 6px;
-  --padding-xs: 9px;
-  --padding-s: 18px;
-  --padding-m: 36px;
-  --padding-l: 72px;
-  /* Gap */
-  --gap-xxs: 6px;
-  --gap-xs: 9px;
-  --gap-m: 20px;
-  --gap-l: 36px;
+    --color-primary: #3d5afe;
+    --color-primary-dark2: #1e287a;
+    --color-secondary: #00e676;
+    --color-text: #ededed;
+    --gray-dark1: #989898;
+    --color-input-placeholder: #7a7a7a;
+    /* Background colors */
+    --background-dark-1: #121212;
+    --background-dark-2: #2e2e2e;
+    --background-dark-3: #555555;
+    --background-dark-4: #7f7f7f;
+    --background-dark-5: #b0b0b0;
+    /* Border Radius */
+    --border-rad-s: 10px;
+    --border-rad-m: 20px;
+    /* Padding */
+    --padding-xxs: 6px;
+    --padding-xs: 9px;
+    --padding-s: 18px;
+    --padding-m: 36px;
+    --padding-l: 72px;
+    /* Gap */
+    --gap-xxs: 6px;
+    --gap-xs: 9px;
+    --gap-m: 20px;
+    --gap-l: 36px;
 }

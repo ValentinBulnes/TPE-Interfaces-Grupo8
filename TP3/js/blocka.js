@@ -1,14 +1,14 @@
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 var imageHeight = 0;
-var imageWidth  = 0;
+var imageWidth = 0;
 var imageData;
 var imageDataOriginal; // Guardar la imagen original sin filtros
 
 // Array para guardar la rotación de cada cuadrante (0, 1, 2, 3 = 0°, 90°, 180°, 270°)
-var filas = 2
-const columnas = 2
-var rotacionCuadrantes = Array(filas).fill(Array(columnas).fill(0))
+var filas = 2;
+const columnas = 2;
+var rotacionCuadrantes = Array(filas).fill(Array(columnas).fill(0));
 
 // Array con las rutas de las imágenes disponibles
 var imagenes = [
@@ -17,7 +17,7 @@ var imagenes = [
     "img/blocka/1x1/mario3-1x1.jpg",
     "img/blocka/1x1/mario4-1x1.jpg",
     "img/blocka/1x1/mario5-1x1.jpg",
-    "img/blocka/1x1/mario6-1x1.jpg"
+    "img/blocka/1x1/mario6-1x1.jpg",
 ];
 
 // Variables del temporizador
@@ -38,7 +38,7 @@ var tiempoTotalAcumulado = 0;
 function mostrarMenuPrincipal() {
     var menuPrincipal = document.getElementById("menu-principal-blocka");
     var btnComenzarBlocka = document.getElementById("btn-comenzar-blocka");
-    
+
     // Ocultar preview y botón, mostrar menú
     btnComenzarBlocka?.classList.add("oculto");
     menuPrincipal?.classList.remove("oculto");
@@ -48,19 +48,18 @@ function mostrarMenuPrincipal() {
 function iniciarJuego() {
     var juegoBlocka = document.getElementById("juego-blocka");
     var menuPrincipal = document.getElementById("menu-principal-blocka");
-    
+
     // Ocultar menú, mostrar juego
     if (juegoBlocka && menuPrincipal) {
         menuPrincipal.classList.add("oculto");
         juegoBlocka.classList.remove("oculto");
     }
-    
+
     // Resetear nivel y tiempo total al iniciar
     nivelActual = 1;
     tiempoTotalAcumulado = 0;
     cargarNivel(nivelActual);
 }
-
 
 // Función para cargar un nivel específico
 function cargarNivel(nivel) {
@@ -69,22 +68,24 @@ function cargarNivel(nivel) {
     if (nivelIndicador) {
         nivelIndicador.textContent = "Nivel " + nivel;
     }
-    
+
     // Resetear el array de rotaciones
-    rotacionCuadrantes = Array(filas).fill(null).map(() => Array(columnas).fill(0));
-    
+    rotacionCuadrantes = Array(filas)
+        .fill(null)
+        .map(() => Array(columnas).fill(0));
+
     // Resetear variables del juego
     tiempoTranscurrido = 0;
     juegoIniciado = false;
-    
+
     // Seleccionar una imagen aleatoria
     var indiceAleatorio = Math.floor(Math.random() * imagenes.length);
     var imagenSeleccionada = imagenes[indiceAleatorio];
-    
+
     // Cargar la imagen y iniciar el temporizador
     var Imagen = new Image();
     Imagen.src = imagenSeleccionada;
-    Imagen.onload = function() {
+    Imagen.onload = function () {
         cargarImagenEnCanvas(this, nivel);
         iniciarTemporizador();
     };
@@ -93,15 +94,15 @@ function cargarNivel(nivel) {
 // Función para ir al siguiente nivel
 function siguienteNivel() {
     var mensajeVictoria = document.getElementById("mensaje-victoria");
-    
+
     // Ocultar mensaje de victoria
     if (mensajeVictoria) {
         mensajeVictoria.classList.add("oculto");
     }
-    
+
     // Incrementar nivel
     nivelActual++;
-    
+
     // Cargar el siguiente nivel
     cargarNivel(nivelActual);
 }
@@ -111,26 +112,26 @@ function volverAlMenu() {
     var juegoBlocka = document.getElementById("juego-blocka");
     var menuPrincipal = document.getElementById("menu-principal-blocka");
     var mensajeVictoria = document.getElementById("mensaje-victoria");
-    
+
     // Detener el temporizador si está corriendo
     detenerTemporizador();
-    
+
     // Ocultar mensaje de victoria
     if (mensajeVictoria) {
         mensajeVictoria.classList.add("oculto");
     }
-    
+
     // Ocultar juego y mostrar menú principal
     if (juegoBlocka && menuPrincipal) {
         juegoBlocka.classList.add("oculto");
         menuPrincipal.classList.remove("oculto");
     }
-    
+
     // Limpiar el canvas
     if (canvas && ctx) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
-    
+
     // Resetear variables
     juegoIniciado = false;
     tiempoTranscurrido = 0;
@@ -164,31 +165,31 @@ if (btnMenuPrincipal) {
 
 // Función para cargar imagen en el canvas
 function cargarImagenEnCanvas(imagen, nivel) {
-    imageWidth  = imagen.width;
+    imageWidth = imagen.width;
     imageHeight = imagen.height;
-    
+
     // Ajustar el tamaño del canvas al tamaño de la imagen
     canvas.width = imageWidth;
     canvas.height = imageHeight;
-    
+
     ctx.drawImage(imagen, 0, 0);
-    
+
     // Guardar la imagen original sin filtros
     imageDataOriginal = ctx.getImageData(0, 0, imageWidth, imageHeight);
-    
+
     // Crear una copia para aplicar el filtro
     imageData = ctx.getImageData(0, 0, imageWidth, imageHeight);
-    
+
     // Aplicar filtro según el nivel
     aplicarFiltroPorNivel(imageData, nivel);
     ctx.putImageData(imageData, 0, 0);
-    
+
     // Dibujar bordes en cada cuadrante
     const anchoCuadrante = imageWidth / columnas;
     const altoCuadrante = imageHeight / filas;
     ctx.strokeStyle = "red";
     ctx.lineWidth = 2;
-    
+
     for (var x = 0; x < 2; x++) {
         for (var y = 0; y < filas; y++) {
             var posX = x * anchoCuadrante;
@@ -202,7 +203,7 @@ function cargarImagenEnCanvas(imagen, nivel) {
 
 // Función para aplicar filtro según el nivel
 function aplicarFiltroPorNivel(imageData, nivel) {
-    switch(nivel) {
+    switch (nivel) {
         case 1:
             // Nivel 1: Sin filtro
             break;
@@ -232,63 +233,104 @@ function aplicarFiltroPorNivel(imageData, nivel) {
 function aplicarFiltrosPorCuadrante(imageData) {
     const anchoCuadrante = imageWidth / columnas;
     const altoCuadrante = imageHeight / filas;
-    
+
     // Cuadrante superior izquierdo (0,0): Sin filtro
     // No se aplica nada
-    
+
     // Cuadrante superior derecho (1,0): Filtro de brillo
-    aplicarFiltroCuadrante(imageData, 1, 0, anchoCuadrante, altoCuadrante, filtroBrillo);
-    
+    aplicarFiltroCuadrante(
+        imageData,
+        1,
+        0,
+        anchoCuadrante,
+        altoCuadrante,
+        filtroBrillo
+    );
+
     // Cuadrante inferior izquierdo (0,1): Escala de grises
-    aplicarFiltroCuadrante(imageData, 0, 1, anchoCuadrante, altoCuadrante, filtroEscalaDeGrises);
-    
+    aplicarFiltroCuadrante(
+        imageData,
+        0,
+        1,
+        anchoCuadrante,
+        altoCuadrante,
+        filtroEscalaDeGrises
+    );
+
     // Cuadrante inferior derecho (1,1): Filtro negativo
-    aplicarFiltroCuadrante(imageData, 1, 1, anchoCuadrante, altoCuadrante, filtroNegativo);
+    aplicarFiltroCuadrante(
+        imageData,
+        1,
+        1,
+        anchoCuadrante,
+        altoCuadrante,
+        filtroNegativo
+    );
 }
 
 // Función auxiliar para aplicar filtro a un cuadrante específico
-function aplicarFiltroCuadrante(imageData, cuadranteX, cuadranteY, anchoCuadrante, altoCuadrante, filtroFn) {
+function aplicarFiltroCuadrante(
+    imageData,
+    cuadranteX,
+    cuadranteY,
+    anchoCuadrante,
+    altoCuadrante,
+    filtroFn
+) {
     const startX = cuadranteX * anchoCuadrante;
     const startY = cuadranteY * altoCuadrante;
     const endX = startX + anchoCuadrante;
     const endY = startY + altoCuadrante;
-    
+
     // Crear un imageData temporal solo para este cuadrante
-    const tempCanvas = document.createElement('canvas');
+    const tempCanvas = document.createElement("canvas");
     tempCanvas.width = anchoCuadrante;
     tempCanvas.height = altoCuadrante;
-    const tempCtx = tempCanvas.getContext('2d');
-    
+    const tempCtx = tempCanvas.getContext("2d");
+
     // Extraer el cuadrante
-    const cuadranteData = ctx.getImageData(startX, startY, anchoCuadrante, altoCuadrante);
-    
+    const cuadranteData = ctx.getImageData(
+        startX,
+        startY,
+        anchoCuadrante,
+        altoCuadrante
+    );
+
     // Aplicar el filtro al cuadrante
     filtroFn(cuadranteData);
-    
+
     // Colocar el cuadrante filtrado de vuelta en la imagen completa
     for (var y = 0; y < altoCuadrante; y++) {
         for (var x = 0; x < anchoCuadrante; x++) {
             const pixel = getPixel(cuadranteData, x, y);
-            setPixel(imageData, startX + x, startY + y, pixel.r, pixel.g, pixel.b, pixel.a);
+            setPixel(
+                imageData,
+                startX + x,
+                startY + y,
+                pixel.r,
+                pixel.g,
+                pixel.b,
+                pixel.a
+            );
         }
     }
 }
 
-function setPixel(imageData,x,y,r,g,b,a){
-    index = (x + y * imageData.width) *4;
-    imageData.data[index+0] = r;
-    imageData.data[index+1] = g;
-    imageData.data[index+2] = b;
-    imageData.data[index+3] = a;
+function setPixel(imageData, x, y, r, g, b, a) {
+    index = (x + y * imageData.width) * 4;
+    imageData.data[index + 0] = r;
+    imageData.data[index + 1] = g;
+    imageData.data[index + 2] = b;
+    imageData.data[index + 3] = a;
 }
 
-function getPixel(imageData,x,y){
+function getPixel(imageData, x, y) {
     index = (x + y * imageData.width) * 4;
     return {
-        r: imageData.data[index+0],
-        g: imageData.data[index+1],
-        b: imageData.data[index+2],
-        a: imageData.data[index+3]
+        r: imageData.data[index + 0],
+        g: imageData.data[index + 1],
+        b: imageData.data[index + 2],
+        a: imageData.data[index + 3],
     };
 }
 
@@ -308,12 +350,12 @@ function filtroBrillo(imageData, brillo = 1.3) {
     for (var x = 0; x < imageData.width; x++) {
         for (var y = 0; y < imageData.height; y++) {
             var pixel = getPixel(imageData, x, y);
-            
+
             // Aumentar cada canal RGB por el factor
             var nuevoR = Math.min(255, pixel.r * brillo);
             var nuevoG = Math.min(255, pixel.g * brillo);
             var nuevoB = Math.min(255, pixel.b * brillo);
-            
+
             setPixel(imageData, x, y, nuevoR, nuevoG, nuevoB, pixel.a);
         }
     }
@@ -324,11 +366,11 @@ function filtroNegativo(imageData) {
     for (var x = 0; x < imageData.width; x++) {
         for (var y = 0; y < imageData.height; y++) {
             var pixel = getPixel(imageData, x, y);
-            
+
             var nuevoR = 255 - pixel.r;
             var nuevoG = 255 - pixel.g;
             var nuevoB = 255 - pixel.b;
-            
+
             setPixel(imageData, x, y, nuevoR, nuevoG, nuevoB, pixel.a);
         }
     }
@@ -342,7 +384,7 @@ function rotarCuadrantesAleatorio() {
         for (var y = 0; y < filas; y++) {
             // Generar número aleatorio de rotaciones (1, 2, o 3 veces 90°, nunca 0)
             var numRotaciones = Math.floor(Math.random() * 3) + 1;
-            
+
             // Aplicar las rotaciones visualmente (rotarCuadrante actualiza el array automáticamente)
             for (var i = 0; i < numRotaciones; i++) {
                 rotarCuadrante(x, y, 1); // 1 = rotar a la derecha
@@ -353,47 +395,52 @@ function rotarCuadrantesAleatorio() {
 
 // Función para rotar un cuadrante específico
 function rotarCuadrante(cuadranteX, cuadranteY, direccion) {
-
     const anchoCuadrante = imageWidth / columnas;
     const altoCuadrante = imageHeight / filas;
-    
+
     //Calcular la posición inicial del cuadrante en el canvas
     var posX = cuadranteX * anchoCuadrante;
     var posY = cuadranteY * altoCuadrante;
-    
-    var dataCuadrante = ctx.getImageData(posX, posY, anchoCuadrante, altoCuadrante);
-    
+
+    var dataCuadrante = ctx.getImageData(
+        posX,
+        posY,
+        anchoCuadrante,
+        altoCuadrante
+    );
+
     //Crear un canvas temporal para dibujar el cuadrante rotado
-    var canvasTemp = document.createElement('canvas');
+    var canvasTemp = document.createElement("canvas");
     canvasTemp.width = anchoCuadrante;
     canvasTemp.height = altoCuadrante;
-    var ctxTemp = canvasTemp.getContext('2d');
-    
+    var ctxTemp = canvasTemp.getContext("2d");
+
     // Dibujar los píxeles extraídos en el canvas temporal
     ctxTemp.putImageData(dataCuadrante, 0, 0);
-    
+
     //Limpiar el área del cuadrante original en el canvas principal
     ctx.clearRect(posX, posY, anchoCuadrante, altoCuadrante);
-    
+
     ctx.save(); //Guardar el estado del contexto
-    
+
     //Mover el punto de origen al centro del cuadrante
     ctx.translate(posX + anchoCuadrante / 2, posY + altoCuadrante / 2);
-    
+
     //Rotar el contexto (direccion: 1 = derecha, -1 = izquierda)
-    var angulo = direccion * 90 * Math.PI / 180;
+    var angulo = (direccion * 90 * Math.PI) / 180;
     ctx.rotate(angulo);
-    
+
     //Dibujar el canvas temporal rotado (centrado en el origen)
     ctx.drawImage(canvasTemp, -anchoCuadrante / 2, -altoCuadrante / 2);
-    
+
     //Restaurar el estado del contexto
     ctx.restore();
-    
+
     //Actualizar el estado de rotación del cuadrante
     rotacionCuadrantes[cuadranteY][cuadranteX] += direccion;
     // Mantener el valor entre 0 y 3 (módulo 4)
-    rotacionCuadrantes[cuadranteY][cuadranteX] = (rotacionCuadrantes[cuadranteY][cuadranteX] + 4) % 4;
+    rotacionCuadrantes[cuadranteY][cuadranteX] =
+        (rotacionCuadrantes[cuadranteY][cuadranteX] + 4) % 4;
 }
 
 // Función para verificar si todos los cuadrantes están correctos
@@ -411,28 +458,31 @@ function verificarJuegoCompleto() {
 
 // Función para mostrar mensaje de victoria
 function mostrarVictoria() {
-    juegoIniciado = false
+    juegoIniciado = false;
     detenerTemporizador();
-    
+
     // Mostrar la imagen original en RGB (sin filtros)
     ctx.putImageData(imageDataOriginal, 0, 0);
-    
+
     var segundosTotales = obtenerSegundos(tiempoTranscurrido);
-    
+
     // Acumular el tiempo del nivel actual
     tiempoTotalAcumulado += tiempoTranscurrido;
-    
+
     var mensajeTiempo = document.getElementById("mensaje-tiempo");
     var mensajeVictoria = document.getElementById("mensaje-victoria");
     var tituloVictoria = mensajeVictoria.querySelector("h1");
     var btnSiguienteNivel = document.getElementById("btn-siguiente-nivel");
-    
+
     // Verificar si es el último nivel
     if (nivelActual >= maxNiveles) {
         // Mostrar tiempo total acumulado en el último nivel
         var segundosTotalesAcumulados = obtenerSegundos(tiempoTotalAcumulado);
         tituloVictoria.textContent = "¡JUEGO COMPLETADO!";
-        mensajeTiempo.textContent = "Completaste el juego en un tiempo total de " + segundosTotalesAcumulados + " segundos";
+        mensajeTiempo.textContent =
+            "Completaste el juego en un tiempo total de " +
+            segundosTotalesAcumulados +
+            " segundos";
         // Ocultar botón de siguiente nivel
         if (btnSiguienteNivel) {
             btnSiguienteNivel.style.display = "none";
@@ -440,58 +490,57 @@ function mostrarVictoria() {
     } else {
         // Mostrar tiempo del nivel actual
         tituloVictoria.textContent = "¡NIVEL COMPLETADO!";
-        mensajeTiempo.textContent = "Completaste el nivel en " + segundosTotales + " segundos";
+        mensajeTiempo.textContent =
+            "Completaste el nivel en " + segundosTotales + " segundos";
         // Mostrar botón de siguiente nivel
         if (btnSiguienteNivel) {
             btnSiguienteNivel.style.display = "inline-block";
         }
     }
-    
+
     mensajeVictoria.classList.remove("oculto");
 }
 
 // Función para detectar en qué cuadrante se hizo click
 function obtenerCuadrante(event) {
-    var x = event.offsetX
-    var y = event.offsetY
-    
+    var x = event.offsetX;
+    var y = event.offsetY;
+
     const anchoCuadrante = imageWidth / columnas;
     const altoCuadrante = imageHeight / filas;
-    
+
     var cuadranteX = calcularCuadrante(x, anchoCuadrante);
     var cuadranteY = calcularCuadrante(y, altoCuadrante);
-    
+
     return { x: cuadranteX, y: cuadranteY };
 }
 
-function calcularCuadrante(pos, lado){
-    var cuadrante = 1
-    while (pos > lado * cuadrante){
-        cuadrante += 1
+function calcularCuadrante(pos, lado) {
+    var cuadrante = 1;
+    while (pos > lado * cuadrante) {
+        cuadrante += 1;
     }
-    return cuadrante -1 // 0 index
+    return cuadrante - 1; // 0 index
 }
 
-function clickCuadrante(e, direccion){
+function clickCuadrante(e, direccion) {
     e.preventDefault();
     if (!juegoIniciado) return; // Solo permitir clicks si el juego inició
-    
+
     var cuadrante = obtenerCuadrante(e);
     rotarCuadrante(cuadrante.x, cuadrante.y, direccion); // -1 = izquierda
-    
+
     // Verificar si se completó el juego
     if (verificarJuegoCompleto()) {
         mostrarVictoria();
     }
-
 }
 
 // Event listener para click izquierdo (rotar cuadrante a la izquierda)
-canvas.addEventListener("click", (e) => clickCuadrante(e, -1))
+canvas.addEventListener("click", (e) => clickCuadrante(e, -1));
 
 // Event listener para click derecho (rotar cuadrante a la derecha)
-canvas.addEventListener("contextmenu", (e) => clickCuadrante(e, 1))
-
+canvas.addEventListener("contextmenu", (e) => clickCuadrante(e, 1));
 
 // Funciones del temporizador
 function iniciarTemporizador() {
@@ -503,16 +552,16 @@ function actualizarTemporizador() {
     tiempoTranscurrido = Date.now() - tiempoInicio;
     var segundos = obtenerSegundos(tiempoTranscurrido);
     var temporizador = document.getElementById("temporizador");
-    
+
     temporizador.textContent = `Tiempo: ${segundos}s`;
-    actualizarTiempoTotal()
+    actualizarTiempoTotal();
 }
 
-function actualizarTiempoTotal(){
-    const tiempoTranscurridoTotal = tiempoTotalAcumulado + tiempoTranscurrido
+function actualizarTiempoTotal() {
+    const tiempoTranscurridoTotal = tiempoTotalAcumulado + tiempoTranscurrido;
     var segundos = obtenerSegundos(tiempoTranscurridoTotal);
-    const tiempoTotalElem = document.querySelector("#game-info >h3")
-    tiempoTotalElem.textContent = `Tiempo total: ${segundos}s`
+    const tiempoTotalElem = document.querySelector("#game-info >h3");
+    tiempoTotalElem.textContent = `Tiempo total: ${segundos}s`;
 }
 
 function detenerTemporizador() {
