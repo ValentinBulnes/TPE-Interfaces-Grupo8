@@ -23,5 +23,6 @@
   /* Gap */
   --gap-xxs: 6px;
   --gap-xs: 9px;
+  --gap-m: 20px;
   --gap-l: 36px;
 }

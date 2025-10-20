@@ -23,6 +23,7 @@ var imagenes = [
 // Variables del temporizador
 var tiempoInicio;
 var tiempoTranscurrido = 0;
+var tiempoTranscurridoTotal = 0;
 var intervaloTemporizador;
 var juegoIniciado = false;
 
@@ -36,15 +37,11 @@ var tiempoTotalAcumulado = 0;
 // Función para mostrar el menú principal
 function mostrarMenuPrincipal() {
     var menuPrincipal = document.getElementById("menu-principal-blocka");
-    var gamePreview = document.getElementById("game-preview");
     var btnComenzarBlocka = document.getElementById("btn-comenzar-blocka");
     
     // Ocultar preview y botón, mostrar menú
-    if (menuPrincipal && gamePreview && btnComenzarBlocka) {
-        gamePreview.classList.add("oculto");
-        btnComenzarBlocka.classList.add("oculto");
-        menuPrincipal.classList.remove("oculto");
-    }
+    btnComenzarBlocka?.classList.add("oculto");
+    menuPrincipal?.classList.remove("oculto");
 }
 
 // Función para iniciar el juego desde el menú
@@ -504,10 +501,18 @@ function iniciarTemporizador() {
 
 function actualizarTemporizador() {
     tiempoTranscurrido = Date.now() - tiempoInicio;
-    var segundos = Math.floor(tiempoTranscurrido / 1000);
+    var segundos = obtenerSegundos(tiempoTranscurrido);
     var temporizador = document.getElementById("temporizador");
     
-    temporizador.textContent = segundos + " segundos";
+    temporizador.textContent = `Tiempo: ${segundos}s`;
+    actualizarTiempoTotal()
+}
+
+function actualizarTiempoTotal(){
+    const tiempoTranscurridoTotal = tiempoTotalAcumulado + tiempoTranscurrido
+    var segundos = obtenerSegundos(tiempoTranscurridoTotal);
+    const tiempoTotalElem = document.querySelector("#game-info >h3")
+    tiempoTotalElem.textContent = `Tiempo total: ${segundos}s`
 }
 
 function detenerTemporizador() {
