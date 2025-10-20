@@ -279,14 +279,6 @@ function aplicarFiltroCuadrante(
 ) {
     const startX = cuadranteX * anchoCuadrante;
     const startY = cuadranteY * altoCuadrante;
-    const endX = startX + anchoCuadrante;
-    const endY = startY + altoCuadrante;
-
-    // Crear un imageData temporal solo para este cuadrante
-    const tempCanvas = document.createElement("canvas");
-    tempCanvas.width = anchoCuadrante;
-    tempCanvas.height = altoCuadrante;
-    const tempCtx = tempCanvas.getContext("2d");
 
     // Extraer el cuadrante
     const cuadranteData = ctx.getImageData(
