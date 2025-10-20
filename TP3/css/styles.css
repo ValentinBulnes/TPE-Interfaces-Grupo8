@@ -1197,6 +1197,23 @@ body.login-page {
     transform: scale(0.95);
 }
 
+.btn-hover-primary {
+    border: none;
+    background-color: #3d5afe;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-hover-primary:hover {
+    background-color: #33eb8a;
+    animation: pulse 0.6s ease-in-out;
+}
+
+.btn-hover-primary:active {
+    transform: scale(0.95);
+}
+
 /* Botón del juego */
 
 .game-btn {
