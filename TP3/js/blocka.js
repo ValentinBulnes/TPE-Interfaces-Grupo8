@@ -31,10 +31,17 @@ var juegoIniciado = false;
 
 // Variables de niveles
 var nivelActual = 1;
-var maxNiveles = 5;
+var maxNiveles = 6;
 
 // Variable para tiempo total acumulado
 var tiempoTotalAcumulado = 0;
+
+// Variables para el nivel con límite de tiempo
+var limiteTiempo = 10000; // 10 segundos en milisegundos
+var tiempoRestante = 0;
+
+// Array de imágenes mezcladas para el juego actual (sin repetir)
+var imagenesMezcladas = [];
 
 // Función para mostrar el menú principal
 function mostrarMenuPrincipal() {
@@ -60,6 +67,13 @@ function iniciarJuego() {
     // Resetear nivel y tiempo total al iniciar
     nivelActual = 1;
     tiempoTotalAcumulado = 0;
+    
+    // Mezclar las imágenes para este juego (sin repetir)
+    imagenesMezcladas = imagenes.slice();  //copia del array de imágenes
+    imagenesMezcladas.sort(function() {
+        return Math.random() - 0.5;
+    });
+    
     cargarNivel(nivelActual);
 }
 
@@ -80,9 +94,8 @@ function cargarNivel(nivel) {
     tiempoTranscurrido = 0;
     juegoIniciado = false;
 
-    // Seleccionar una imagen aleatoria
-    var indiceAleatorio = Math.floor(Math.random() * imagenes.length);
-    var imagenSeleccionada = imagenes[indiceAleatorio];
+    // Seleccionar imagen del array mezclado según el nivel (sin repetir)
+    var imagenSeleccionada = imagenesMezcladas[nivel - 1];
 
     // Cargar la imagen y iniciar el temporizador
     var Imagen = new Image();
@@ -180,6 +193,25 @@ if (btnJugarNuevo) {
     });
 }
 
+// Event listener para el botón "Reintentar"
+var btnReintentar = document.getElementById("btn-reintentar");
+if (btnReintentar) {
+    btnReintentar.addEventListener("click", reintentarNivel);
+}
+
+// Event listener para el botón "Menú Principal" desde Game Over
+var btnMenuGameOver = document.getElementById("btn-menu-gameover");
+if (btnMenuGameOver) {
+    btnMenuGameOver.addEventListener("click", function() {
+        var mensajeGameOver = document.getElementById("mensaje-gameover");
+        if (mensajeGameOver) {
+            mensajeGameOver.classList.add("oculto");
+            mensajeGameOver.classList.remove("aparecer");
+        }
+        volverAlMenu();
+    });
+}
+
 // Función para cargar imagen en el canvas
 function cargarImagenEnCanvas(imagen, nivel) {
     imageWidth = imagen.width;
@@ -238,6 +270,10 @@ function aplicarFiltroPorNivel(imageData, nivel) {
             break;
         case 5:
             // Nivel 5: Filtros mixtos por cuadrante
+            aplicarFiltrosPorCuadrante(imageData);
+            break;
+        case 6:
+            // Nivel 6: Filtros mixtos por cuadrante + límite de tiempo
             aplicarFiltrosPorCuadrante(imageData);
             break;
         default:
@@ -524,6 +560,38 @@ function mostrarVictoria() {
     }, 1000);
 }
 
+// Función para mostrar mensaje de game over
+function mostrarGameOver() {
+    juegoIniciado = false;
+    detenerTemporizador();
+
+    var mensajeGameOver = document.getElementById("mensaje-gameover");
+    var btnReintentar = document.getElementById("btn-reintentar");
+
+    // Mostrar el mensaje de game over
+    setTimeout(() => {
+        mensajeGameOver.classList.remove("oculto");
+        // Pequeño delay para que la transición se active correctamente
+        setTimeout(() => {
+            mensajeGameOver.classList.add("aparecer");
+        }, 10);
+    }, 500);
+}
+
+// Función para reintentar el nivel 6
+function reintentarNivel() {
+    var mensajeGameOver = document.getElementById("mensaje-gameover");
+    if (mensajeGameOver) {
+        mensajeGameOver.classList.add("oculto");
+        mensajeGameOver.classList.remove("aparecer");
+    }
+    // Acumular el tiempo transcurrido del intento fallido (los 10 segundos completos)
+    tiempoTotalAcumulado += limiteTiempo;
+    // Agregar penalización de 5 segundos al tiempo total
+    tiempoTotalAcumulado += 5000;
+    cargarNivel(6);
+}
+
 // Función para detectar en qué cuadrante se hizo click
 function obtenerCuadrante(event) {
     var x = event.offsetX;
@@ -568,16 +636,40 @@ canvas.addEventListener("contextmenu", (e) => clickCuadrante(e, 1));
 // Funciones del temporizador
 function iniciarTemporizador() {
     tiempoInicio = Date.now();
+    if (nivelActual === 6) {
+        tiempoRestante = limiteTiempo;
+    }
     intervaloTemporizador = setInterval(actualizarTemporizador, 100);
 }
 
 function actualizarTemporizador() {
-    tiempoTranscurrido = Date.now() - tiempoInicio;
-    var segundos = obtenerSegundos(tiempoTranscurrido);
-    var temporizador = document.getElementById("temporizador");
-
-    temporizador.textContent = `Tiempo: ${segundos}s`;
-    actualizarTiempoTotal();
+    if (nivelActual === 6) {
+        // Cuenta regresiva para nivel 6
+        tiempoTranscurrido = Date.now() - tiempoInicio;
+        tiempoRestante = limiteTiempo - tiempoTranscurrido;
+        var temporizador = document.getElementById("temporizador");
+        
+        if (tiempoRestante <= 0) {
+            tiempoRestante = 0;
+            temporizador.textContent = `Tiempo restante: 0s`;
+            temporizador.style.color = "#ff4444";
+            mostrarGameOver();
+            return;
+        }
+        
+        var segundosRestantes = Math.ceil(tiempoRestante / 1000);
+        temporizador.textContent = `Tiempo restante: ${segundosRestantes}s`;
+        temporizador.style.color = "#ff4444";
+        actualizarTiempoTotal();
+    } else {
+        // Temporizador normal para otros niveles
+        tiempoTranscurrido = Date.now() - tiempoInicio;
+        var segundos = obtenerSegundos(tiempoTranscurrido);
+        var temporizador = document.getElementById("temporizador");
+        temporizador.textContent = `Tiempo: ${segundos}s`;
+        temporizador.style.color = "#fff";
+        actualizarTiempoTotal();
+    }
 }
 
 function actualizarTiempoTotal() {
