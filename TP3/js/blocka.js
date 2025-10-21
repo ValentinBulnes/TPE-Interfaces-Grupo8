@@ -18,6 +18,8 @@ var imagenes = [
     "img/blocka/1x1/mario4-1x1.jpg",
     "img/blocka/1x1/mario5-1x1.jpg",
     "img/blocka/1x1/mario6-1x1.jpg",
+    "img/blocka/1x1/mario7-1x1.jpg",
+    "img/blocka/1x1/mario8-1x1.jpg",
 ];
 
 // Variables del temporizador
@@ -163,6 +165,19 @@ if (btnSiguienteNivel) {
 var btnMenuPrincipal = document.getElementById("btn-menu-principal");
 if (btnMenuPrincipal) {
     btnMenuPrincipal.addEventListener("click", volverAlMenu);
+}
+
+// Event listener para el botón "Jugar de nuevo"
+var btnJugarNuevo = document.getElementById("btn-jugar-nuevo");
+if (btnJugarNuevo) {
+    btnJugarNuevo.addEventListener("click", function() {
+        var mensajeVictoria = document.getElementById("mensaje-victoria");
+        if (mensajeVictoria) {
+            mensajeVictoria.classList.add("oculto");
+            mensajeVictoria.classList.remove("aparecer");
+        }
+        iniciarJuego();
+    });
 }
 
 // Función para cargar imagen en el canvas
@@ -467,6 +482,7 @@ function mostrarVictoria() {
     var mensajeVictoria = document.getElementById("mensaje-victoria");
     var tituloVictoria = mensajeVictoria.querySelector("h1");
     var btnSiguienteNivel = document.getElementById("btn-siguiente-nivel");
+    var btnJugarNuevo = document.getElementById("btn-jugar-nuevo");
 
     // Verificar si es el último nivel
     if (nivelActual >= maxNiveles) {
@@ -477,18 +493,24 @@ function mostrarVictoria() {
             "Completaste el juego en un tiempo total de " +
             segundosTotalesAcumulados +
             " segundos";
-        // Ocultar botón de siguiente nivel
+        // Ocultar botón de siguiente nivel y mostrar botón jugar de nuevo
         if (btnSiguienteNivel) {
             btnSiguienteNivel.style.display = "none";
+        }
+        if (btnJugarNuevo) {
+            btnJugarNuevo.style.display = "inline-block";
         }
     } else {
         // Mostrar tiempo del nivel actual
         tituloVictoria.textContent = "¡NIVEL COMPLETADO!";
         mensajeTiempo.textContent =
             "Completaste el nivel en " + segundosTotales + " segundos";
-        // Mostrar botón de siguiente nivel
+        // Mostrar botón de siguiente nivel y ocultar botón jugar de nuevo
         if (btnSiguienteNivel) {
             btnSiguienteNivel.style.display = "inline-block";
+        }
+        if (btnJugarNuevo) {
+            btnJugarNuevo.style.display = "none";
         }
     }
 
