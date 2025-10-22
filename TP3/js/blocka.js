@@ -5,28 +5,19 @@ var imageWidth = 0;
 var imageData;
 var imageDataOriginal; // Guardar la imagen original sin filtros
 
+// Array con las 8 imagenes
+var imagenes = ["img/blocka/1x1/mario1-1x1.jpeg","img/blocka/1x1/mario2-1x1.jpg","img/blocka/1x1/mario3-1x1.jpg","img/blocka/1x1/mario4-1x1.jpg","img/blocka/1x1/mario5-1x1.jpg","img/blocka/1x1/mario6-1x1.jpg","img/blocka/1x1/mario7-1x1.jpg","img/blocka/1x1/mario8-1x1.jpg",];
+
 // Array para guardar la rotación de cada cuadrante (0, 1, 2, 3 = 0°, 90°, 180°, 270°)
 var filas = 2;
 const columnas = 2;
-var rotacionCuadrantes = Array(filas).fill(Array(columnas).fill(0));
+var rotacionCuadrantes = [[0, 0], [0, 0]];
 
 // Array para marcar cuadrantes fijos (que no se pueden rotar por usar la ayuda)
 var cuadrantesFijos = [];
 
 // Variable para controlar si ya se usó la ayuda en el nivel actual
 var ayudaUsada = false;
-
-// Array con las rutas de las imágenes disponibles
-var imagenes = [
-    "img/blocka/1x1/mario1-1x1.jpeg",
-    "img/blocka/1x1/mario2-1x1.jpg",
-    "img/blocka/1x1/mario3-1x1.jpg",
-    "img/blocka/1x1/mario4-1x1.jpg",
-    "img/blocka/1x1/mario5-1x1.jpg",
-    "img/blocka/1x1/mario6-1x1.jpg",
-    "img/blocka/1x1/mario7-1x1.jpg",
-    "img/blocka/1x1/mario8-1x1.jpg",
-];
 
 // Variables del temporizador
 var tiempoInicio;
@@ -186,62 +177,6 @@ function volverAlMenu() {
     tiempoTotalAcumulado = 0;
 }
 
-// Event listener para el botón de play (muestra menú principal)
-var btnComenzarBlocka = document.getElementById("btn-comenzar-blocka");
-if (btnComenzarBlocka) {
-    btnComenzarBlocka.addEventListener("click", mostrarMenuPrincipal);
-}
-
-// Event listener para el botón "JUGAR" del menú principal
-var btnIniciarJuego = document.getElementById("btn-iniciar-juego");
-if (btnIniciarJuego) {
-    btnIniciarJuego.addEventListener("click", iniciarJuego);
-}
-
-// Event listener para el botón "Siguiente Nivel"
-var btnSiguienteNivel = document.getElementById("btn-siguiente-nivel");
-if (btnSiguienteNivel) {
-    btnSiguienteNivel.addEventListener("click", siguienteNivel);
-}
-
-// Event listener para el botón "Menú Principal"
-var btnMenuPrincipal = document.getElementById("btn-menu-principal");
-if (btnMenuPrincipal) {
-    btnMenuPrincipal.addEventListener("click", volverAlMenu);
-}
-
-// Event listener para el botón "Jugar de nuevo"
-var btnJugarNuevo = document.getElementById("btn-jugar-nuevo");
-if (btnJugarNuevo) {
-    btnJugarNuevo.addEventListener("click", function() {
-        var mensajeVictoria = document.getElementById("mensaje-victoria");
-        if (mensajeVictoria) {
-            mensajeVictoria.classList.add("oculto");
-            mensajeVictoria.classList.remove("aparecer");
-        }
-        iniciarJuego();
-    });
-}
-
-// Event listener para el botón "Reintentar"
-var btnReintentar = document.getElementById("btn-reintentar");
-if (btnReintentar) {
-    btnReintentar.addEventListener("click", reintentarNivel);
-}
-
-// Event listener para el botón "Menú Principal" desde Game Over
-var btnMenuGameOver = document.getElementById("btn-menu-gameover");
-if (btnMenuGameOver) {
-    btnMenuGameOver.addEventListener("click", function() {
-        var mensajeGameOver = document.getElementById("mensaje-gameover");
-        if (mensajeGameOver) {
-            mensajeGameOver.classList.add("oculto");
-            mensajeGameOver.classList.remove("aparecer");
-        }
-        volverAlMenu();
-    });
-}
-
 // Función para cargar imagen en el canvas
 function cargarImagenEnCanvas(imagen, nivel) {
     imageWidth = imagen.width;
@@ -287,34 +222,16 @@ function dibujarBordesCuadrantes() {
 
 // Función para aplicar filtro según el nivel
 function aplicarFiltroPorNivel(imageData, nivel) {
-    switch (nivel) {
-        case 1:
-            // Nivel 1: Sin filtro
-            break;
-        case 2:
-            // Nivel 2: Filtro de brillo
-            filtroBrillo(imageData);
-            break;
-        case 3:
-            // Nivel 3: Escala de grises
-            filtroEscalaDeGrises(imageData);
-            break;
-        case 4:
-            // Nivel 4: Filtro negativo
-            filtroNegativo(imageData);
-            break;
-        case 5:
-            // Nivel 5: Filtros mixtos por cuadrante
-            aplicarFiltrosPorCuadrante(imageData);
-            break;
-        case 6:
-            // Nivel 6: Filtros mixtos por cuadrante + límite de tiempo
-            aplicarFiltrosPorCuadrante(imageData);
-            break;
-        default:
-            // Por defecto sin filtro
-            break;
-    }
+    const filtros = {
+        1: () => {}, // Nivel 1: Sin filtro
+        2: () => filtroBrillo(imageData), // Nivel 2: Filtro de brillo
+        3: () => filtroEscalaDeGrises(imageData), // Nivel 3: Escala de grises
+        4: () => filtroNegativo(imageData), // Nivel 4: Filtro negativo
+        5: () => aplicarFiltrosPorCuadrante(imageData), // Nivel 5: Filtros mixtos por cuadrante
+        6: () => aplicarFiltrosPorCuadrante(imageData) // Nivel 6: Filtros mixtos por cuadrante + límite de tiempo
+    };
+    
+    (filtros[nivel] || filtros[1])(); // Si no existe, sin filtro
 }
 
 // Función para aplicar diferentes filtros a cada cuadrante
@@ -789,18 +706,6 @@ function resaltarCuadrante(cuadranteX, cuadranteY) {
     }, 1000);
 }
 
-// Event listener para click izquierdo (rotar cuadrante a la izquierda)
-canvas.addEventListener("click", (e) => clickCuadrante(e, -1));
-
-// Event listener para click derecho (rotar cuadrante a la derecha)
-canvas.addEventListener("contextmenu", (e) => clickCuadrante(e, 1));
-
-// Event listener para el botón de ayuda
-var btnAyuda = document.getElementById("btn-ayuda");
-if (btnAyuda) {
-    btnAyuda.addEventListener("click", usarAyuda);
-}
-
 // Funciones del temporizador
 function iniciarTemporizador() {
     // Asegurarse de que no haya un temporizador previo corriendo
@@ -868,3 +773,75 @@ function detenerTemporizador() {
 function obtenerSegundos(milisegundos) {
     return Math.floor(milisegundos / 1000);
 }
+
+// ============================================
+// EVENT LISTENERS
+// ============================================
+
+// Event listener para el botón de play (muestra menú principal)
+var btnComenzarBlocka = document.getElementById("btn-comenzar-blocka");
+if (btnComenzarBlocka) {
+    btnComenzarBlocka.addEventListener("click", mostrarMenuPrincipal);
+}
+
+// Event listener para el botón "JUGAR" del menú principal
+var btnIniciarJuego = document.getElementById("btn-iniciar-juego");
+if (btnIniciarJuego) {
+    btnIniciarJuego.addEventListener("click", iniciarJuego);
+}
+
+// Event listener para el botón "Siguiente Nivel"
+var btnSiguienteNivel = document.getElementById("btn-siguiente-nivel");
+if (btnSiguienteNivel) {
+    btnSiguienteNivel.addEventListener("click", siguienteNivel);
+}
+
+// Event listener para el botón "Menú Principal"
+var btnMenuPrincipal = document.getElementById("btn-menu-principal");
+if (btnMenuPrincipal) {
+    btnMenuPrincipal.addEventListener("click", volverAlMenu);
+}
+
+// Event listener para el botón "Jugar de nuevo"
+var btnJugarNuevo = document.getElementById("btn-jugar-nuevo");
+if (btnJugarNuevo) {
+    btnJugarNuevo.addEventListener("click", function() {
+        var mensajeVictoria = document.getElementById("mensaje-victoria");
+        if (mensajeVictoria) {
+            mensajeVictoria.classList.add("oculto");
+            mensajeVictoria.classList.remove("aparecer");
+        }
+        iniciarJuego();
+    });
+}
+
+// Event listener para el botón "Reintentar"
+var btnReintentar = document.getElementById("btn-reintentar");
+if (btnReintentar) {
+    btnReintentar.addEventListener("click", reintentarNivel);
+}
+
+// Event listener para el botón "Menú Principal" desde Game Over
+var btnMenuGameOver = document.getElementById("btn-menu-gameover");
+if (btnMenuGameOver) {
+    btnMenuGameOver.addEventListener("click", function() {
+        var mensajeGameOver = document.getElementById("mensaje-gameover");
+        if (mensajeGameOver) {
+            mensajeGameOver.classList.add("oculto");
+            mensajeGameOver.classList.remove("aparecer");
+        }
+        volverAlMenu();
+    });
+}
+
+// Event listener para el botón de ayuda
+var btnAyuda = document.getElementById("btn-ayuda");
+if (btnAyuda) {
+    btnAyuda.addEventListener("click", usarAyuda);
+}
+
+// Event listener para click izquierdo (rotar cuadrante a la izquierda)
+canvas.addEventListener("click", (e) => clickCuadrante(e, -1));
+
+// Event listener para click derecho (rotar cuadrante a la derecha)
+canvas.addEventListener("contextmenu", (e) => clickCuadrante(e, 1));
