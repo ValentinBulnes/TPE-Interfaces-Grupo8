@@ -10,6 +10,12 @@ var filas = 2;
 const columnas = 2;
 var rotacionCuadrantes = Array(filas).fill(Array(columnas).fill(0));
 
+// Array para marcar cuadrantes fijos (que no se pueden rotar por usar la ayuda)
+var cuadrantesFijos = [];
+
+// Variable para controlar si ya se usó la ayuda en el nivel actual
+var ayudaUsada = false;
+
 // Array con las rutas de las imágenes disponibles
 var imagenes = [
     "img/blocka/1x1/mario1-1x1.jpeg",
@@ -93,6 +99,23 @@ function cargarNivel(nivel) {
     // Resetear variables del juego
     tiempoTranscurrido = 0;
     juegoIniciado = false;
+    
+    // Resetear cuadrantes fijos y ayuda
+    cuadrantesFijos = [];
+    ayudaUsada = false;
+    
+    // Configurar el botón de ayuda según el nivel
+    var btnAyuda = document.getElementById("btn-ayuda");
+    if (btnAyuda) {
+        if (nivel === 1 || nivel === 2) {
+            // Deshabilitar en niveles 1 y 2
+            btnAyuda.disabled = true;
+        } else {
+            // Habilitar en niveles 3+
+            btnAyuda.disabled = false;
+
+        }
+    }
 
     // Seleccionar imagen del array mezclado según el nivel (sin repetir)
     var imagenSeleccionada = imagenesMezcladas[nivel - 1];
@@ -234,8 +257,15 @@ function cargarImagenEnCanvas(imagen, nivel) {
     ctx.putImageData(imageData, 0, 0);
 
     // Dibujar bordes en cada cuadrante
-    const anchoCuadrante = imageWidth / columnas;
-    const altoCuadrante = imageHeight / filas;
+    dibujarBordesCuadrantes();
+    rotarCuadrantesAleatorio();
+    juegoIniciado = true;
+}
+
+// Función para dibujar los bordes de todos los cuadrantes
+function dibujarBordesCuadrantes() {
+    var anchoCuadrante = imageWidth / columnas;
+    var altoCuadrante = imageHeight / filas;
     ctx.strokeStyle = "red";
     ctx.lineWidth = 2;
 
@@ -246,8 +276,6 @@ function cargarImagenEnCanvas(imagen, nivel) {
             ctx.strokeRect(posX, posY, anchoCuadrante, altoCuadrante);
         }
     }
-    rotarCuadrantesAleatorio();
-    juegoIniciado = true;
 }
 
 // Función para aplicar filtro según el nivel
@@ -616,15 +644,133 @@ function calcularCuadrante(pos, lado) {
 
 function clickCuadrante(e, direccion) {
     e.preventDefault();
-    if (!juegoIniciado) return; // Solo permitir clicks si el juego inició
+    if (!juegoIniciado) {
+        return;
+    }
 
     var cuadrante = obtenerCuadrante(e);
-    rotarCuadrante(cuadrante.x, cuadrante.y, direccion); // -1 = izquierda
+    
+    // Verificar si el cuadrante está fijo
+    var esFijo = false;
+    for (var i = 0; i < cuadrantesFijos.length; i++) {
+        if (cuadrantesFijos[i].x === cuadrante.x && cuadrantesFijos[i].y === cuadrante.y) {
+            esFijo = true;
+            break;
+        }
+    }
+    
+    if (esFijo) {
+        return;
+    }
+    
+    rotarCuadrante(cuadrante.x, cuadrante.y, direccion);
 
-    // Verificar si se completó el juego
     if (verificarJuegoCompleto()) {
         mostrarVictoria();
     }
+}
+
+// Función para usar la ayuda
+function usarAyuda() {
+    if (!juegoIniciado) {
+        return;
+    }
+    
+    // Verificar si la ayuda ya fue usada en este nivel
+    if (ayudaUsada) {
+        return;
+    }
+    
+    // Buscar cuadrantes incorrectos que no estén fijos
+    var cuadrantesIncorrectos = [];
+    for (var y = 0; y < filas; y++) {
+        for (var x = 0; x < 2; x++) {
+            var esFijo = false;
+            for (var i = 0; i < cuadrantesFijos.length; i++) {
+                if (cuadrantesFijos[i].x === x && cuadrantesFijos[i].y === y) {
+                    esFijo = true;
+                    break;
+                }
+            }
+            
+            if (!esFijo && rotacionCuadrantes[y][x] !== 0) {
+                cuadrantesIncorrectos.push({ x: x, y: y });
+            }
+        }
+    }
+    
+    if (cuadrantesIncorrectos.length === 0) {
+        return;
+    }
+    
+    // Seleccionar un cuadrante aleatorio
+    var indiceAleatorio = Math.floor(Math.random() * cuadrantesIncorrectos.length);
+    var cuadrante = cuadrantesIncorrectos[indiceAleatorio];
+    
+    // Calcular cuántas rotaciones necesita
+    var rotacionActual = rotacionCuadrantes[cuadrante.y][cuadrante.x];
+    var rotaciones = (4 - rotacionActual) % 4;
+    
+    // Rotar el cuadrante hasta la posición correcta
+    for (var i = 0; i < rotaciones; i++) {
+        rotarCuadrante(cuadrante.x, cuadrante.y, 1);
+    }
+    
+    // Marcar como fijo y sumar tiempo
+    cuadrantesFijos.push(cuadrante);
+    
+    // Marcar que la ayuda ya fue usada en este nivel
+    ayudaUsada = true;
+    
+    // Deshabilitar el botón de ayuda
+    var btnAyuda = document.getElementById("btn-ayuda");
+    if (btnAyuda) {
+        btnAyuda.disabled = true;
+    }
+    
+    // Sumar 5 segundos de penalización
+    if (nivelActual === 6) {
+        // En nivel 6: solo sumar al tiempo total, no afectar el tiempo restante
+        tiempoTotalAcumulado += 5000;
+    } else {
+        // En otros niveles: sumar al tiempo del nivel (que también afecta al tiempo total)
+        tiempoInicio -= 5000;
+    }
+    
+    actualizarTiempoTotal();
+    
+    resaltarCuadrante(cuadrante.x, cuadrante.y);
+    
+    // Verificar si completó el juego
+    if (verificarJuegoCompleto()) {
+        mostrarVictoria();
+    }
+}
+
+// Función para mostrar el cuadrante corregido con borde dorado
+function resaltarCuadrante(cuadranteX, cuadranteY) {
+    const anchoCuadrante = imageWidth / columnas;
+    const altoCuadrante = imageHeight / filas;
+    const posX = cuadranteX * anchoCuadrante;
+    const posY = cuadranteY * altoCuadrante;
+    
+    // Guardar el estado actual del canvas (con todas las rotaciones)
+    var estadoActual = ctx.getImageData(0, 0, imageWidth, imageHeight);
+    
+    // Dibujar borde
+    ctx.strokeStyle = "#FFD700";
+    ctx.lineWidth = 5;
+    ctx.strokeRect(posX, posY, anchoCuadrante, altoCuadrante);
+    
+    // Después de 1 segundo, restaurar
+    setTimeout(function() {
+        // Solo restaurar si el nivel no se completo
+        if (juegoIniciado) {
+            // Restaurar el canvas
+            ctx.putImageData(estadoActual, 0, 0);
+            dibujarBordesCuadrantes();
+        }
+    }, 1000);
 }
 
 // Event listener para click izquierdo (rotar cuadrante a la izquierda)
@@ -632,6 +778,12 @@ canvas.addEventListener("click", (e) => clickCuadrante(e, -1));
 
 // Event listener para click derecho (rotar cuadrante a la derecha)
 canvas.addEventListener("contextmenu", (e) => clickCuadrante(e, 1));
+
+// Event listener para el botón de ayuda
+var btnAyuda = document.getElementById("btn-ayuda");
+if (btnAyuda) {
+    btnAyuda.addEventListener("click", usarAyuda);
+}
 
 // Funciones del temporizador
 function iniciarTemporizador() {

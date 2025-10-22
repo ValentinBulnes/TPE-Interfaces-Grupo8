@@ -68,10 +68,39 @@
     padding: 10px 20px;
     background-color: rgba(0, 0, 0, 0.7);
     border-radius: var(--border-rad-s);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
 }
 
 #game-info h2 {
     margin-top: var(--padding-s);
+}
+
+#game-info h3 {
+    margin: 0;
+}
+
+#game-info #btn-ayuda {
+    margin-top: 10px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+#game-info #btn-ayuda:hover:not(:disabled) {
+    background-color: #33eb8a;
+    transform: scale(1.05);
+}
+
+#game-info #btn-ayuda:active:not(:disabled) {
+    transform: scale(0.95);
+}
+
+#game-info #btn-ayuda:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: #555;
 }
 
 #mensaje-victoria {
@@ -146,4 +175,12 @@
     border-radius: var(--border-rad-s);
     margin-top: 8px;
     min-width: 180px;
+}
+
+/* Contenedor de la barra izquierda */
+.left-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
 }
