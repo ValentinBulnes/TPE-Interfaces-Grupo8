@@ -151,6 +151,7 @@ function volverAlMenu() {
     var juegoBlocka = document.getElementById("juego-blocka");
     var menuPrincipal = document.getElementById("menu-principal-blocka");
     var mensajeVictoria = document.getElementById("mensaje-victoria");
+    var mensajeGameOver = document.getElementById("mensaje-gameover");
 
     // Detener el temporizador si está corriendo
     detenerTemporizador();
@@ -159,6 +160,12 @@ function volverAlMenu() {
     if (mensajeVictoria) {
         mensajeVictoria.classList.add("oculto");
         mensajeVictoria.classList.remove("aparecer");
+    }
+
+    // Ocultar mensaje de game over
+    if (mensajeGameOver) {
+        mensajeGameOver.classList.add("oculto");
+        mensajeGameOver.classList.remove("aparecer");
     }
 
     // Ocultar juego y mostrar menú principal
