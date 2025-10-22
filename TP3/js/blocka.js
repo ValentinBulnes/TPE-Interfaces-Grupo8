@@ -532,15 +532,19 @@ function verificarJuegoCompleto() {
 // Función para mostrar mensaje de victoria
 function mostrarVictoria() {
     juegoIniciado = false;
+    
+    // Capturar el tiempo transcurrido ANTES de detener el temporizador
+    var tiempoNivelCompletado = Date.now() - tiempoInicio;
+    
     detenerTemporizador();
 
     // Mostrar la imagen original en RGB (sin filtros)
     ctx.putImageData(imageDataOriginal, 0, 0);
 
-    var segundosTotales = obtenerSegundos(tiempoTranscurrido);
+    var segundosTotales = obtenerSegundos(tiempoNivelCompletado);
 
-    // Acumular el tiempo del nivel actual
-    tiempoTotalAcumulado += tiempoTranscurrido;
+    // Acumular el tiempo del nivel actual usando el tiempo capturado
+    tiempoTotalAcumulado += tiempoNivelCompletado;
 
     var mensajeTiempo = document.getElementById("mensaje-tiempo");
     var mensajeVictoria = document.getElementById("mensaje-victoria");
@@ -591,6 +595,10 @@ function mostrarVictoria() {
 // Función para mostrar mensaje de game over
 function mostrarGameOver() {
     juegoIniciado = false;
+    
+    // Capturar el tiempo transcurrido ANTES de detener el temporizador
+    tiempoTranscurrido = Date.now() - tiempoInicio;
+    
     detenerTemporizador();
 
     var mensajeGameOver = document.getElementById("mensaje-gameover");
@@ -732,12 +740,13 @@ function usarAyuda() {
     if (nivelActual === 6) {
         // En nivel 6: solo sumar al tiempo total, no afectar el tiempo restante
         tiempoTotalAcumulado += 5000;
+        actualizarTiempoTotal();
     } else {
-        // En otros niveles: sumar al tiempo del nivel (que también afecta al tiempo total)
+        // En otros niveles: restar al tiempo de inicio para simular que pasaron 5 segundos más
         tiempoInicio -= 5000;
+        // Forzar actualización inmediata del display
+        actualizarTemporizador();
     }
-    
-    actualizarTiempoTotal();
     
     resaltarCuadrante(cuadrante.x, cuadrante.y);
     
@@ -787,14 +796,25 @@ if (btnAyuda) {
 
 // Funciones del temporizador
 function iniciarTemporizador() {
+    // Asegurarse de que no haya un temporizador previo corriendo
+    detenerTemporizador();
+    
     tiempoInicio = Date.now();
+    tiempoTranscurrido = 0;
+    
     if (nivelActual === 6) {
         tiempoRestante = limiteTiempo;
     }
+    
     intervaloTemporizador = setInterval(actualizarTemporizador, 100);
 }
 
 function actualizarTemporizador() {
+    // No actualizar si el juego no está iniciado o el temporizador fue detenido
+    if (!juegoIniciado || !intervaloTemporizador) {
+        return;
+    }
+    
     if (nivelActual === 6) {
         // Cuenta regresiva para nivel 6
         tiempoTranscurrido = Date.now() - tiempoInicio;
@@ -832,7 +852,10 @@ function actualizarTiempoTotal() {
 }
 
 function detenerTemporizador() {
-    clearInterval(intervaloTemporizador);
+    if (intervaloTemporizador) {
+        clearInterval(intervaloTemporizador);
+        intervaloTemporizador = null;
+    }
 }
 
 function obtenerSegundos(milisegundos) {
