@@ -88,15 +88,6 @@
     transition: all 0.3s ease;
 }
 
-#game-info #btn-ayuda:hover:not(:disabled) {
-    background-color: #33eb8a;
-    transform: scale(1.05);
-}
-
-#game-info #btn-ayuda:active:not(:disabled) {
-    transform: scale(0.95);
-}
-
 #game-info #btn-ayuda:disabled {
     opacity: 0.5;
     cursor: not-allowed;
