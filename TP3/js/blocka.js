@@ -4,6 +4,8 @@ var imageHeight = 0;
 var imageWidth = 0;
 var imageData;
 var imageDataOriginal; // Guardar la imagen original sin filtros
+const colorBordesCuadrados = "red"
+const colorCuadranteResaltado = "#FFD700"
 
 // Array con las 8 imagenes
 var imagenes = ["img/blocka/1x1/mario1-1x1.jpeg","img/blocka/1x1/mario2-1x1.jpg","img/blocka/1x1/mario3-1x1.jpg","img/blocka/1x1/mario4-1x1.jpg","img/blocka/1x1/mario5-1x1.jpg","img/blocka/1x1/mario6-1x1.jpg","img/blocka/1x1/mario7-1x1.jpg","img/blocka/1x1/mario8-1x1.jpg",];
@@ -208,7 +210,7 @@ function cargarImagenEnCanvas(imagen, nivel) {
 function dibujarBordesCuadrantes() {
     var anchoCuadrante = imageWidth / columnas;
     var altoCuadrante = imageHeight / filas;
-    ctx.strokeStyle = "red";
+    ctx.strokeStyle = colorBordesCuadrados;
     ctx.lineWidth = 2;
 
     for (var x = 0; x < 2; x++) {
@@ -612,13 +614,13 @@ function usarAyuda() {
     if (ayudaUsada) {
         return;
     }
-    
+    // NOTE: no existe un flujo donde se ejecute el resto con cuadrantesFijos asignados o donde no haya cuadrantes incorrectos (*)
     // Buscar cuadrantes incorrectos que no estén fijos
     var cuadrantesIncorrectos = [];
     for (var y = 0; y < filas; y++) {
         for (var x = 0; x < 2; x++) {
             var esFijo = false;
-            for (var i = 0; i < cuadrantesFijos.length; i++) {
+            for (var i = 0; i < cuadrantesFijos.length; i++) { // *
                 if (cuadrantesFijos[i].x === x && cuadrantesFijos[i].y === y) {
                     esFijo = true;
                     break;
@@ -631,7 +633,7 @@ function usarAyuda() {
         }
     }
     
-    if (cuadrantesIncorrectos.length === 0) {
+    if (cuadrantesIncorrectos.length === 0) { // *
         return;
     }
     
@@ -688,11 +690,11 @@ function resaltarCuadrante(cuadranteX, cuadranteY) {
     const posY = cuadranteY * altoCuadrante;
     
     // Guardar el estado actual del canvas (con todas las rotaciones)
-    var estadoActual = ctx.getImageData(0, 0, imageWidth, imageHeight);
+    //var estadoActual = ctx.getImageData(0, 0, imageWidth, imageHeight);
     
     // Dibujar borde
-    ctx.strokeStyle = "#FFD700";
-    ctx.lineWidth = 5;
+    ctx.strokeStyle = colorCuadranteResaltado;
+    ctx.lineWidth = 2;
     ctx.strokeRect(posX, posY, anchoCuadrante, altoCuadrante);
     
     // Después de 1 segundo, restaurar
@@ -700,7 +702,8 @@ function resaltarCuadrante(cuadranteX, cuadranteY) {
         // Solo restaurar si el nivel no se completo
         if (juegoIniciado) {
             // Restaurar el canvas
-            ctx.putImageData(estadoActual, 0, 0);
+            // BUG: reinstaurar el estado actual hace un desync entre la imagen y la rotacion si el usuario hace click durante el timeout
+            // ctx.putImageData(estadoActual, 0, 0);
             dibujarBordesCuadrantes();
         }
     }, 1000);
