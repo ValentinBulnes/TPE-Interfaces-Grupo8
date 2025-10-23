@@ -52,13 +52,11 @@ function mostrarMenuPrincipal() {
 
 // Función para iniciar el juego desde el menú
 function iniciarJuego() {
-    var juegoBlocka = document.getElementById("juego-blocka");
     var menuPrincipal = document.getElementById("menu-principal-blocka");
 
-    // Ocultar menú, mostrar juego
-    if (juegoBlocka && menuPrincipal) {
+    // Ocultar menú
+    if (menuPrincipal) {
         menuPrincipal.classList.add("oculto");
-        juegoBlocka.classList.remove("oculto");
     }
 
     // Resetear nivel y tiempo total al iniciar
@@ -71,7 +69,54 @@ function iniciarJuego() {
         return Math.random() - 0.5;
     });
     
-    cargarNivel(nivelActual);
+    mostrarPantallaPrevia(nivelActual);
+}
+
+function mostrarPantallaPrevia(nivel) {
+    var pantallaPrevia = document.getElementById("pantalla-previa");
+    var juegoBlocka = document.getElementById("juego-blocka");
+    var thumbnails = document.querySelectorAll("#contenedor-thumbnails img");  //lista de imagenes
+
+    // Ocultar juego y mostrar pantalla previa
+    juegoBlocka.classList.add("oculto");
+    pantallaPrevia.classList.remove("oculto");
+
+    // Quitar la clase seleccionada de todas las imágenes
+    thumbnails.forEach(function(img) {
+        img.classList.remove("seleccionada");
+    });
+
+    // Encontrar qué imagen del HTML corresponde al nivel actual
+    var imagenNivel = imagenesMezcladas[nivel - 1];
+    var indiceImagenFinal = imagenes.indexOf(imagenNivel);
+
+    // Animación: resaltar imágenes una por una hasta llegar a la correcta
+    var indiceActual = 0;
+    var intervalo = setInterval(function() {
+        // Quitar selección anterior
+        thumbnails.forEach(function(img) {
+            img.classList.remove("seleccionada");
+        });
+        
+        // Seleccionar imagen actual
+        thumbnails[indiceActual].classList.add("seleccionada");
+        
+        // Si llegamos a la imagen final, detener la animación
+        if (indiceActual === indiceImagenFinal) {
+            clearInterval(intervalo);
+        }
+        
+        // Avanzar al siguiente índice (circular)
+        indiceActual = (indiceActual + 1) % thumbnails.length;
+    }, 200);
+
+    // Después de 3 segundos, ocultar pantalla previa y cargar nivel
+    setTimeout(function() {
+        clearInterval(intervalo);
+        pantallaPrevia.classList.add("oculto");
+        juegoBlocka.classList.remove("oculto");
+        cargarNivel(nivel);
+    }, 3000);
 }
 
 // Función para cargar un nivel específico
@@ -133,8 +178,8 @@ function siguienteNivel() {
     // Incrementar nivel
     nivelActual++;
 
-    // Cargar el siguiente nivel
-    cargarNivel(nivelActual);
+    // Mostrar pantalla previa antes de cargar el siguiente nivel
+    mostrarPantallaPrevia(nivelActual);
 }
 
 // Función para volver al menú principal desde el juego
