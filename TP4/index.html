@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio - GameCenter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="./css/root.css">
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/carrusel.css">
+    <link rel="stylesheet" href="./css/loader.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="header-left">
+                <button class="icon-btn menu-toggle" aria-label="Abrir menú">
+                    <iconify-icon icon="lucide:menu"></iconify-icon>
+                </button>
+
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="img/logo.svg" alt="GameCenter" class="logo-img">
+                    </a>
+                </div>
+            </div>
+
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="¿Qué querés jugar hoy?">
+                <button class="search-btn" aria-label="Buscar">
+                    <iconify-icon icon="lucide:search"></iconify-icon>
+                </button>
+            </div>
+
+            <div class="header-right">
+                <button class="icon-btn cart-btn" aria-label="Carrito">
+                    <iconify-icon icon="lucide:shopping-cart"></iconify-icon>
+                </button>
+                <button class="user-avatar-btn" aria-label="Menú de usuario">
+                    <div class="user-avatar">
+                        <img src="img/avatars/avatar_1.png" alt="Avatar de usuario" class="avatar-img">
+                        <div class="status-indicator"></div>
+                    </div>
+                    <iconify-icon icon="lucide:x" class="close-icon hidden"></iconify-icon>
+                </button>
+            </div>
+        </div>
+
+        <!-- Menú desplegable de navegación -->
+        <nav class="dropdown-menu">
+            <ul class="menu-list">
+                <li class="menu-item menu-main menu-search-mobile">
+                    <a href="#" class="menu-link">
+                        <iconify-icon icon="lucide:search"></iconify-icon>
+                        <span>Búsqueda</span>
+                    </a>
+                </li>
+                <li class="menu-item menu-main">
+                    <a href="index.html" class="menu-link">
+                        <iconify-icon icon="lucide:home"></iconify-icon>
+                        <span>Inicio</span>
+                    </a>
+                </li>
+                <li class="menu-item menu-main">
+                    <a href="#" class="menu-link">
+                        <iconify-icon icon="lucide:flame"></iconify-icon>
+                        <span>De moda</span>
+                    </a>
+                </li>
+                <li class="menu-item menu-main">
+                    <a href="#" class="menu-link">
+                        <iconify-icon icon="lucide:rocket"></iconify-icon>
+                        <span>Novedades</span>
+                    </a>
+                </li>
+                <li class="menu-item menu-main active">
+                    <a href="#" class="menu-link">
+                        <iconify-icon icon="lucide:layout-grid"></iconify-icon>
+                        <span>Todas las categorías</span>
+                    </a>
+                </li>
+                <div class="menu-separator"></div>
+                <li class="menu-item menu-category">
+                    <a href="#" class="menu-link">
+                        <iconify-icon icon="fluent-emoji-flat:crossed-swords"></iconify-icon>
+                        <span>Acción</span>
+                    </a>
+                </li>
+                <li class="menu-item menu-category">
+                    <a href="#" class="menu-link">
+                        <iconify-icon icon="fluent-emoji-flat:world-map"></iconify-icon>
+                        <span>Aventura</span>
+                    </a>
+                </li>
+                <li class="menu-item menu-category">
+                    <a href="#" class="menu-link">
+                        <iconify-icon icon="fluent-emoji-flat:puzzle-piece"></iconify-icon>
+                        <span>Puzzles</span>
+                    </a>
+                </li>
+                <li class="menu-item menu-category">
+                    <a href="#" class="menu-link">
+                        <iconify-icon icon="fluent-emoji-flat:soccer-ball"></iconify-icon>
+                        <span>Deportes</span>
+                    </a>
+                </li>
+                <li class="menu-item menu-category">
+                    <a href="#" class="menu-link">
+                        <iconify-icon icon="fluent-emoji-flat:chess-pawn"></iconify-icon>
+                        <span>Estrategia</span>
+                    </a>
+                </li>
+                <li class="menu-item menu-category">
+                    <a href="#" class="menu-link">
+                        <iconify-icon icon="fluent-emoji-flat:crystal-ball"></iconify-icon>
+                        <span>Rol</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Menú desplegable de usuario -->
+        <nav class="user-dropdown-menu">
+            <div class="user-menu-header">
+                <img src="img/avatars/avatar_1.png" alt="Avatar de usuario" class="user-menu-avatar">
+                <h3 class="user-menu-name">PlayerOne</h3>
+            </div>
+            <div class="user-menu-separator"></div>
+            <ul class="user-menu-list">
+                <li class="user-menu-item user-cart-mobile">
+                    <a href="#" class="user-menu-link">Carrito de compras</a>
+                </li>
+                <li class="user-menu-item">
+                    <a href="#" class="user-menu-link">Perfil</a>
+                </li>
+                <li class="user-menu-item">
+                    <a href="#" class="user-menu-link">Amigos</a>
+                </li>
+                <li class="user-menu-item">
+                    <a href="#" class="user-menu-link">Favoritos</a>
+                </li>
+                <li class="user-menu-item">
+                    <a href="#" class="user-menu-link">Biblioteca</a>
+                </li>
+                <li class="user-menu-item">
+                    <a href="#" class="user-menu-link">Configuracion</a>
+                </li>
+                <li class="user-menu-item logout">
+                    <a href="login.html" class="user-menu-link">
+                        <span>Cerrar sesion</span>
+                        <iconify-icon icon="lucide:log-out"></iconify-icon>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <div id="loader">
+        <div class="spinner"></div>
+        <div class="percentage">0%</div>
+        <div class="progress-bar">
+            <div></div>
+        </div>
+    </div>
+    <main>
+
+        <image-carousel class="single" filter="premium" premium></image-carousel>
+
+        <image-carousel title="Recomendados para vos" filter="recomendado"></image-carousel>
+
+        <image-carousel title="Tus favoritos" filter="favorito"></image-carousel>
+
+        <image-carousel title="Novedades" filter="novedad"></image-carousel>
+
+        <image-carousel title="Promociones" filter="promo"></image-carousel>
+
+    </main>
+    <footer id="fat-footer">
+        <div id="footer-content">
+            <div id="footer-top">
+                <div id="footer-logo">
+                    <img src="img/Logo_big.svg" alt="GameCenter Logo">
+                </div>
+                <div id="footer-social">
+                    <a href="#"><iconify-icon icon="pajamas:twitter"></iconify-icon></a>
+                    <a href="#"><iconify-icon icon="lucide:instagram"></iconify-icon></a>
+                    <a href="#"><iconify-icon icon="lucide:facebook"></iconify-icon></a>
+                </div>
+            </div>
+            <div class="separator"></div>
+            <div id="footer-links">
+                <div class="footer-link-category">
+                    <div class="footer-category-header">
+                        <h3>Navegación</h3>
+                        <iconify-icon icon="lucide:chevron-down" class="footer-category-icon"></iconify-icon>
+                    </div>
+                    <ul class="footer-link-list">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#">Categorías</a></li>
+                        <li><a href="#">Perfil</a></li>
+                        <li><a href="#">Carrito</a></li>
+                    </ul>
+                </div>
+                <div class="footer-link-category">
+                    <div class="footer-category-header">
+                        <h3>Cuenta</h3>
+                        <iconify-icon icon="lucide:chevron-down" class="footer-category-icon"></iconify-icon>
+                    </div>
+                    <ul class="footer-link-list">
+                        <li><a href="login.html">Iniciar sesión</a></li>
+                        <li><a href="signup.html">Registrarse</a></li>
+                        <li><a href="#">Privacidad</a></li>
+                        <li><a href="#">Términos y condiciones</a></li>
+                    </ul>
+                </div>
+                <div class="footer-link-category">
+                    <div class="footer-category-header">
+                        <h3>Juegos</h3>
+                        <iconify-icon icon="lucide:chevron-down" class="footer-category-icon"></iconify-icon>
+                    </div>
+                    <ul class="footer-link-list">
+                        <li><a href="#">Nuevos lanzamientos</a></li>
+                        <li><a href="#">Más jugados</a></li>
+                        <li><a href="#">Gratis</a></li>
+                        <li><a href="#">Multijugador</a></li>
+                    </ul>
+                </div>
+                <div class="footer-link-category">
+                    <div class="footer-category-header">
+                        <h3>Sobre nosotros</h3>
+                        <iconify-icon icon="lucide:chevron-down" class="footer-category-icon"></iconify-icon>
+                    </div>
+                    <ul class="footer-link-list">
+                        <li><a href="#">Quíenes somos</a></li>
+                        <li><a href="#">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-link-category">
+                    <div class="footer-category-header">
+                        <h3>Ayuda</h3>
+                        <iconify-icon icon="lucide:chevron-down" class="footer-category-icon"></iconify-icon>
+                    </div>
+                    <ul class="footer-link-list">
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Cómo comprar</a></li>
+                        <li><a href="#">Soporte</a></li>
+                    </ul>
+                </div>
+                <div class="footer-link-category">
+                    <div class="footer-category-header">
+                        <h3>Comunidad</h3>
+                        <iconify-icon icon="lucide:chevron-down" class="footer-category-icon"></iconify-icon>
+                    </div>
+                    <ul class="footer-link-list">
+                        <li><a href="#">Foro</a></li>
+                        <li><a href="#">Rankings</a></li>
+                        <li><a href="#">Discord oficial</a></li>
+                        <li><a href="#">Reseñas de juegos</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="copyright">
+                <iconify-icon icon="lucide:copyright"></iconify-icon>
+                2025 GameCenter. Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <template id="card-template">
+        <div>
+            <img>
+            <span class="material-symbols-rounded">
+                play_arrow
+            </span>
+            <section class="flex-col">
+                <h3 class="bold">El Juego 2077: Retorno del Rey</h3>
+                <div>
+                    <h3>$99.99</h3>
+                    <span class="material-symbols-rounded">
+                        favorite
+                    </span>
+                </div>
+            </section>
+        </div>
+    </template>
+
+    <template id="premium-card-template">
+        <img>
+        <section>
+            <div class="flex-col">
+                <h1>El Juego 2077: Retorno del Rey</h1>
+                <h2>$99.99</h2>
+            </div>
+            <button>
+                <h2>Comprar</h2>
+            </button>
+        </section>
+    </template>
+
+    <template id="carousel-template">
+        <div>
+            <h3>Section title</h3>
+            <nav>
+                <button class="prev" disabled>
+                    <span class="material-symbols-rounded">
+                        chevron_left
+                    </span>
+                </button>
+                <div class="carousel">
+                    <div></div>
+                </div>
+                <button class="next">
+                    <span class="material-symbols-rounded">
+                        chevron_right
+                    </span>
+                </button>
+            </nav>
+            <div class="scroll-pill">
+                <div></div>
+            </div>
+        </div>
+    </template>
+
+    <script src="./js/main.js"></script>
+    <script src="./js/carrusel.js"></script>
+    <script src="./js/loader.js"></script>
+</body>
+
+</html>
