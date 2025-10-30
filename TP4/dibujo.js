@@ -35,11 +35,9 @@ function drawFigure() {
 
 
 function onMouseDown(e) {
-    const rect = canvas.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+    const mousePos = getMousePosition(e)
     
-    console.log('Mouse down en:', x, y);
+    console.log('Mouse down en:', mousePos.x, mousePos.y);
     isMouseDown = true;
 
     if (lastClickFigure != null) {
@@ -47,7 +45,7 @@ function onMouseDown(e) {
         lastClickFigure = null;
     }
 
-    let clickFig = findClickedFigure(x, y);
+    const clickFig = findClickedFigure( mousePos.x, mousePos.y);
     console.log('Figura encontrada:', clickFig);
     if (clickFig != null) {
         clickFig.setResaltado(true);
@@ -63,12 +61,10 @@ function onMouseUp(e) {
 
 function onMouseMove(e) {
     if (isMouseDown && lastClickFigure != null) {
-        const rect = canvas.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        
-        console.log('Moviendo figura a:', x, y);
-        lastClickFigure.setPosition(x, y);
+        const mousePos = getMousePosition(e)
+
+        console.log('Moviendo figura a:', mousePos.x, mousePos.y);
+        lastClickFigure.setPosition(mousePos.x, mousePos.y);
         drawFigure();
     }
 }
@@ -117,6 +113,13 @@ function findClickedFigure(x, y) {
         if (element.isPointInside(x, y)) {
             return element;
         }
+    }
+}
+
+function getMousePosition(mouseEvent){
+    return{
+        x: mouseEvent.offsetX,
+        y: mouseEvent.offsetY
     }
 }
 
