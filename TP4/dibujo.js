@@ -8,7 +8,8 @@ const CANT_FIG = 32;
 let figures = [];
 let lastClickFigure = null;
 let isMouseDown = false;
-
+let offsetX = 0;
+let offsetY = 0;
 var ImagenHTML5 = new Image();
 
 const rows = 7;
@@ -36,20 +37,21 @@ function drawFigure() {
 
 function onMouseDown(e) {
     const mousePos = getMousePosition(e)
-    
+
     console.log('Mouse down en:', mousePos.x, mousePos.y);
     isMouseDown = true;
 
     if (lastClickFigure != null) {
         lastClickFigure.setResaltado(false);
-        lastClickFigure = null;
+        offsetX = 0;
+        offsetY = 0;
     }
-
-    const clickFig = findClickedFigure( mousePos.x, mousePos.y);
-    console.log('Figura encontrada:', clickFig);
-    if (clickFig != null) {
-        clickFig.setResaltado(true);
-        lastClickFigure = clickFig;
+    lastClickFigure = findClickedFigure( mousePos.x, mousePos.y);
+    console.log('Figura encontrada:', lastClickFigure);
+    if (lastClickFigure != null) {
+        lastClickFigure.setResaltado(true);
+        offsetX = mousePos.x - lastClickFigure.posX
+        offsetY = mousePos.y - lastClickFigure.posY
         console.log('Figura seleccionada');
     }
     drawFigure();
@@ -62,9 +64,11 @@ function onMouseUp(e) {
 function onMouseMove(e) {
     if (isMouseDown && lastClickFigure != null) {
         const mousePos = getMousePosition(e)
+        const newPosX = mousePos.x - offsetX;
+        const newPosY = mousePos.y - offsetY;
 
-        console.log('Moviendo figura a:', mousePos.x, mousePos.y);
-        lastClickFigure.setPosition(mousePos.x, mousePos.y);
+        console.log('Moviendo figura a:', newPosX, newPosY);
+        lastClickFigure.setPosition(newPosX, newPosY);
         drawFigure();
     }
 }
@@ -114,6 +118,7 @@ function findClickedFigure(x, y) {
             return element;
         }
     }
+    return null;
 }
 
 function getMousePosition(mouseEvent){
