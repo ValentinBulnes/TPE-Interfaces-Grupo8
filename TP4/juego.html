@@ -11,6 +11,7 @@
     <script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>
     <link rel="stylesheet" href="./css/root.css">
     <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/peg.css">
 </head>
 
 <body>
@@ -163,12 +164,53 @@
                 </ol>
             </nav>
         </div>
+
         <div class="game-page-section" id="game-execution">
-            <img src="img/juego/jugar.png" alt="Pantalla de ejecución del juego">
+            <img src="img/juego/jugar.jpg" alt="Pantalla de ejecución del juego">
             <button class="play-btn game-btn">
                 <iconify-icon icon="lucide-play"></iconify-icon>
             </button>
+            <div id="menu-principal-peg" class="oculto">
+                <h1>Batman Peg Solitaire: Gotham Edition</h1>
+                <h3>Lográ que quede solo una ficha en el tablero, saltando y eliminando las demás con estrategia</h3>
+                <p>Salta una ficha sobre otra en línea recta hacia un espacio vacío.</p>
+                <p>Seguí saltando hasta que no queden más movimientos posibles.</p>
+                <p>Tenés 5 minutos para completar el desafío.</p>
+                <button id="btn-iniciar-juego" class="btn-menu-jugar btn-hover-primary">Comenzar</button>
+            </div>
+
+            <!-- Contenedor del juego Peg Solitaire -->
+            <div id="juego-peg" class="oculto">
+                <div class="izquierda">
+                    <button id="btn-menu-principal" class="btn-hover-primary">Menú Principal</button>
+                </div>
+                <div class="centro">
+                    <canvas id="canvas" width="664" height="664"></canvas>
+                </div>
+                <div class="derecha">
+                    <div id="game-info">
+                        <h2>Tiempo</h2>
+                        <h2>Restante:</h2>
+                        <h2>5:00</h2>
+                    </div>
+                </div>
+                <div id="mensaje-victoria" class="oculto">
+                    <h1>¡Juego completado!</h1>
+                    <div id="botones-victoria">
+                        <button id="btn-siguiente-nivel" class="btn-hover-primary">Siguiente Nivel</button>
+                        <button id="btn-jugar-nuevo" class="btn-hover-primary" style="display: none;">Volver a jugar</button>
+                    </div>
+                </div>
+                <div id="mensaje-gameover" class="oculto">
+                    <h1>¡TIEMPO AGOTADO!</h1>
+                    <p>No completaste el juego a tiempo. ¡Inténtalo de nuevo!</p>
+                    <div id="botones-gameover">
+                        <button id="btn-reintentar" class="btn-hover-primary">Volver a jugar</button>
+                    </div>
+                </div>
+            </div>
         </div>
+
         <div class="game-page-section" id="game-title">
             <h1>Batman Peg Solitaire: Gotham Edition</h1>
             <div id="game-title-actions">
@@ -252,6 +294,7 @@
                 </aside>
             </div>
         </section>
+
         <div class="comunidad-container">
             <h2>Comunidad</h2>
             <h3>3 comentarios</h3>
@@ -334,6 +377,7 @@
             </div>
         </div>
     </main>
+
     <footer id="fat-footer">
         <div id="footer-content">
             <div id="footer-top">
@@ -424,7 +468,12 @@
             </div>
         </div>
     </footer>
+
     <script src="./js/main.js"></script>
+    <script src="./Figure.js"></script>
+    <script src="./Circle.js"></script>
+    <script src="./dibujo.js"></script>
+
 </body>
 
 </html>
