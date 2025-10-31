@@ -13,20 +13,19 @@ export class TableroModelo {
         for (let fila = 0; fila < this.size; fila++) {
             this.fichas[fila] = [];
             for (let col = 0; col < this.size; col++) {
+                // Celdas inválidas → null directamente
                 if ((fila < 2 || fila > 4) && (col < 2 || col > 4)) {
-                    this.fichas[fila][col] = new FichaModelo(fila, col, null);
+                    this.fichas[fila][col] = null;
                 } else {
                     this.fichas[fila][col] = new FichaModelo(fila, col, 1);
                 }
             }
         }
-
-        // Centro vacío
         this.fichas[3][3].tipo = 0;
     }
 
     obtenerFicha(fila, col) {
-        //if (!this.esCeldaValida(fila, col)) return null;
+        if (!this.esCeldaValida(fila, col)) return null;
         return this.fichas[fila][col];
     }
 
@@ -36,8 +35,8 @@ export class TableroModelo {
     }
 
     tieneFicha(fila, col) {
-        const f = this.obtenerFicha(fila, col);
-        return f && f.tipo === 1;
+        const ficha = this.obtenerFicha(fila, col);
+        return ficha && ficha.tipo === 1;
     }
 
     esCeldaValida(fila, col) {
@@ -46,7 +45,7 @@ export class TableroModelo {
             fila < this.size &&
             col >= 0 &&
             col < this.size &&
-            this.fichas[fila][col].tipo !== null
+            this.fichas[fila][col] !== null
         );
     }
 
@@ -57,7 +56,6 @@ export class TableroModelo {
         const deltaFila = filaDestino - fichaOrigen.fila;
         const deltaCol = colDestino - fichaOrigen.columna;
 
-        // Movimiento debe ser de dos celdas en línea recta
         if (Math.abs(deltaFila) === 2 && deltaCol === 0) {
             const filaMedio = fichaOrigen.fila + deltaFila / 2;
             const colMedio = fichaOrigen.columna;
@@ -86,11 +84,10 @@ export class TableroModelo {
         const filaMedio = (fichaOrigen.fila + filaDestino) / 2;
         const colMedio = (fichaOrigen.columna + colDestino) / 2;
 
-        // Ejecutar movimiento
+        // Mover ficha
         this.eliminarFicha(filaMedio, colMedio);
-        fichaOrigen.mover(filaDestino, colDestino);
+        fichaOrigen.tipo = 0;
         this.fichas[filaDestino][colDestino].tipo = 1;
-        this.fichas[fichaOrigen.fila][fichaOrigen.columna].tipo = 0;
 
         return true;
     }

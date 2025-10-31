@@ -4,6 +4,7 @@ import { TableroVista } from "./vista/TableroVista.js";
 export class JuegoController {
     constructor(canvas) {
         this.tablero = new TableroModelo();
+        // this.vista = new TableroVista(canvas, this.tablero.fichas);
         this.vista = new TableroVista(canvas, this.tablero);
 
         this.fichaSeleccionada = null;
@@ -39,18 +40,11 @@ export class JuegoController {
             e.offsetY
         );
 
-        const movimientoValido = this.tablero.aplicarMovimiento(
-            this.fichaSeleccionada,
-            fila,
-            col
-        );
-
+        this.tablero.aplicarMovimiento(this.fichaSeleccionada, fila, col);
         this.fichaSeleccionada.seleccionada = false;
         this.fichaSeleccionada = null;
-        this.vista.dibujar();
 
-        if (movimientoValido) {
-            // TODO: agregar detección de fin de juego o contador
-        }
+        // 🔁 Redibujar desde cero basado en el modelo actualizado
+        this.vista.dibujar();
     }
 }

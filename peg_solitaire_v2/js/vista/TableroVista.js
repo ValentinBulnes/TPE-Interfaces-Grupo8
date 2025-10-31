@@ -4,7 +4,7 @@ export class TableroVista {
     constructor(canvas, tableroModelo) {
         this.canvas = canvas;
         this.ctx = canvas.getContext("2d");
-        this.tablero = tableroModelo;
+        this.tablero = tableroModelo; // tableroModelo -> [][]
         this.cellSize = canvas.width / tableroModelo.size;
     }
 
@@ -14,16 +14,37 @@ export class TableroVista {
         return { fila, col };
     }
 
+    // dibujar(_tablero = null) {
+    //     if (_tablero != null) this.tablero = _tablero
+    //     const { ctx, tablero } = this;
+    //     ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+    //     for (const fila of tablero) {
+    //         for (const ficha of fila) {
+    //             // const ficha = tablero.fichas[fila][col];
+    //             if (ficha === null) continue;
+
+    //             const vistaFicha = new FichaVista(
+    //                 ctx,
+    //                 ficha.fila,
+    //                 ficha.columna,
+    //                 ficha.tipo,
     dibujar() {
         const { ctx, tablero } = this;
         ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
         for (let fila = 0; fila < tablero.size; fila++) {
             for (let col = 0; col < tablero.size; col++) {
-                const ficha = tablero.obtenerFicha(fila, col);
-                console.log(ficha);
-                const vistaFicha = new FichaVista(ctx, ficha, this.cellSize);
-                console.log(vistaFicha);
+                const ficha = tablero.fichas[fila][col];
+                if (ficha === null) continue;
+
+                const vistaFicha = new FichaVista(
+                    ctx,
+                    fila,
+                    col,
+                    this.cellSize,
+                    ficha.seleccionada
+                );
                 vistaFicha.dibujar();
             }
         }

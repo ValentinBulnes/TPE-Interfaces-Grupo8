@@ -1,28 +1,29 @@
 export class FichaVista {
-    constructor(ctx, ficha, cellSize) {
+    constructor(ctx, fila, col, tipo, cellSize, seleccionada = false) {
         this.ctx = ctx;
-        this.ficha = ficha;
+        this.fila = fila;
+        this.col = col;
+        this.tipo = tipo;
         this.cellSize = cellSize;
+        this.seleccionada = seleccionada;
     }
 
     dibujar() {
-        const { ctx, ficha, cellSize } = this;
-        console.log(this);
-        //if (ficha === null) return;
-        if (ficha.tipo === null) return;
+        const { ctx, fila, col, tipo, cellSize, seleccionada } = this;
+        if (tipo === null) return;
 
-        const x = ficha.columna * cellSize + cellSize / 2;
-        const y = ficha.fila * cellSize + cellSize / 2;
+        const x = col * cellSize + cellSize / 2;
+        const y = fila * cellSize + cellSize / 2;
 
-        // Base
+        // Base de la celda
         ctx.fillStyle = "#ddd";
         ctx.beginPath();
         ctx.arc(x, y, cellSize * 0.4, 0, Math.PI * 2);
         ctx.fill();
 
-        // Ficha
-        if (ficha.tipo === 1) {
-            ctx.fillStyle = ficha.seleccionada ? "#2196f3" : "#333";
+        // Dibuja ficha si corresponde
+        if (tipo === 1) {
+            ctx.fillStyle = seleccionada ? "#2196f3" : "#333";
             ctx.beginPath();
             ctx.arc(x, y, cellSize * 0.3, 0, Math.PI * 2);
             ctx.fill();
