@@ -2,21 +2,32 @@ import { TableroModelo } from "./modelo/TableroModelo.js";
 import { TableroVista } from "./vista/TableroVista.js";
 
 export class JuegoController {
-    constructor(canvas) {
+    constructor(canvas, onVictoria = null, onGameOver = null) {
         this.tablero = new TableroModelo();
         this.vista = new TableroVista(canvas, this.tablero);
 
+        // Callbacks
+        this.onVictoria = onVictoria;
+        this.onGameOver = onGameOver;
+
+        // Estado del drag and drop
         this.fichaSeleccionada = null;
         this.fichaArrastrada = null;
         this.offsetX = 0;
         this.offsetY = 0;
-        this.isMouseDown = false
+        this.isMouseDown = false;
+
+        // Temporizador
+        this.tiempoRestante = 300; // 5 minutos en segundos
+        this.temporizador = null;
 
         this.vista.dibujar();
 
         canvas.addEventListener("mousedown", (e) => this.mouseDown(e));
         canvas.addEventListener("mouseup", (e) => this.mouseUp(e));
         canvas.addEventListener("mousemove", (e) => this.mouseMove(e));
+
+        this.iniciarTemporizador();
     }
 
     mouseDown(e) {
@@ -52,13 +63,24 @@ export class JuegoController {
             e.offsetY
         );
 
-        this.tablero.aplicarMovimiento(this.fichaSeleccionada, fila, col);
+        const movimientoExitoso = this.tablero.aplicarMovimiento(this.fichaSeleccionada, fila, col);
         this.fichaSeleccionada.seleccionada = false;
         this.fichaSeleccionada = null;
 
         // 🔁 Redibujar desde cero basado en el modelo actualizado
         this.vista.dibujar();
-        // TODO: verificar condicion de ganado
+
+        // Verificar condiciones de juego después de un movimiento válido
+        if (movimientoExitoso) {
+            if (this.tablero.verificarVictoria()) {
+                this.detenerJuego();
+                if (this.onVictoria) this.onVictoria();
+            } else if (!this.tablero.hayMovimientosDisponibles()) {
+                // Sin movimientos disponibles = Game Over
+                this.detenerJuego();
+                if (this.onGameOver) this.onGameOver();
+            }
+        }
     }
 
     mouseMove(e) {
@@ -76,5 +98,50 @@ export class JuegoController {
             x: mouseEvent.offsetX,
             y: mouseEvent.offsetY,
         };
+    }
+
+    // ============================================
+    // MANEJO DEL TEMPORIZADOR
+    // ============================================
+
+    iniciarTemporizador() {
+        if (this.temporizador) clearInterval(this.temporizador);
+
+        this.temporizador = setInterval(() => {
+            this.tiempoRestante--;
+            this.actualizarDisplayTiempo();
+
+            if (this.tiempoRestante <= 0) {
+                this.detenerJuego();
+                if (this.onGameOver) this.onGameOver();
+            }
+        }, 1000);
+    }
+
+    actualizarDisplayTiempo() {
+        const minutos = Math.floor(this.tiempoRestante / 60);
+        const segundos = this.tiempoRestante % 60;
+        const displayElement = document.querySelector("#game-info h2:last-child");
+
+        if (displayElement) {
+            displayElement.textContent = `${minutos}:${segundos.toString().padStart(2, "0")}`;
+        }
+    }
+
+    detenerJuego() {
+        if (this.temporizador) {
+            clearInterval(this.temporizador);
+            this.temporizador = null;
+        }
+    }
+
+    reiniciar() {
+        this.detenerJuego();
+        this.tiempoRestante = 300;
+        this.tablero.inicializar();
+        this.fichaSeleccionada = null;
+        this.fichaArrastrada = null;
+        this.vista.dibujar();
+        this.iniciarTemporizador();
     }
 }

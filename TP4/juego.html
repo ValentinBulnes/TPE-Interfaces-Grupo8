@@ -196,14 +196,15 @@
                 </div>
                 <div id="mensaje-victoria" class="oculto">
                     <h1>¡Juego completado!</h1>
+                    <p>¡Felicitaciones! Has completado el desafío de Peg Solitaire.</p>
                     <div id="botones-victoria">
-                        <button id="btn-siguiente-nivel" class="btn-hover-primary">Siguiente Nivel</button>
-                        <button id="btn-jugar-nuevo" class="btn-hover-primary" style="display: none;">Volver a jugar</button>
+                        <button id="btn-siguiente-nivel" class="btn-hover-primary" style="display: none;">Siguiente Nivel</button>
+                        <button id="btn-jugar-nuevo" class="btn-hover-primary">Volver a jugar</button>
                     </div>
                 </div>
                 <div id="mensaje-gameover" class="oculto">
-                    <h1>¡TIEMPO AGOTADO!</h1>
-                    <p>No completaste el juego a tiempo. ¡Inténtalo de nuevo!</p>
+                    <h1>¡GAME OVER!</h1>
+                    <p>No completaste el juego. ¡Inténtalo de nuevo!</p>
                     <div id="botones-gameover">
                         <button id="btn-reintentar" class="btn-hover-primary">Volver a jugar</button>
                     </div>
@@ -470,9 +471,7 @@
     </footer>
 
     <script src="./js/main.js"></script>
-    <script src="./Figure.js"></script>
-    <script src="./Circle.js"></script>
-    <script src="./dibujo.js"></script>
+    <script type="module" src="./js/peg_solitaire/init.js"></script>
 
 </body>
 
