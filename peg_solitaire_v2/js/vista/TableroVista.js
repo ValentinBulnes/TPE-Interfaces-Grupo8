@@ -1,11 +1,12 @@
 import { FichaVista } from "./FichaVista.js";
 
 export class TableroVista {
+    cellSize = 90
     constructor(canvas, tableroModelo) {
         this.canvas = canvas;
         this.ctx = canvas.getContext("2d");
         this.tablero = tableroModelo.fichas; // rompi encapsulamiento asiq accedo directamente al estado interno
-        this.cellSize = canvas.width / tableroModelo.size;
+        // this.cellSize = canvas.width / tableroModelo.size;
         this.fichas = [];
         this.backgroundImg = new Image();
         this.backgroundImg.src = "tablero.png";

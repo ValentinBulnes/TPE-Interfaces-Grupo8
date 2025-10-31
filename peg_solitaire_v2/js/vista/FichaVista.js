@@ -26,7 +26,7 @@ export class FichaVista {
     }
 
     getPosFromRowCol(row_col) {
-        return row_col * this.cellSize + this.cellSize / 2;
+        return row_col * this.cellSize + this.cellSize / 2 + 17;
     }
 
     getInnerRadius() {
