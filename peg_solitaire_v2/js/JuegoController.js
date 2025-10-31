@@ -10,14 +10,17 @@ export class JuegoController {
         this.fichaArrastrada = null;
         this.offsetX = 0;
         this.offsetY = 0;
+        this.isMouseDown = false
 
         this.vista.dibujar();
 
         canvas.addEventListener("mousedown", (e) => this.mouseDown(e));
         canvas.addEventListener("mouseup", (e) => this.mouseUp(e));
+        canvas.addEventListener("mousemove", (e) => this.mouseMove(e));
     }
 
     mouseDown(e) {
+        this.isMouseDown = true;
         const mousePos = this.getMousePosition(e);
         this.offsetX = 0;
         this.offsetY = 0;
@@ -27,15 +30,20 @@ export class JuegoController {
             mousePos.y
         );
 
-        const ficha = this.tablero.obtenerFicha(fila, col);
-        if (ficha && ficha.tipo === 1) {
-            ficha.seleccionada = true;
-            this.fichaSeleccionada = ficha;
+        this.fichaSeleccionada = this.tablero.obtenerFicha(fila, col);
+        if (this.fichaSeleccionada && this.fichaSeleccionada.tipo === 1) {
+            this.fichaSeleccionada.seleccionada = true;
             this.vista.dibujar();
+            this.fichaArrastrada = this.vista.obtenerFicha(mousePos.x, mousePos.y);
+            if (this.fichaArrastrada != null) {
+                this.offsetX = mousePos.x - this.fichaArrastrada.posX;
+                this.offsetY = mousePos.y - this.fichaArrastrada.posY;
+            }
         }
     }
 
     mouseUp(e) {
+        this.isMouseDown = false;
         if (!this.fichaSeleccionada) return;
 
         const { fila, col } = this.vista.convertirXYaFilaColumna(
@@ -52,14 +60,12 @@ export class JuegoController {
     }
 
     mouseMove(e) {
-        if (isMouseDown && lastClickFigure != null) {
+        if (this.isMouseDown && this.fichaArrastrada != null) {
             const mousePos = this.getMousePosition(e);
-            const newPosX = mousePos.x - offsetX;
-            const newPosY = mousePos.y - offsetY;
-
-            console.log("Moviendo figura a:", newPosX, newPosY);
-            lastClickFigure.setPosition(newPosX, newPosY);
-            drawFigure();
+            const newPosX = mousePos.x - this.offsetX;
+            const newPosY = mousePos.y - this.offsetY;
+            this.fichaArrastrada.setPosition(newPosX, newPosY);
+            this.vista.refresh()
         }
     }
 

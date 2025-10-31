@@ -16,6 +16,7 @@ export class TableroVista {
     }
 
     dibujar() {
+        this.fichas = []
         const { ctx, tablero } = this;
         ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
@@ -43,5 +44,13 @@ export class TableroVista {
         for (const ficha of fichas) {
             ficha.dibujar();
         }
+    }
+
+    obtenerFicha(mouseX, mouseY) {
+        for (const ficha of this.fichas) {
+            if (ficha.isPointInside(mouseX, mouseY))
+                return ficha
+        }
+        return null
     }
 }
