@@ -1,4 +1,8 @@
 export class FichaVista {
+    idleColor = "#1e287a";
+    activeColor = "#3d5afe";
+    resaltadoColor = "#00e676";
+
     constructor(ctx, fila, col, tipo, cellSize, seleccionada = false) {
         this.ctx = ctx;
         this.cellSize = cellSize;
@@ -6,9 +10,6 @@ export class FichaVista {
         this.posX = this.getPosFromRowCol(col);
         this.tipo = tipo;
         this.seleccionada = seleccionada;
-        this.idleColor = "#1e287a"
-        this.activeColor = "#3d5afe"
-        this.resaltadoColor = "#00e676"
     }
 
     dibujar() {
@@ -42,8 +43,8 @@ export class FichaVista {
         return Math.sqrt(_x * _x + _y * _y) <= this.getInnerRadius();
     }
 
-    setPosition(newPosX, newPosY){
-        this.posX = newPosX
-        this.posY = newPosY
+    setPosition(newPosX, newPosY) {
+        this.posX = newPosX;
+        this.posY = newPosY;
     }
 }
