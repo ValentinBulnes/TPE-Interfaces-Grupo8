@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peg solitaire</title>
+</head>
+<body>
+    <canvas id="juego" width="664" height="664"></canvas>
+    <script type="module">
+        import { JuegoController } from "./js/peg_solitaire/JuegoController.js";
+        const canvas = document.getElementById("juego");
+        new JuegoController(canvas);
+    </script>
+</body>
+</html>
