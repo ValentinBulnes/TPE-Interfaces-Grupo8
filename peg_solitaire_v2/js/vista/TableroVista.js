@@ -4,8 +4,9 @@ export class TableroVista {
     constructor(canvas, tableroModelo) {
         this.canvas = canvas;
         this.ctx = canvas.getContext("2d");
-        this.tablero = tableroModelo; // tableroModelo -> [][]
+        this.tablero = tableroModelo.fichas; // rompi encapsulamiento asiq accedo directamente al estado interno
         this.cellSize = canvas.width / tableroModelo.size;
+        this.fichas = [];
     }
 
     convertirXYaFilaColumna(x, y) {
@@ -14,39 +15,33 @@ export class TableroVista {
         return { fila, col };
     }
 
-    // dibujar(_tablero = null) {
-    //     if (_tablero != null) this.tablero = _tablero
-    //     const { ctx, tablero } = this;
-    //     ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
-    //     for (const fila of tablero) {
-    //         for (const ficha of fila) {
-    //             // const ficha = tablero.fichas[fila][col];
-    //             if (ficha === null) continue;
-
-    //             const vistaFicha = new FichaVista(
-    //                 ctx,
-    //                 ficha.fila,
-    //                 ficha.columna,
-    //                 ficha.tipo,
     dibujar() {
         const { ctx, tablero } = this;
         ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-        for (let fila = 0; fila < tablero.size; fila++) {
-            for (let col = 0; col < tablero.size; col++) {
-                const ficha = tablero.fichas[fila][col];
+        for (const fila of tablero) {
+            for (const ficha of fila) {
                 if (ficha === null) continue;
 
                 const vistaFicha = new FichaVista(
                     ctx,
-                    fila,
-                    col,
+                    ficha.fila,
+                    ficha.columna,
+                    ficha.tipo,
                     this.cellSize,
                     ficha.seleccionada
                 );
+                this.fichas.push(vistaFicha);
                 vistaFicha.dibujar();
             }
+        }
+    }
+
+    refresh() {
+        const { ctx, fichas } = this;
+        ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        for (const ficha of fichas) {
+            ficha.dibujar();
         }
     }
 }

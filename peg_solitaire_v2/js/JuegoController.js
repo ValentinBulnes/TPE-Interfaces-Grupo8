@@ -4,7 +4,6 @@ import { TableroVista } from "./vista/TableroVista.js";
 export class JuegoController {
     constructor(canvas) {
         this.tablero = new TableroModelo();
-        // this.vista = new TableroVista(canvas, this.tablero.fichas);
         this.vista = new TableroVista(canvas, this.tablero);
 
         this.fichaSeleccionada = null;
@@ -19,9 +18,13 @@ export class JuegoController {
     }
 
     mouseDown(e) {
+        const mousePos = this.getMousePosition(e);
+        this.offsetX = 0;
+        this.offsetY = 0;
+
         const { fila, col } = this.vista.convertirXYaFilaColumna(
-            e.offsetX,
-            e.offsetY
+            mousePos.x,
+            mousePos.y
         );
 
         const ficha = this.tablero.obtenerFicha(fila, col);
@@ -46,5 +49,24 @@ export class JuegoController {
 
         // 🔁 Redibujar desde cero basado en el modelo actualizado
         this.vista.dibujar();
+    }
+
+    mouseMove(e) {
+        if (isMouseDown && lastClickFigure != null) {
+            const mousePos = this.getMousePosition(e);
+            const newPosX = mousePos.x - offsetX;
+            const newPosY = mousePos.y - offsetY;
+
+            console.log("Moviendo figura a:", newPosX, newPosY);
+            lastClickFigure.setPosition(newPosX, newPosY);
+            drawFigure();
+        }
+    }
+
+    getMousePosition(mouseEvent) {
+        return {
+            x: mouseEvent.offsetX,
+            y: mouseEvent.offsetY,
+        };
     }
 }
