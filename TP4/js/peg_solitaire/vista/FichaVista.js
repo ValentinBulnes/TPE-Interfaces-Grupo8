@@ -13,9 +13,7 @@ export class FichaVista {
     }
 
     dibujar() {
-        const { ctx, posX, posY, tipo, cellSize, seleccionada } = this;
-        if (tipo === null) return;
-
+        const { ctx, posX, posY, tipo, seleccionada } = this;
         // Dibuja ficha si corresponde
         if (tipo === 1) {
             ctx.fillStyle = seleccionada ? this.activeColor : this.idleColor;
@@ -33,9 +31,9 @@ export class FichaVista {
         return this.cellSize * 0.3;
     }
 
-    getOuterRadius() {
-        return this.cellSize * 0.4;
-    }
+    // getOuterRadius() {
+    //     return this.cellSize * 0.4;
+    // }
 
     isPointInside(x, y) {
         let _x = this.posX - x;

@@ -52,29 +52,24 @@ export class TableroModelo {
     esMovimientoValido(fichaOrigen, filaDestino, colDestino) {
         if (!fichaOrigen || fichaOrigen.tipo !== 1) return false;
         if (!this.esCeldaValida(filaDestino, colDestino)) return false;
+        if (this.tieneFicha(filaDestino, colDestino)) return false;
 
         const deltaFila = filaDestino - fichaOrigen.fila;
         const deltaCol = colDestino - fichaOrigen.columna;
 
-        if (Math.abs(deltaFila) === 2 && deltaCol === 0) {
-            const filaMedio = fichaOrigen.fila + deltaFila / 2;
-            const colMedio = fichaOrigen.columna;
-            return (
-                this.tieneFicha(filaMedio, colMedio) &&
-                !this.tieneFicha(filaDestino, colDestino)
-            );
-        }
+        // Solo se permiten saltos de 2 celdas en línea recta
+        if (
+            !(
+                (Math.abs(deltaFila) === 2 && deltaCol === 0) ||
+                (Math.abs(deltaCol) === 2 && deltaFila === 0)
+            )
+        )
+            return false;
 
-        if (Math.abs(deltaCol) === 2 && deltaFila === 0) {
-            const filaMedio = fichaOrigen.fila;
-            const colMedio = fichaOrigen.columna + deltaCol / 2;
-            return (
-                this.tieneFicha(filaMedio, colMedio) &&
-                !this.tieneFicha(filaDestino, colDestino)
-            );
-        }
+        const filaMedio = fichaOrigen.fila + deltaFila / 2;
+        const colMedio = fichaOrigen.columna + deltaCol / 2;
 
-        return false;
+        return this.tieneFicha(filaMedio, colMedio);
     }
 
     aplicarMovimiento(fichaOrigen, filaDestino, colDestino) {
