@@ -7,6 +7,11 @@ export class TableroVista {
         this.tablero = tableroModelo.fichas; // rompi encapsulamiento asiq accedo directamente al estado interno
         this.cellSize = canvas.width / tableroModelo.size;
         this.fichas = [];
+        this.backgroundImg = new Image();
+        this.backgroundImg.src = "tablero.png";
+        this.backgroundImg.onload = () => {
+            this.dibujar();
+        };
     }
 
     convertirXYaFilaColumna(x, y) {
@@ -16,16 +21,15 @@ export class TableroVista {
     }
 
     dibujar() {
-        this.fichas = []
-        const { ctx, tablero } = this;
-        ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.fichas = [];
+        this.clearCanvas();
 
-        for (const fila of tablero) {
+        for (const fila of this.tablero) {
             for (const ficha of fila) {
                 if (ficha === null) continue;
 
                 const vistaFicha = new FichaVista(
-                    ctx,
+                    this.ctx,
                     ficha.fila,
                     ficha.columna,
                     ficha.tipo,
@@ -39,18 +43,31 @@ export class TableroVista {
     }
 
     refresh() {
-        const { ctx, fichas } = this;
-        ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        for (const ficha of fichas) {
+        this.clearCanvas();
+        for (const ficha of this.fichas) {
             ficha.dibujar();
         }
     }
 
     obtenerFicha(mouseX, mouseY) {
         for (const ficha of this.fichas) {
-            if (ficha.isPointInside(mouseX, mouseY))
-                return ficha
+            if (ficha.isPointInside(mouseX, mouseY)) return ficha;
         }
-        return null
+        return null;
+    }
+
+    clearCanvas() {
+        const { ctx, backgroundImg, canvas } = this;
+        // Limpiar el canvas completamente
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Dibujar la imagen de fondo si está cargada
+        if (backgroundImg.complete) {
+            ctx.drawImage(backgroundImg, 0, 0, canvas.width, canvas.height);
+        } else {
+            // Si la imagen no está cargada aún, usar color de fondo temporal
+            ctx.fillStyle = "darkgray";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
     }
 }

@@ -40,6 +40,7 @@ export class JuegoController {
                 this.offsetY = mousePos.y - this.fichaArrastrada.posY;
             }
         }
+        // TODO: buscar movimientos posibles y resaltarlos
     }
 
     mouseUp(e) {
@@ -57,6 +58,7 @@ export class JuegoController {
 
         // 🔁 Redibujar desde cero basado en el modelo actualizado
         this.vista.dibujar();
+        // TODO: verificar condicion de ganado
     }
 
     mouseMove(e) {

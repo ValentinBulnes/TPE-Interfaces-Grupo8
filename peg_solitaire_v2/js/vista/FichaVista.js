@@ -6,21 +6,18 @@ export class FichaVista {
         this.posX = this.getPosFromRowCol(col);
         this.tipo = tipo;
         this.seleccionada = seleccionada;
+        this.idleColor = "#1e287a"
+        this.activeColor = "#3d5afe"
+        this.resaltadoColor = "#00e676"
     }
 
     dibujar() {
         const { ctx, posX, posY, tipo, cellSize, seleccionada } = this;
         if (tipo === null) return;
 
-        // Base de la celda
-        ctx.fillStyle = "#ddd";
-        ctx.beginPath();
-        ctx.arc(posX, posY, this.getOuterRadius(), 0, Math.PI * 2);
-        ctx.fill();
-
         // Dibuja ficha si corresponde
         if (tipo === 1) {
-            ctx.fillStyle = seleccionada ? "#2196f3" : "#333";
+            ctx.fillStyle = seleccionada ? this.activeColor : this.idleColor;
             ctx.beginPath();
             ctx.arc(posX, posY, this.getInnerRadius(), 0, Math.PI * 2);
             ctx.fill();
