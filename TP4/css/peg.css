@@ -3,6 +3,22 @@
     display: none !important;
 }
 
+/* Estilos específicos para el contenedor de ejecución del juego */
+#game-execution.game-page-section {
+    height: 800px;
+    position: relative;
+}
+
+/* Background del juego con opacidad (solo visible cuando el juego está activo) */
+#game-execution.game-page-section.jugando::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url('../img/peg_solitaire/fondoPeg.jpg') center;
+    opacity: 0.5;
+    z-index: -1;
+}
+
 /* Estilos específicos del contenedor del juego */
 #juego-peg {
     width: 100%;
@@ -10,8 +26,6 @@
     display: flex;
     align-items: stretch;
     justify-content: center;
-    padding: 0;
-    margin: 0;
     position: relative;
     overflow: hidden;
 }
@@ -22,7 +36,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 0;
     padding: 40px 60px;
     background-color: rgba(0, 0, 0, 0.8);
     border-radius: 20px;
@@ -69,6 +82,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 30px 40px;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
 }
 
 #game-info h2 {
@@ -195,7 +212,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 0;
     padding: 40px 60px;
     background-color: rgba(0, 0, 0, 0.8);
     border-radius: 20px;
@@ -222,8 +238,6 @@
     gap: 20px;
     justify-content: center;
     align-items: center;
-    flex-wrap: nowrap;
-    width: 100%;
 }
 
 #menu-seleccion-ficha-peg .ficha-opcion {
@@ -235,10 +249,6 @@
     flex-direction: column;
     align-items: center;
     gap: 8px;
-    margin-top: 0;
-    min-width: auto;
-    width: auto;
-    height: auto;
 }
 
 #menu-seleccion-ficha-peg .ficha-opcion img {

@@ -9,7 +9,7 @@ export class TableroVista {
         // this.cellSize = canvas.width / tableroModelo.size;
         this.fichas = [];
         this.backgroundImg = new Image();
-        this.backgroundImg.src = "./img/peg_solitaire/tablero.png";
+        this.backgroundImg.src = "./img/peg_solitaire/tablero2.png";
         this.backgroundImg.onload = () => {
             this.dibujar();
         };

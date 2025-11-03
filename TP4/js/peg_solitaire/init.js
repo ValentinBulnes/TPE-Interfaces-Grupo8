@@ -69,10 +69,9 @@ function mostrarMenuPrincipalPeg() {
     const gamePageSection = document.querySelector("#game-execution.game-page-section");
     const imagenFondo = gamePageSection ? gamePageSection.querySelector("img") : null;
 
-    // Agrandar el div game-page-section a 800px de altura y cambiar fondo
+    // Agregar clase para mostrar el background del juego
     if (gamePageSection) {
-        gamePageSection.style.height = "800px";
-        gamePageSection.style.backgroundColor = "#2e2e2e";
+        gamePageSection.classList.add("jugando");
     }
 
     // Ocultar la imagen de fondo

@@ -6,8 +6,7 @@ export class FichaVista {
     ];
     static fichaSeleccionada = 0;
     static imagenActual = null;
-    activeColor = "#3d5afe";
-    resaltadoColor = "#00e676";
+    activeColor = "#ffffff";
 
     constructor(ctx, fila, col, tipo, cellSize, seleccionada = false) {
         this.ctx = ctx;
@@ -72,7 +71,7 @@ export class FichaVista {
         const { ctx, posX, posY } = this;
         const radius = this.getInnerRadius();
         ctx.strokeStyle = this.activeColor;
-        ctx.lineWidth = 3;
+        ctx.lineWidth = 4;
         ctx.beginPath();
         ctx.arc(posX, posY, radius, 0, Math.PI * 2);
         ctx.stroke();
