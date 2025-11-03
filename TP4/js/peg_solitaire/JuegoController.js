@@ -89,7 +89,7 @@ export class JuegoController {
             const newPosX = mousePos.x - this.offsetX;
             const newPosY = mousePos.y - this.offsetY;
             this.fichaArrastrada.setPosition(newPosX, newPosY);
-            this.vista.refresh()
+            this.vista.refresh(this.fichaArrastrada)
         }
     }
 
@@ -133,15 +133,5 @@ export class JuegoController {
             clearInterval(this.temporizador);
             this.temporizador = null;
         }
-    }
-
-    reiniciar() {
-        this.detenerJuego();
-        this.tiempoRestante = 300;
-        this.tablero.inicializar();
-        this.fichaSeleccionada = null;
-        this.fichaArrastrada = null;
-        this.vista.dibujar();
-        this.iniciarTemporizador();
     }
 }

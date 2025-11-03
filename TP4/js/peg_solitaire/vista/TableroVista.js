@@ -5,7 +5,7 @@ export class TableroVista {
     constructor(canvas, tableroModelo) {
         this.canvas = canvas;
         this.ctx = canvas.getContext("2d");
-        this.tablero = tableroModelo.fichas; // rompi encapsulamiento asiq accedo directamente al estado interno
+        this.tableroModelo = tableroModelo; // Guardar referencia al modelo completo
         // this.cellSize = canvas.width / tableroModelo.size;
         this.fichas = [];
         this.backgroundImg = new Image();
@@ -25,7 +25,7 @@ export class TableroVista {
         this.fichas = [];
         this.clearCanvas();
 
-        for (const fila of this.tablero) {
+        for (const fila of this.tableroModelo.fichas) {
             for (const ficha of fila) {
                 if (ficha === null) continue;
 
@@ -43,10 +43,17 @@ export class TableroVista {
         }
     }
 
-    refresh() {
+    refresh(fichaArrastrada = null) {
         this.clearCanvas();
+        // Dibujar todas las fichas excepto la arrastrada
         for (const ficha of this.fichas) {
-            ficha.dibujar();
+            if (ficha !== fichaArrastrada) {
+                ficha.dibujar();
+            }
+        }
+        // Dibujar la ficha arrastrada al final para que esté encima
+        if (fichaArrastrada) {
+            fichaArrastrada.dibujar();
         }
     }
 

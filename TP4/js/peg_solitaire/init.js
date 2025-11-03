@@ -1,4 +1,5 @@
 import { JuegoController } from "./JuegoController.js";
+import { FichaVista } from "./vista/FichaVista.js";
 
 let juegoController = null;
 
@@ -88,12 +89,27 @@ function mostrarMenuPrincipalPeg() {
     }
 }
 
-function iniciarJuegoPeg() {
+function mostrarMenuSeleccionFicha() {
     const menuPrincipal = document.getElementById("menu-principal-peg");
+    const menuSeleccionFicha = document.getElementById("menu-seleccion-ficha-peg");
 
-    // Ocultar menú
+    // Ocultar menú principal
     if (menuPrincipal) {
         menuPrincipal.classList.add("oculto");
+    }
+
+    // Mostrar menú de selección de fichas
+    if (menuSeleccionFicha) {
+        menuSeleccionFicha.classList.remove("oculto");
+    }
+}
+
+function iniciarJuegoPeg() {
+    const menuSeleccionFicha = document.getElementById("menu-seleccion-ficha-peg");
+
+    // Ocultar menú de selección
+    if (menuSeleccionFicha) {
+        menuSeleccionFicha.classList.add("oculto");
     }
 
     // Mostrar juego
@@ -132,14 +148,26 @@ if (btnComenzarPeg) {
     btnComenzarPeg.addEventListener("click", mostrarMenuPrincipalPeg);
 }
 
-// Botón "Comenzar" del menú principal
+// Botón "Comenzar" del menú principal (muestra selección de fichas)
 const btnIniciarJuego = document.getElementById("btn-iniciar-juego");
 if (btnIniciarJuego) {
-    btnIniciarJuego.addEventListener("click", () => {
+    btnIniciarJuego.addEventListener("click", mostrarMenuSeleccionFicha);
+}
+
+// Botones de selección de fichas
+const fichasOpciones = document.querySelectorAll(".ficha-opcion");
+fichasOpciones.forEach((fichaBtn, indice) => {
+    fichaBtn.addEventListener("click", () => {
+        console.log("Ficha seleccionada:", indice);
+        
+        // Configurar la ficha seleccionada en FichaVista
+        FichaVista.seleccionarFicha(indice);
+        
+        // Iniciar el juego con la ficha seleccionada
         iniciarJuegoPeg();
         inicializarJuego();
     });
-}
+});
 
 // Botón reintentar (después de game over)
 const btnReintentar = document.getElementById("btn-reintentar");
@@ -164,5 +192,14 @@ const btnMenuPrincipal = document.getElementById("btn-menu-principal");
 if (btnMenuPrincipal) {
     btnMenuPrincipal.addEventListener("click", () => {
         volverAlMenuPeg();
+    });
+}
+
+// Botón reiniciar juego - reinicia el juego actual
+const btnReiniciarJuego = document.getElementById("btn-reiniciar-juego");
+if (btnReiniciarJuego) {
+    btnReiniciarJuego.addEventListener("click", () => {
+        ocultarMensajes();
+        inicializarJuego();
     });
 }

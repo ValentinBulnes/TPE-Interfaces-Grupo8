@@ -188,3 +188,74 @@
     flex: 1 1 auto;
     height: 100%;
 }
+
+/* Estilos del menú de selección de ficha */
+#menu-seleccion-ficha-peg {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    padding: 40px 60px;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    max-width: 600px;
+    text-align: center;
+}
+
+#menu-seleccion-ficha-peg h1 {
+    margin: 0 0 12px 0;
+    font-size: 2.5rem;
+    letter-spacing: 0.5px;
+}
+
+#menu-seleccion-ficha-peg h3 {
+    margin: 0 0 32px 0;
+    opacity: 0.9;
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+#menu-seleccion-ficha-peg .fichas-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    width: 100%;
+}
+
+#menu-seleccion-ficha-peg .ficha-opcion {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-top: 0;
+    min-width: auto;
+    width: auto;
+    height: auto;
+}
+
+#menu-seleccion-ficha-peg .ficha-opcion img {
+    width: 100px !important;
+    height: 100px !important;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    opacity: 1 !important;
+    transition: transform 0.3s ease, border 0.3s ease;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+}
+
+#menu-seleccion-ficha-peg .ficha-opcion:hover img {
+    transform: scale(1.2);
+    border: 4px solid #33eb8a;
+}
