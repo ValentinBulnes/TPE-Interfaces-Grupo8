@@ -160,7 +160,7 @@ fichasOpciones.forEach((fichaBtn, indice) => {
         console.log("Ficha seleccionada:", indice);
         
         // Configurar la ficha seleccionada en FichaVista
-        FichaVista.seleccionarFicha(indice);
+        FichaVista.seleccionarSkinFicha(indice);
         
         // Iniciar el juego con la ficha seleccionada
         iniciarJuegoPeg();

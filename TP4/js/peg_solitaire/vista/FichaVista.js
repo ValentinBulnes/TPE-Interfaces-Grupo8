@@ -1,10 +1,10 @@
 export class FichaVista {
-    static rutasFichas = [
+    static srcSkinFichas = [
         'img/peg_solitaire/ficha1.png',
         'img/peg_solitaire/ficha2.png',
         'img/peg_solitaire/ficha3.png'
     ];
-    static fichaSeleccionada = 0;
+    static indexSkinSeleccionado = 0;
     static imagenActual = null;
     activeColor = "#ffffff";
 
@@ -19,16 +19,16 @@ export class FichaVista {
         // Cargar la imagen si aún no está cargada
         if (!FichaVista.imagenActual) {
             FichaVista.imagenActual = new Image();
-            FichaVista.imagenActual.src = FichaVista.rutasFichas[FichaVista.fichaSeleccionada];
+            FichaVista.imagenActual.src = FichaVista.srcSkinFichas[FichaVista.indexSkinSeleccionado];
         }
     }
 
     // Método estático para cambiar la ficha seleccionada
-    static seleccionarFicha(numeroFicha) {
-        if (numeroFicha >= 0 && numeroFicha < FichaVista.rutasFichas.length) {
-            FichaVista.fichaSeleccionada = numeroFicha;
+    static seleccionarSkinFicha(skinIndex) {
+        if (skinIndex >= 0 && skinIndex < FichaVista.srcSkinFichas.length) {
+            FichaVista.indexSkinSeleccionado = skinIndex;
             FichaVista.imagenActual = new Image();
-            FichaVista.imagenActual.src = FichaVista.rutasFichas[numeroFicha];
+            FichaVista.imagenActual.src = FichaVista.srcSkinFichas[skinIndex];
         }
     }
 
