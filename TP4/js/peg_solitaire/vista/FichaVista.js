@@ -6,6 +6,7 @@ export class FichaVista {
     ];
     static indexSkinSeleccionado = 0;
     static imagenActual = null;
+    static contadorAnimacion = 0;
     activeColor = "#ffffff";
 
     constructor(ctx, fila, col, tipo, cellSize, seleccionada = false) {
@@ -68,8 +69,7 @@ export class FichaVista {
         }
 
         if (this.animar){
-            //TODO: hacer la animacion de posible destino en una ficha vacia
-            this.dibujarBorde()
+            this.dibujarAnimacionPulso()
         }
     }
 
@@ -80,6 +80,20 @@ export class FichaVista {
         ctx.lineWidth = 4;
         ctx.beginPath();
         ctx.arc(posX, posY, radius, 0, Math.PI * 2);
+        ctx.stroke();
+    }
+
+    dibujarAnimacionPulso() {
+        const { ctx, posX, posY } = this;
+        const radius = this.getInnerRadius();
+        
+        const pulso = Math.sin(FichaVista.contadorAnimacion);
+        const escala = 1 + (pulso * 0.2);
+        
+        ctx.strokeStyle = "#64C8FF";
+        ctx.lineWidth = 4;
+        ctx.beginPath();
+        ctx.arc(posX, posY, radius * escala, 0, Math.PI * 2);
         ctx.stroke();
     }
 

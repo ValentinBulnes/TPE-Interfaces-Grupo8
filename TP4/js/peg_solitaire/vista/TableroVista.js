@@ -50,8 +50,14 @@ export class TableroVista {
         }
     }
 
-    refresh(fichaArrastrada = null) {
+    refresh(fichaArrastrada = null, stepAnim = false) {
         this.clearCanvas();
+        
+        // Incrementar contador de animación UNA sola vez si corresponde
+        if (stepAnim) {
+            FichaVista.contadorAnimacion += 0.1;
+        }
+        
         // Dibujar todas las fichas excepto la arrastrada
         for (const ficha of this.fichas) {
             if (ficha !== fichaArrastrada) {
