@@ -72,6 +72,7 @@ export class JuegoController {
         const movimientoExitoso = this.tablero.aplicarMovimiento(this.fichaSeleccionada, fila, col);
         this.fichaSeleccionada.seleccionada = false;
         this.fichaSeleccionada = null;
+        this.fichaArrastrada = null;
 
         // 🔁 Redibujar desde cero basado en el modelo actualizado
         this.vista.dibujar();
