@@ -102,29 +102,57 @@ export class TableroModelo {
         return this.contarFichasRestantes() === 1;
     }
 
-    obtenerMovimientosPosibles() {
-        const movimientos = [];
-        const direcciones = [[-2, 0], [2, 0], [0, -2], [0, 2]];
+    obtenerMovimientosPosibles(fichaSeleccionada) {
+        const fichasDestino = [];
+        const direcciones = [
+            [-2, 0],
+            [2, 0],
+            [0, -2],
+            [0, 2],
+        ];
+
+        for (let [df, dc] of direcciones) {
+            const filaDestino = fichaSeleccionada.fila + df;
+            const colDestino = fichaSeleccionada.columna + dc;
+            if (
+                this.esMovimientoValido(
+                    fichaSeleccionada,
+                    filaDestino,
+                    colDestino
+                )
+            ) {
+                fichasDestino.push(this.obtenerFicha(filaDestino, colDestino));
+            }
+        }
+
+        return fichasDestino;
+    }
+
+    hayMovimientosDisponibles() {
+        const direcciones = [
+            [-2, 0],
+            [2, 0],
+            [0, -2],
+            [0, 2],
+        ];
 
         for (let fila of this.fichas) {
             for (let ficha of fila) {
                 if (ficha && ficha.tipo === 1) {
                     for (let [df, dc] of direcciones) {
-                        if (this.esMovimientoValido(ficha, ficha.fila + df, ficha.columna + dc)) {
-                            movimientos.push({
-                                origen: ficha,
-                                destino: { fila: ficha.fila + df, columna: ficha.columna + dc }
-                            });
+                        if (
+                            this.esMovimientoValido(
+                                ficha,
+                                ficha.fila + df,
+                                ficha.columna + dc
+                            )
+                        ) {
+                            return true;
                         }
                     }
                 }
             }
         }
-        return movimientos;
-    }
-
-    hayMovimientosDisponibles() {
-        return this.obtenerMovimientosPosibles().length > 0;
+        return false;
     }
 }
-

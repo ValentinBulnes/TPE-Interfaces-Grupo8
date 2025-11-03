@@ -21,6 +21,13 @@ export class TableroVista {
         return { fila, col };
     }
 
+    convertirColFilaaXY(col, fila) {
+        const ficha = this.fichas[0];
+        const x = ficha.getPosFromRowCol(col);
+        const y = ficha.getPosFromRowCol(fila);
+        return { x: x, y: y };
+    }
+
     dibujar() {
         this.fichas = [];
         this.clearCanvas();
@@ -62,6 +69,17 @@ export class TableroVista {
             if (ficha.isPointInside(mouseX, mouseY)) return ficha;
         }
         return null;
+    }
+
+    // posFichas: [{x,y}]
+    animarFichas(posFichas) {
+        for (const pos of posFichas){
+            const fichaPosible = this.obtenerFicha(pos.x, pos.y)
+            console.log(fichaPosible, pos.x, pos.y)
+            if (fichaPosible)
+                fichaPosible.animar = true
+            // resetea solo en vista.dibujar
+        }
     }
 
     clearCanvas() {

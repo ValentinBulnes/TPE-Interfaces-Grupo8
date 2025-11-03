@@ -50,8 +50,14 @@ export class JuegoController {
                 this.offsetX = mousePos.x - this.fichaArrastrada.posX;
                 this.offsetY = mousePos.y - this.fichaArrastrada.posY;
             }
+
+            const fichasPosibleDestino =
+                this.tablero.obtenerMovimientosPosibles(this.fichaSeleccionada);
+            if (fichasPosibleDestino.length > 0) {
+                const posPosibleDestino = fichasPosibleDestino.map((ficha) => this.vista.convertirColFilaaXY(ficha.columna, ficha.fila));
+                this.vista.animarFichas(posPosibleDestino);
+            }
         }
-        // TODO: buscar movimientos posibles y resaltarlos
     }
 
     mouseUp(e) {

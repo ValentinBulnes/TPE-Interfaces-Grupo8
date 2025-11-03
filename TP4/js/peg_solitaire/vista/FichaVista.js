@@ -15,6 +15,7 @@ export class FichaVista {
         this.posX = this.getPosFromRowCol(col);
         this.tipo = tipo;
         this.seleccionada = seleccionada;
+        this.animar = false
         
         // Cargar la imagen si aún no está cargada
         if (!FichaVista.imagenActual) {
@@ -64,6 +65,11 @@ export class FichaVista {
                     this.dibujarBorde();
                 }
             }
+        }
+
+        if (this.animar){
+            //TODO: hacer la animacion de posible destino en una ficha vacia
+            this.dibujarBorde()
         }
     }
 
