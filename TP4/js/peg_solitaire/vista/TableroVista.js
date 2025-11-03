@@ -66,16 +66,7 @@ export class TableroVista {
 
     clearCanvas() {
         const { ctx, backgroundImg, canvas } = this;
-        // Limpiar el canvas completamente
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        // Dibujar la imagen de fondo si está cargada
-        if (backgroundImg.complete) {
-            ctx.drawImage(backgroundImg, 0, 0, canvas.width, canvas.height);
-        } else {
-            // Si la imagen no está cargada aún, usar color de fondo temporal
-            ctx.fillStyle = "darkgray";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-        }
+        ctx.drawImage(backgroundImg, 0, 0, canvas.width, canvas.height);
     }
 }
