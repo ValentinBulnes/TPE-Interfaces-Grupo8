@@ -1,11 +1,11 @@
 import { FichaVista } from "./FichaVista.js";
 
 export class TableroVista {
-    cellSize = 90
+    cellSize = 90;
     constructor(canvas, tableroModelo) {
         this.canvas = canvas;
         this.ctx = canvas.getContext("2d");
-        this.tableroModelo = tableroModelo; // Guardar referencia al modelo completo
+        this.fichasTableroModelo = tableroModelo.fichas; // rompi encapsulamiento al acceder directamente al estado interno. NOTA: va en contra de MVC y POO, pero funciona
         // this.cellSize = canvas.width / tableroModelo.size;
         this.fichas = [];
         this.backgroundImg = new Image();
@@ -25,7 +25,7 @@ export class TableroVista {
         this.fichas = [];
         this.clearCanvas();
 
-        for (const fila of this.tableroModelo.fichas) {
+        for (const fila of this.fichasTableroModelo) {
             for (const ficha of fila) {
                 if (ficha === null) continue;
 
