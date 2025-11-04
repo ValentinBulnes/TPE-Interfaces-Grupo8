@@ -2,6 +2,11 @@ import { TableroModelo } from "./modelo/TableroModelo.js";
 import { TableroVista } from "./vista/TableroVista.js";
 
 export class JuegoController {
+	/**
+	 * Constructor del controlador del juego.
+	 * Inicializa el tablero, la vista, los callbacks y los event listeners del mouse.
+	 * También inicializa el temporizador y el estado del drag and drop.
+	 */
 	constructor(canvas, onVictoria = null, onGameOver = null) {
 		this.tablero = new TableroModelo();
 		this.vista = new TableroVista(canvas, this.tablero);
@@ -34,6 +39,11 @@ export class JuegoController {
 		this.iniciarTemporizador();
 	}
 
+	/**
+	 * Maneja el evento de presionar el mouse.
+	 * Detecta la ficha seleccionada, calcula los movimientos posibles,
+	 * marca la ficha como seleccionada y prepara el arrastre.
+	 */
 	mouseDown(e) {
 		this.isMouseDown = true;
 		const mousePos = this.getMousePosition(e);
@@ -74,6 +84,11 @@ export class JuegoController {
 		}
 	}
 
+	/**
+	 * Maneja el evento de soltar el mouse.
+	 * Intenta aplicar el movimiento de la ficha al destino y verifica
+	 * las condiciones de victoria o game over.
+	 */
 	mouseUp(e) {
 		this.isMouseDown = false;
 		if (!this.fichaSeleccionada) return;
@@ -107,6 +122,10 @@ export class JuegoController {
 		}
 	}
 
+	/**
+	 * Maneja el evento de mover el mouse.
+	 * Actualiza la posición de la ficha arrastrada mientras se mueve el mouse.
+	 */
 	mouseMove(e) {
 		if (this.isMouseDown && this.fichaArrastrada != null) {
 			const mousePos = this.getMousePosition(e);
@@ -118,6 +137,10 @@ export class JuegoController {
 		}
 	}
 
+	/**
+	 * Obtiene la posición del mouse relativa al canvas.
+	 * Retorna las coordenadas x e y del evento del mouse.
+	 */
 	getMousePosition(mouseEvent) {
 		return {
 			x: mouseEvent.offsetX,
@@ -129,6 +152,11 @@ export class JuegoController {
 	// MANEJO DEL TEMPORIZADOR
 	// ============================================
 
+	/**
+	 * Inicia el temporizador del juego.
+	 * Configura un intervalo que decrementa el tiempo cada segundo y
+	 * finaliza el juego cuando el tiempo se agota.
+	 */
 	iniciarTemporizador() {
 		if (this.temporizador) clearInterval(this.temporizador);
 
@@ -151,6 +179,10 @@ export class JuegoController {
 		}, 1000);
 	}
 
+	/**
+	 * Actualiza el display del tiempo en la interfaz.
+	 * Convierte los segundos restantes a formato minutos:segundos y lo muestra.
+	 */
 	actualizarDisplayTiempo() {
 		const minutos = Math.floor(this.tiempoRestante / 60);
 		const segundos = this.tiempoRestante % 60;
@@ -161,6 +193,10 @@ export class JuegoController {
 		}
 	}
 
+	/**
+	 * Detiene el juego cancelando el temporizador y la animación.
+	 * Limpia todos los intervalos y animaciones activas.
+	 */
 	detenerJuego() {
 		if (this.temporizador) {
 			clearInterval(this.temporizador);
@@ -173,6 +209,11 @@ export class JuegoController {
 	// MANEJO DE LA ANIMACIÓN
 	// ============================================
 
+	/**
+	 * Inicia el loop de animación del juego.
+	 * Usa requestAnimationFrame para actualizar el canvas continuamente
+	 * mientras se arrastra una ficha.
+	 */
 	iniciarAnimacion() {
 		if (this.isAnimating) return;
 		
@@ -190,6 +231,10 @@ export class JuegoController {
 		animate();
 	}
 
+	/**
+	 * Detiene el loop de animación.
+	 * Cancela el requestAnimationFrame y resetea el estado de animación.
+	 */
 	detenerAnimacion() {
 		this.isAnimating = false;
 		if (this.animationFrameId) {

@@ -3,14 +3,14 @@ import { FichaVista } from "./vista/FichaVista.js";
 
 let juegoController = null;
 
-// ============================================
-// INICIALIZACIÓN DEL JUEGO
-// ============================================
-
+/**
+ * Inicializa el juego creando una nueva instancia del controlador.
+ * Si ya existe un juego anterior, lo detiene antes de crear uno nuevo.
+ */
 function inicializarJuego() {
     const canvas = document.getElementById("canvas");
     if (canvas) {
-        // Si ya existe un controlador, detener el juego anterior
+
         if (juegoController) {
             juegoController.detenerJuego();
         }
@@ -24,10 +24,10 @@ function inicializarJuego() {
     }
 }
 
-// ============================================
-// MENSAJES DE UI
-// ============================================
-
+/**
+ * Muestra el mensaje de victoria en la interfaz.
+ * Remueve la clase oculto y agrega la clase aparecer para hacer visible el mensaje.
+ */
 function mostrarVictoria() {
     const mensajeVictoria = document.getElementById("mensaje-victoria");
     if (mensajeVictoria) {
@@ -36,6 +36,10 @@ function mostrarVictoria() {
     }
 }
 
+/**
+ * Muestra el mensaje de game over en la interfaz.
+ * Remueve la clase oculto y agrega la clase aparecer para hacer visible el mensaje.
+ */
 function mostrarGameOver() {
     const mensajeGameOver = document.getElementById("mensaje-gameover");
     if (mensajeGameOver) {
@@ -44,6 +48,10 @@ function mostrarGameOver() {
     }
 }
 
+/**
+ * Oculta todos los mensajes de victoria y game over.
+ * Agrega la clase oculto y remueve la clase aparecer para ocultar los mensajes.
+ */
 function ocultarMensajes() {
     const mensajeVictoria = document.getElementById("mensaje-victoria");
     const mensajeGameOver = document.getElementById("mensaje-gameover");
@@ -63,6 +71,11 @@ function ocultarMensajes() {
 // NAVEGACIÓN DEL JUEGO
 // ============================================
 
+/**
+ * Muestra el menú principal del juego peg solitaire.
+ * Configura el fondo del juego, oculta la imagen de fondo y el botón de comenzar,
+ * y muestra el menú principal.
+ */
 function mostrarMenuPrincipalPeg() {
     const menuPrincipal = document.getElementById("menu-principal-peg");
     const btnComenzarPeg = document.querySelector(".play-btn.game-btn");
@@ -88,6 +101,10 @@ function mostrarMenuPrincipalPeg() {
     }
 }
 
+/**
+ * Muestra el menú de selección de fichas y oculta el menú principal.
+ * Cambia la visibilidad de los elementos del menú para navegar entre pantallas.
+ */
 function mostrarMenuSeleccionFicha() {
     const menuPrincipal = document.getElementById("menu-principal-peg");
     const menuSeleccionFicha = document.getElementById("menu-seleccion-ficha-peg");
@@ -103,6 +120,10 @@ function mostrarMenuSeleccionFicha() {
     }
 }
 
+/**
+ * Inicia el juego ocultando el menú de selección de fichas y mostrando el canvas del juego.
+ * Hace visible la sección donde se renderiza el tablero del juego.
+ */
 function iniciarJuegoPeg() {
     const menuSeleccionFicha = document.getElementById("menu-seleccion-ficha-peg");
 
@@ -118,6 +139,11 @@ function iniciarJuegoPeg() {
     }
 }
 
+/**
+ * Vuelve al menú principal del juego.
+ * Detiene el juego actual, oculta los mensajes y cambia la visibilidad de los elementos
+ * para mostrar el menú principal y ocultar el juego.
+ */
 function volverAlMenuPeg() {
     const juegoPeg = document.getElementById("juego-peg");
     const menuPrincipal = document.getElementById("menu-principal-peg");
