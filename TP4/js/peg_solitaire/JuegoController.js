@@ -154,7 +154,7 @@ export class JuegoController {
 	actualizarDisplayTiempo() {
 		const minutos = Math.floor(this.tiempoRestante / 60);
 		const segundos = this.tiempoRestante % 60;
-		const displayElement = document.querySelector("#game-info h2:last-child");
+		const displayElement = document.querySelector("#game-info h2");
 
 		if (displayElement) {
 			displayElement.textContent = `${minutos}:${segundos.toString().padStart(2, "0")}`;
