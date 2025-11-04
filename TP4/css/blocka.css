@@ -62,8 +62,6 @@
 }
 
 #game-info {
-    font-size: 1.5rem;
-    font-weight: bold;
     color: var(--color-text);
     padding: 10px 20px;
     background-color: rgba(0, 0, 0, 0.7);

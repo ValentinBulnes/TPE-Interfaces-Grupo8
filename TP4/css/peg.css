@@ -75,25 +75,16 @@
 }
 
 #game-info {
-    font-size: 1.2rem;
-    font-weight: bold;
     color: var(--color-text);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 30px 40px;
-    background-color: rgba(0, 0, 0, 0.8);
-    border-radius: 20px;
+    padding: 10px 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: var(--border-rad-s);
     backdrop-filter: blur(10px);
-}
-
-#game-info h2 {
-    margin-top: var(--padding-s);
-}
-
-#game-info h3 {
-    margin: 0;
+    gap: 10px;
 }
 
 #mensaje-victoria {
