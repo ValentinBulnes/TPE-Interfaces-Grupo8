@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego2</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>
+    <link rel="stylesheet" href="./css/root.css">
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/blocka.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="header-left">
+                <button class="icon-btn menu-toggle" aria-label="Abrir menú">
+                    <iconify-icon icon="lucide:menu"></iconify-icon>
+                </button>
+
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="img/logo.svg" alt="GameCenter" class="logo-img">
+                    </a>
+                </div>
+            </div>
+
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="¿Qué querés jugar hoy?">
+                <button class="search-btn" aria-label="Buscar">
+                    <iconify-icon icon="lucide:search"></iconify-icon>
+                </button>
+            </div>
+
+            <div class="header-right">
+                <button class="icon-btn cart-btn" aria-label="Carrito">
+                    <iconify-icon icon="lucide:shopping-cart"></iconify-icon>
+                </button>
+                <button class="user-avatar-btn" aria-label="Menú de usuario">
+                    <div class="user-avatar">
+                        <img src="img/avatars/avatar_1.png" alt="Avatar de usuario" class="avatar-img">
+                        <div class="status-indicator"></div>
+                    </div>
+                    <iconify-icon icon="lucide:x" class="close-icon hidden"></iconify-icon>
+                </button>
+            </div>
+        </div>
+
+        <!-- Menú desplegable de navegación -->
+        <nav class="dropdown-menu">
+            <ul class="menu-list">
+                <li class="menu-item menu-main">
+                    <a href="index.html" class="menu-link">
+                        <iconify-icon icon="lucide:home"></iconify-icon>
+                        <span>Inicio</span>
+                    </a>
+                </li>
+                <li class="menu-item menu-main">
+                    <a href="#" class="menu-link">
+                        <iconify-icon icon="lucide:flame"></iconify-icon>
+                        <span>De moda</span>
+                    </a>
+                </li>
+                <li class="menu-item menu-main">
+                    <a href="#" class="menu-link">
+                        <iconify-icon icon="lucide:rocket"></iconify-icon>
+                        <span>Novedades</span>
+                    </a>
+                </li>
+                <li class="menu-item menu-main active">
+                    <a href="#" class="menu-link">
+                        <iconify-icon icon="lucide:layout-grid"></iconify-icon>
+                        <span>Todas las categorías</span>
+                    </a>
+                </li>
+                <div class="menu-separator"></div>
+                <li class="menu-item menu-category">
+                    <a href="#" class="menu-link">
+                        <iconify-icon icon="fluent-emoji-flat:crossed-swords"></iconify-icon>
+                        <span>Acción</span>
+                    </a>
+                </li>
+                <li class="menu-item menu-category">
+                    <a href="#" class="menu-link">
+                        <iconify-icon icon="fluent-emoji-flat:world-map"></iconify-icon>
+                        <span>Aventura</span>
+                    </a>
+                </li>
+                <li class="menu-item menu-category">
+                    <a href="#" class="menu-link">
+                        <iconify-icon icon="fluent-emoji-flat:puzzle-piece"></iconify-icon>
+                        <span>Puzzles</span>
+                    </a>
+                </li>
+                <li class="menu-item menu-category">
+                    <a href="#" class="menu-link">
+                        <iconify-icon icon="fluent-emoji-flat:soccer-ball"></iconify-icon>
+                        <span>Deportes</span>
+                    </a>
+                </li>
+                <li class="menu-item menu-category">
+                    <a href="#" class="menu-link">
+                        <iconify-icon icon="fluent-emoji-flat:chess-pawn"></iconify-icon>
+                        <span>Estrategia</span>
+                    </a>
+                </li>
+                <li class="menu-item menu-category">
+                    <a href="#" class="menu-link">
+                        <iconify-icon icon="fluent-emoji-flat:crystal-ball"></iconify-icon>
+                        <span>Rol</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Menú desplegable de usuario -->
+        <nav class="user-dropdown-menu">
+            <div class="user-menu-header">
+                <img src="img/avatars/avatar_1.png" alt="Avatar de usuario" class="user-menu-avatar">
+                <h3 class="user-menu-name">PlayerOne</h3>
+            </div>
+            <div class="user-menu-separator"></div>
+            <ul class="user-menu-list">
+                <li class="user-menu-item">
+                    <a href="#" class="user-menu-link">Perfil</a>
+                </li>
+                <li class="user-menu-item">
+                    <a href="#" class="user-menu-link">Amigos</a>
+                </li>
+                <li class="user-menu-item">
+                    <a href="#" class="user-menu-link">Favoritos</a>
+                </li>
+                <li class="user-menu-item">
+                    <a href="#" class="user-menu-link">Biblioteca</a>
+                </li>
+                <li class="user-menu-item">
+                    <a href="#" class="user-menu-link">Configuracion</a>
+                </li>
+                <li class="user-menu-item logout">
+                    <a href="#" class="user-menu-link">
+                        <span>Cerrar sesion</span>
+                        <iconify-icon icon="lucide:log-out"></iconify-icon>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main id="game-page-main">
+        <div class="game-page-section" id="breadcrumb">
+            <nav>
+                <ol>
+                    <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
+                    <li class="breadcrumb-separator">›</li>
+                    <li class="breadcrumb-item"><a href="#">Juegos</a></li>
+                    <li class="breadcrumb-separator">›</li>
+                    <li class="breadcrumb-item"><a href="#">Puzzles</a></li>
+                    <li class="breadcrumb-separator">›</li>
+                    <li class="breadcrumb-item active"><a href="juego2.html">BLOCKA Mario Bros.</a>
+                    </li>
+                </ol>
+            </nav>
+        </div>
+        <div class="game-page-section" id="game-execution"
+            style="background-image: url('img/cards-big/BLOCKAmario2.png');">
+            <button class="play-btn game-btn" id="btn-comenzar-blocka">
+                <iconify-icon icon="lucide-play"></iconify-icon>
+            </button>
+            <!-- Menú Principal del Juego -->
+            <div id="menu-principal-blocka" class="oculto">
+                <h1>BLOCKA: Mario Bros.</h1>
+                <h3>Rota los cuadrantes para completar la imagen</h3>
+                <p>El juego consta de 6 niveles</p>
+                <p>Completá todos los niveles para ganar el juego</p>
+                <p>¡Cuanto menor sea el tiempo, mejor!</p>
+                <button id="btn-iniciar-juego" class="btn-menu-jugar btn-hover-primary">Comenzar</button>
+            </div>
+
+            <!-- Pantalla previa de nivel -->
+            <div id="pantalla-previa" class="oculto">
+                <h2>Preparando nivel...</h2>
+                <div id="contenedor-thumbnails">
+                    <img src="img/blocka/1x1/mario1-1x1.jpeg" alt="Imagen 1">
+                    <img src="img/blocka/1x1/mario2-1x1.jpg" alt="Imagen 2">
+                    <img src="img/blocka/1x1/mario3-1x1.jpg" alt="Imagen 3">
+                    <img src="img/blocka/1x1/mario4-1x1.jpg" alt="Imagen 4">
+                    <img src="img/blocka/1x1/mario5-1x1.jpg" alt="Imagen 5">
+                    <img src="img/blocka/1x1/mario6-1x1.jpg" alt="Imagen 6">
+                    <img src="img/blocka/1x1/mario7-1x1.jpg" alt="Imagen 7">
+                    <img src="img/blocka/1x1/mario8-1x1.jpg" alt="Imagen 8">
+                </div>
+            </div>
+
+            <!-- Contenedor del juego Blocka -->
+            <div id="juego-blocka" class="oculto">
+                <div class="left-bar">
+                    <button id="btn-menu-principal" class="btn-hover-primary">Menú Principal</button>
+                </div>
+                <canvas id="canvas" width="664" height="664"></canvas>
+                <div id="game-info">
+                    <h3>Tiempo total: 0s</h3>
+                    <h2 id="nivel-indicador">Nivel 1</h2>
+                    <h3 id="temporizador">Tiempo: 0s</h3>
+                    <button id="btn-ayuda" class="btn-hover-primary">Ayudita (+5s)</button>
+                </div>
+                <div id="mensaje-victoria" class="oculto">
+                    <h1>¡NIVEL COMPLETADO!</h1>
+                    <p id="mensaje-tiempo"></p>
+                    <div id="botones-victoria">
+                        <button id="btn-siguiente-nivel" class="btn-hover-primary">Siguiente Nivel</button>
+                        <button id="btn-jugar-nuevo" class="btn-hover-primary" style="display: none;">Jugar de nuevo</button>
+                    </div>
+                </div>
+                <div id="mensaje-gameover" class="oculto">
+                    <h1>¡TIEMPO AGOTADO!</h1>
+                    <p>No completaste el nivel a tiempo. ¡Inténtalo de nuevo!</p>
+                    <div id="botones-gameover">
+                        <button id="btn-reintentar" class="btn-hover-primary">Reintentar (+5s)</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="game-page-section" id="game-title">
+            <h1>BLOCKA Mario Bros.</h1>
+            <div id="game-title-actions">
+                <button class="icon-btn">
+                    <iconify-icon icon="lucide:heart"></iconify-icon>
+                </button>
+                <button class="icon-btn">
+                    <iconify-icon icon="lucide:thumbs-up"></iconify-icon>
+                </button>
+                <button class="icon-btn">
+                    <iconify-icon icon="lucide:thumbs-down"></iconify-icon>
+                </button>
+                <button class="icon-btn" id="share-button">
+                    <iconify-icon icon="lucide:share-2"></iconify-icon>
+                    <label>Compartir</label>
+                </button>
+
+                <!-- Menu de compartir -->
+                <div id="share-menu" class="hidden">
+                    <h3>Compartir en:</h3>
+                    <ul>
+                        <li><a href="#"><iconify-icon icon="pajamas:twitter"></iconify-icon>Twitter</a></li>
+                        <li><a href="#"><iconify-icon icon="lucide:instagram"></iconify-icon>Instagram</a></li>
+                        <li><a href="#"><iconify-icon icon="lucide:facebook"></iconify-icon>Facebook</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <section class="game-page-section" id="about-game">
+            <article id="how-to-play">
+                <h3>Cómo jugar</h3>
+                <ul>
+                    <li>Al comenzar, la imagen aparece dividida en partes giradas.</li>
+                    <li>Hacé clic izquierdo para rotar a la izquierda o derecho para rotar a la derecha.</li>
+                    <li>Armá la imagen completa en el menor tiempo posible.</li>
+                    <li>Si necesitás ayuda, a partir del nivel 3 podés usar “Ayudita”, pero suma 5 segundos.</li>
+                    <li>Cada nivel tiene una nueva imagen, más filtros y más dificultad.</li>
+                    <li>Y cuidado! El ultimo nivel es a contrareloj!</li>
+                </ul>
+            </article>
+
+            <article id="gallery">
+                <div class="video-thumb">
+                    <img src="img/juego/videomario.png" alt="Captura del juego 1">
+                    <button class="play-btn video-btn">
+                        <iconify-icon icon="lucide-play"></iconify-icon>
+                    </button>
+                </div>
+                <img src="img/juego/galeriamario1.jpg" alt="Captura del juego 2">
+                <img src="img/juego/galeriamario2.jpg" alt="Captura del juego 3">
+                <img src="img/juego/galeriamario3.jpg" alt="Captura del juego 4">
+            </article>
+
+            <div class="flex-row">
+                <article id="description">
+                    <h3>Descripción</h3>
+                    <p>En el mundo pixelado de Mario, algo salió mal: un misterioso fallo del Reino Champiñón rompió la
+                        realidad en pedazos. Las imágenes del universo de Mario quedaron fragmentadas y giradas, como si
+                        el tiempo mismo hubiera perdido el equilibrio. Solo vos podés restaurar el orden, rotando los
+                        bloques para devolverle su forma al mundo. Cada nivel es una dimensión distorsionada, un desafío
+                        visual donde el color, la luz y la lógica se combinan para reconstruir la esencia del clásico
+                        héroe.</p>
+                    <p>Más información en la <a href="#">página de Nintendo.</a></p>
+                </article>
+
+                <aside class="about-game-article" id="game-details">
+                    <h3>Detalles del juego</h3>
+                    <div class="separator"></div>
+                    <ul>
+                        <li>Categoría: <strong>Puzzles</strong></li>
+                        <li>Desarrollador: <strong>Grupo 8 Studios</strong></li>
+                        <li>Modo: <strong>1 jugador</strong></li>
+                        <li>Dificultad: <strong>Facil</strong></li>
+                        <li>Duración aproximada: <strong>6 min</strong></li>
+                        <li>Fecha de lanzamiento: <strong>Octubre 2025</strong></li>
+                        <li>Valoración de usuarios: <strong>60%</strong></li>
+                        <li>En favoritos: <strong>479 jugadores</strong></li>
+                    </ul>
+                </aside>
+            </div>
+        </section>
+        <div class="comunidad-container">
+            <h2>Comunidad</h2>
+            <h3>4 comentarios</h3>
+            <div class="comentar-container">
+                <img src="img/avatars/avatar_1.png" alt="Avatar de usuario" class="avatar-img avatar-comunidad-img">
+                <input type="text" placeholder="Agrega tu comentario...">
+                <button class="comentar-btn">Comentar</button>
+            </div>
+            <div class="comentario-container">
+                <div class="comentario-avatar">
+                    <img src="img/avatars/avatar_5.jpg" alt="Avatar de usuario" class="avatar-img avatar-comunidad-img">
+                </div>
+                <div class="comentario-info">
+                    <div class="comentario-header">
+                        <h3 class="comentario-nombre">CyberNova</h3>
+                        <p class="comentario-tiempo">hace 2 horas</p>
+                    </div>
+                    <p class="comentario-texto">Increíble experiencia. Los gráficos son espectaculares, la música te
+                        mete de lleno en la acción y el sistema de progresión está muy bien balanceado. Se nota que los
+                        desarrolladores pusieron mucho amor al detalle. Llevo más de 40 horas y todavía sigo encontrando
+                        cosas nuevas. Totalmente recomendado. Ademas...</p>
+                    <button class="comentario-ver-mas">Ver más</button>
+                    <div class="comentario-likes">
+                        <div class="like-group">
+                            <iconify-icon icon="lucide:thumbs-up"></iconify-icon>
+                            <p>2</p>
+                        </div>
+                        <div class="dislike-group">
+                            <iconify-icon icon="lucide:thumbs-down"></iconify-icon>
+                            <p>1</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="comentario-container">
+                <div class="comentario-avatar">
+                    <img src="img/avatars/avatar_6.jpg" alt="Avatar de usuario" class="avatar-img avatar-comunidad-img">
+                </div>
+                <div class="comentario-info">
+                    <div class="comentario-header">
+                        <h3 class="comentario-nombre">CrimsonWolf</h3>
+                        <p class="comentario-tiempo">hace 2 días</p>
+                    </div>
+                    <p class="comentario-texto">Tiene buenas ideas, pero la ejecución no convence. Los controles son
+                        algo torpes y el rendimiento baja en ciertos niveles.</p>
+                    <div class="comentario-likes">
+                        <div class="like-group">
+                            <iconify-icon icon="lucide:thumbs-up"></iconify-icon>
+                            <p>1</p>
+                        </div>
+                        <div class="dislike-group">
+                            <iconify-icon icon="lucide:thumbs-down"></iconify-icon>
+                            <p>4</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="comentario-container">
+                <div class="comentario-avatar">
+                    <img src="img/avatars/avatar_7.png" alt="Avatar de usuario" class="avatar-img avatar-comunidad-img">
+                </div>
+                <div class="comentario-info">
+                    <div class="comentario-header">
+                        <h3 class="comentario-nombre">ZeroByte</h3>
+                        <p class="comentario-tiempo">hace 4 días</p>
+                    </div>
+                    <p class="comentario-texto">Divertido y adictivo. Algunas misiones se repiten un poco, pero el
+                        gameplay lo compensa. Ideal para jugar con amigos.</p>
+                    <div class="comentario-likes">
+                        <div class="like-group">
+                            <iconify-icon icon="lucide:thumbs-up"></iconify-icon>
+                            <p>10</p>
+                        </div>
+                        <div class="dislike-group">
+                            <iconify-icon icon="lucide:thumbs-down"></iconify-icon>
+                            <p>3</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="comentario-container">
+                <div class="comentario-avatar">
+                    <img src="img/avatars/avatar_8.jpg" alt="Avatar de usuario" class="avatar-img avatar-comunidad-img">
+                </div>
+                <div class="comentario-info">
+                    <div class="comentario-header">
+                        <h3 class="comentario-nombre">LunaBlade</h3>
+                        <p class="comentario-tiempo">hace 2 semanas</p>
+                    </div>
+                    <p class="comentario-texto">Una decepción total. Bugs por todos lados, tiempos de carga eternos y
+                        servidores que se caen cada dos por tres. No lo recomiendo ni en oferta.</p>
+                    <div class="comentario-likes">
+                        <div class="like-group">
+                            <iconify-icon icon="lucide:thumbs-up"></iconify-icon>
+                            <p>2</p>
+                        </div>
+                        <div class="dislike-group">
+                            <iconify-icon icon="lucide:thumbs-down"></iconify-icon>
+                            <p>21</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer id="fat-footer">
+        <div id="footer-content">
+            <div id="footer-top">
+                <div id="footer-logo">
+                    <img src="img/Logo_big.svg" alt="GameCenter Logo">
+                </div>
+                <div id="footer-social">
+                    <a href="#"><iconify-icon icon="pajamas:twitter"></iconify-icon></a>
+                    <a href="#"><iconify-icon icon="lucide:instagram"></iconify-icon></a>
+                    <a href="#"><iconify-icon icon="lucide:facebook"></iconify-icon></a>
+                </div>
+            </div>
+            <div class="separator"></div>
+            <div id="footer-links">
+                <div class="footer-link-category">
+                    <div class="footer-category-header">
+                        <h3>Navegación</h3>
+                        <iconify-icon icon="lucide:chevron-down" class="footer-category-icon"></iconify-icon>
+                    </div>
+                    <ul class="footer-link-list">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#">Categorías</a></li>
+                        <li><a href="#">Perfil</a></li>
+                        <li><a href="#">Carrito</a></li>
+                    </ul>
+                </div>
+                <div class="footer-link-category">
+                    <div class="footer-category-header">
+                        <h3>Cuenta</h3>
+                        <iconify-icon icon="lucide:chevron-down" class="footer-category-icon"></iconify-icon>
+                    </div>
+                    <ul class="footer-link-list">
+                        <li><a href="login.html">Iniciar sesión</a></li>
+                        <li><a href="signup.html">Registrarse</a></li>
+                        <li><a href="#">Privacidad</a></li>
+                        <li><a href="#">Términos y condiciones</a></li>
+                    </ul>
+                </div>
+                <div class="footer-link-category">
+                    <div class="footer-category-header">
+                        <h3>Juegos</h3>
+                        <iconify-icon icon="lucide:chevron-down" class="footer-category-icon"></iconify-icon>
+                    </div>
+                    <ul class="footer-link-list">
+                        <li><a href="#">Nuevos lanzamientos</a></li>
+                        <li><a href="#">Más jugados</a></li>
+                        <li><a href="#">Gratis</a></li>
+                        <li><a href="#">Multijugador</a></li>
+                    </ul>
+                </div>
+                <div class="footer-link-category">
+                    <div class="footer-category-header">
+                        <h3>Sobre nosotros</h3>
+                        <iconify-icon icon="lucide:chevron-down" class="footer-category-icon"></iconify-icon>
+                    </div>
+                    <ul class="footer-link-list">
+                        <li><a href="#">Quíenes somos</a></li>
+                        <li><a href="#">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-link-category">
+                    <div class="footer-category-header">
+                        <h3>Ayuda</h3>
+                        <iconify-icon icon="lucide:chevron-down" class="footer-category-icon"></iconify-icon>
+                    </div>
+                    <ul class="footer-link-list">
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Cómo comprar</a></li>
+                        <li><a href="#">Soporte</a></li>
+                    </ul>
+                </div>
+                <div class="footer-link-category">
+                    <div class="footer-category-header">
+                        <h3>Comunidad</h3>
+                        <iconify-icon icon="lucide:chevron-down" class="footer-category-icon"></iconify-icon>
+                    </div>
+                    <ul class="footer-link-list">
+                        <li><a href="#">Foro</a></li>
+                        <li><a href="#">Rankings</a></li>
+                        <li><a href="#">Discord oficial</a></li>
+                        <li><a href="#">Reseñas de juegos</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="copyright">
+                <iconify-icon icon="lucide:copyright"></iconify-icon>
+                2025 GameCenter. Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+    <script src="./js/main.js"></script>
+    <script src="./js/blocka.js"></script>
+</body>
+
+</html>
