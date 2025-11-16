@@ -49,17 +49,6 @@ body {
     animation: scroll 5s infinite linear;
 }
 
-.helicoptero {
-    position: absolute;
-    z-index: 10;
-    pointer-events: none;
-    width: 120px;
-    height: auto;
-    top: 40%;
-    left: 30%;
-    transform: translate(-50%, -50%);
-}
-
 @keyframes scroll {
     from {
         background-position-x: 0;
@@ -69,3 +58,26 @@ body {
     }
 }
 
+#dragon {
+    width: 939px;
+    height: 678px;
+    background-image: url('character_sprite_sheet.png');
+    background-size: 3756px 678px;
+    position: absolute;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%) scale(0.1);
+    animation: dragon-fly 0.5s steps(4) infinite;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+}
+
+@keyframes dragon-fly {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: -3756px 0;
+    }
+}
