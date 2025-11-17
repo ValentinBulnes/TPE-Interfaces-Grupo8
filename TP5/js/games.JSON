@@ -1,10 +1,17 @@
 [
     {
-    "title": "BATMAN Peg Solitaire: Gotham Edition",
-    "image": "./img/juego/jugar.jpg",
-    "alt": "",
-    "price": "Sin costo",
-    "tags": ["premium"]
+        "title": "Flappy Dragon",
+        "image": "./img/cards-big/flappy.png",
+        "alt": "",
+        "price": "Sin costo",
+        "tags": ["premium"]
+    },
+    {
+        "title": "BATMAN Peg Solitaire: Gotham Edition",
+        "image": "./img/peg/jugar.jpg",
+        "alt": "",
+        "price": "Sin costo",
+        "tags": ["premium"]
     },
     {
         "title": "BLOCKA Mario Bros.",
@@ -82,6 +89,13 @@
         "alt": "Grand Theft Auto V",
         "price": "$89.99",
         "tags": ["premium"]
+    },
+    {
+        "title": "Flappy Dragon",
+        "image": "img/cards-small/flappy.png",
+        "alt": "",
+        "price": "Sin costo",
+        "tags": ["recomendado"]
     },
     {
         "title": "BLOCKA Mario Bros.",

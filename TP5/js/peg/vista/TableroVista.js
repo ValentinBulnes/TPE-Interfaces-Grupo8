@@ -13,7 +13,7 @@ export class TableroVista {
         this.fichasTableroModelo = tableroModelo.fichas; // rompi encapsulamiento al acceder directamente al estado interno. NOTA: va en contra de MVC y POO, pero funciona
         this.fichas = [];
         this.backgroundImg = new Image();
-        this.backgroundImg.src = "./img/peg_solitaire/tablero2.png";
+        this.backgroundImg.src = "./img/peg/tablero2.png";
         this.backgroundImg.onload = () => {
             this.dibujar();
         };

@@ -1,17 +1,23 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* Clase para ocultar elementos */
+.oculto {
+    display: none !important;
 }
 
-body {
+/* Estilos específicos para el contenedor de ejecución del juego */
+#game-execution.game-page-section {
+    height: 700px;
+    position: relative;
+}
+
+/* Estilos específicos para el juego Flappy Dragon */
+#juego-flappy {
     width: 100%;
-    height: 100vh;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
-    position: relative;
 }
 
 .parallax-container {
@@ -31,21 +37,21 @@ body {
 }
 
 .section-1 {
-    background-image: url('img/background parallax/background_plains-Sheet1.png');
+    background-image: url('../img/flappy/background parallax/background_plains-Sheet1.png');
 }
 
 .section-2 {
-    background-image: url('img/background parallax/background_plains-Sheet2.png');
+    background-image: url('../img/flappy/background parallax/background_plains-Sheet2.png');
     animation: scroll 15s infinite linear;
 }
 
 .section-3 {
-    background-image: url('img/background parallax/background_plains-Sheet3.png');
+    background-image: url('../img/flappy/background parallax/background_plains-Sheet3.png');
     animation: scroll 10s infinite linear;
 }
 
 .section-4 {
-    background-image: url('img/background parallax/background_plains-Sheet4.png');
+    background-image: url('../img/flappy/background parallax/background_plains-Sheet4.png');
     animation: scroll 5s infinite linear;
 }
 
@@ -61,7 +67,7 @@ body {
 #dragon {
     width: 939px;
     height: 678px;
-    background-image: url('character_sprite_sheet.png');
+    background-image: url('../img/flappy/character_sprite_sheet.png');
     background-size: 3756px 678px;
     position: absolute;
     bottom: 100px;

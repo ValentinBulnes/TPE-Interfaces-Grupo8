@@ -83,8 +83,9 @@ class ImageCarousel extends HTMLElement {
             .then((res) => res.json())
             .then((data) => this.loadFromJSON(data))
             .then(() => {
-                this.batmanNavigation();
-                this.marioNavigation();
+                this.setupCardNavigation("BATMAN", "./peg.html");
+                this.setupCardNavigation("BLOCKA Mario", "./blocka.html");
+                this.setupCardNavigation("Flappy Dragon", "./flappy.html");
             });
 
         this.querySelector(".prev").addEventListener("click", () =>
@@ -114,49 +115,26 @@ class ImageCarousel extends HTMLElement {
         requestAnimationFrame(() => this.update());
     }
 
-    batmanNavigation() {
-        // Look for Batman cards in both premium and carousel variants
-        const batmanCard =
-            this.querySelector('premium-card[title^="BATMAN" i]') ||
-            this.querySelector('carousel-card[title^="Batman" i]');
-        if (!batmanCard) return;
+    setupCardNavigation(title, url) {
+        // Look for cards in both premium and carousel variants
+        const card =
+            this.querySelector(`premium-card[title^="${title}" i]`) ||
+            this.querySelector(`carousel-card[title^="${title}" i]`);
+        if (!card) return;
 
         // Select the appropriate button depending on the card type
-        const button = batmanCard.matches("premium-card")
-            ? batmanCard.querySelector("button")
-            : batmanCard.querySelector("div > .material-symbols-rounded");
+        const button = card.matches("premium-card")
+            ? card.querySelector("button")
+            : card.querySelector("div > .material-symbols-rounded");
 
         const isMobile = window.matchMedia("(max-width: 768px)").matches;
 
         // On mobile: make entire card clickable; on desktop: use button (if present)
-        const target = isMobile || !button ? batmanCard : button;
+        const target = isMobile || !button ? card : button;
         if (!target) return;
 
         target.addEventListener("click", () => {
-            window.location.href = "./juego.html";
-        });
-    }
-
-    marioNavigation() {
-        // Look for BLOCKA Mario Bros. cards in both premium and carousel variants
-        const marioCard =
-            this.querySelector('premium-card[title^="BLOCKA Mario" i]') ||
-            this.querySelector('carousel-card[title^="BLOCKA Mario" i]');
-        if (!marioCard) return;
-
-        // Select the appropriate button depending on the card type
-        const button = marioCard.matches("premium-card")
-            ? marioCard.querySelector("button")
-            : marioCard.querySelector("div > .material-symbols-rounded");
-
-        const isMobile = window.matchMedia("(max-width: 768px)").matches;
-
-        // On mobile: make entire card clickable; on desktop: use button (if present)
-        const target = isMobile || !button ? marioCard : button;
-        if (!target) return;
-
-        target.addEventListener("click", () => {
-            window.location.href = "./juego2.html";
+            window.location.href = url;
         });
     }
 

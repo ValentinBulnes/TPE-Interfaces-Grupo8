@@ -1,8 +1,8 @@
 export class FichaVista {
     static srcSkinFichas = [
-        'img/peg_solitaire/ficha1.png',
-        'img/peg_solitaire/ficha2.png',
-        'img/peg_solitaire/ficha3.png'
+        'img/peg/ficha1.png',
+        'img/peg/ficha2.png',
+        'img/peg/ficha3.png'
     ];
     static indexSkinSeleccionado = 0;
     static imagenActual = null;

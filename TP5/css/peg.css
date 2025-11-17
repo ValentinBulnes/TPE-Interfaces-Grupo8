@@ -14,7 +14,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: url('../img/peg_solitaire/fondoPeg.jpg') center;
+    background: url('../img/peg/fondoPeg.jpg') center;
     opacity: 0.5;
     z-index: -1;
 }
