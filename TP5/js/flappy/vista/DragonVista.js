@@ -21,6 +21,16 @@ export class DragonVista {
             const rotacionLimitada = Math.max(-30, Math.min(30, rotacion));
             
             this.elementoDragon.style.transform = `translateX(-50%) translateY(${posicionY}px) scale(0.1) rotate(${rotacionLimitada}deg)`;
+            
+            // Límite inferior del modelo (debe coincidir con DragonModelo.js)
+            const limiteInferior = 370;
+            
+            // Si el dragón está cayendo (velocidad positiva mayor a 2) O está en el piso, pausar animación y mostrar último frame
+            if (velocidadY > 7 || posicionY >= limiteInferior) {
+                this.elementoDragon.classList.add("cayendo");
+            } else {
+                this.elementoDragon.classList.remove("cayendo");
+            }
         }
     }
 
