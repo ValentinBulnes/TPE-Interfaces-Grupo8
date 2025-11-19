@@ -115,3 +115,24 @@
         background-position: -320px 0;
     }
 }
+
+#heart {
+    width: 350px;
+    height: 350px;
+    background-image: url('../img/flappy/heart.png');
+    background-size: 8050px 350px;
+    position: absolute;
+    left: 70%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(0.1);
+    animation: heart-rotate 1s steps(23) infinite;
+}
+
+@keyframes heart-rotate {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: -8050px 0;
+    }
+}
