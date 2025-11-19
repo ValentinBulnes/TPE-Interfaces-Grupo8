@@ -65,10 +65,10 @@
 }
 
 #dragon {
-    width: 939px;
+    width: 817px;
     height: 678px;
     background-image: url('../img/flappy/character_sprite_sheet.png');
-    background-size: 3756px 678px;
+    background-size: 3268px 678px;
     position: absolute;
     bottom: 50px;
     left: 20%;
@@ -83,14 +83,14 @@
         background-position: 0 0;
     }
     to {
-        background-position: -3756px 0;
+        background-position: -3268px 0;
     }
 }
 
 /* Clase para cuando el dragón cae - muestra el último frame (frame 4) */
 #dragon.cayendo {
     animation: none;
-    background-position: -2817px 0; /* 939px * 3 = frame 4 (último frame) */
+    background-position: -2451px 0; /* 817px * 3 = frame 4 (último frame) */
 }
 
 #coin {
