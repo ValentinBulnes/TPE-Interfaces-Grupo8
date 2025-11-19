@@ -56,7 +56,8 @@ export class FlappyController {
         // Actualizar la vista con la nueva posición y velocidad (para la rotación)
         const posicion = this.modelo.obtenerPosicion();
         const velocidad = this.modelo.obtenerVelocidad();
-        this.vista.actualizarPosicion(posicion, velocidad);
+        const esColision = this.modelo.esColision();
+        this.vista.actualizarPosicion(posicion, velocidad, esColision);
 
         // Continuar el loop
         requestAnimationFrame(() => this.gameLoop());

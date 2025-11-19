@@ -56,5 +56,9 @@ export class DragonModelo {
         this.posicionY = 0;
         this.velocidadY = 0;
     }
+
+    esColision(){
+        return this.posicionY == this.limiteSuperior
+    }
 }
 

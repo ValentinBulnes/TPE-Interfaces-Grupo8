@@ -10,7 +10,10 @@ export class DragonVista {
     }
 
     // Actualiza la posición visual del dragón con rotación
-    actualizarPosicion(posicionY, velocidadY) {
+    actualizarPosicion(posicionY, velocidadY, esColision) {
+        if (esColision) {
+            this.elementoDragon.classList.add("crash")
+        }
         if (this.elementoDragon) {
             // Calcular la rotación basándose en la velocidad
             // Velocidad negativa (sube) = rotación negativa (apunta arriba)
@@ -20,7 +23,7 @@ export class DragonVista {
             // Limitar la rotación para que no sea exagerada
             const rotacionLimitada = Math.max(-30, Math.min(30, rotacion));
             
-            this.elementoDragon.style.transform = `translateX(-50%) translateY(${posicionY}px) scale(0.1) rotate(${rotacionLimitada}deg)`;
+            this.elementoDragon.style = `--position-y: ${posicionY}px;--rotation: ${rotacionLimitada}deg;`;
             
             // Límite inferior del modelo (debe coincidir con DragonModelo.js)
             const limiteInferior = 370;
