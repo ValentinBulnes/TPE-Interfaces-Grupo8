@@ -156,3 +156,24 @@
         background-position: -8050px 0;
     }
 }
+
+#enemy {
+    width: 250px;
+    height: 250px;
+    background-image: url('../img/flappy/enemy.png');
+    background-size: 3500px 250px;
+    position: absolute;
+    left: 30%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(0.3);
+    animation: enemy-fly 2s steps(14) infinite;
+}
+
+@keyframes enemy-fly {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: -3500px 0;
+    }
+}
