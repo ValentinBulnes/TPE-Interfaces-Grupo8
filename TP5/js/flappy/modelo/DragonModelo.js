@@ -2,16 +2,51 @@
 export class DragonModelo {
     constructor() {
         // Estado del dragón
-        this.posicionY = 0; // Posición Y del dragón (en píxeles, desde el centro)
+        // Posición inicial: un poco más arriba de la mitad del contenedor
+        this.posicionY = -200; // Posición Y del dragón (en píxeles, desde el centro)
         this.velocidadY = 0; // Velocidad vertical del dragón
+        this.gameOver = false; // Flag de game over
         
         // Constantes físicas
         this.gravedad = 0.3; // Aceleración de la gravedad
         this.fuerzaSalto = -5; // Fuerza del salto (negativo = hacia arriba)
         
-        // Límites del contenedor (en píxeles desde el centro)
-        this.limiteSuperior = -200; // No puede subir más de esto
-        this.limiteInferior = 370;  // No puede bajar más de esto
+        // Límites iniciales (se recalcularán al iniciar el juego)
+        this.limiteSuperior = -445;
+        this.limiteInferior = 47;
+    }
+
+    // Calcula los límites del dragón basándose en las dimensiones del contenedor
+    calcularLimites() {
+        // Obtener dimensiones del contenedor parallax
+        const contenedor = document.querySelector('.parallax-container');
+        const elementoDragon = document.getElementById('dragon');
+        
+        if (!contenedor || !elementoDragon) {
+            this.limiteSuperior = -445;
+            this.limiteInferior = 47;
+            return;
+        }
+
+        // Obtener dimensiones del contenedor y del dragón
+        const alturaContenedor = contenedor.offsetHeight;
+        const estilosDragon = window.getComputedStyle(elementoDragon);
+        const bottomDragon = parseFloat(estilosDragon.bottom);
+        const alturaDragon = parseFloat(estilosDragon.height);
+        
+        // CÁLCULO SIMPLE (sin escalas complicadas):
+        // Posición inicial del borde inferior: bottomDragon
+        // Posición inicial del borde superior: bottomDragon + alturaDragon
+        
+        const bordeInferiorInicial = bottomDragon;
+        const bordeSuperiorInicial = bottomDragon + alturaDragon;
+        
+        // LÍMITE INFERIOR: para que el borde inferior toque y=0 (el suelo)
+        this.limiteInferior = bordeInferiorInicial;
+        
+        // LÍMITE SUPERIOR: para que el borde superior toque y=alturaContenedor (el techo)
+        const distanciaHastaTecho = alturaContenedor - bordeSuperiorInicial;
+        this.limiteSuperior = -distanciaHastaTecho;
     }
 
     // Aplica la gravedad y actualiza la posición del dragón
@@ -22,17 +57,20 @@ export class DragonModelo {
         // Actualizar posición
         this.posicionY += this.velocidadY;
 
-        // Verificar límites del contenedor
-        if (this.posicionY < this.limiteSuperior) {
-            // Si toca el techo
+        // REGLA FUNDAMENTAL: El dragón NUNCA puede salir de la pantalla
+        // Verificar límite superior (no salir por arriba)
+        if (this.posicionY <= this.limiteSuperior) {
+            // El dragón tocó el techo - Solo detenerlo, sin game over
             this.posicionY = this.limiteSuperior;
-            this.velocidadY = 0; // Detener el movimiento hacia arriba
+            this.velocidadY = 0;
         }
         
-        if (this.posicionY > this.limiteInferior) {
-            // Si toca el suelo
+        // Verificar límite inferior (no salir por abajo)
+        if (this.posicionY >= this.limiteInferior) {
+            // El dragón tocó el suelo - GAME OVER
             this.posicionY = this.limiteInferior;
-            this.velocidadY = 0; // Detener el movimiento hacia abajo
+            this.velocidadY = 0;
+            this.gameOver = true;
         }
     }
 
@@ -53,12 +91,21 @@ export class DragonModelo {
 
     // Reinicia el estado del dragón
     reiniciar() {
-        this.posicionY = 0;
+        // Posición inicial: un poco más arriba de la mitad del contenedor
+        // Valor negativo = hacia arriba desde la posición base (bottom: 47px)
+        this.posicionY = -200;
         this.velocidadY = 0;
+        this.gameOver = false;
     }
 
-    esColision(){
-        return this.posicionY == this.limiteSuperior
+    // Verifica si hay colisión con el suelo (game over)
+    esColision() {
+        return this.posicionY >= this.limiteInferior;
+    }
+
+    // Verifica si el juego terminó
+    esGameOver() {
+        return this.gameOver;
     }
 }
 

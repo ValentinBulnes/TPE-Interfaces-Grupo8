@@ -13,4 +13,3 @@ document.addEventListener('DOMContentLoaded', () => {
     // El controlador ya se encarga de configurar todos los eventos
 });
 
-
