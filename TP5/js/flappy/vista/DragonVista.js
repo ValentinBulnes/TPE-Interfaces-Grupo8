@@ -23,7 +23,7 @@ export class DragonVista {
             // Limitar la rotación para que no sea exagerada
             const rotacionLimitada = Math.max(-30, Math.min(30, rotacion));
             
-            this.elementoDragon.style = `--position-y: ${posicionY}px;--rotation: ${rotacionLimitada}deg;`;
+            this.elementoDragon.style = `--position-y: ${posicionY}%;--rotation: ${rotacionLimitada}deg;`;
             
             // Límite inferior del modelo (debe coincidir con DragonModelo.js)
             const limiteInferior = 370;

@@ -6,12 +6,12 @@ export class DragonModelo {
         this.velocidadY = 0; // Velocidad vertical del dragón
         
         // Constantes físicas
-        this.gravedad = 0.3; // Aceleración de la gravedad
+        this.gravedad = 0.23; // Aceleración de la gravedad
         this.fuerzaSalto = -5; // Fuerza del salto (negativo = hacia arriba)
         
         // Límites del contenedor (en píxeles desde el centro)
-        this.limiteSuperior = -200; // No puede subir más de esto
-        this.limiteInferior = 370;  // No puede bajar más de esto
+        this.limiteSuperior = -470; // % No puede subir más de esto
+        this.limiteInferior = 350; // % No puede bajar más de esto 
     }
 
     // Aplica la gravedad y actualiza la posición del dragón

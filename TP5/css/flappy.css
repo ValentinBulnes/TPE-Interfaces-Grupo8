@@ -71,9 +71,9 @@
     height: 678px;
     background-image: url('../img/flappy/character_sprite_sheet.png');
     position: absolute;
-    bottom: 50px;
-    left: 20%;
-    transform: translateX(-50%) translateY(var(--position-y)) scale(0.1) rotate(var(--rotation));
+    left: -40%;
+    transform-origin: 50% 50%;
+    transform:scale(0.1) translateY(var(--position-y)) rotate(var(--rotation));
     animation: dragon-fly 0.5s steps(4) infinite;
     z-index: 100;
     transition: transform 0.1s ease-out;
@@ -95,7 +95,9 @@
     background-image: url('../img/flappy/smoke-grid.png');
     animation: dragon-crash 1.3s steps(12) infinite;
     background-position-y: calc(var(--smoke-index) * 64px);
-    transform: translateX(-50%) translateY(var(--position-y)) scale(1) rotate(var(--rotation)); 
+    top: 51%;
+    left: 7%;
+    transform: translateY(var(--position-y)) rotate(var(--rotation)); 
 }
 
 @keyframes dragon-crash {
@@ -108,7 +110,7 @@
 }
 
 /* Clase para cuando el dragón cae - muestra el último frame (frame 4) */
-#dragon.cayendo {
+#dragon.cayendo:not(.crash) {
     animation: none;
     background-position: -2451px 0; /* 817px * 3 = frame 4 (último frame) */
 }
