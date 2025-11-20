@@ -7,7 +7,7 @@ export class DragonModelo {
         this.reduccionHitbox = 0.6;
         // Estado del dragón
         // Posición inicial: un poco más arriba de la mitad del contenedor
-        this.posicionY = -200; // Posición Y del dragón (en píxeles, desde el centro)
+        this.posicionY = 200; // Posición Y del dragón (en píxeles, desde el centro)
         this.velocidadY = 0; // Velocidad vertical del dragón
         this.gameOver = false; // Flag de game over
 

@@ -79,7 +79,7 @@
 }
 
 #dragon {
-    --position-y: -200px;
+    --position-y: 200px;
     --rotation: 0deg;
     width: 81.7px;
     height: 67.8px;
