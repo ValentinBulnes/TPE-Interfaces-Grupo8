@@ -1,8 +1,8 @@
 // Controlador del juego - Coordina el modelo y la vista, maneja eventos y el game loop
-import { EnemigoModelo } from './modelo/EnemigoModelo.js';
-import { EnemigoVista } from './vista/EnemigoVista.js';
-import { ColeccionableModelo } from './modelo/ColeccionableModelo.js';
-import { ColeccionableVista } from './vista/ColeccionableVista.js';
+import { EnemigoModelo } from "./modelo/EnemigoModelo.js";
+import { EnemigoVista } from "./vista/EnemigoVista.js";
+import { ColeccionableModelo } from "./modelo/ColeccionableModelo.js";
+import { ColeccionableVista } from "./vista/ColeccionableVista.js";
 
 export class FlappyController {
     constructor(modelo, vista) {
@@ -15,7 +15,7 @@ export class FlappyController {
         this.tiempoUltimoColeccionable = 0;
         this.intervaloEnemigos = 2000; // Spawn enemy every 2 seconds
         this.intervaloColeccionables = 3000; // Spawn collectible every 3 seconds
-        
+
         // Configurar eventos
         this.configurarEventos();
     }
@@ -31,7 +31,9 @@ export class FlappyController {
         // Evento de click en el juego para saltar
         const contenedorJuego = this.vista.obtenerContenedorJuego();
         if (contenedorJuego) {
-            contenedorJuego.addEventListener("click", () => this.manejarSalto());
+            contenedorJuego.addEventListener("click", () =>
+                this.manejarSalto()
+            );
         }
     }
 
@@ -39,16 +41,16 @@ export class FlappyController {
     iniciarJuego() {
         // Mostrar el juego
         this.vista.mostrarJuego();
-        
+
         // Ocultar mensaje de game over si estaba visible
         this.vista.ocultarGameOver();
-        
+
         // Calcular límites del dragón basándose en el contenedor
         this.modelo.calcularLimites();
-        
+
         // Reiniciar el modelo
         this.modelo.reiniciar();
-        
+
         // Limpiar enemigos existentes
         this.limpiarEnemigos();
 
@@ -56,15 +58,17 @@ export class FlappyController {
         this.juegoIniciado = true;
         this.tiempoUltimoEnemigo = performance.now();
         this.tiempoUltimoColeccionable = performance.now();
-        
+
         // Iniciar el game loop
         this.gameLoop(performance.now());
     }
 
     limpiarEnemigos() {
-        this.enemigos.forEach(enemigo => enemigo.vista.eliminar());
+        this.enemigos.forEach((enemigo) => enemigo.vista.eliminar());
         this.enemigos = [];
-        this.coleccionables.forEach(coleccionable => coleccionable.vista.eliminar());
+        this.coleccionables.forEach((coleccionable) =>
+            coleccionable.vista.eliminar()
+        );
         this.coleccionables = [];
     }
 
@@ -89,8 +93,13 @@ export class FlappyController {
         const limiteInferior = this.modelo.limiteInferior;
         // Verificar colisiones con enemigos
         const hayColisionEnemiga = this.verificarColisionEnemigos();
-        const hayColision = esColision || hayColisionEnemiga
-        this.vista.actualizarPosicion(posicion, velocidad, hayColision, limiteInferior);
+        const hayColision = esColision || hayColisionEnemiga;
+        this.vista.actualizarPosicion(
+            posicion,
+            velocidad,
+            hayColision,
+            limiteInferior
+        );
 
         // Verificar si hay game over DESPUÉS de actualizar la vista
         if (this.modelo.esGameOver()) {
@@ -98,8 +107,6 @@ export class FlappyController {
             return;
         }
 
-
-        
         if (hayColision) {
             this.modelo.gameOver = true;
             this.terminarJuego();
@@ -118,9 +125,11 @@ export class FlappyController {
     terminarJuego() {
         this.juegoIniciado = false;
         this.vista.mostrarGameOver();
-        
+
         // Configurar botón de reintentar
-        const botonReintentar = document.getElementById('btn-reintentar-flappy');
+        const botonReintentar = document.getElementById(
+            "btn-reintentar-flappy"
+        );
         if (botonReintentar) {
             botonReintentar.onclick = () => this.iniciarJuego();
         }
@@ -137,7 +146,7 @@ export class FlappyController {
         for (let i = this.enemigos.length - 1; i >= 0; i--) {
             const enemigo = this.enemigos[i];
             enemigo.modelo.actualizar();
-            
+
             if (enemigo.modelo.marcadoParaEliminar) {
                 enemigo.vista.eliminar();
                 this.enemigos.splice(i, 1);
@@ -152,7 +161,7 @@ export class FlappyController {
         const modelo = new EnemigoModelo();
         const vista = new EnemigoVista();
         this.enemigos.push({ modelo, vista });
-        
+
         // Initial position update
         const pos = modelo.obtenerPosicion();
         vista.actualizarPosicion(pos.x, pos.y);
@@ -160,9 +169,12 @@ export class FlappyController {
 
     gestionarColeccionables(tiempoActual) {
         // Generar nuevos coleccionables
-        if (tiempoActual - this.tiempoUltimoColeccionable > this.intervaloColeccionables) {
+        if (
+            tiempoActual - this.tiempoUltimoColeccionable >
+            this.intervaloColeccionables
+        ) {
             // Alternar entre moneda y corazon aleatoriamente
-            const tipo = Math.random() < 0.7 ? 'moneda' : 'corazon'; // 70% monedas, 30% corazones
+            const tipo = Math.random() < 0.7 ? "moneda" : "corazon"; // 70% monedas, 30% corazones
             this.crearColeccionable(tipo);
             this.tiempoUltimoColeccionable = tiempoActual;
         }
@@ -171,7 +183,7 @@ export class FlappyController {
         for (let i = this.coleccionables.length - 1; i >= 0; i--) {
             const coleccionable = this.coleccionables[i];
             coleccionable.modelo.actualizar();
-            
+
             if (coleccionable.modelo.marcadoParaEliminar) {
                 coleccionable.vista.eliminar();
                 this.coleccionables.splice(i, 1);
@@ -186,7 +198,7 @@ export class FlappyController {
         const modelo = new ColeccionableModelo(tipo);
         const vista = new ColeccionableVista(tipo);
         this.coleccionables.push({ modelo, vista });
-        
+
         // Initial position update
         const pos = modelo.obtenerPosicion();
         vista.actualizarPosicion(pos.x, pos.y);
