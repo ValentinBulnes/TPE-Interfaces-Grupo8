@@ -211,16 +211,9 @@ export class FlappyController {
         }
 
         // Obtener posición y dimensiones del dragón
-        const dragonY = this.modelo.obtenerPosicion();
-        const dragonAncho = 81.7;
-        const dragonAlto = 67.8;
-        const dragonX = 640 * 0.07;
-
-        // Dragon absolute position
-        const dragonTop = dragonY;
-        const dragonBottom = dragonY + dragonAlto;
-        const dragonLeft = dragonX;
-        const dragonRight = dragonX + dragonAncho;
+        const dragonHitbox = this.modelo.getHitbox();
+        const dragonAncho = this.modelo.getAncho();
+        const dragonAlto = this.modelo.getAlto();
 
         // Verificar colisión con cada enemigo
         for (let enemigo of this.enemigos) {
@@ -244,9 +237,11 @@ export class FlappyController {
 
             // Strict AABB collision detection (no margins)
             const colisionX =
-                dragonLeft < enemigoRight && dragonRight > enemigoLeft;
+                dragonHitbox.left < enemigoRight &&
+                dragonHitbox.right > enemigoLeft;
             const colisionY =
-                dragonTop < enemigoBottom && dragonBottom > enemigoTop;
+                dragonHitbox.top < enemigoBottom &&
+                dragonHitbox.bottom > enemigoTop;
 
             if (colisionX && colisionY) {
                 console.log(
@@ -255,12 +250,12 @@ export class FlappyController {
                     )
                 );
                 console.log(document.querySelector("#dragon"));
-                debugBox(enemigoTop,enemigoLeft,enemigoAnchoReducido,enemigoAltoReducido,"red");
-                debugBox(dragonTop,dragonLeft,dragonAncho,dragonAlto,"blue");
-                //  debugBox(dragonTop, dragonLeft, 5, 5, "red");
-                //  debugBox(dragonTop, dragonRight, 5, 5, "green");
-                //  debugBox(dragonBottom, dragonLeft, 5, 5, "blue");
-                //  debugBox(dragonBottom, dragonRight, 5, 5, "yellow");
+                // debugBox(enemigoTop,enemigoLeft,enemigoAnchoReducido,enemigoAltoReducido,"red");
+                // debugBox(dragonHitbox.top,dragonHitbox.left,dragonAncho,dragonAlto,"blue");
+                // debugBox(dragonHitbox.top, dragonHitbox.left, 5, 5, "red");
+                // debugBox(dragonHitbox.top, dragonHitbox.right, 5, 5, "green");
+                // debugBox(dragonHitbox.bottom, dragonHitbox.left, 5, 5, "blue");
+                // debugBox(dragonHitbox.bottom,dragonHitbox.right,5,5,"yellow");
                 return true;
             }
         }
@@ -280,8 +275,7 @@ function debugBox(y, x, width, height, color) {
         width: `${width}px`,
         height: `${height}px`,
         backgroundColor: color,
-        pointerEvents: "none", // optional, depending on UX requirements
-        opacity: "0.5", // Opacity at 50%
+        opacity: "0.5",
     });
     console.log(node);
 

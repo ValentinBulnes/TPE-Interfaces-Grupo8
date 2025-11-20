@@ -1,12 +1,15 @@
 // Modelo del dragón - Maneja toda la lógica y el estado del dragón
 export class DragonModelo {
     constructor() {
+        this.ancho = 81.7;
+        this.alto = 67.8;
+        this.posicionX = 640 * 0.07;
         // Estado del dragón
         // Posición inicial: un poco más arriba de la mitad del contenedor
         this.posicionY = -200; // Posición Y del dragón (en píxeles, desde el centro)
         this.velocidadY = 0; // Velocidad vertical del dragón
         this.gameOver = false; // Flag de game over
-        
+
         // Constantes físicas
         this.gravedad = 0.23; // Aceleración de la gravedad
         this.fuerzaSalto = -5; // Fuerza del salto (negativo = hacia arriba)
@@ -19,9 +22,9 @@ export class DragonModelo {
     // Calcula los límites del dragón basándose en las dimensiones del contenedor
     calcularLimites() {
         // Obtener dimensiones del contenedor parallax
-        const contenedor = document.querySelector('.parallax-container');
-        const elementoDragon = document.getElementById('dragon');
-        
+        const contenedor = document.querySelector(".parallax-container");
+        const elementoDragon = document.getElementById("dragon");
+
         if (!contenedor || !elementoDragon) {
             this.limiteSuperior = -445;
             this.limiteInferior = 47;
@@ -33,17 +36,17 @@ export class DragonModelo {
         const estilosDragon = window.getComputedStyle(elementoDragon);
         const bottomDragon = parseFloat(estilosDragon.bottom);
         const alturaDragon = parseFloat(estilosDragon.height);
-        
+
         // CÁLCULO SIMPLE (sin escalas complicadas):
         // Posición inicial del borde inferior: bottomDragon
         // Posición inicial del borde superior: bottomDragon + alturaDragon
-        
+
         const bordeInferiorInicial = bottomDragon;
         const bordeSuperiorInicial = bottomDragon + alturaDragon;
-        
+
         // LÍMITE INFERIOR: para que el borde inferior toque y=0 (el suelo)
         this.limiteInferior = bordeInferiorInicial;
-        
+
         // LÍMITE SUPERIOR: para que el borde superior toque y=alturaContenedor (el techo)
         const distanciaHastaTecho = alturaContenedor - bordeSuperiorInicial;
         this.limiteSuperior = -distanciaHastaTecho;
@@ -53,7 +56,7 @@ export class DragonModelo {
     actualizar() {
         // Aplicar gravedad
         this.velocidadY += this.gravedad;
-        
+
         // Actualizar posición
         this.posicionY += this.velocidadY;
 
@@ -64,7 +67,7 @@ export class DragonModelo {
             this.posicionY = this.limiteSuperior;
             this.velocidadY = 0;
         }
-        
+
         // Verificar límite inferior (no salir por abajo)
         if (this.posicionY >= this.limiteInferior) {
             // El dragón tocó el suelo - GAME OVER
@@ -107,5 +110,25 @@ export class DragonModelo {
     esGameOver() {
         return this.gameOver;
     }
-}
 
+    getHitbox() {
+        const top = this.posicionY;
+        const bottom = this.posicionY + this.alto;
+        const left = this.posicionX;
+        const right = this.posicionX + this.ancho;
+        return {
+            top: top,
+            bottom: bottom,
+            left: left,
+            right: right,
+        };
+    }
+
+    getAncho(){
+        return this.ancho
+    }
+
+    getAlto(){
+        return this.alto
+    }
+}
