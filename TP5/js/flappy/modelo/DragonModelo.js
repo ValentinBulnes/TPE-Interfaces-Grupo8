@@ -10,13 +10,10 @@ export class DragonModelo {
         // Constantes físicas
         this.gravedad = 0.23; // Aceleración de la gravedad
         this.fuerzaSalto = -5; // Fuerza del salto (negativo = hacia arriba)
-        
-        // Límites del contenedor (en píxeles desde el centro)
-        this.limiteSuperior = -470; // % No puede subir más de esto
-        this.limiteInferior = 350; // % No puede bajar más de esto 
-        // // Límites iniciales (se recalcularán al iniciar el juego)
-        // this.limiteSuperior = -445;
-        // this.limiteInferior = 47;
+
+        // Límites iniciales (se recalcularán al iniciar el juego)
+        this.limiteSuperior = -445;
+        this.limiteInferior = 47;
     }
 
     // Calcula los límites del dragón basándose en las dimensiones del contenedor
@@ -96,7 +93,7 @@ export class DragonModelo {
     reiniciar() {
         // Posición inicial: un poco más arriba de la mitad del contenedor
         // Valor negativo = hacia arriba desde la posición base (bottom: 47px)
-        this.posicionY = -200;
+        this.posicionY = 0;
         this.velocidadY = 0;
         this.gameOver = false;
     }

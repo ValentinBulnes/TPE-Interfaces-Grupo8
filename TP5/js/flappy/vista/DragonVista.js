@@ -29,7 +29,7 @@ export class DragonVista {
                 // Limitar la rotación para que no sea exagerada
                 const rotacionLimitada = Math.max(-30, Math.min(30, rotacion));
                 
-                this.elementoDragon.style = `--position-y: ${posicionY}%;--rotation: ${rotacionLimitada}deg;`;
+                this.elementoDragon.style = `--position-y: ${posicionY}px;--rotation: ${rotacionLimitada}deg;`;
                 
                 // Si el dragón está cayendo (velocidad positiva mayor a 2) O está en el piso, pausar animación y mostrar último frame
                 if (velocidadY > 7 || posicionY >= limiteInferior) {
