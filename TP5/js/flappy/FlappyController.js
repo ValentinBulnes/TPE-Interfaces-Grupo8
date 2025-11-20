@@ -87,7 +87,10 @@ export class FlappyController {
         const velocidad = this.modelo.obtenerVelocidad();
         const esColision = this.modelo.esColision();
         const limiteInferior = this.modelo.limiteInferior;
-        this.vista.actualizarPosicion(posicion, velocidad, esColision, limiteInferior);
+        // Verificar colisiones con enemigos
+        const hayColisionEnemiga = this.verificarColisionEnemigos();
+        const hayColision = esColision || hayColisionEnemiga
+        this.vista.actualizarPosicion(posicion, velocidad, hayColision, limiteInferior);
 
         // Verificar si hay game over DESPUÉS de actualizar la vista
         if (this.modelo.esGameOver()) {
@@ -95,8 +98,7 @@ export class FlappyController {
             return;
         }
 
-        // Verificar colisiones con enemigos
-        const hayColision = this.verificarColisionEnemigos();
+
         
         if (hayColision) {
             this.modelo.gameOver = true;
@@ -201,18 +203,18 @@ export class FlappyController {
         const dragonAncho = 81.7; // width del dragón
         const dragonAlto = 67.8; // height del dragón
         
-        // El dragón tiene left: 20% y translateX(-50%)
+        // El dragón tiene left: 7% y top 50%
         // Entonces su posición X efectiva es: (640 * 0.20) - (dragonAncho / 2)
-        const dragonX = (640 * 0.20) - (dragonAncho / 2);
+        const dragonX = (640 * 0.07) - (dragonAncho / 2);
         
-        // El dragón tiene bottom: 47px en CSS, más el translateY
+        // El dragón tiene top: 50% en CSS, más el translateY
         // translateY negativo = mover HACIA ARRIBA, translateY positivo = mover HACIA ABAJO
-        // Posición real del borde inferior = 47 - translateY (porque el eje Y invertido en CSS)
+        // Posición real del borde inferior = 50% - translateY (porque el eje Y invertido en CSS)
         // Wait, translateY(value) mueve hacia abajo si positivo y hacia arriba si negativo
         // Con bottom, la referencia es desde abajo
-        // Si bottom: 47 y translateY: -200, visualmente sube 200px
+        // Si top: 50% y translateY: -200, visualmente sube 200px
         // Entonces bottom real = 47 + 200 = 247
-        const dragonBottom = 47 - dragonY; // bottom CSS - translateY (porque translateY negativo sube)
+        const dragonBottom = 230 - dragonY; // bottom CSS - translateY (porque translateY negativo sube)
         const dragonTop = dragonBottom + dragonAlto;
         const dragonLeft = dragonX;
         const dragonRight = dragonX + dragonAncho;
@@ -244,10 +246,15 @@ export class FlappyController {
             const margen = 3;
             
             // Detección de colisión AABB (Axis-Aligned Bounding Box) con margen
-            const colisionX = dragonRight - margen > enemigoLeft + margen && dragonLeft + margen < enemigoRight - margen;
-            const colisionY = dragonTop - margen > enemigoBottom + margen && dragonBottom + margen < enemigoTop - margen;
+            const colisionXLeft = dragonLeft + margen < enemigoRight - margen
+            const colisionXRight = dragonRight - margen > enemigoLeft + margen
+            const colisionYTop = dragonTop - margen > enemigoBottom + margen
+            const colisionYBot = dragonBottom + margen < enemigoTop - margen
+            const colisionX = colisionXLeft && colisionXRight;
+            const colisionY = colisionYTop && colisionYBot;
             
             if (colisionX && colisionY) {
+                console.log(enemigoPos)
                 return true; // Hay colisión
             }
         }
