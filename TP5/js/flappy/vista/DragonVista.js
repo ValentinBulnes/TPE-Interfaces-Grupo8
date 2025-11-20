@@ -15,7 +15,7 @@ export class DragonVista {
         if (this.elementoDragon) {
             // Si hay colisión, detener TODAS las animaciones
             if (esColision) {
-                this.elementoDragon.classList.add("cayendo");
+                this.elementoDragon.classList.add("crash");
                 // Detener animaciones del parallax
                 if (this.contenedorParallax) {
                     this.contenedorParallax.classList.add("game-over");
@@ -106,6 +106,7 @@ export class DragonVista {
         // Limpiar clases del dragón
         if (this.elementoDragon) {
             this.elementoDragon.classList.remove('cayendo');
+            this.elementoDragon.classList.remove('crash');
         }
         
         // Reactivar animaciones del parallax

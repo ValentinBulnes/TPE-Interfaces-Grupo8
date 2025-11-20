@@ -8,9 +8,9 @@ export class DragonModelo {
         this.gameOver = false; // Flag de game over
         
         // Constantes físicas
-        this.gravedad = 0.3; // Aceleración de la gravedad
+        this.gravedad = 0.23; // Aceleración de la gravedad
         this.fuerzaSalto = -5; // Fuerza del salto (negativo = hacia arriba)
-        
+
         // Límites iniciales (se recalcularán al iniciar el juego)
         this.limiteSuperior = -445;
         this.limiteInferior = 47;
@@ -93,7 +93,7 @@ export class DragonModelo {
     reiniciar() {
         // Posición inicial: un poco más arriba de la mitad del contenedor
         // Valor negativo = hacia arriba desde la posición base (bottom: 47px)
-        this.posicionY = -200;
+        this.posicionY = 0;
         this.velocidadY = 0;
         this.gameOver = false;
     }
