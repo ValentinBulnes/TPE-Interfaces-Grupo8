@@ -12,8 +12,7 @@ export class EnemigoVista {
 
     actualizarPosicion(x, y) {
         if (this.elemento) {
-            this.elemento.style.left = `${x}px`;
-            this.elemento.style.bottom = `${y}px`;
+            this.elemento.style = `--position-y: ${y}px; left: ${x}px;`;
         }
     }
 

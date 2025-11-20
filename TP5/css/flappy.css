@@ -87,9 +87,7 @@
     background-size: 326.8px 67.8px; 
     /* 817px * 4 frames = 3268px escalado a 0.1 = 326.8px */
     position: absolute;
-    bottom: 50%;
     left: 7%;
-    transform-origin: 50% 50%;
     transform: translateY(var(--position-y)) rotate(var(--rotation));
     animation: dragon-fly 0.5s steps(4) infinite;
     z-index: 100;
@@ -172,6 +170,7 @@
 }
 
 .enemy {
+    --position-y: 0;
     width: 75px;
     height: 75px;
     background-image: url('../img/flappy/enemy.png');
@@ -179,6 +178,7 @@
     position: absolute;
     animation: enemy-fly 2s steps(14) infinite;
     z-index: 90; /* Behind dragon (100) */
+    transform: translateY(var(--position-y));
 }
 
 @keyframes enemy-fly {
