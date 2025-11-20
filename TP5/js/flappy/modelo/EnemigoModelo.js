@@ -32,7 +32,7 @@ export class EnemigoModelo {
     getHitbox() {
         const anchoReducido = this.ancho * this.reduccionHitbox;
         const altoReducido = this.alto * this.reduccionHitbox;
-        const centerPos = this.getCenterPos()
+        const centerPos = this.getCenterPos();
 
         const top = centerPos.y - anchoReducido / 2;
         const bottom = centerPos.y + anchoReducido / 2;

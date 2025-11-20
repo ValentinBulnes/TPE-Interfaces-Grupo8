@@ -4,6 +4,7 @@ export class DragonModelo {
         this.ancho = 81.7;
         this.alto = 67.8;
         this.posicionX = 640 * 0.07;
+        this.reduccionHitbox = 0.6;
         // Estado del dragón
         // Posición inicial: un poco más arriba de la mitad del contenedor
         this.posicionY = -200; // Posición Y del dragón (en píxeles, desde el centro)
@@ -112,25 +113,28 @@ export class DragonModelo {
     }
 
     getHitbox() {
-        const top = this.posicionY;
-        const bottom = this.posicionY + this.alto;
-        const left = this.posicionX;
-        const right = this.posicionX + this.ancho;
+        const anchoReducido = this.ancho * this.reduccionHitbox;
+        const altoReducido = this.alto * this.reduccionHitbox;
+        const centerPos = this.getCenterPos();
+
+        const top = centerPos.y - anchoReducido / 2;
+        const bottom = centerPos.y + anchoReducido / 2;
+        const left = centerPos.x - anchoReducido / 2;
+        const right = centerPos.x + anchoReducido / 2;
+
         return {
             top: top,
             bottom: bottom,
             left: left,
             right: right,
-            ancho: this.ancho,
-            alto: this.alto
+            ancho: anchoReducido,
+            alto: altoReducido,
         };
     }
 
-    getAncho(){
-        return this.ancho
-    }
-
-    getAlto(){
-        return this.alto
+    getCenterPos() {
+        const centerX = this.posicionX + this.ancho / 2;
+        const centerY = this.posicionY + this.alto / 2;
+        return { x: centerX, y: centerY };
     }
 }
