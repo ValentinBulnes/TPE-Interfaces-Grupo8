@@ -212,36 +212,18 @@ export class FlappyController {
 
         // Obtener posición y dimensiones del dragón
         const dragonHitbox = this.modelo.getHitbox();
-        const dragonAncho = this.modelo.getAncho();
-        const dragonAlto = this.modelo.getAlto();
 
         // Verificar colisión con cada enemigo
         for (let enemigo of this.enemigos) {
-            const enemigoPos = enemigo.modelo.obtenerPosicion();
-            const enemigoAncho = enemigo.modelo.ancho;
-            const enemigoAlto = enemigo.modelo.alto;
-
-            const reduccionHitbox = 0.6;
-            const enemigoAnchoReducido = enemigoAncho * reduccionHitbox;
-            const enemigoAltoReducido = enemigoAlto * reduccionHitbox;
-
-            // Enemy center point
-            const enemigoCentroX = enemigoPos.x + enemigoAncho / 2;
-            const enemigoCentroY = enemigoPos.y + enemigoAlto / 2;
-
-            // Reduced hitbox centered on enemy center
-            const enemigoLeft = enemigoCentroX - enemigoAnchoReducido / 2;
-            const enemigoRight = enemigoCentroX + enemigoAnchoReducido / 2;
-            const enemigoTop = enemigoCentroY - enemigoAltoReducido / 2;
-            const enemigoBottom = enemigoCentroY + enemigoAltoReducido / 2;
+            const enemigoHitbox = enemigo.modelo.getHitbox();
 
             // Strict AABB collision detection (no margins)
             const colisionX =
-                dragonHitbox.left < enemigoRight &&
-                dragonHitbox.right > enemigoLeft;
+                dragonHitbox.left < enemigoHitbox.right &&
+                dragonHitbox.right > enemigoHitbox.left;
             const colisionY =
-                dragonHitbox.top < enemigoBottom &&
-                dragonHitbox.bottom > enemigoTop;
+                dragonHitbox.top < enemigoHitbox.bottom &&
+                dragonHitbox.bottom > enemigoHitbox.top;
 
             if (colisionX && colisionY) {
                 console.log(
@@ -250,12 +232,8 @@ export class FlappyController {
                     )
                 );
                 console.log(document.querySelector("#dragon"));
-                // debugBox(enemigoTop,enemigoLeft,enemigoAnchoReducido,enemigoAltoReducido,"red");
-                // debugBox(dragonHitbox.top,dragonHitbox.left,dragonAncho,dragonAlto,"blue");
-                // debugBox(dragonHitbox.top, dragonHitbox.left, 5, 5, "red");
-                // debugBox(dragonHitbox.top, dragonHitbox.right, 5, 5, "green");
-                // debugBox(dragonHitbox.bottom, dragonHitbox.left, 5, 5, "blue");
-                // debugBox(dragonHitbox.bottom,dragonHitbox.right,5,5,"yellow");
+                // debugBox(enemigoHitbox.top,enemigoHitbox.left,enemigoHitbox.ancho,enemigoHitbox.alto,"red");
+                // debugBox(dragonHitbox.top,dragonHitbox.left,dragonHitbox.ancho,dragonHitbox.alto,"blue");
                 return true;
             }
         }

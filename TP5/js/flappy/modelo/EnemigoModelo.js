@@ -5,7 +5,8 @@ export class EnemigoModelo {
         this.ancho = 75; // Width final (sin scale)
         this.alto = 75; // Height final (sin scale)
         this.marcadoParaEliminar = false;
-        
+        this.reduccionHitbox = 0.6;
+
         // Calcular posición Y dentro del contenedor (560px de alto)
         // SIMPLE: sin scales, bottom indica directamente la posición del borde inferior
         const alturaContenedor = 560;
@@ -26,5 +27,31 @@ export class EnemigoModelo {
 
     obtenerPosicion() {
         return { x: this.x, y: this.y };
+    }
+
+    getHitbox() {
+        const anchoReducido = this.ancho * this.reduccionHitbox;
+        const altoReducido = this.alto * this.reduccionHitbox;
+        const centerPos = this.getCenterPos()
+
+        const top = centerPos.y - anchoReducido / 2;
+        const bottom = centerPos.y + anchoReducido / 2;
+        const left = centerPos.x - anchoReducido / 2;
+        const right = centerPos.x + anchoReducido / 2;
+
+        return {
+            top: top,
+            bottom: bottom,
+            left: left,
+            right: right,
+            ancho: anchoReducido,
+            alto: altoReducido,
+        };
+    }
+
+    getCenterPos() {
+        const centerX = this.x + this.ancho / 2;
+        const centerY = this.y + this.alto / 2;
+        return { x: centerX, y: centerY };
     }
 }

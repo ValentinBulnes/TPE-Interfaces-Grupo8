@@ -121,6 +121,8 @@ export class DragonModelo {
             bottom: bottom,
             left: left,
             right: right,
+            ancho: this.ancho,
+            alto: this.alto
         };
     }
 
