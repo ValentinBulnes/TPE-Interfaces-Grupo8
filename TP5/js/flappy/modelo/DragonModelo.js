@@ -102,7 +102,7 @@ export class DragonModelo extends NPCModelo {
     // Reinicia el estado del dragón
     reiniciar() {
         // Posición inicial: un poco más arriba de la mitad del contenedor
-        // Valor negativo = hacia arriba desde la posición base (bottom: 47px)
+        // Valor negativo = hacia arriba desde la posición base
         this.posY = 0;
         this.velocidadY = 0;
         this.gameOver = false;
