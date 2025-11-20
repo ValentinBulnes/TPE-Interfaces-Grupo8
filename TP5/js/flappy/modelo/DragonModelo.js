@@ -1,13 +1,19 @@
 // Modelo del dragón - Maneja toda la lógica y el estado del dragón
-export class DragonModelo {
+import { NPCModelo } from "./NPCModelo.js";
+
+export class DragonModelo extends NPCModelo {
     constructor() {
-        this.ancho = 81.7;
-        this.alto = 67.8;
-        this.posicionX = 640 * 0.07;
-        this.reduccionHitbox = 0.6;
+        // Inicializar la clase padre con parámetros específicos del dragón
+        super({
+            x: 640 * 0.07, // posX: 7% del ancho del contenedor
+            velocidad: 0, // El dragón no se mueve horizontalmente
+            ancho: 81.7,
+            alto: 67.8,
+            reduccionHitbox: 0.6,
+            y: 200, // Posición Y inicial
+        });
+
         // Estado del dragón
-        // Posición inicial: un poco más arriba de la mitad del contenedor
-        this.posicionY = 200; // Posición Y del dragón (en píxeles, desde el centro)
         this.velocidadY = 0; // Velocidad vertical del dragón
         this.gameOver = false; // Flag de game over
 
@@ -58,21 +64,21 @@ export class DragonModelo {
         // Aplicar gravedad
         this.velocidadY += this.gravedad;
 
-        // Actualizar posición
-        this.posicionY += this.velocidadY;
+        // Actualizar posición Y
+        this.posY += this.velocidadY;
 
         // REGLA FUNDAMENTAL: El dragón NUNCA puede salir de la pantalla
         // Verificar límite superior (no salir por arriba)
-        if (this.posicionY <= this.limiteSuperior) {
+        if (this.posY <= this.limiteSuperior) {
             // El dragón tocó el techo - Solo detenerlo, sin game over
-            this.posicionY = this.limiteSuperior;
+            this.posY = this.limiteSuperior;
             this.velocidadY = 0;
         }
 
         // Verificar límite inferior (no salir por abajo)
-        if (this.posicionY >= this.limiteInferior) {
+        if (this.posY >= this.limiteInferior) {
             // El dragón tocó el suelo - GAME OVER
-            this.posicionY = this.limiteInferior;
+            this.posY = this.limiteInferior;
             this.velocidadY = 0;
             this.gameOver = true;
         }
@@ -85,7 +91,7 @@ export class DragonModelo {
 
     // Obtiene la posición actual del dragón
     obtenerPosicion() {
-        return this.posicionY;
+        return this.posY;
     }
 
     // Obtiene la velocidad actual del dragón
@@ -97,14 +103,15 @@ export class DragonModelo {
     reiniciar() {
         // Posición inicial: un poco más arriba de la mitad del contenedor
         // Valor negativo = hacia arriba desde la posición base (bottom: 47px)
-        this.posicionY = 0;
+        this.posY = 0;
+        this.posY = 0;
         this.velocidadY = 0;
         this.gameOver = false;
     }
 
     // Verifica si hay colisión con el suelo (game over)
     esColision() {
-        return this.posicionY >= this.limiteInferior;
+        return this.posY >= this.limiteInferior;
     }
 
     // Verifica si el juego terminó
@@ -112,29 +119,5 @@ export class DragonModelo {
         return this.gameOver;
     }
 
-    getHitbox() {
-        const anchoReducido = this.ancho * this.reduccionHitbox;
-        const altoReducido = this.alto * this.reduccionHitbox;
-        const centerPos = this.getCenterPos();
-
-        const top = centerPos.y - anchoReducido / 2;
-        const bottom = centerPos.y + anchoReducido / 2;
-        const left = centerPos.x - anchoReducido / 2;
-        const right = centerPos.x + anchoReducido / 2;
-
-        return {
-            top: top,
-            bottom: bottom,
-            left: left,
-            right: right,
-            ancho: anchoReducido,
-            alto: altoReducido,
-        };
-    }
-
-    getCenterPos() {
-        const centerX = this.posicionX + this.ancho / 2;
-        const centerY = this.posicionY + this.alto / 2;
-        return { x: centerX, y: centerY };
-    }
+    // getCenterPos() y getHitbox() se heredan de NPCModelo
 }

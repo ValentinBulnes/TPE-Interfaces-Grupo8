@@ -13,7 +13,7 @@ export class NPCModelo {
             throw new Error("Cannot instantiate abstract class NPCModelo");
         }
 
-        this.x = x;
+        this.posX = x;
         this.velocidad = velocidad;
         this.ancho = ancho;
         this.alto = alto;
@@ -23,29 +23,29 @@ export class NPCModelo {
 
         // Calcular posición Y dentro del contenedor si no se pasa explícitamente
         if (y !== null) {
-            this.y = y;
+            this.posY = y;
         } else {
             const yMinimo = margen;
             const yMaximo = alturaContenedor - this.alto - margen;
-            this.y = Math.random() * (yMaximo - yMinimo) + yMinimo;
+            this.posY = Math.random() * (yMaximo - yMinimo) + yMinimo;
         }
     }
 
     actualizar() {
-        this.x -= this.velocidad;
+        this.posX -= this.velocidad;
 
-        if (this.x < this.limiteEliminacion) {
+        if (this.posX < this.limiteEliminacion) {
             this.marcadoParaEliminar = true;
         }
     }
 
     obtenerPosicion() {
-        return { x: this.x, y: this.y };
+        return { x: this.posX, y: this.posY };
     }
 
     getCenterPos() {
-        const centerX = this.x + this.ancho / 2;
-        const centerY = this.y + this.alto / 2;
+        const centerX = this.posX + this.ancho / 2;
+        const centerY = this.posY + this.alto / 2;
         return { x: centerX, y: centerY };
     }
 
