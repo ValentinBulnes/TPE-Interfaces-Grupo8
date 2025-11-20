@@ -211,67 +211,80 @@ export class FlappyController {
         }
 
         // Obtener posición y dimensiones del dragón
-        const dragonY = this.modelo.obtenerPosicion(); // translateY value
-        const dragonAncho = 81.7; // width del dragón
-        const dragonAlto = 67.8; // height del dragón
-        
-        // El dragón tiene left: 7% y top 50%
-        // Entonces su posición X efectiva es: (640 * 0.20) - (dragonAncho / 2)
-        const dragonX = (640 * 0.07) - (dragonAncho / 2);
-        
-        // El dragón tiene top: 50% en CSS, más el translateY
-        // translateY negativo = mover HACIA ARRIBA, translateY positivo = mover HACIA ABAJO
-        // Posición real del borde inferior = 50% - translateY (porque el eje Y invertido en CSS)
-        // Wait, translateY(value) mueve hacia abajo si positivo y hacia arriba si negativo
-        // Con bottom, la referencia es desde abajo
-        // Si top: 50% y translateY: -200, visualmente sube 200px
-        // Entonces bottom real = 47 + 200 = 247
-        const dragonBottom = 230 - dragonY; // bottom CSS - translateY (porque translateY negativo sube)
-        const dragonTop = dragonBottom + dragonAlto;
+        const dragonY = this.modelo.obtenerPosicion();
+        const dragonAncho = 81.7;
+        const dragonAlto = 67.8;
+        const dragonX = 640 * 0.07;
+
+        // Dragon absolute position
+        const dragonAbsoluteBottom = dragonY;
+        const dragonTop = dragonAbsoluteBottom;
+        const dragonBottom = dragonAbsoluteBottom + dragonAlto;
         const dragonLeft = dragonX;
         const dragonRight = dragonX + dragonAncho;
 
         // Verificar colisión con cada enemigo
         for (let enemigo of this.enemigos) {
             const enemigoPos = enemigo.modelo.obtenerPosicion();
-            const enemigoAncho = enemigo.modelo.ancho; // 75px
-            const enemigoAlto = enemigo.modelo.alto; // 75px
-            
-            // Reducir el hitbox del enemigo para hacer el juego más fácil
-            // En lugar de usar el tamaño completo (75px), usamos un porcentaje menor
-            const reduccionHitbox = 0.6; // 60% del tamaño original
+            const enemigoAncho = enemigo.modelo.ancho;
+            const enemigoAlto = enemigo.modelo.alto;
+
+            const reduccionHitbox = 0.6;
             const enemigoAnchoReducido = enemigoAncho * reduccionHitbox;
             const enemigoAltoReducido = enemigoAlto * reduccionHitbox;
-            
-            // SIMPLE: sin scales, bottom y left indican directamente los bordes
-            // Calcular el centro para aplicar la reducción del hitbox
-            const enemigoCentroX = enemigoPos.x + (enemigoAncho / 2);
-            const enemigoCentroY = enemigoPos.y + (enemigoAlto / 2);
-            
-            // Calcular límites del enemigo basándose en el centro y tamaño reducido
-            const enemigoLeft = enemigoCentroX - (enemigoAnchoReducido / 2);
-            const enemigoRight = enemigoCentroX + (enemigoAnchoReducido / 2);
-            const enemigoBottom = enemigoCentroY - (enemigoAltoReducido / 2);
-            const enemigoTop = enemigoCentroY + (enemigoAltoReducido / 2);
-            
-            // Margen adicional de colisión (para hacer el juego aún más justo)
-            const margen = 3;
-            
-            // Detección de colisión AABB (Axis-Aligned Bounding Box) con margen
-            const colisionXLeft = dragonLeft + margen < enemigoRight - margen
-            const colisionXRight = dragonRight - margen > enemigoLeft + margen
-            const colisionYTop = dragonTop - margen > enemigoBottom + margen
-            const colisionYBot = dragonBottom + margen < enemigoTop - margen
-            const colisionX = colisionXLeft && colisionXRight;
-            const colisionY = colisionYTop && colisionYBot;
-            
+
+            // Enemy center point
+            const enemigoCentroX = enemigoPos.x + enemigoAncho / 2;
+            const enemigoCentroY = enemigoPos.y + enemigoAlto / 2;
+
+            // Reduced hitbox centered on enemy center
+            const enemigoLeft = enemigoCentroX - enemigoAnchoReducido / 2;
+            const enemigoRight = enemigoCentroX + enemigoAnchoReducido / 2;
+            const enemigoTop = enemigoCentroY - enemigoAltoReducido / 2;
+            const enemigoBottom = enemigoCentroY + enemigoAltoReducido / 2;
+
+            // Strict AABB collision detection (no margins)
+            const colisionX =
+                dragonLeft < enemigoRight && dragonRight > enemigoLeft;
+            const colisionY =
+                dragonTop < enemigoBottom && dragonBottom > enemigoTop;
+
             if (colisionX && colisionY) {
-                console.log(enemigoPos)
-                return true; // Hay colisión
+                console.log(
+                    document.querySelector(
+                        "#juego-flappy > div.parallax-container > div.enemy"
+                    )
+                );
+                console.log(document.querySelector("#dragon"));
+                this.debugBox(enemigoTop, enemigoLeft, enemigoAncho, enemigoAlto, "red");
+                this.debugBox(dragonTop, dragonLeft, dragonAncho, dragonAlto, "blue");
+                // this.debugBox(dragonTop, dragonRight, 5, 5, "green");
+                // this.debugBox(dragonBottom, dragonLeft, 5, 5, "blue");
+                // this.debugBox(dragonBottom, dragonRight, 5, 5, "yellow");
+                return true;
             }
         }
-        
-        return false; // No hay colisión
+
+        return false;
+    }
+
+    debugBox(y, x, width, height, color) {
+        const container = document.querySelector(".parallax-container");
+
+        const node = document.createElement("div");
+        Object.assign(node.style, {
+            position: "absolute",
+            left: `${x}px`,
+            top: `${y}px`,
+            width: `${width}px`,
+            height: `${height}px`,
+            backgroundColor: color,
+            pointerEvents: "none", // optional, depending on UX requirements
+            opacity: "0.5",          // Opacity at 50%
+        });
+        console.log(node);
+
+        container.appendChild(node);
+        return node;
     }
 }
-
