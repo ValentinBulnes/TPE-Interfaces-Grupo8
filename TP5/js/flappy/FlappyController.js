@@ -217,9 +217,8 @@ export class FlappyController {
         const dragonX = 640 * 0.07;
 
         // Dragon absolute position
-        const dragonAbsoluteBottom = dragonY;
-        const dragonTop = dragonAbsoluteBottom;
-        const dragonBottom = dragonAbsoluteBottom + dragonAlto;
+        const dragonTop = dragonY;
+        const dragonBottom = dragonY + dragonAlto;
         const dragonLeft = dragonX;
         const dragonRight = dragonX + dragonAncho;
 
@@ -256,35 +255,36 @@ export class FlappyController {
                     )
                 );
                 console.log(document.querySelector("#dragon"));
-                this.debugBox(enemigoTop, enemigoLeft, enemigoAncho, enemigoAlto, "red");
-                this.debugBox(dragonTop, dragonLeft, dragonAncho, dragonAlto, "blue");
-                // this.debugBox(dragonTop, dragonRight, 5, 5, "green");
-                // this.debugBox(dragonBottom, dragonLeft, 5, 5, "blue");
-                // this.debugBox(dragonBottom, dragonRight, 5, 5, "yellow");
+                debugBox(enemigoTop,enemigoLeft,enemigoAnchoReducido,enemigoAltoReducido,"red");
+                debugBox(dragonTop,dragonLeft,dragonAncho,dragonAlto,"blue");
+                //  debugBox(dragonTop, dragonLeft, 5, 5, "red");
+                //  debugBox(dragonTop, dragonRight, 5, 5, "green");
+                //  debugBox(dragonBottom, dragonLeft, 5, 5, "blue");
+                //  debugBox(dragonBottom, dragonRight, 5, 5, "yellow");
                 return true;
             }
         }
 
         return false;
     }
+}
 
-    debugBox(y, x, width, height, color) {
-        const container = document.querySelector(".parallax-container");
+function debugBox(y, x, width, height, color) {
+    const container = document.querySelector(".parallax-container");
 
-        const node = document.createElement("div");
-        Object.assign(node.style, {
-            position: "absolute",
-            left: `${x}px`,
-            top: `${y}px`,
-            width: `${width}px`,
-            height: `${height}px`,
-            backgroundColor: color,
-            pointerEvents: "none", // optional, depending on UX requirements
-            opacity: "0.5",          // Opacity at 50%
-        });
-        console.log(node);
+    const node = document.createElement("div");
+    Object.assign(node.style, {
+        position: "absolute",
+        left: `${x}px`,
+        top: `${y}px`,
+        width: `${width}px`,
+        height: `${height}px`,
+        backgroundColor: color,
+        pointerEvents: "none", // optional, depending on UX requirements
+        opacity: "0.5", // Opacity at 50%
+    });
+    console.log(node);
 
-        container.appendChild(node);
-        return node;
-    }
+    container.appendChild(node);
+    return node;
 }
