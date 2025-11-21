@@ -174,6 +174,12 @@
 
             <!-- Contenedor del juego Flappy Dragon -->
             <div id="juego-flappy" class="oculto">
+                <div id="izquierda">
+                    <div id="hud-vidas">
+                        <span class="label-vidas">Vidas:</span>
+                        <span id="contador-vidas">2</span>
+                    </div>
+                </div>
                 <div class="parallax-container">
                     <div class="parallax-section section-1"></div>
                     <div class="parallax-section section-2"></div>
@@ -181,6 +187,13 @@
                     <div class="parallax-section section-4"></div>
                     <div id="dragon"></div>
                 </div>
+                <div id="derecha">
+                    <div id="hud-puntos">
+                        <span class="label-puntos">Puntos:</span>
+                        <span id="contador-puntos">0</span>
+                    </div>
+                </div>
+                
                 <div id="mensaje-gameover-flappy" class="oculto">
                     <h1>¡GAME OVER!</h1>
                     <p>¡El dragón chocó! Intentá de nuevo.</p>

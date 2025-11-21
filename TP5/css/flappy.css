@@ -18,9 +18,20 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 20px;
     margin-top: 0;
     background: linear-gradient(135deg, rgba(61, 90, 254, 0.3) 0%, rgba(0, 230, 118, 0.3) 50%, rgba(255, 64, 129, 0.3) 100%);
     backdrop-filter: blur(10px);
+}
+
+/* Contenedores laterales */
+#izquierda,
+#derecha {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 
 .parallax-container {
@@ -30,6 +41,7 @@
     overflow: hidden;
     border-radius: 12px;
     box-shadow: 0 0 0 4px rgba(61, 90, 254, 1), 0 0 30px rgba(61, 90, 254, 0.8), inset 0 0 30px rgba(0, 230, 118, 0.4);
+    flex-shrink: 0;
 }
 
 .parallax-section {
@@ -280,4 +292,74 @@
     bottom: 0;
     background-image: url('../img/flappy/tuboInferior.png');
     background-position: top; /* El borde debe quedar en la parte superior del tubo */
+}
+
+/* Contador de puntos */
+#hud-puntos {
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    padding: 20px 30px;
+    border-radius: 12px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), 0 0 20px rgba(61, 90, 254, 0.5);
+    border: 2px solid rgba(61, 90, 254, 0.6);
+    min-width: 120px;
+}
+
+.label-puntos {
+    color: #00e676;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    white-space: nowrap;
+}
+
+#contador-puntos {
+    color: #ffd700;
+    font-size: 3rem;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+    min-width: 60px;
+    text-align: center;
+}
+
+/* Contador de vidas */
+#hud-vidas {
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    padding: 20px 30px;
+    border-radius: 12px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 64, 129, 0.5);
+    border: 2px solid rgba(255, 64, 129, 0.6);
+    min-width: 120px;
+}
+
+.label-vidas {
+    color: #ff4081;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    white-space: nowrap;
+}
+
+#contador-vidas {
+    color: #ff6090;
+    font-size: 3rem;
+    text-shadow: 0 0 10px rgba(255, 64, 129, 0.8);
+    min-width: 60px;
+    text-align: center;
 }

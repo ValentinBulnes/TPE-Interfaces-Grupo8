@@ -59,6 +59,10 @@ export class FlappyController {
         // Limpiar enemigos existentes
         this.limpiarEnemigos();
 
+        // Reiniciar contadores
+        this.actualizarContadorPuntos();
+        this.actualizarContadorVidas();
+
         // Marcar el juego como iniciado
         this.juegoIniciado = true;
         this.tiempoUltimoEnemigo = performance.now();
@@ -112,10 +116,20 @@ export class FlappyController {
         // Verificar colisiones con obstáculos
         const hayColisionObstaculo = this.verificarColisionObstaculos();
 
+        // Verificar si el dragón pasó por algún tubo
+        this.verificarTubosPasados();
+
         this.coleccionarColeccionables();
 
         // Verificar si hay game over DESPUÉS de actualizar la vista
-        if (this.modelo.esGameOver(hayColisionEnemiga || hayColisionObstaculo)) {
+        const gameOver = this.modelo.esGameOver(hayColisionEnemiga || hayColisionObstaculo);
+        
+        // Actualizar contador de vidas si hubo colisión
+        if (hayColisionEnemiga || hayColisionObstaculo) {
+            this.actualizarContadorVidas();
+        }
+        
+        if (gameOver) {
             this.terminarJuego();
             return;
         }
@@ -137,6 +151,10 @@ export class FlappyController {
         if (coleccionablesColisionados.length > 0) {
             // Informar al modelo para actualizar contadores
             this.modelo.coleccionar(coleccionablesColisionados);
+
+            // Actualizar contadores en la interfaz
+            this.actualizarContadorVidas();
+            this.actualizarContadorPuntos();
 
             // Eliminar visualmente y marcar para eliminación en el modelo
             for (let col of coleccionablesColisionados) {
@@ -340,6 +358,44 @@ export class FlappyController {
 
         return false;
     }
+
+    // Verifica si el dragón pasó completamente por algún tubo
+    verificarTubosPasados() {
+        const dragonHitbox = this.modelo.getHitbox();
+        
+        for (let obstaculo of this.obstaculos) {
+            // Si ya fue pasado, no volver a contar
+            if (obstaculo.modelo.fuePasado()) {
+                continue;
+            }
+
+            const hitboxes = obstaculo.modelo.getHitboxes();
+            
+            // El dragón pasa el tubo cuando su lado izquierdo supera el lado derecho del tubo
+            if (dragonHitbox.left > hitboxes.superior.right) {
+                obstaculo.modelo.marcarComoPasado();
+                this.modelo.incrementarPuntos();
+                this.actualizarContadorPuntos();
+            }
+        }
+    }
+
+    // Actualiza el contador de puntos en la interfaz
+    actualizarContadorPuntos() {
+        const contadorPuntos = document.getElementById("contador-puntos");
+        if (contadorPuntos) {
+            contadorPuntos.textContent = this.modelo.obtenerPuntos();
+        }
+    }
+
+    // Actualiza el contador de vidas en la interfaz
+    actualizarContadorVidas() {
+        const contadorVidas = document.getElementById("contador-vidas");
+        if (contadorVidas) {
+            const vidas = this.modelo.coleccionables.corazon || 0;
+            contadorVidas.textContent = vidas;
+        }
+    }
 }
 
 function debugBox(y, x, width, height, color) {
@@ -355,7 +411,6 @@ function debugBox(y, x, width, height, color) {
         backgroundColor: color,
         opacity: "0.5",
     });
-    console.log(node);
 
     container.appendChild(node);
     return node;

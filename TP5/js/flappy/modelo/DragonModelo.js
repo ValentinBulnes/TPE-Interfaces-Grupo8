@@ -14,6 +14,7 @@ export class DragonModelo extends NPCModelo {
             colorHitbox: "blue",
         });
         this.coleccionables = { corazon: 2 };
+        this.puntos = 0; // Contador de puntos al pasar por tubos
 
         // Estado del dragón
         this.velocidadY = 0; // Velocidad vertical del dragón
@@ -111,6 +112,7 @@ export class DragonModelo extends NPCModelo {
         this.velocidadY = 0;
         this.gameOver = false;
         this.coleccionables = { corazon: 2 };
+        this.puntos = 0;
         this.invulnerable = false;
         this.tiempoInvulnerabilidad = 0;
     }
@@ -124,11 +126,6 @@ export class DragonModelo extends NPCModelo {
     esGameOver(hayColision = false) {
         if (hayColision && !this.invulnerable) {
             // Solo procesar la colisión si no está invulnerable
-            console.log(
-                `Hubo colisión, pierdo una vida: ${
-                    this.coleccionables.corazon
-                } -> ${this.coleccionables.corazon - 1}`
-            );
             this.coleccionables.corazon--;
 
             // Activar invulnerabilidad si sigue vivo
@@ -175,11 +172,26 @@ export class DragonModelo extends NPCModelo {
                 coleccionable.tipo ||
                 (coleccionable.modelo && coleccionable.modelo.tipo);
             if (!tipo) continue;
+            
+            // Si es una moneda, sumar 5 puntos
+            if (tipo === 'moneda') {
+                this.puntos += 5;
+            }
+            
+            // Actualizar contador de coleccionables
             if (!this.coleccionables[tipo]) this.coleccionables[tipo] = 0;
             this.coleccionables[tipo] += 1;
         }
+    }
 
-        console.log("coleccionables (modelo):", this.coleccionables);
+    // Incrementa los puntos cuando el dragón pasa por un tubo
+    incrementarPuntos() {
+        this.puntos++;
+    }
+
+    // Obtiene los puntos actuales
+    obtenerPuntos() {
+        return this.puntos;
     }
 
     // getCenterPos() y getHitbox() se heredan de NPCModelo
