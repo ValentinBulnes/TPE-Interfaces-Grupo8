@@ -12,6 +12,7 @@ export class DragonModelo extends NPCModelo {
             reduccionHitbox: 0.6,
             y: 200, // Posición Y inicial
         });
+        this.coleccionables = {};
 
         // Estado del dragón
         this.velocidadY = 0; // Velocidad vertical del dragón
@@ -106,6 +107,7 @@ export class DragonModelo extends NPCModelo {
         this.posY = 0;
         this.velocidadY = 0;
         this.gameOver = false;
+        this.coleccionables = {};
     }
 
     // Verifica si hay colisión con el suelo (game over)
@@ -116,6 +118,21 @@ export class DragonModelo extends NPCModelo {
     // Verifica si el juego terminó
     esGameOver() {
         return this.gameOver;
+    }
+
+    coleccionar(conjuntoColeccionables) {
+        for (let coleccionable of conjuntoColeccionables) {
+            // El controlador pasa objetos { modelo, vista }
+            // Aceptar también si se le pasa directamente el modelo
+            const tipo =
+                coleccionable.tipo ||
+                (coleccionable.modelo && coleccionable.modelo.tipo);
+            if (!tipo) continue;
+            if (!this.coleccionables[tipo]) this.coleccionables[tipo] = 0;
+            this.coleccionables[tipo] += 1;
+        }
+
+        console.log("coleccionables (modelo):", this.coleccionables);
     }
 
     // getCenterPos() y getHitbox() se heredan de NPCModelo

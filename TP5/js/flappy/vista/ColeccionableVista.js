@@ -5,27 +5,26 @@ export class ColeccionableVista {
     }
 
     crearElemento() {
-        const elemento = document.createElement('div');
-        
+        const elemento = document.createElement("div");
+
         // Aplicar clase CSS según el tipo
-        if (this.tipo === 'moneda') {
-            elemento.className = 'moneda-movil';
-        } else if (this.tipo === 'corazon') {
-            elemento.className = 'corazon-movil';
+        if (this.tipo === "moneda") {
+            elemento.className = "moneda-movil";
+        } else if (this.tipo === "corazon") {
+            elemento.className = "corazon-movil";
         }
-        
-        const contenedor = document.querySelector('.parallax-container');
+
+        const contenedor = document.querySelector(".parallax-container");
         if (contenedor) {
             contenedor.appendChild(elemento);
         }
-        
+
         return elemento;
     }
 
     actualizarPosicion(x, y) {
         if (this.elemento) {
-            this.elemento.style.left = x + 'px';
-            this.elemento.style.bottom = y + 'px';
+            this.elemento.style = `--position-y: ${y}px; left: ${x}px;`;
         }
     }
 
@@ -35,4 +34,3 @@ export class ColeccionableVista {
         }
     }
 }
-

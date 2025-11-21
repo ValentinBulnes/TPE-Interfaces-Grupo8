@@ -92,7 +92,8 @@ export class FlappyController {
         const esColision = this.modelo.esColision();
         const limiteInferior = this.modelo.limiteInferior;
         // Verificar colisiones con enemigos
-        const hayColisionEnemiga = this.verificarColisionEnemigos();
+        const hayColisionEnemiga =
+            this.obtenerColisionados(this.enemigos).length > 0;
         const hayColision = esColision || hayColisionEnemiga;
         this.vista.actualizarPosicion(
             posicion,
@@ -100,6 +101,8 @@ export class FlappyController {
             hayColision,
             limiteInferior
         );
+
+        this.coleccionarColeccionables();
 
         // Verificar si hay game over DESPUÉS de actualizar la vista
         if (this.modelo.esGameOver()) {
@@ -119,6 +122,30 @@ export class FlappyController {
 
         // Continuar el loop
         requestAnimationFrame((t) => this.gameLoop(t));
+    }
+
+    coleccionarColeccionables() {
+        const coleccionablesColisionados = this.obtenerColisionados(
+            this.coleccionables
+        );
+
+        if (coleccionablesColisionados.length > 0) {
+            // Informar al modelo para actualizar contadores
+            this.modelo.coleccionar(coleccionablesColisionados);
+
+            // Eliminar visualmente y marcar para eliminación en el modelo
+            for (let col of coleccionablesColisionados) {
+                if (col.vista) col.vista.eliminar();
+                if (
+                    col.modelo &&
+                    typeof col.modelo.marcarParaEliminar === "function"
+                ) {
+                    col.modelo.marcarParaEliminar();
+                }
+                const idx = this.coleccionables.indexOf(col);
+                if (idx !== -1) this.coleccionables.splice(idx, 1);
+            }
+        }
     }
 
     // Termina el juego y muestra el mensaje de game over
@@ -205,40 +232,35 @@ export class FlappyController {
     }
 
     // Verifica si hay colisión entre el dragón y los enemigos
-    verificarColisionEnemigos() {
-        if (this.enemigos.length === 0) {
-            return false; // No hay enemigos
+    obtenerColisionados(conjuntoNPC) {
+        const res = [];
+        if (conjuntoNPC.length === 0) {
+            return res; // No hay enemigos
         }
 
         // Obtener posición y dimensiones del dragón
         const dragonHitbox = this.modelo.getHitbox();
 
         // Verificar colisión con cada enemigo
-        for (let enemigo of this.enemigos) {
-            const enemigoHitbox = enemigo.modelo.getHitbox();
+        for (let npc of conjuntoNPC) {
+            const npcHitbox = npc.modelo.getHitbox();
 
             // Strict AABB collision detection (no margins)
             const colisionX =
-                dragonHitbox.left < enemigoHitbox.right &&
-                dragonHitbox.right > enemigoHitbox.left;
+                dragonHitbox.left < npcHitbox.right &&
+                dragonHitbox.right > npcHitbox.left;
             const colisionY =
-                dragonHitbox.top < enemigoHitbox.bottom &&
-                dragonHitbox.bottom > enemigoHitbox.top;
+                dragonHitbox.top < npcHitbox.bottom &&
+                dragonHitbox.bottom > npcHitbox.top;
 
             if (colisionX && colisionY) {
-                console.log(
-                    document.querySelector(
-                        "#juego-flappy > div.parallax-container > div.enemy"
-                    )
-                );
-                console.log(document.querySelector("#dragon"));
                 // debugBox(enemigoHitbox.top,enemigoHitbox.left,enemigoHitbox.ancho,enemigoHitbox.alto,"red");
                 // debugBox(dragonHitbox.top,dragonHitbox.left,dragonHitbox.ancho,dragonHitbox.alto,"blue");
-                return true;
+                res.push(npc);
             }
         }
 
-        return false;
+        return res;
     }
 }
 
