@@ -39,6 +39,10 @@ export class FlappyController {
             contenedorJuego.addEventListener("click", () =>
                 this.manejarSalto()
             );
+            document.body.addEventListener("keydown", (e) => {
+                if (e.key == "w")
+                    this.manejarSalto();
+            });
         }
     }
 
