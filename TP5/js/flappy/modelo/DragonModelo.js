@@ -51,17 +51,11 @@ export class DragonModelo extends NPCModelo {
         const bottomDragon = parseFloat(estilosDragon.bottom);
         const alturaDragon = parseFloat(estilosDragon.height);
 
-        // CÁLCULO SIMPLE (sin escalas complicadas):
-        // Posición inicial del borde inferior: bottomDragon
-        // Posición inicial del borde superior: bottomDragon + alturaDragon
-
-        const bordeInferiorInicial = bottomDragon;
-        const bordeSuperiorInicial = bottomDragon + alturaDragon;
-
         // LÍMITE INFERIOR: para que el borde inferior toque y=0 (el suelo)
-        this.limiteInferior = bordeInferiorInicial;
+        this.limiteInferior = bottomDragon;
 
         // LÍMITE SUPERIOR: para que el borde superior toque y=alturaContenedor (el techo)
+        const bordeSuperiorInicial = bottomDragon + alturaDragon;
         const distanciaHastaTecho = alturaContenedor - bordeSuperiorInicial;
         this.limiteSuperior = -distanciaHastaTecho;
     }
