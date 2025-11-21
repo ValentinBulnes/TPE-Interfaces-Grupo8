@@ -1,4 +1,5 @@
 export class NPCModelo {
+    static DEBUG_HITBOX = false;
     constructor({
         x = 640,
         velocidad = 5,
@@ -8,6 +9,7 @@ export class NPCModelo {
         alturaContenedor = 560,
         margen = 20,
         y = null,
+        colorHitbox = "red",
     } = {}) {
         if (new.target === NPCModelo) {
             throw new Error("Cannot instantiate abstract class NPCModelo");
@@ -29,6 +31,8 @@ export class NPCModelo {
             const yMaximo = alturaContenedor - this.alto - margen;
             this.posY = Math.random() * (yMaximo - yMinimo) + yMinimo;
         }
+        this.colorHitbox = colorHitbox;
+        this.initDebugHitbox();
     }
 
     actualizar() {
@@ -37,6 +41,7 @@ export class NPCModelo {
         if (this.posX < this.limiteEliminacion) {
             this.marcadoParaEliminar = true;
         }
+        this.debugHitbox();
     }
 
     obtenerPosicion() {
@@ -75,5 +80,26 @@ export class NPCModelo {
 
     isMarcadoParaEliminar() {
         return this.marcadoParaEliminar;
+    }
+
+    initDebugHitbox() {
+        if (!NPCModelo.DEBUG_HITBOX) return;
+        const container = document.querySelector(".parallax-container");
+        this.hitbox = document.createElement("div");
+        container.appendChild(this.hitbox);
+    }
+
+    debugHitbox() {
+        if (!NPCModelo.DEBUG_HITBOX) return;
+        const { top, left, ancho, alto } = this.getHitbox();
+        Object.assign(this.hitbox.style, {
+            position: "absolute",
+            left: `${left}px`,
+            top: `${top}px`,
+            width: `${ancho}px`,
+            height: `${alto}px`,
+            backgroundColor: this.colorHitbox,
+            opacity: "0.5",
+        });
     }
 }

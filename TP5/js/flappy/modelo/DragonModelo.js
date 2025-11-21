@@ -11,6 +11,7 @@ export class DragonModelo extends NPCModelo {
             alto: 67.8,
             reduccionHitbox: 0.6,
             y: 200, // Posición Y inicial
+            colorHitbox: "blue",
         });
         this.coleccionables = {};
 
@@ -83,6 +84,7 @@ export class DragonModelo extends NPCModelo {
             this.velocidadY = 0;
             this.gameOver = true;
         }
+        this.debugHitbox();
     }
 
     // Hace saltar al dragón
