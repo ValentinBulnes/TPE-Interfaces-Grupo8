@@ -89,29 +89,20 @@ export class FlappyController {
         // Actualizar la vista con la nueva posición y velocidad (para la rotación)
         const posicion = this.modelo.obtenerPosicion();
         const velocidad = this.modelo.obtenerVelocidad();
-        const esColision = this.modelo.esColision();
         const limiteInferior = this.modelo.limiteInferior;
-        // Verificar colisiones con enemigos
-        const hayColisionEnemiga =
-            this.obtenerColisionados(this.enemigos).length > 0;
-        const hayColision = esColision || hayColisionEnemiga;
         this.vista.actualizarPosicion(
             posicion,
             velocidad,
-            hayColision,
             limiteInferior
         );
+        // Verificar colisiones con enemigos
+        const hayColisionEnemiga =
+            this.obtenerColisionados(this.enemigos).length > 0;
 
         this.coleccionarColeccionables();
 
         // Verificar si hay game over DESPUÉS de actualizar la vista
-        if (this.modelo.esGameOver()) {
-            this.terminarJuego();
-            return;
-        }
-
-        if (hayColision) {
-            this.modelo.gameOver = true;
+        if (this.modelo.esGameOver(hayColisionEnemiga)) {
             this.terminarJuego();
             return;
         }

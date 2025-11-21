@@ -13,7 +13,7 @@ export class DragonModelo extends NPCModelo {
             y: 200, // Posición Y inicial
             colorHitbox: "blue",
         });
-        this.coleccionables = {};
+        this.coleccionables = { corazon: 1 };
 
         // Estado del dragón
         this.velocidadY = 0; // Velocidad vertical del dragón
@@ -77,8 +77,7 @@ export class DragonModelo extends NPCModelo {
             this.velocidadY = 0;
         }
 
-        // Verificar límite inferior (no salir por abajo)
-        if (this.posY >= this.limiteInferior) {
+        if (this.esColisionSuelo()) {
             // El dragón tocó el suelo - GAME OVER
             this.posY = this.limiteInferior;
             this.velocidadY = 0;
@@ -109,17 +108,21 @@ export class DragonModelo extends NPCModelo {
         this.posY = 0;
         this.velocidadY = 0;
         this.gameOver = false;
-        this.coleccionables = {};
+        this.coleccionables = { corazon: 1 };
     }
 
     // Verifica si hay colisión con el suelo (game over)
-    esColision() {
+    esColisionSuelo() {
         return this.posY >= this.limiteInferior;
     }
 
     // Verifica si el juego terminó
-    esGameOver() {
-        return this.gameOver;
+    esGameOver(hayColision = false) {
+        if (hayColision) {
+            console.log(`Hubo colision, pierdo una vida: ${this.coleccionables.corazon} -> ${this.coleccionables.corazon-1}`)
+            this.coleccionables.corazon--
+        }
+        return this.gameOver || this.coleccionables.corazon <= 0;
     }
 
     coleccionar(conjuntoColeccionables) {
