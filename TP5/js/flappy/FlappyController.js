@@ -89,11 +89,13 @@ export class FlappyController {
         // Actualizar la vista con la nueva posición y velocidad (para la rotación)
         const posicion = this.modelo.obtenerPosicion();
         const velocidad = this.modelo.obtenerVelocidad();
+        const esInvulnerable = this.modelo.estaInvulnerable()
         const limiteInferior = this.modelo.limiteInferior;
         this.vista.actualizarPosicion(
             posicion,
             velocidad,
-            limiteInferior
+            limiteInferior, 
+            esInvulnerable,
         );
         // Verificar colisiones con enemigos
         const hayColisionEnemiga =

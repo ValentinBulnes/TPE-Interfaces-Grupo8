@@ -30,7 +30,7 @@ export class DragonModelo extends NPCModelo {
         // Sistema de inmunidad transitoria
         this.invulnerable = false;
         this.tiempoInvulnerabilidad = 0;
-        this.duracionInvulnerabilidad = 2000; // 2 segundos en milisegundos
+        this.duracionInvulnerabilidad = 1000; // 1 segundos en milisegundos
     }
 
     // Calcula los límites del dragón basándose en las dimensiones del contenedor
@@ -149,7 +149,6 @@ export class DragonModelo extends NPCModelo {
     activarInvulnerabilidad() {
         this.invulnerable = true;
         this.tiempoInvulnerabilidad = this.duracionInvulnerabilidad;
-        console.log("🛡️ Dragón invulnerable por 2 segundos");
     }
 
     // Actualizar estado de invulnerabilidad

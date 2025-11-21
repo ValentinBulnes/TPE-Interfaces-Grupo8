@@ -15,7 +15,7 @@ export class DragonVista {
     }
 
     // Actualiza la posición visual del dragón con rotación
-    actualizarPosicion(posicionY, velocidadY, limiteInferior) {
+    actualizarPosicion(posicionY, velocidadY, limiteInferior, esInvulnerable) {
         if (this.elementoDragon) {
             // Calcular la rotación basándose en la velocidad
             // Velocidad negativa (sube) = rotación negativa (apunta arriba)
@@ -32,6 +32,12 @@ export class DragonVista {
                 this.elementoDragon.classList.add("cayendo");
             } else {
                 this.elementoDragon.classList.remove("cayendo");
+            }
+            
+            if(esInvulnerable){
+                this.elementoDragon.classList.toggle("invulnerable", true)
+            }else{
+                this.elementoDragon.classList.remove("invulnerable");
             }
         }
     }
