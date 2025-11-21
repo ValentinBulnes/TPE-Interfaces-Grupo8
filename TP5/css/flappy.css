@@ -257,3 +257,27 @@
     50%  { opacity: 0.8; transform: scale(1.15);}
     100% { opacity: 0.5; transform: scale(1);   }
 }
+
+/* Obstáculos (tubos tipo Flappy Bird) */
+.tubo {
+    position: absolute;
+    width: 52px;
+    background-repeat: repeat-y;
+    background-size: 52px auto; /* Ancho fijo, altura automática que se repite */
+    z-index: 80; /* Por encima del parallax pero debajo del dragón */
+    image-rendering: pixelated; /* Para mantener el estilo pixel art */
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+}
+
+.tubo-superior {
+    top: 0;
+    background-image: url('../img/flappy/tuboSuperior.png');
+    background-position: bottom; /* El borde debe quedar en la parte inferior del tubo */
+}
+
+.tubo-inferior {
+    bottom: 0;
+    background-image: url('../img/flappy/tuboInferior.png');
+    background-position: top; /* El borde debe quedar en la parte superior del tubo */
+}

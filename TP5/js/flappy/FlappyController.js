@@ -3,6 +3,8 @@ import { EnemigoModelo } from "./modelo/EnemigoModelo.js";
 import { EnemigoVista } from "./vista/EnemigoVista.js";
 import { ColeccionableModelo } from "./modelo/ColeccionableModelo.js";
 import { ColeccionableVista } from "./vista/ColeccionableVista.js";
+import { ObstaculoModelo } from "./modelo/ObstaculoModelo.js";
+import { ObstaculoVista } from "./vista/ObstaculoVista.js";
 
 export class FlappyController {
     constructor(modelo, vista) {
@@ -11,10 +13,13 @@ export class FlappyController {
         this.juegoIniciado = false;
         this.enemigos = []; // Array to store active enemies { modelo, vista }
         this.coleccionables = []; // Array to store active collectibles (coins and hearts)
+        this.obstaculos = []; // Array to store active obstacles (pipes)
         this.tiempoUltimoEnemigo = 0;
         this.tiempoUltimoColeccionable = 0;
+        this.tiempoUltimoObstaculo = 0;
         this.intervaloEnemigos = 2000; // Spawn enemy every 2 seconds
         this.intervaloColeccionables = 3000; // Spawn collectible every 3 seconds
+        this.intervaloObstaculos = 2500; // Spawn obstacle every 2.5 seconds
 
         // Configurar eventos
         this.configurarEventos();
@@ -58,6 +63,7 @@ export class FlappyController {
         this.juegoIniciado = true;
         this.tiempoUltimoEnemigo = performance.now();
         this.tiempoUltimoColeccionable = performance.now();
+        this.tiempoUltimoObstaculo = performance.now();
 
         // Iniciar el game loop
         this.gameLoop(performance.now());
@@ -70,6 +76,8 @@ export class FlappyController {
             coleccionable.vista.eliminar()
         );
         this.coleccionables = [];
+        this.obstaculos.forEach((obstaculo) => obstaculo.vista.eliminar());
+        this.obstaculos = [];
     }
 
     // Maneja el evento de salto
@@ -101,17 +109,21 @@ export class FlappyController {
         const hayColisionEnemiga =
             this.obtenerColisionados(this.enemigos).length > 0;
 
+        // Verificar colisiones con obstáculos
+        const hayColisionObstaculo = this.verificarColisionObstaculos();
+
         this.coleccionarColeccionables();
 
         // Verificar si hay game over DESPUÉS de actualizar la vista
-        if (this.modelo.esGameOver(hayColisionEnemiga)) {
+        if (this.modelo.esGameOver(hayColisionEnemiga || hayColisionObstaculo)) {
             this.terminarJuego();
             return;
         }
 
-        // Gestionar enemigos y coleccionables
+        // Gestionar enemigos, coleccionables y obstáculos
         this.gestionarEnemigos(tiempoActual);
         this.gestionarColeccionables(tiempoActual);
+        this.gestionarObstaculos(tiempoActual);
 
         // Continuar el loop
         requestAnimationFrame((t) => this.gameLoop(t));
@@ -254,6 +266,79 @@ export class FlappyController {
         }
 
         return res;
+    }
+
+    // Gestiona los obstáculos (tubos)
+    gestionarObstaculos(tiempoActual) {
+        // Generar nuevos obstáculos
+        if (tiempoActual - this.tiempoUltimoObstaculo > this.intervaloObstaculos) {
+            this.crearObstaculo();
+            this.tiempoUltimoObstaculo = tiempoActual;
+        }
+
+        // Actualizar y eliminar obstáculos
+        for (let i = this.obstaculos.length - 1; i >= 0; i--) {
+            const obstaculo = this.obstaculos[i];
+            obstaculo.modelo.actualizar();
+
+            if (obstaculo.modelo.marcadoParaEliminar) {
+                obstaculo.vista.eliminar();
+                this.obstaculos.splice(i, 1);
+            } else {
+                const posiciones = obstaculo.modelo.obtenerPosiciones();
+                obstaculo.vista.actualizarPosicion(posiciones);
+            }
+        }
+    }
+
+    // Crea un nuevo obstáculo
+    crearObstaculo() {
+        const modelo = new ObstaculoModelo();
+        const vista = new ObstaculoVista();
+        this.obstaculos.push({ modelo, vista });
+
+        // Initial position update
+        const posiciones = modelo.obtenerPosiciones();
+        vista.actualizarPosicion(posiciones);
+    }
+
+    // Verifica colisiones con obstáculos (ambos tubos)
+    verificarColisionObstaculos() {
+        if (this.obstaculos.length === 0) {
+            return false;
+        }
+
+        const dragonHitbox = this.modelo.getHitbox();
+
+        for (let obstaculo of this.obstaculos) {
+            const hitboxes = obstaculo.modelo.getHitboxes();
+
+            // Verificar colisión con tubo superior
+            const colisionSuperiorX =
+                dragonHitbox.left < hitboxes.superior.right &&
+                dragonHitbox.right > hitboxes.superior.left;
+            const colisionSuperiorY =
+                dragonHitbox.top < hitboxes.superior.bottom &&
+                dragonHitbox.bottom > hitboxes.superior.top;
+
+            if (colisionSuperiorX && colisionSuperiorY) {
+                return true;
+            }
+
+            // Verificar colisión con tubo inferior
+            const colisionInferiorX =
+                dragonHitbox.left < hitboxes.inferior.right &&
+                dragonHitbox.right > hitboxes.inferior.left;
+            const colisionInferiorY =
+                dragonHitbox.top < hitboxes.inferior.bottom &&
+                dragonHitbox.bottom > hitboxes.inferior.top;
+
+            if (colisionInferiorX && colisionInferiorY) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
 
