@@ -13,7 +13,7 @@ export class DragonModelo extends NPCModelo {
             y: 200, // Posición Y inicial
             colorHitbox: "blue",
         });
-        this.coleccionables = { corazon: 1 };
+        this.coleccionables = { corazon: 2 };
 
         // Estado del dragón
         this.velocidadY = 0; // Velocidad vertical del dragón
@@ -26,6 +26,11 @@ export class DragonModelo extends NPCModelo {
         // Límites iniciales (se recalcularán al iniciar el juego)
         this.limiteSuperior = -445;
         this.limiteInferior = 47;
+
+        // Sistema de inmunidad transitoria
+        this.invulnerable = false;
+        this.tiempoInvulnerabilidad = 0;
+        this.duracionInvulnerabilidad = 2000; // 2 segundos en milisegundos
     }
 
     // Calcula los límites del dragón basándose en las dimensiones del contenedor
@@ -83,6 +88,9 @@ export class DragonModelo extends NPCModelo {
             this.velocidadY = 0;
             this.gameOver = true;
         }
+
+        this.actualizarInvulnerabilidad();
+
         this.debugHitbox();
     }
 
@@ -108,7 +116,9 @@ export class DragonModelo extends NPCModelo {
         this.posY = 0;
         this.velocidadY = 0;
         this.gameOver = false;
-        this.coleccionables = { corazon: 1 };
+        this.coleccionables = { corazon: 2 };
+        this.invulnerable = false;
+        this.tiempoInvulnerabilidad = 0;
     }
 
     // Verifica si hay colisión con el suelo (game over)
@@ -118,12 +128,51 @@ export class DragonModelo extends NPCModelo {
 
     // Verifica si el juego terminó
     esGameOver(hayColision = false) {
-        if (hayColision) {
-            console.log(`Hubo colision, pierdo una vida: ${this.coleccionables.corazon} -> ${this.coleccionables.corazon-1}`)
-            this.coleccionables.corazon--
+        if (hayColision && !this.invulnerable) {
+            // Solo procesar la colisión si no está invulnerable
+            console.log(
+                `Hubo colisión, pierdo una vida: ${
+                    this.coleccionables.corazon
+                } -> ${this.coleccionables.corazon - 1}`
+            );
+            this.coleccionables.corazon--;
+
+            // Activar invulnerabilidad si sigue vivo
+            if (this.coleccionables.corazon > 0) {
+                this.activarInvulnerabilidad();
+            }
         }
         return this.gameOver || this.coleccionables.corazon <= 0;
     }
+
+    // Activa el estado de invulnerabilidad transitoria
+    activarInvulnerabilidad() {
+        this.invulnerable = true;
+        this.tiempoInvulnerabilidad = this.duracionInvulnerabilidad;
+        console.log("🛡️ Dragón invulnerable por 2 segundos");
+    }
+
+    // Actualizar estado de invulnerabilidad
+    actualizarInvulnerabilidad() {
+        if (this.invulnerable) {
+            this.tiempoInvulnerabilidad -= 16; // Aproximadamente 60 FPS
+            if (this.tiempoInvulnerabilidad <= 0) {
+                this.invulnerable = false;
+                this.tiempoInvulnerabilidad = 0;
+            }
+        }
+    }
+
+    // Devuelve si el dragón está actualmente invulnerable
+    estaInvulnerable() {
+        return this.invulnerable;
+    }
+
+    // Devuelve el porcentaje de invulnerabilidad restante (0-1)
+    // obtenerPorcentajeInvulnerabilidad() {
+    //     if (!this.invulnerable) return 0;
+    //     return this.tiempoInvulnerabilidad / this.duracionInvulnerabilidad;
+    // }
 
     coleccionar(conjuntoColeccionables) {
         for (let coleccionable of conjuntoColeccionables) {
