@@ -9,9 +9,10 @@
     position: relative;
 }
 
-#game-execution:not(:has(> img:not(.oculto))){
-    background: linear-gradient(135deg, rgba(61, 90, 254, 0.3) 0%, rgba(0, 230, 118, 0.3) 50%, rgba(255, 64, 129, 0.3) 100%);
-    backdrop-filter: blur(10px);
+#game-execution:not(:has(> img:not(.oculto))) {
+    background-size: cover;
+    background-position: center;
+    background-image: url("../img/flappy/backdrop-opacity.png");
 }
 
 /* Estilos específicos para el juego Flappy Dragon */
