@@ -174,9 +174,9 @@
             </button>
             <div id="menu-principal" class="menu-principal oculto">
                 <h1>Flappy Dragon</h1>
-                <h3>Llega lo mas lejos que puedas para obtener el mejor puntaje</h3>
+                <h3>Sobrevivi 1 minuto y intenta obtener el mejor puntaje</h3>
                 <p>Usa el Click o la W para que Flappy Dragon se eleve.</p>
-                <p>Esquiva los enemigos en el camino, y seupera los caños para sumar puntos.</p>
+                <p>Esquiva los enemigos en el camino, y supera los caños para sumar puntos.</p>
                 <p>Atrapa corazones para sumar vidas extra.</p>
                 <p>Colecciona las monedas para sumar mas puntos!</p>
                 <button id="btn-iniciar-juego" class="btn-hover-primary">Comenzar</button>
@@ -196,6 +196,7 @@
                 </div>
                 <div id="derecha">
                     <div class="game-info">
+                        <h2 class="label-tiempo">Tiempo: <span id="contador-tiempo">1:00</span></h2>
                         <h2 class="label-puntos">Puntos: <span id="contador-puntos">0</span></h2>
                         <h2 class="label-vidas">Vidas: <span id="contador-vidas">2</span></h2>
                     </div>
@@ -206,6 +207,15 @@
                     <p>¡El dragón chocó! Intentá de nuevo.</p>
                     <div id="botones-gameover-flappy">
                         <button id="btn-reintentar-flappy" class="btn-hover-primary">Volver a jugar</button>
+                    </div>
+                </div>
+
+                <div id="mensaje-victoria-flappy" class="oculto">
+                    <h1>¡GANASTE!</h1>
+                    <p>¡Sobreviviste 1 minuto! ¡Sos un maestro del vuelo!</p>
+                    <p>Puntos finales: <span id="puntos-finales-victoria">0</span></p>
+                    <div id="botones-victoria-flappy">
+                        <button id="btn-jugar-otra-vez-flappy" class="btn-hover-primary">Jugar otra vez</button>
                     </div>
                 </div>
             </div>
@@ -245,35 +255,36 @@
                 <h3>Cómo jugar</h3>
                 <ul>
                     <li>Usa el Click o la W para que Flappy Dragon se eleve.</li>
-                    <li>Llega lo mas lejos que puedas para obtener el mejor puntaje</li>
-                    <li>Esquiva los enemigos en el camino, y seupera los caños para sumar puntos</li>
+                    <li>Intenta sobrevivir 1 minuto y obtener el mejor puntaje</li>
+                    <li>Esquiva los enemigos en el camino, y supera los caños para sumar puntos</li>
                     <li>Atrapa corazones para sumar vidas extra</li>
-                    <li>Colecciona las monedas para sumar mas puntos</li>
+                    <li>Colecciona las monedas para sumar más puntos</li>
                 </ul>
             </article>
 
             <article id="gallery">
                 <div class="video-thumb">
-                    <img src="img/peg/video.png" alt="Captura del juego 1">
+                    <img src="img/flappy/video.png" alt="Captura del juego 1">
                     <button class="play-btn video-btn">
                         <iconify-icon icon="lucide-play"></iconify-icon>
                     </button>
                 </div>
-                <img src="img/peg/galeria1.png" alt="Captura del juego 2">
-                <img src="img/peg/galeria2.png" alt="Captura del juego 3">
-                <img src="img/peg/galeria3.png" alt="Captura del juego 4">
+                <img src="img/flappy/galeria1.png" alt="Captura del juego 2">
+                <img src="img/flappy/galeria2.png" alt="Captura del juego 3">
+                <img src="img/flappy/galeria3.png" alt="Captura del juego 4">
             </article>
 
             <div class="flex-row">
                 <article id="description">
                     <h3>Descripción</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
-                        eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut 
-                        enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-                        nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in 
-                        reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla 
-                        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa 
-                        qui officia deserunt mollit anim id est laborum.</p>
+                    <p>En Flappy Dragon, acompañás a un joven dragón que emprende un viaje a través de cielos
+                         peligrosos y tierras llenas de criaturas misteriosas. En su camino, deberá abrirse paso 
+                         entre antiguas ruinas flotantes, esquivar enemigos que intentan detenerlo y recolectar 
+                         tesoros que quedaron dispersos por viejos reinos olvidados. Cada moneda y cada corazón 
+                         que encuentra no solo lo fortalecen, sino que revelan pequeños fragmentos de un mundo 
+                         vibrante y lleno de magia. Es una aventura rápida pero intensa, donde cada segundo en el 
+                         aire cuenta y cada vuelo trae consigo una nueva oportunidad de descubrir hasta dónde puede 
+                         llegar este pequeño pero valiente dragón.</p>
                     <p>Más información en la <a href="#">página del desarrollador.</a></p>
                 </article>
 

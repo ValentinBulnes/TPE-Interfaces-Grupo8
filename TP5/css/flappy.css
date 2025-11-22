@@ -252,6 +252,53 @@
     min-width: 180px;
 }
 
+/* Mensaje de victoria */
+#mensaje-victoria-flappy {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translate(-50%, 150%);
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    text-align: center;
+    opacity: 0;
+    transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+    z-index: 1000;
+}
+
+#mensaje-victoria-flappy.aparecer {
+    transform: translate(-50%, 0);
+    opacity: 1;
+}
+
+#mensaje-victoria-flappy h1 {
+    font-size: 2rem;
+    margin: 0 0 10px 0;
+    color: #00e676;
+}
+
+#mensaje-victoria-flappy p {
+    font-size: 1rem;
+    margin-bottom: 15px;
+}
+
+#botones-victoria-flappy {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+#botones-victoria-flappy button {
+    padding: 14px 32px;
+    font-size: 1.05rem;
+    font-weight: bold;
+    border-radius: var(--border-rad-s);
+    margin-top: 8px;
+    min-width: 180px;
+}
+
 .invulnerable::before {
     content: "";
     position: absolute;
@@ -416,4 +463,19 @@
     text-shadow: 0 0 10px rgba(255, 64, 129, 0.8);
     min-width: 60px;
     text-align: center;
+}
+
+/* Contador de tiempo */
+.label-tiempo {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    white-space: nowrap;
+}
+
+#contador-tiempo {
+    color: #00e676;
+    text-shadow: 0 0 10px rgba(0, 230, 118, 0.8);
+    min-width: 60px;
+    text-align: center;
+    font-size: 1.2em;
 }

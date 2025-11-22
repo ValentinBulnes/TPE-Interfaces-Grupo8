@@ -1,12 +1,12 @@
 import { NPCModelo } from "./NPCModelo.js";
 
 export class ObstaculoModelo extends NPCModelo {
-    constructor() {
+    constructor(espacioEntreTabos = 150) {
         // Dimensiones del contenedor
         const alturaContenedor = 560;
         const anchoTubo = 52; // Ancho del tubo del sprite
         const alturaMinimaTubo = 100;
-        const espacio = 150; // Espacio entre tubos superior e inferior
+        const espacio = espacioEntreTabos; // Espacio entre tubos superior e inferior (variable según dificultad)
 
         // Calcular altura aleatoria para el tubo superior
         const alturaMaximaTubo = alturaContenedor - espacio - alturaMinimaTubo;

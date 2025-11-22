@@ -23,16 +23,31 @@ export class FlappyController {
         this.intervaloObstaculos = 2500; // Spawn obstacle every 2.5 seconds
         this.intervaloObstaculosMin = 1000;
 
+        // Sistema de dificultad progresiva para el gap de los tubos
+        this.espacioTubos = 250; // Espacio inicial entre tubos (más fácil)
+        this.espacioTubosMin = 150; // Espacio mínimo entre tubos (más difícil)
+        this.espacioTubosInicial = 250;
+
+        // Sistema de tiempo límite
+        this.tiempoInicio = 0;
+        this.tiempoLimite = 60000; // 60 segundos en milisegundos
+        this.tiempoRestante = 60000;
+
+        // Referencias a elementos del DOM (para control de flujo)
+        this.contenedorJuego = document.getElementById("juego-flappy");
+        this.contenedorParallax = document.querySelector(".parallax-container");
+        this.mensajeGameOver = document.getElementById("mensaje-gameover-flappy");
+        this.mensajeVictoria = document.getElementById("mensaje-victoria-flappy");
+
         // Configurar eventos
         this.configurarEventos();
     }
 
     // Configura todos los event listeners
     configurarEventos() {
-        const contenedorJuego = this.vista.obtenerContenedorJuego();
-        if (contenedorJuego) {
+        if (this.contenedorJuego) {
             // Evento de click en el juego para saltar
-            contenedorJuego.addEventListener("click", () =>
+            this.contenedorJuego.addEventListener("click", () =>
                 this.manejarSalto()
             );
             // Evento de presionar tecla W en el juego para saltar
@@ -47,12 +62,16 @@ export class FlappyController {
     // Inicia el juego
     iniciarJuego() {
         this.intervaloObstaculos = 2500;
+        this.espacioTubos = this.espacioTubosInicial; // Reiniciar espacio de tubos
 
         // Mostrar el juego
-        this.vista.mostrarJuego();
+        this.mostrarJuego();
 
         // Ocultar mensaje de game over si estaba visible
-        this.vista.ocultarGameOver();
+        this.ocultarGameOver();
+
+        // Ocultar mensaje de victoria si estaba visible
+        this.ocultarVictoria();
 
         // Calcular límites del dragón basándose en el contenedor
         this.modelo.calcularLimites();
@@ -63,9 +82,17 @@ export class FlappyController {
         // Limpiar enemigos existentes
         this.limpiarEnemigos();
 
+        // Limpiar efectos visuales del dragón
+        this.vista.limpiarEfectos();
+
         // Reiniciar contadores
         this.actualizarContadorPuntos();
         this.actualizarContadorVidas();
+        
+        // Reiniciar tiempo
+        this.tiempoInicio = performance.now();
+        this.tiempoRestante = this.tiempoLimite;
+        this.actualizarContadorTiempo();
 
         // Marcar el juego como iniciado
         this.juegoIniciado = true;
@@ -108,6 +135,17 @@ export class FlappyController {
 
         // Verificar si está pausado
         if (this.juegoPausado) return;
+
+        // Actualizar tiempo restante
+        const tiempoTranscurrido = tiempoActual - this.tiempoInicio;
+        this.tiempoRestante = Math.max(0, this.tiempoLimite - tiempoTranscurrido);
+        this.actualizarContadorTiempo();
+
+        // Verificar si se ganó el juego (tiempo agotado sin perder)
+        if (this.tiempoRestante <= 0) {
+            this.ganarJuego();
+            return;
+        }
 
         // Actualizar el modelo (física del dragón)
         this.modelo.actualizar();
@@ -181,7 +219,9 @@ export class FlappyController {
         if (coleccionablesColisionados.length > 0) {
             // Informar al modelo para actualizar contadores
             this.modelo.coleccionar(coleccionablesColisionados);
-            this.vista.coleccionar()
+            
+            // Aplicar efecto visual de power-up al dragón
+            this.vista.aplicarEfectoPowerUp();
 
             // Actualizar contadores en la interfaz
             this.actualizarContadorVidas();
@@ -205,7 +245,7 @@ export class FlappyController {
     // Termina el juego y muestra el mensaje de game over
     terminarJuego() {
         this.juegoIniciado = false;
-        this.vista.mostrarGameOver();
+        this.mostrarGameOver();
 
         // Configurar botón de reintentar
         const botonReintentar = document.getElementById(
@@ -324,8 +364,12 @@ export class FlappyController {
         ) {
             this.crearObstaculo();
             this.tiempoUltimoObstaculo = tiempoActual;
+            
+            // Aumentar dificultad: reducir intervalo y espacio entre tubos
             if (this.intervaloObstaculos > this.intervaloObstaculosMin)
                 this.intervaloObstaculos -= 50;
+            if (this.espacioTubos > this.espacioTubosMin)
+                this.espacioTubos -= 3.33; // 100px de reducción en 30 tubos (igual que el intervalo)
         }
 
         // Actualizar y eliminar obstáculos
@@ -345,7 +389,7 @@ export class FlappyController {
 
     // Crea un nuevo obstáculo
     crearObstaculo() {
-        const modelo = new ObstaculoModelo();
+        const modelo = new ObstaculoModelo(this.espacioTubos);
         const vista = new ObstaculoVista();
         this.obstaculos.push({ modelo, vista });
 
@@ -428,6 +472,108 @@ export class FlappyController {
         if (contadorVidas) {
             const vidas = this.modelo.coleccionables.corazon || 0;
             contadorVidas.textContent = vidas;
+        }
+    }
+
+    // Actualiza el contador de tiempo en la interfaz
+    actualizarContadorTiempo() {
+        const contadorTiempo = document.getElementById("contador-tiempo");
+        if (contadorTiempo) {
+            const segundos = Math.ceil(this.tiempoRestante / 1000);
+            const minutos = Math.floor(segundos / 60);
+            const segs = segundos % 60;
+            const textoTiempo = `${minutos}:${segs.toString().padStart(2, '0')}`;
+            contadorTiempo.textContent = textoTiempo;
+        }
+    }
+
+    // Termina el juego con victoria
+    ganarJuego() {
+        this.juegoIniciado = false;
+        this.mostrarVictoria();
+
+        // Actualizar puntos finales en el mensaje de victoria
+        const puntosFinales = document.getElementById("puntos-finales-victoria");
+        if (puntosFinales) {
+            puntosFinales.textContent = this.modelo.obtenerPuntos();
+        }
+
+        // Configurar botón de jugar otra vez
+        const botonJugarOtraVez = document.getElementById(
+            "btn-jugar-otra-vez-flappy"
+        );
+        if (botonJugarOtraVez) {
+            botonJugarOtraVez.onclick = () => this.iniciarJuego();
+        }
+    }
+
+    // ========== MÉTODOS DE CONTROL DE FLUJO DE UI ==========
+
+    // Muestra el contenedor del juego
+    mostrarJuego() {
+        if (this.contenedorJuego) {
+            this.contenedorJuego.classList.remove("oculto");
+        }
+        // Reactivar animaciones del parallax
+        if (this.contenedorParallax) {
+            this.contenedorParallax.classList.remove("game-over");
+        }
+    }
+
+    // Muestra el mensaje de game over
+    mostrarGameOver() {
+        // Detener todas las animaciones
+        if (this.contenedorParallax) {
+            this.contenedorParallax.classList.add("game-over");
+        }
+
+        // Aplicar efecto visual de crash al dragón
+        this.vista.aplicarEfectoCrash();
+
+        // Mostrar mensaje
+        if (this.mensajeGameOver) {
+            this.mensajeGameOver.classList.remove("oculto");
+            // Pequeño delay para que la animación se vea
+            setTimeout(() => {
+                this.mensajeGameOver.classList.add("aparecer");
+            }, 100);
+        }
+    }
+
+    // Oculta el mensaje de game over
+    ocultarGameOver() {
+        if (this.mensajeGameOver) {
+            this.mensajeGameOver.classList.remove("aparecer");
+            setTimeout(() => {
+                this.mensajeGameOver.classList.add("oculto");
+            }, 600);
+        }
+    }
+
+    // Muestra el mensaje de victoria
+    mostrarVictoria() {
+        // Detener todas las animaciones
+        if (this.contenedorParallax) {
+            this.contenedorParallax.classList.add("game-over");
+        }
+
+        // Mostrar mensaje
+        if (this.mensajeVictoria) {
+            this.mensajeVictoria.classList.remove("oculto");
+            // Pequeño delay para que la animación se vea
+            setTimeout(() => {
+                this.mensajeVictoria.classList.add("aparecer");
+            }, 100);
+        }
+    }
+
+    // Oculta el mensaje de victoria
+    ocultarVictoria() {
+        if (this.mensajeVictoria) {
+            this.mensajeVictoria.classList.remove("aparecer");
+            setTimeout(() => {
+                this.mensajeVictoria.classList.add("oculto");
+            }, 600);
         }
     }
 }

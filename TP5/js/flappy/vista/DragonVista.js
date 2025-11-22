@@ -1,16 +1,8 @@
-// Vista del dragón - Maneja la representación visual del dragón
+// Vista del dragón - Maneja SOLO la representación visual del dragón
 export class DragonVista {
     constructor() {
-        // Referencias a elementos del DOM
+        // Referencia solo al elemento del dragón
         this.elementoDragon = document.getElementById("dragon");
-        this.contenedorJuego = document.getElementById("juego-flappy");
-        this.contenedorParallax = document.querySelector(".parallax-container");
-        this.seccionJuego = document.querySelector(
-            "#game-execution.game-page-section"
-        );
-        this.imagenFondo = this.seccionJuego
-            ? this.seccionJuego.querySelector("img")
-            : null;
     }
 
     // Actualiza la posición visual del dragón con rotación
@@ -41,70 +33,30 @@ export class DragonVista {
         }
     }
 
-    // Muestra el juego y reemplaza el contenido de game-execution
-    mostrarJuego() {
-        // Mostrar el contenedor del juego
-        if (this.contenedorJuego) {
-            this.contenedorJuego.classList.remove("oculto");
-        }
-    }
-
-    // Obtiene el elemento del contenedor del juego (para eventos)
-    obtenerContenedorJuego() {
-        return this.contenedorJuego;
-    }
-
-    coleccionar(){
-        this.elementoDragon.classList.add("power-up")
-        setTimeout(()=>{this.elementoDragon.classList.remove("power-up")}, 2000)
-    }
-
-    // Muestra el mensaje de game over
-    mostrarGameOver() {
-        // DETENER TODAS LAS ANIMACIONES
-        if (this.contenedorParallax) {
-            this.contenedorParallax.classList.add("game-over");
-        }
-
-        // Detener animación del dragón
+    // Aplica efecto visual de crash al dragón
+    aplicarEfectoCrash() {
         if (this.elementoDragon) {
             this.elementoDragon.classList.add("crash");
         }
+    }
 
-        // Mostrar mensaje
-        const mensajeGameOver = document.getElementById(
-            "mensaje-gameover-flappy"
-        );
-        if (mensajeGameOver) {
-            mensajeGameOver.classList.remove("oculto");
-            // Pequeño delay para que la animación se vea
+    // Aplica efecto visual de power-up al dragón
+    aplicarEfectoPowerUp() {
+        if (this.elementoDragon) {
+            this.elementoDragon.classList.add("power-up");
             setTimeout(() => {
-                mensajeGameOver.classList.add("aparecer");
-            }, 100);
+                this.elementoDragon.classList.remove("power-up");
+            }, 2000);
         }
     }
 
-    // Oculta el mensaje de game over
-    ocultarGameOver() {
-        const mensajeGameOver = document.getElementById(
-            "mensaje-gameover-flappy"
-        );
-        if (mensajeGameOver) {
-            mensajeGameOver.classList.remove("aparecer");
-            setTimeout(() => {
-                mensajeGameOver.classList.add("oculto");
-            }, 600);
-        }
-
-        // Limpiar clases del dragón
+    // Limpia todos los efectos visuales del dragón
+    limpiarEfectos() {
         if (this.elementoDragon) {
             this.elementoDragon.classList.remove("cayendo");
             this.elementoDragon.classList.remove("crash");
-        }
-
-        // Reactivar animaciones del parallax
-        if (this.contenedorParallax) {
-            this.contenedorParallax.classList.remove("game-over");
+            this.elementoDragon.classList.remove("invulnerable");
+            this.elementoDragon.classList.remove("power-up");
         }
     }
 }
