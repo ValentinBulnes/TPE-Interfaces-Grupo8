@@ -39,7 +39,6 @@ export class FlappyController {
             document.body.addEventListener("keydown", (e) => {
                 if (e.key == "w" || e.key == "W") this.manejarSalto();
                 if (e.key == "p" || e.key == "P") this.alternarPausa();
-
             });
         }
     }
@@ -76,13 +75,20 @@ export class FlappyController {
     }
 
     limpiarEnemigos() {
-        this.enemigos.forEach((enemigo) => enemigo.vista.eliminar());
+        this.enemigos.forEach((enemigo) => {
+            enemigo.modelo.marcarParaEliminar();
+            enemigo.vista.eliminar();
+        });
         this.enemigos = [];
-        this.coleccionables.forEach((coleccionable) =>
-            coleccionable.vista.eliminar()
-        );
+        this.coleccionables.forEach((coleccionable) => {
+            coleccionable.modelo.marcarParaEliminar();
+            coleccionable.vista.eliminar();
+        });
         this.coleccionables = [];
-        this.obstaculos.forEach((obstaculo) => obstaculo.vista.eliminar());
+        this.obstaculos.forEach((obstaculo) => {
+            obstaculo.modelo.marcarParaEliminar();
+            obstaculo.vista.eliminar();
+        });
         this.obstaculos = [];
     }
 
@@ -152,9 +158,9 @@ export class FlappyController {
 
     alternarPausa() {
         if (!this.juegoIniciado) return;
-        
+
         this.juegoPausado = !this.juegoPausado;
-        
+
         if (this.juegoPausado) {
             this.vista.mostrarPausa?.(); // Si tienes método en la vista
         } else {

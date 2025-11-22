@@ -121,5 +121,11 @@ export class ObstaculoModelo extends NPCModelo {
             opacity: "0.3",
         });
     }
+
+    eliminarDebugHitbox(){
+        if (!NPCModelo.DEBUG_HITBOX) return;
+        this.hitboxInferior?.parentNode?.removeChild(this.hitboxInferior);
+        this.hitboxSuperior?.parentNode?.removeChild(this.hitboxSuperior);
+    }
 }
 
