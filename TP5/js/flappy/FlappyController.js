@@ -181,6 +181,7 @@ export class FlappyController {
         if (coleccionablesColisionados.length > 0) {
             // Informar al modelo para actualizar contadores
             this.modelo.coleccionar(coleccionablesColisionados);
+            this.vista.coleccionar()
 
             // Actualizar contadores en la interfaz
             this.actualizarContadorVidas();

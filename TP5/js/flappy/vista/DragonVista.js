@@ -54,6 +54,11 @@ export class DragonVista {
         return this.contenedorJuego;
     }
 
+    coleccionar(){
+        this.elementoDragon.classList.add("power-up")
+        setTimeout(()=>{this.elementoDragon.classList.remove("power-up")}, 2000)
+    }
+
     // Muestra el mensaje de game over
     mostrarGameOver() {
         // DETENER TODAS LAS ANIMACIONES
