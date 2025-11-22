@@ -44,7 +44,8 @@
     position: relative;
     overflow: hidden;
     border-radius: 12px;
-    box-shadow: 0 0 0 4px rgba(61, 90, 254, 1), 0 0 30px rgba(61, 90, 254, 0.8), inset 0 0 30px rgba(0, 230, 118, 0.4);
+    box-shadow: 0 0 0 4px rgba(61, 90, 254, 1), 0 0 30px rgba(61, 90, 254, 0.8),
+        inset 0 0 30px rgba(0, 230, 118, 0.4);
     flex-shrink: 0;
 }
 
@@ -63,21 +64,21 @@
 }
 
 .section-1 {
-    background-image: url('../img/flappy/background parallax/background_plains-Sheet1.png');
+    background-image: url("../img/flappy/background parallax/background_plains-Sheet1.png");
 }
 
 .section-2 {
-    background-image: url('../img/flappy/background parallax/background_plains-Sheet2.png');
+    background-image: url("../img/flappy/background parallax/background_plains-Sheet2.png");
     animation: scroll 15s infinite linear;
 }
 
 .section-3 {
-    background-image: url('../img/flappy/background parallax/background_plains-Sheet3.png');
+    background-image: url("../img/flappy/background parallax/background_plains-Sheet3.png");
     animation: scroll 10s infinite linear;
 }
 
 .section-4 {
-    background-image: url('../img/flappy/background parallax/background_plains-Sheet4.png');
+    background-image: url("../img/flappy/background parallax/background_plains-Sheet4.png");
     animation: scroll 5s infinite linear;
 }
 
@@ -95,8 +96,8 @@
     --rotation: 0deg;
     width: 81.7px;
     height: 67.8px;
-    background-image: url('../img/flappy/character_sprite_sheet.png');
-    background-size: 326.8px 67.8px; 
+    background-image: url("../img/flappy/character_sprite_sheet.png");
+    background-size: 326.8px 67.8px;
     /* 817px * 4 frames = 3268px escalado a 0.1 = 326.8px */
     position: absolute;
     left: 7%;
@@ -115,16 +116,16 @@
     }
 }
 
-#dragon.crash{
+#dragon.crash {
     --smoke-index: 12;
     width: 64px;
     height: 64px;
-    background-image: url('../img/flappy/smoke-grid.png');
+    background-image: url("../img/flappy/smoke-grid.png");
     animation: dragon-crash 1.3s steps(12) infinite;
-    background-size: unset; 
+    background-size: unset;
     background-position-y: calc(var(--smoke-index) * 64px);
     left: 9%;
-    transform: translateY(var(--position-y)) rotate(var(--rotation)); 
+    transform: translateY(var(--position-y)) rotate(var(--rotation));
 }
 
 @keyframes dragon-crash {
@@ -145,7 +146,7 @@
 .moneda-movil {
     width: 64px;
     height: 64px;
-    background-image: url('../img/flappy/coin2.png');
+    background-image: url("../img/flappy/coin2.png");
     background-size: 640px 64px; /* 320px * 2 = 640px, 32px * 2 = 64px */
     position: absolute;
     animation: coin-rotate 1s steps(10) infinite;
@@ -167,7 +168,7 @@
 .corazon-movil {
     width: 35px;
     height: 35px;
-    background-image: url('../img/flappy/heart.png');
+    background-image: url("../img/flappy/heart.png");
     background-size: 805px 35px; /* 8050px * 0.1 = 805px, 350px * 0.1 = 35px */
     position: absolute;
     animation: heart-rotate 1s steps(23) infinite;
@@ -189,7 +190,7 @@
     --position-y: 0;
     width: 75px;
     height: 75px;
-    background-image: url('../img/flappy/enemy.png');
+    background-image: url("../img/flappy/enemy.png");
     background-size: 1050px 75px; /* 3500px * 0.3 = 1050px, 250px * 0.3 = 75px */
     position: absolute;
     animation: enemy-fly 2s steps(14) infinite;
@@ -305,19 +306,19 @@
     position: absolute;
     width: 110px;
     height: 90px;
-    background-image: url('../img/flappy/vfx/Effect_ElectricShield_1_265x265.png');
+    background-image: url("../img/flappy/vfx/Effect_ElectricShield_1_265x265.png");
     background-size: 660px 450px;
     /* original
     width: 265px;
     height: 265px; 
     background-size: 1590 1325; */
     background-repeat: no-repeat;
-    animation: invulnerable-electro-x .3s steps(6) infinite,
-               invulnerable-electro-y 1.5s steps(5) infinite;
+    animation: invulnerable-electro-x 0.3s steps(6) infinite,
+        invulnerable-electro-y 1.5s steps(5) infinite;
     pointer-events: none;
     z-index: 99;
     opacity: 0.5;
-    top:-6px;
+    top: -6px;
 }
 
 @keyframes invulnerable-electro-x {
@@ -343,7 +344,7 @@
     position: absolute;
     width: 110px;
     height: 90px;
-    background-image: url('../img/flappy/vfx/Effect_Charged_1_321x371.png');
+    background-image: url("../img/flappy/vfx/Effect_Charged_1_321x371.png");
     background-size: 770px 540px;
     /* original
     width: 321px;
@@ -351,12 +352,10 @@
     background-size: 2247 2226; */
     background-repeat: no-repeat;
     /* 30fps-aligned timings */
-    animation:
-        charge-x 0.3s steps(7) infinite,
-        charge-y 1.8s steps(6) infinite;
+    animation: charge-x 0.3s steps(7) infinite, charge-y 1.8s steps(6) infinite;
     pointer-events: none;
     z-index: 99;
-    top:-6px;
+    top: -6px;
     filter: invert(1);
 }
 
@@ -392,91 +391,39 @@
 
 .tubo-superior {
     top: 0;
-    background-image: url('../img/flappy/tuboSuperior.png');
+    background-image: url("../img/flappy/tuboSuperior.png");
     background-position: bottom; /* El borde debe quedar en la parte inferior del tubo */
 }
 
 .tubo-inferior {
     bottom: 0;
-    background-image: url('../img/flappy/tuboInferior.png');
+    background-image: url("../img/flappy/tuboInferior.png");
     background-position: top; /* El borde debe quedar en la parte superior del tubo */
 }
 
-/* Contador de puntos */
-#hud-puntos {
-    background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(10px);
-    padding: 20px 30px;
-    border-radius: 12px;
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), 0 0 20px rgba(61, 90, 254, 0.5);
-    border: 2px solid rgba(61, 90, 254, 0.6);
-    min-width: 120px;
-}
-
-.label-puntos {
+/* Labels de contadores */
+.game-info > h2 {
     text-transform: uppercase;
     letter-spacing: 1px;
     white-space: nowrap;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
 }
 
 #contador-puntos {
     color: #ffd700;
     text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
-    min-width: 60px;
-    text-align: center;
-}
-
-/* Contador de vidas */
-#hud-vidas {
-    background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(10px);
-    padding: 20px 30px;
-    border-radius: 12px;
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 64, 129, 0.5);
-    border: 2px solid rgba(255, 64, 129, 0.6);
-    min-width: 120px;
-}
-
-.label-vidas {
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    white-space: nowrap;
 }
 
 #contador-vidas {
     color: #ff6090;
     text-shadow: 0 0 10px rgba(255, 64, 129, 0.8);
-    min-width: 60px;
-    text-align: center;
-}
-
-/* Contador de tiempo */
-.label-tiempo {
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    white-space: nowrap;
 }
 
 #contador-tiempo {
     color: #00e676;
     text-shadow: 0 0 10px rgba(0, 230, 118, 0.8);
-    min-width: 60px;
-    text-align: center;
-    font-size: 1.2em;
 }
