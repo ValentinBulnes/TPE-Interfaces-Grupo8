@@ -20,6 +20,7 @@ export class FlappyController {
         this.intervaloEnemigos = 2000; // Spawn enemy every 2 seconds
         this.intervaloColeccionables = 3000; // Spawn collectible every 3 seconds
         this.intervaloObstaculos = 2500; // Spawn obstacle every 2.5 seconds
+        this.intervaloObstaculosMin = 1000
 
         // Configurar eventos
         this.configurarEventos();
@@ -281,8 +282,6 @@ export class FlappyController {
                 dragonHitbox.bottom > npcHitbox.top;
 
             if (colisionX && colisionY) {
-                // debugBox(enemigoHitbox.top,enemigoHitbox.left,enemigoHitbox.ancho,enemigoHitbox.alto,"red");
-                // debugBox(dragonHitbox.top,dragonHitbox.left,dragonHitbox.ancho,dragonHitbox.alto,"blue");
                 res.push(npc);
             }
         }
@@ -296,6 +295,8 @@ export class FlappyController {
         if (tiempoActual - this.tiempoUltimoObstaculo > this.intervaloObstaculos) {
             this.crearObstaculo();
             this.tiempoUltimoObstaculo = tiempoActual;
+            if (this.intervaloObstaculos > this.intervaloObstaculosMin)
+                this.intervaloObstaculos -= 50
         }
 
         // Actualizar y eliminar obstáculos
@@ -400,22 +401,4 @@ export class FlappyController {
             contadorVidas.textContent = vidas;
         }
     }
-}
-
-function debugBox(y, x, width, height, color) {
-    const container = document.querySelector(".parallax-container");
-
-    const node = document.createElement("div");
-    Object.assign(node.style, {
-        position: "absolute",
-        left: `${x}px`,
-        top: `${y}px`,
-        width: `${width}px`,
-        height: `${height}px`,
-        backgroundColor: color,
-        opacity: "0.5",
-    });
-
-    container.appendChild(node);
-    return node;
 }
