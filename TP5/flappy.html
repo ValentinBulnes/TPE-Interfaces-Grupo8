@@ -12,6 +12,7 @@
     <link rel="preload" href="img/peg/fondoPeg.jpg" as="image">
     <link rel="stylesheet" href="./css/root.css">
     <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/juego_common.css">
     <link rel="stylesheet" href="./css/flappy.css">
 </head>
 
@@ -171,14 +172,20 @@
             <button class="play-btn game-btn">
                 <iconify-icon icon="lucide-play"></iconify-icon>
             </button>
-
+            <div id="menu-principal" class="menu-principal oculto">
+                <h1>Flappy Dragon</h1>
+                <h3>Llega lo mas lejos que puedas para obtener el mejor puntaje</h3>
+                <p>Usa el Click o la W para que Flappy Dragon se eleve.</p>
+                <p>Esquiva los enemigos en el camino, y seupera los caños para sumar puntos.</p>
+                <p>Atrapa corazones para sumar vidas extra.</p>
+                <p>Colecciona las monedas para sumar mas puntos!</p>
+                <button id="btn-iniciar-juego" class="btn-hover-primary">Comenzar</button>
+            </div>
             <!-- Contenedor del juego Flappy Dragon -->
-            <div id="juego-flappy" class="oculto">
+            <div id="juego-flappy" class="game-box oculto">
                 <div id="izquierda">
-                    <div id="hud-vidas">
-                        <span class="label-vidas">Vidas:</span>
-                        <span id="contador-vidas">2</span>
-                    </div>
+                    <button id="btn-menu-principal" class="btn-hover-primary">Menú Principal</button>
+
                 </div>
                 <div class="parallax-container">
                     <div class="parallax-section section-1"></div>
@@ -188,9 +195,9 @@
                     <div id="dragon"></div>
                 </div>
                 <div id="derecha">
-                    <div id="hud-puntos">
-                        <span class="label-puntos">Puntos:</span>
-                        <span id="contador-puntos">0</span>
+                    <div class="game-info">
+                        <h2 class="label-puntos">Puntos: <span id="contador-puntos">0</span></h2>
+                        <h2 class="label-vidas">Vidas: <span id="contador-vidas">2</span></h2>
                     </div>
                 </div>
                 
@@ -237,11 +244,11 @@
             <article id="how-to-play">
                 <h3>Cómo jugar</h3>
                 <ul>
-                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit</li>
-                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit</li>
-                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit</li>
-                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit</li>
-                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit</li>
+                    <li>Usa el Click o la W para que Flappy Dragon se eleve.</li>
+                    <li>Llega lo mas lejos que puedas para obtener el mejor puntaje</li>
+                    <li>Esquiva los enemigos en el camino, y seupera los caños para sumar puntos</li>
+                    <li>Atrapa corazones para sumar vidas extra</li>
+                    <li>Colecciona las monedas para sumar mas puntos</li>
                 </ul>
             </article>
 

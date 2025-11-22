@@ -9,7 +9,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const modelo = new DragonModelo();
     const vista = new DragonVista();
     const controlador = new FlappyController(modelo, vista);
-    
-    // El controlador ya se encarga de configurar todos los eventos
-});
 
+    // Manejar eventos de navegacion de menu
+    const gameExecutionBox = document.querySelector("#game-execution")
+    const botonPlay = gameExecutionBox.querySelector(".play-btn.game-btn");
+    const menuPrincipal = gameExecutionBox.querySelector(".menu-principal")
+    const botonVolverMenuPrincipal = gameExecutionBox.querySelector("#btn-menu-principal")
+    const juegoFlappyBox = gameExecutionBox.querySelector("#juego-flappy")
+
+    botonPlay.addEventListener("click", () => {
+        gameExecutionBox.querySelector("img").classList.add("oculto")
+        botonPlay.classList.add("oculto")
+        menuPrincipal.classList.toggle("oculto")
+    });
+
+    menuPrincipal.querySelector("#btn-iniciar-juego").addEventListener("click", () => {
+        menuPrincipal.classList.toggle("oculto")
+        controlador.iniciarJuego()
+    })
+
+    botonVolverMenuPrincipal.addEventListener("click", ()=>{
+        menuPrincipal.classList.toggle("oculto")
+        juegoFlappyBox.classList.add("oculto")
+        controlador.terminarJuego()
+    })
+});

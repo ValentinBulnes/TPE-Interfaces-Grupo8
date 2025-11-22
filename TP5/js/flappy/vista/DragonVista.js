@@ -11,7 +11,6 @@ export class DragonVista {
         this.imagenFondo = this.seccionJuego
             ? this.seccionJuego.querySelector("img")
             : null;
-        this.botonPlay = document.querySelector(".play-btn.game-btn");
     }
 
     // Actualiza la posición visual del dragón con rotación
@@ -44,17 +43,6 @@ export class DragonVista {
 
     // Muestra el juego y reemplaza el contenido de game-execution
     mostrarJuego() {
-        // Limpiar el contenido de game-execution (imagen y botón)
-        if (this.seccionJuego) {
-            // Remover todos los hijos excepto juego-flappy
-            const hijos = Array.from(this.seccionJuego.children);
-            hijos.forEach((hijo) => {
-                if (hijo.id !== "juego-flappy") {
-                    hijo.remove();
-                }
-            });
-        }
-
         // Mostrar el contenedor del juego
         if (this.contenedorJuego) {
             this.contenedorJuego.classList.remove("oculto");
@@ -64,11 +52,6 @@ export class DragonVista {
     // Obtiene el elemento del contenedor del juego (para eventos)
     obtenerContenedorJuego() {
         return this.contenedorJuego;
-    }
-
-    // Obtiene el botón de play (para eventos)
-    obtenerBotonPlay() {
-        return this.botonPlay;
     }
 
     // Muestra el mensaje de game over

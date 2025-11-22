@@ -20,7 +20,7 @@ export class FlappyController {
         this.intervaloEnemigos = 2000; // Spawn enemy every 2 seconds
         this.intervaloColeccionables = 3000; // Spawn collectible every 3 seconds
         this.intervaloObstaculos = 2500; // Spawn obstacle every 2.5 seconds
-        this.intervaloObstaculosMin = 1000
+        this.intervaloObstaculosMin = 1000;
 
         // Configurar eventos
         this.configurarEventos();
@@ -28,21 +28,15 @@ export class FlappyController {
 
     // Configura todos los event listeners
     configurarEventos() {
-        // Evento del botón play
-        const botonPlay = this.vista.obtenerBotonPlay();
-        if (botonPlay) {
-            botonPlay.addEventListener("click", () => this.iniciarJuego());
-        }
-
-        // Evento de click en el juego para saltar
         const contenedorJuego = this.vista.obtenerContenedorJuego();
         if (contenedorJuego) {
+            // Evento de click en el juego para saltar
             contenedorJuego.addEventListener("click", () =>
                 this.manejarSalto()
             );
+            // Evento de presionar tecla W en el juego para saltar
             document.body.addEventListener("keydown", (e) => {
-                if (e.key == "w")
-                    this.manejarSalto();
+                if (e.key == "w") this.manejarSalto();
             });
         }
     }
@@ -106,13 +100,13 @@ export class FlappyController {
         // Actualizar la vista con la nueva posición y velocidad (para la rotación)
         const posicion = this.modelo.obtenerPosicion();
         const velocidad = this.modelo.obtenerVelocidad();
-        const esInvulnerable = this.modelo.estaInvulnerable()
+        const esInvulnerable = this.modelo.estaInvulnerable();
         const limiteInferior = this.modelo.limiteInferior;
         this.vista.actualizarPosicion(
             posicion,
             velocidad,
-            limiteInferior, 
-            esInvulnerable,
+            limiteInferior,
+            esInvulnerable
         );
         // Verificar colisiones con enemigos
         const hayColisionEnemiga =
@@ -127,13 +121,15 @@ export class FlappyController {
         this.coleccionarColeccionables();
 
         // Verificar si hay game over DESPUÉS de actualizar la vista
-        const gameOver = this.modelo.esGameOver(hayColisionEnemiga || hayColisionObstaculo);
-        
+        const gameOver = this.modelo.esGameOver(
+            hayColisionEnemiga || hayColisionObstaculo
+        );
+
         // Actualizar contador de vidas si hubo colisión
         if (hayColisionEnemiga || hayColisionObstaculo) {
             this.actualizarContadorVidas();
         }
-        
+
         if (gameOver) {
             this.terminarJuego();
             return;
@@ -292,11 +288,14 @@ export class FlappyController {
     // Gestiona los obstáculos (tubos)
     gestionarObstaculos(tiempoActual) {
         // Generar nuevos obstáculos
-        if (tiempoActual - this.tiempoUltimoObstaculo > this.intervaloObstaculos) {
+        if (
+            tiempoActual - this.tiempoUltimoObstaculo >
+            this.intervaloObstaculos
+        ) {
             this.crearObstaculo();
             this.tiempoUltimoObstaculo = tiempoActual;
             if (this.intervaloObstaculos > this.intervaloObstaculosMin)
-                this.intervaloObstaculos -= 50
+                this.intervaloObstaculos -= 50;
         }
 
         // Actualizar y eliminar obstáculos
@@ -367,7 +366,7 @@ export class FlappyController {
     // Verifica si el dragón pasó completamente por algún tubo
     verificarTubosPasados() {
         const dragonHitbox = this.modelo.getHitbox();
-        
+
         for (let obstaculo of this.obstaculos) {
             // Si ya fue pasado, no volver a contar
             if (obstaculo.modelo.fuePasado()) {
@@ -375,7 +374,7 @@ export class FlappyController {
             }
 
             const hitboxes = obstaculo.modelo.getHitboxes();
-            
+
             // El dragón pasa el tubo cuando su lado izquierdo supera el lado derecho del tubo
             if (dragonHitbox.left > hitboxes.superior.right) {
                 obstaculo.modelo.marcarComoPasado();
