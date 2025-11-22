@@ -11,6 +11,7 @@ export class FlappyController {
         this.modelo = modelo;
         this.vista = vista;
         this.juegoIniciado = false;
+        this.juegoPausado = false;
         this.enemigos = []; // Array to store active enemies { modelo, vista }
         this.coleccionables = []; // Array to store active collectibles (coins and hearts)
         this.obstaculos = []; // Array to store active obstacles (pipes)
@@ -36,7 +37,9 @@ export class FlappyController {
             );
             // Evento de presionar tecla W en el juego para saltar
             document.body.addEventListener("keydown", (e) => {
-                if (e.key == "w") this.manejarSalto();
+                if (e.key == "w" || e.key == "W") this.manejarSalto();
+                if (e.key == "p" || e.key == "P") this.alternarPausa();
+
             });
         }
     }
@@ -94,6 +97,9 @@ export class FlappyController {
     gameLoop(tiempoActual) {
         if (!this.juegoIniciado) return;
 
+        // Verificar si está pausado
+        if (this.juegoPausado) return;
+
         // Actualizar el modelo (física del dragón)
         this.modelo.actualizar();
 
@@ -142,6 +148,20 @@ export class FlappyController {
 
         // Continuar el loop
         requestAnimationFrame((t) => this.gameLoop(t));
+    }
+
+    alternarPausa() {
+        if (!this.juegoIniciado) return;
+        
+        this.juegoPausado = !this.juegoPausado;
+        
+        if (this.juegoPausado) {
+            this.vista.mostrarPausa?.(); // Si tienes método en la vista
+        } else {
+            this.vista.ocultarPausa?.(); // Si tienes método en la vista
+            // Reiniciar el gameLoop
+            requestAnimationFrame((t) => this.gameLoop(t));
+        }
     }
 
     coleccionarColeccionables() {

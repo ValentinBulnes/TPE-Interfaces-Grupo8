@@ -76,6 +76,7 @@ export class NPCModelo {
 
     marcarParaEliminar() {
         this.marcadoParaEliminar = true;
+        this.eliminarDebugHitbox()
     }
 
     isMarcadoParaEliminar() {
@@ -101,5 +102,10 @@ export class NPCModelo {
             backgroundColor: this.colorHitbox,
             opacity: "0.5",
         });
+    }
+
+    eliminarDebugHitbox(){
+        if (!NPCModelo.DEBUG_HITBOX) return;
+        this.hitbox?.parentNode?.removeChild(this.hitbox);
     }
 }
