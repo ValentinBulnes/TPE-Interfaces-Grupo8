@@ -9,7 +9,7 @@ export class DragonModelo extends NPCModelo {
             velocidad: 0, // El dragón no se mueve horizontalmente
             ancho: 81.7,
             alto: 67.8,
-            reduccionHitbox: 0.6,
+            reduccionHitbox: 0.4,
             y: 200, // Posición Y inicial
             colorHitbox: "blue",
         });

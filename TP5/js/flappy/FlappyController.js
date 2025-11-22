@@ -39,12 +39,15 @@ export class FlappyController {
             document.body.addEventListener("keydown", (e) => {
                 if (e.key == "w" || e.key == "W") this.manejarSalto();
                 if (e.key == "p" || e.key == "P") this.alternarPausa();
+                if (e.key == "r" || e.key == "R") this.iniciarJuego();
             });
         }
     }
 
     // Inicia el juego
     iniciarJuego() {
+        this.intervaloObstaculos = 2500;
+
         // Mostrar el juego
         this.vista.mostrarJuego();
 
