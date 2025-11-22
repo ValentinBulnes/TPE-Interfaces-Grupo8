@@ -253,14 +253,16 @@
 }
 
 .invulnerable::before {
-    --shield-index: 1;
     content: "";
     position: absolute;
     width: 110px;
     height: 90px;
     background-image: url('../img/flappy/vfx/Effect_ElectricShield_1_265x265.png');
     background-size: 660px 450px;
-    /* background-size original: 1590px 1325px; */
+    /* original
+    width: 265px;
+    height: 265px; 
+    background-size: 1590 1325; */
     background-repeat: no-repeat;
     animation: invulnerable-electro-x .3s steps(6) infinite,
                invulnerable-electro-y 1.5s steps(5) infinite;
@@ -285,6 +287,46 @@
     }
     to {
         background-position-y: -450px;
+    }
+}
+
+.power-up::before {
+    content: "";
+    position: absolute;
+    width: 110px;
+    height: 90px;
+    background-image: url('../img/flappy/vfx/Effect_Charged_1_321x371.png');
+    background-size: 770px 540px;
+    /* original
+    width: 321px;
+    height: 371px; 
+    background-size: 2247 2226; */
+    background-repeat: no-repeat;
+    /* 30fps-aligned timings */
+    animation:
+        charge-x 0.3s steps(7) infinite,
+        charge-y 1.8s steps(6) infinite;
+    pointer-events: none;
+    z-index: 99;
+    top:-6px;
+    filter: invert(1);
+}
+
+@keyframes charge-x {
+    from {
+        background-position-x: 0;
+    }
+    to {
+        background-position-x: -770px;
+    }
+}
+
+@keyframes charge-y {
+    from {
+        background-position-y: 0;
+    }
+    to {
+        background-position-y: -540px;
     }
 }
 
