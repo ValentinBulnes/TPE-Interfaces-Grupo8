@@ -7,6 +7,10 @@ import { ObstaculoModelo } from "./modelo/ObstaculoModelo.js";
 import { ObstaculoVista } from "./vista/ObstaculoVista.js";
 
 export class FlappyController {
+    deltaEspacioTubos = 30;
+    deltaIntervaloObstaculos = 100;
+    espacioTubosInicial = 350;
+
     constructor(modelo, vista) {
         this.modelo = modelo;
         this.vista = vista;
@@ -24,9 +28,8 @@ export class FlappyController {
         this.intervaloObstaculosMin = 1000;
 
         // Sistema de dificultad progresiva para el gap de los tubos
-        this.espacioTubos = 250; // Espacio inicial entre tubos (más fácil)
-        this.espacioTubosMin = 150; // Espacio mínimo entre tubos (más difícil)
-        this.espacioTubosInicial = 250;
+        this.espacioTubos = this.espacioTubosInicial; // Espacio inicial entre tubos (más fácil)
+        this.espacioTubosMin = 100; // Espacio mínimo entre tubos (más difícil)
 
         // Sistema de tiempo límite
         this.tiempoInicio = 0;
@@ -367,9 +370,9 @@ export class FlappyController {
             
             // Aumentar dificultad: reducir intervalo y espacio entre tubos
             if (this.intervaloObstaculos > this.intervaloObstaculosMin)
-                this.intervaloObstaculos -= 50;
+                this.intervaloObstaculos -= this.deltaIntervaloObstaculos;
             if (this.espacioTubos > this.espacioTubosMin)
-                this.espacioTubos -= 3.33; // 100px de reducción en 30 tubos (igual que el intervalo)
+                this.espacioTubos -= this.deltaEspacioTubos; 
         }
 
         // Actualizar y eliminar obstáculos
